@@ -1,3 +1,2 @@
-/**
- * Created by Shin on 18/08/2016.
- */
+require('./stores/test.js');
+console.log("yeye");
