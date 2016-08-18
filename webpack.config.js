@@ -6,6 +6,21 @@ module.exports = {
     devtool: debug ? 'inline-sourcemap' : null,
     entry: './public/js/client.js',
     module: {
+        preLoaders: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'jshint-loader'
+            }
+        ],
+
+        jshint: {
+            camelcase: true,
+            emitErrors: true,
+            failOnHint: false,
+            esversion: 6
+        },
+
         loaders: [
             {
                 test: /\.js?$/,
