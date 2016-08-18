@@ -10,16 +10,9 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'jshint-loader'
+                loader: 'jshint'
             }
         ],
-
-        jshint: {
-            camelcase: true,
-            emitErrors: true,
-            failOnHint: false,
-            esversion: 6
-        },
 
         loaders: [
             {

@@ -1,0 +1,6 @@
+{
+  "camelcase": true,
+  "emitErrors": true,
+  "failOnHint": false,
+  "esversion": 6
+}
