@@ -1,2 +1,2 @@
 require('./stores/test.js');
-console.log("yeye");
+console.log("yeye222");
