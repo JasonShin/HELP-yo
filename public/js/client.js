@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 class Layout extends React.Component {
     render() {
         return (
-          <h1>hot relaoder woasdrksaa!brah aa</h1>
+          <h1>hot relaoder woasdrksaa!brah aa ss</h1>
         );
     }
 }
