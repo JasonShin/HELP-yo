@@ -1,2 +1,14 @@
-require('./stores/test.js');
-console.log("yeye222");
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+class Layout extends React.Component {
+    render() {
+        return (
+          <h1>hot relaoder woasdrksaa!brah aa</h1>
+        );
+    }
+}
+
+const app = document.getElementById('app');
+
+ReactDOM.render(<Layout />, app);
