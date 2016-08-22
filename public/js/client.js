@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import TodoStore from './stores/TodoStore';
+
+/*
 class Layout extends React.Component {
     render() {
         return (
@@ -11,4 +14,4 @@ class Layout extends React.Component {
 
 const app = document.getElementById('app');
 
-ReactDOM.render(<Layout />, app);
+ReactDOM.render(<Layout />, app);*/
