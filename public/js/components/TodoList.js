@@ -12,15 +12,24 @@ export default class TodoList extends React.Component {
         //Push to todos only if enter is pressed
         if(e.which === 13) {
             this.props.store.createTodo(e.target.value);
-            e.target.value = "";
+            e.target.value = '';
         }
+    }
+
+    toggleComplete(todo) {
+        todo.complete = !todo.complete;
     }
 
     render() {
 
-        const { filter, filteredTodos, todos} = this.props.store;
+        const { clearComplete, filter, filteredTodos, todos} = this.props.store;
         const todoList = filteredTodos.map(todo => {
-            return (<li key={todo.id}>{todo.value}</li>);
+            return (
+                <li key={todo.id}>
+                    <input type="checkbox" onChange={this.toggleComplete.bind(this, todo)} value={todo.complete} checked={todo.complete} />
+                    {todo.value}
+                </li>
+            );
         });
 
         return (<div>
@@ -37,6 +46,8 @@ export default class TodoList extends React.Component {
             <ul>
                 {todoList}
             </ul>
+
+            <a href="#" onClick={clearComplete}>Clear complete</a>
         </div>);
     }
 

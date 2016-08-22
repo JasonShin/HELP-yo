@@ -1,16 +1,5 @@
 import { computed, observable } from 'mobx';
-
-class Todo {
-    @observable value;
-    @observable id;
-    @observable complete;
-
-    constructor(value) {
-        this.value = value;
-        this.id = Date.now();
-        this.complete = false;
-    }
-}
+import TodoModel from '../models/TodoModel';
 
 class TodoStore {
     @observable todos = [];
@@ -22,7 +11,12 @@ class TodoStore {
     }
 
     createTodo(value) {
-        this.todos.push(new Todo(value));
+        this.todos.push(new TodoModel(value));
+    }
+
+    clearComplete = () => {
+        const incompleteTodos = this.todos.filter(todo => !todo.complete);
+        this.todos.replace(incompleteTodos);
     }
 }
 
