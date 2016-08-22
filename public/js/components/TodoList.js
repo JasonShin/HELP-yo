@@ -20,7 +20,7 @@ export default class TodoList extends React.Component {
 
         const { filter, filteredTodos, todos} = this.props.store;
         const todoList = filteredTodos.map(todo => {
-            return (<li>{todo}</li>);
+            return (<li key={todo.id}>{todo.value}</li>);
         });
 
         return (<div>

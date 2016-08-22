@@ -4,11 +4,16 @@ class Todo {
     @observable value;
     @observable id;
     @observable complete;
-    
+
+    constructor(value) {
+        this.value = value;
+        this.id = Date.now();
+        this.complete = false;
+    }
 }
 
 class TodoStore {
-    @observable todos = ['buy milk', 'buy egg'];
+    @observable todos = [];
     @observable filter = '';
 
     @computed get filteredTodos() {
@@ -17,7 +22,7 @@ class TodoStore {
     }
 
     createTodo(value) {
-        this.todos.push(value);
+        this.todos.push(new Todo(value));
     }
 }
 
