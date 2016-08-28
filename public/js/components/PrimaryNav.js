@@ -9,6 +9,7 @@ export default class PrimaryNav extends React.Component {
                     <li>Nav2</li>
                     <li>Nav3</li>
                     <li>Nav4</li>
+                    <li>Nav1</li>
                 </ul>
             </div>
         );

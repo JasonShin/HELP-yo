@@ -2,9 +2,9 @@
   "name": "helpsystem",
   "version": "1.0.0",
   "description": "Help System",
-  "main": "index.js",
+  "main": "webpack.config.js",
   "scripts": {
-    "dev": "./node_modules/.bin/webpack-dev-server --content-base public --inline --hot --port 8181"
+    "dev": "./node_modules/.bin/webpack-dev-server --content-base public --inline --port 8181"
   },
   "repository": {
     "type": "git",
