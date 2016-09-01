@@ -4,7 +4,8 @@
   "description": "Help System",
   "main": "webpack.config.js",
   "scripts": {
-    "dev": "./node_modules/.bin/webpack-dev-server --content-base public --inline --port 8181"
+    "dev": "./node_modules/.bin/webpack-dev-server --content-base public --inline --port 8181",
+    "test": "echo true"
   },
   "repository": {
     "type": "git",
