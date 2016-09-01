@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, hashHistory, browserHistory, routes } from 'react-router';
+//Styles
+import '../css/style.scss';
 
 //Import pages
 import GeneralLayout from './pages/layouts/GeneralLayout';
