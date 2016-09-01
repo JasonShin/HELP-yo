@@ -17,7 +17,6 @@ ReactDOM.render(
         <Route path="/" component={GeneralLayout}>
             <IndexRoute component={Home}></IndexRoute>
             <Route path="bookings/history" name="bookingsHistory" component={BookingsHistory}></Route>
-
         </Route>
     </Router>,
     app
