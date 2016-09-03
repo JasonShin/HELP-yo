@@ -13,7 +13,6 @@ describe('Registering as a student', function(){
 
     it('should fail at registering as a student Jason Shin', (done) => {
 
-
         register()
             .then((data) => {
                 console.log('succes: ' , data);
