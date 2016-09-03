@@ -1,0 +1,8 @@
+
+class Misc {
+    constructor() {
+        super();
+    }
+
+
+}

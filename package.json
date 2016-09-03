@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "./node_modules/.bin/webpack-dev-server --content-base public/ --inline --hot --port 8181",
     "test": "echo true",
-    "test:all": "mocha --compilers js:babel-core/register --recursive tests/."
+    "test:all": "mocha --recursive tests/.",
+    "test:all:es6": "mocha --compilers js:babel-core/register --recursive tests/."
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "babel-preset-stage-0": "^6.3.13",
     "chai": "^3.5.0",
     "css-loader": "^0.23.1",
+    "es6-promise": "^3.2.1",
     "eslint": "^3.4.0",
     "eslint-loader": "^1.5.0",
     "eslint-plugin-react": "^6.1.2",
@@ -40,12 +42,14 @@
     "jquery": "^3.1.0",
     "jquery-ui": "^1.12.0",
     "jquery.ui.widget": "^1.10.3",
+    "jsdom": "^9.4.5",
     "jshint": "^2.9.2",
     "jshint-loader": "^0.8.3",
     "mobx": "^2.0.0",
     "mobx-react": "^3.0.0",
     "mobx-react-devtools": "^4.0.5",
     "mocha": "^3.0.2",
+    "mocha-jsdom": "^1.1.0",
     "node-sass": "^3.8.0",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
