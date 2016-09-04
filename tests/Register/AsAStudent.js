@@ -8,7 +8,7 @@ describe('Registering as a student', function(){
 
     });
 
-    it('should fail at registering as a student Jason Shin', function(done){
+    it('should fail at registering as a student Jason Shin', function(done) {
         register({
             studentId: '123456',
             dob: '1 January 1995',
