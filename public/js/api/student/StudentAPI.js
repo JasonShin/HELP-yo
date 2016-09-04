@@ -1,7 +1,9 @@
 import config from '../../../config/config';
+//import * as firebase from 'firebase';
+import HELPFirebase from '../HELPFirebase';
 const request = require('request');
 
-export const register = (opts) => {
+export const registerHELP = (opts) => {
   return new Promise((resolve, reject) => {
     const { studentId, dob, degreeType, studentStatus, firstLang, countryOrigin, creatorId,
       gender, background, degreeDetails, altContact, preferredName, completedHsc, hscMark, 
@@ -10,6 +12,7 @@ export const register = (opts) => {
       completedFoundationCourse, foundationCourseMark } = opts;
 
     const callback = (error, response, body) => {
+
       if (!error && response.statusCode == 200) {
         resolve('hello! ' + JSON.stringify(response) + 'yo');
       } else {
@@ -61,4 +64,41 @@ export const register = (opts) => {
     };
     request(options, callback);
   });
+};
+
+export const registerFirebase = (opts) => {
+
+  return new Promise((resolve, reject) => {
+
+    const { email, password } = opts;
+
+    HELPFirebase.context.auth().createUserWithEmailAndPassword(email, password)
+        .then(() => {
+          resolve('successfully registered');
+        })
+        .catch((error) => {
+          reject({
+            errorCode: error.code,
+            errorMessage: error.message
+          });
+        });
+  });
+
+};
+
+export const loginFirebase = (opts) => {
+
+  return new Promise((resolve, reject)=> {
+
+    const {email, password} = opts;
+
+    HELPFirebase.context.auth().signInWithEmailAndPassword(email, password)
+    .then(function(result) {
+      resolve(result);
+    })
+    .catch(function(error) {
+      resolve(error);
+    });
+  });
+
 };
