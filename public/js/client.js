@@ -33,3 +33,18 @@ ReactDOM.render(
     </Router>,
     app
 );
+
+/*
+var Routes = (
+    <Router history={history}>
+        <Route path="/" component={GeneralLayout}>
+            <IndexRoute component={Home}></IndexRoute>
+            <Route path="login" component={Login}></Route>
+            <Route path="bookings/history" component={BookingsHistory} onEnter={HELPFirebase.requireAuth}></Route>
+        </Route>
+    </Router>
+);
+
+Router.run(Routes, function (Handler) {
+    React.render(<Handler />, app);
+});*/

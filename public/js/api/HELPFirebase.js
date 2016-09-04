@@ -5,6 +5,7 @@ export default class HELPFirebase {
     static init = false;
 
 
+
     static initialize() {
         //TODO: Find a way to validate firebase has initialized.
         //Possible issues => firebase context timeout
