@@ -21,6 +21,9 @@ import Sessions from './pages/Sessions';
 //Finds root element
 const app = document.getElementById('app');
 
+//webpack loader that we are using & request module   incompatibility
+//import {registerFirebase} from './api/student/StudentAPI';
+
 ReactDOM.render(
     <Router history={history}>
         <Route path="/" component={GeneralLayout}>
