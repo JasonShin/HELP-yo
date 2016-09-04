@@ -54,7 +54,7 @@
     "node-sass": "^3.8.0",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
-    "react-router": "^1.0.3",
+    "react-router": "^2.4.0",
     "sass-loader": "^4.0.0",
     "should": "^11.1.0",
     "style-loader": "^0.13.1",
