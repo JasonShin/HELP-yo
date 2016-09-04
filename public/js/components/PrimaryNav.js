@@ -1,4 +1,5 @@
 import React from 'react';
+import {ReactRouter, Router, Link} from 'react-router';
 
 export default class PrimaryNav extends React.Component {
     render() {
@@ -8,8 +9,9 @@ export default class PrimaryNav extends React.Component {
 
                 <ul>
                     <i class="fa fa-bars" aria-hidden="true"></i>
-                    <li>Nav1</li>
-                    <li>Nav2</li>
+                    <li><Link to="/login">Login</Link></li>
+                    <li><Link to="/bookings/history">Nav1</Link></li>
+
                     <li>Nav3</li>
                     <li>Nav4</li>
                     <li>Nav6</li>

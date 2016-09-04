@@ -97,7 +97,7 @@ export const loginFirebase = (opts) => {
       resolve(result);
     })
     .catch(function(error) {
-      resolve(error);
+      reject(error);
     });
   });
 

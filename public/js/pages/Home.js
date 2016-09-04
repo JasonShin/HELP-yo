@@ -8,7 +8,6 @@ export default class Home extends React.Component {
             <div>
                 <h1>Homepage !! yotest firebase!</h1>
                 <TodoList store={TodoStore} />
-                
             </div>
         );
     }

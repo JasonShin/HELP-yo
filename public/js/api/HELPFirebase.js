@@ -19,4 +19,14 @@ export default class HELPFirebase {
         this.initialize();
         return firebase;
     }
+
+    // () => returns authenticated status
+    static requireAuth(nextState, replace) {
+        if(null === firebase.auth().currentUser) {
+            replace({
+                pathname: '/login',
+                state: { nextPathname: nextState.location.pathname }
+            })
+        }
+    }
 }
