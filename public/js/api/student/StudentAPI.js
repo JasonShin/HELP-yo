@@ -1,7 +1,7 @@
 import config from '../../../config/config';
 //import * as firebase from 'firebase';
 import HELPFirebase from '../HELPFirebase';
-const request = require('request');
+const request = require('superagent');
 
 export const registerHELP = (opts) => {
   return new Promise((resolve, reject) => {
@@ -11,7 +11,7 @@ export const registerHELP = (opts) => {
       cultMark, completedInsearchDeep, insearchDeepMark, completedInsearchDiploma, insearchDiplomaMark,
       completedFoundationCourse, foundationCourseMark } = opts;
 
-    const callback = (error, response, body) => {
+    const callback = (error, response) => {
 
       if (!error && response.statusCode == 200) {
         resolve('hello! ' + JSON.stringify(response) + 'yo');
@@ -24,14 +24,9 @@ export const registerHELP = (opts) => {
       reject('[Register] Required parameter not included. Check REST docs for required parameters.');
     }
 
-    const options = {
-      url: `${config.baseURL}student/register`,
-      method: 'POST',
-      headers: {
-        'AppKey': config.appKey
-      },
-      json: true,
-      body: {
+    request
+      .post(`${config.baseURL}student/register`)
+      .send({
         'StudentId': studentId,
         'DateOfBirth': dob,
         'Degree': degreeType,
@@ -60,9 +55,10 @@ export const registerHELP = (opts) => {
         'InsearchDiplomaMark': insearchDiplomaMark,
         'FoundationCourse': completedFoundationCourse,
         'FoundationCourseMark': foundationCourseMark,
-      }
-    };
-    request(options, callback);
+      })
+      .set('AppKey', config.appKey)
+      .set('Accept', 'application/json')
+      .end(callback);
   });
 };
 

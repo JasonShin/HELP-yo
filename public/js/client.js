@@ -18,11 +18,10 @@ import Booking from './pages/Booking';
 import BookingsHistory from './pages/BookingsHistory';
 import Sessions from './pages/Sessions';
 
+import { registerHELP, registerFirebase, loginFirebase } from './api/student/StudentAPI';
 //Finds root element
 const app = document.getElementById('app');
 
-//webpack loader that we are using & request module   incompatibility
-//import {registerFirebase} from './api/student/StudentAPI';
 
 ReactDOM.render(
     <Router history={history}>

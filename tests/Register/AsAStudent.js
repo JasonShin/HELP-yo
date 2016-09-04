@@ -11,7 +11,6 @@ describe('Registering as a student', function(){
 
     it('should fail at registering as a student Jason Shin', function(done){
         registerHELP({
-
             studentId: '123456',
             dob: '1 January 1995',
             degreeType: 'UG',
