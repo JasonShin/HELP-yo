@@ -27,7 +27,6 @@ describe('Registering as a student', function(){
             completedHsc: 'true',
             hscMark: '100'
         });
-        console.log(response.data);
     });
 
     it('should fail creating user in firebase', async () => {
