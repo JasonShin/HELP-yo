@@ -1,0 +1,52 @@
+@import "../settings/colors";
+#PrimaryNav {
+  color: $general-primary-nav-text-color;
+  background-color: $general-primary-nav-color;
+
+  //LOGO STARTS
+  .logo {
+    $logo-image-width: 50px;
+    $logo-text-size: 50px;
+
+    padding-top: 10px;
+    padding-bottom: 20px;
+
+    text-align: center; //Required to center this wrapper
+    .logo-container {
+
+      display: inline-block;  //Required to center this wrapper
+
+      .logo-image {
+        overflow: hidden;
+        img {
+          width: $logo-image-width;
+          vertical-align: middle;
+        }
+      }
+      .logo-text {
+        font-size: $logo-text-size;
+        font-weight: bolder;
+        vertical-align: middle;
+        padding-left: 15px;
+      }
+    }
+  }
+  //LOGO ENDS
+
+
+  //TODO: Make mixin for following later
+  a:visited {
+    color: $general-primary-nav-text-color;
+  }
+
+  ul {
+    padding: 0;
+    overflow: hidden;
+    margin: 0;
+  }
+
+  ul li {
+    list-style: none;
+    float: left;
+  }
+}

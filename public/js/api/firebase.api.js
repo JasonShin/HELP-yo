@@ -14,10 +14,11 @@ export default class FirebaseAPI {
         }
 
     }
-    
+
     // () => retreives initialized firebase context. Does not initiate already initiated context.
     static get context () {
         this.initialize();
+        window.firebase = firebase;
         return firebase;
     }
 

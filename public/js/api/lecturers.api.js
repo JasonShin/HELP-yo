@@ -7,3 +7,8 @@ const axiosConfig = {
     }
 };
 
+//TODO: Implement tutor API call
+export const getAllLecturers = () => {
+
+    return axios.get(`${config.baseURL}session/sessionTypes/true`, {},axiosConfig);
+};
