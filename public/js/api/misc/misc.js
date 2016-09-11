@@ -1,8 +1,0 @@
-
-class Misc {
-    constructor() {
-        super();
-    }
-
-
-}
