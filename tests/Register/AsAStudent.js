@@ -9,6 +9,7 @@ describe('Registering as a student', function(){
         //Nothing to do here
     });
 
+
     it('should fail at registering as a student Jason Shin', function(done){
         registerHELP({
             studentId: '123456',

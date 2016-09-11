@@ -19,7 +19,6 @@ class Login extends React.Component {
          }).
          then((body) => {
             console.log(body);
-           // this.context.router.replace('/');
             this.props.router.push('/');
          }).
          catch((err) => {

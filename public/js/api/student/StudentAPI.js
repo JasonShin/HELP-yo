@@ -1,5 +1,4 @@
 import config from '../../../config/config';
-//import * as firebase from 'firebase';
 import HELPFirebase from '../HELPFirebase';
 const request = require('superagent');
 
