@@ -1,0 +1,9 @@
+@import "../settings/colors";
+@import "../tools/mixins";
+
+.button-red {
+
+  background-color: $buttons-red;
+  color: white;
+  @include genericfyButton();
+}

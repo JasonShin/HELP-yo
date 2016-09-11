@@ -27,3 +27,14 @@
     }
   }
 }
+
+@mixin genericfyButton() {
+  min-width: 300px;
+  height: 35px;
+  outline: 0;
+  border: 0;
+  text-transform: capitalize;
+  font-weight: bolder;
+  border-radius: 3px;
+
+}

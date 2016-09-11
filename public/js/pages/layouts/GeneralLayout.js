@@ -10,6 +10,7 @@ export default class Layout extends React.Component {
                 <div id="Page">
                     {this.props.children}
                 </div>
+
             </div>
         );
     }

@@ -33,22 +33,30 @@ class Login extends React.Component {
     render() {
         return (
             <div id="PageContent">
-                <h1>You must login to goto any other pages222</h1>
-
-                <form onSubmit={this.handleSubmit.bind(this)}>
-                    <div class="form-group">
-                        <label>uts student id</label>
-                        <input class="form-control" ref={(c) =>{this.emailField = c}} placeholder="Email"  />
+                <div class="contentWrapper loginWrapper">
+                    <div>
+                        <h2>Student Login</h2>
+                        <div>Login to register for workshops, programs, and appointments</div>
                     </div>
 
-                    <div class="form-group">
-                        <label>uts password</label>
-                        <input class="form-control" ref={(c) =>{this.passwordField = c}} placeholder="Password"  />
-                    </div>
+                    <form onSubmit={this.handleSubmit.bind(this)}>
+                        <div class="form-group">
+                            <label>uts student id</label>
+                            <input type="text" class="form-control" ref={(c) =>{this.emailField = c}} placeholder="Email"  />
+                        </div>
 
-                    <button type="submit">Login yo</button>
-                </form>
+                        <div class="form-group">
+                            <label>uts password</label>
+                            <input type="password" class="form-control" ref={(c) =>{this.passwordField = c}} placeholder="Password"  />
+                        </div>
 
+                        <div>
+                            <p><b>Hint</b>: this is the same password you use to login to your UTS student email</p>
+                        </div>
+
+                        <button class="button-red" type="submit">login</button>
+                    </form>
+                </div>
             </div>
         );
     }

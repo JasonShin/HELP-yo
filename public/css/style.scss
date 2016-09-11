@@ -23,6 +23,7 @@ TOC
 /* 3. Elements STARTS */
 @import "elements/page";
 @import "elements/forms";
+@import "elements/buttons";
 /* 3. Elements ENDS */
 
 
@@ -30,5 +31,6 @@ TOC
 /* 4. Components STARTS */
 
 @import 'components/navigation';
+@import "components/contentWrapper";
 
 /* 4. Components ENDS */
