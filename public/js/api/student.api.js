@@ -1,6 +1,6 @@
-import config from '../../../config/config';
+import config from '../../config/config';
 //import * as firebase from 'firebase';
-import HELPFirebase from '../HELPFirebase';
+import FirebaseAPI from './firebase.api';
 const axios = require('axios');
 const axiosConfig = {
   headers: {
@@ -55,10 +55,10 @@ export const registerHELP = (opts) => {
 
 export const registerFirebase = (opts) => {
   const { email, password } = opts;
-  return HELPFirebase.context.auth().createUserWithEmailAndPassword(email, password);
+  return FirebaseAPI.context.auth().createUserWithEmailAndPassword(email, password);
 };
 
 export const loginFirebase = (opts) => {
   const {email, password} = opts;
-  return HELPFirebase.context.auth().signInWithEmailAndPassword(email, password);
+  return FirebaseAPI.context.auth().signInWithEmailAndPassword(email, password);
 };
