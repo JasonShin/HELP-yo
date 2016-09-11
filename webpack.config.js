@@ -24,7 +24,7 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                loader: 'style-loader!css-loader!sass-loader'
+                loader: 'style-loader!css-loader?minimize!sass-loader'
             },
             //Added to resolve => https://github.com/jviotti/ghrequest/issues/3
             /*{

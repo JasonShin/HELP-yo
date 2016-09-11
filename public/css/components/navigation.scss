@@ -15,24 +15,29 @@
 
     text-align: center; //Required to center this wrapper
     .logo-container {
-
       display: inline-block;  //Required to center this wrapper
+      
+      a {
+        text-decoration: none;
 
-      .logo-image {
-        overflow: hidden;
-        img {
-          width: $logo-image-width;
+        .logo-image {
+          overflow: hidden;
+          img {
+            width: $logo-image-width;
+            vertical-align: middle;
+            @include achorfy(false);
+          }
+        }
+
+        .logo-text {
+          font-size: $logo-text-size;
+          font-weight: bolder;
           vertical-align: middle;
+          padding-left: 15px;
           @include achorfy(false);
         }
       }
-      .logo-text {
-        font-size: $logo-text-size;
-        font-weight: bolder;
-        vertical-align: middle;
-        padding-left: 15px;
-        @include achorfy(false);
-      }
+
     }
 
 

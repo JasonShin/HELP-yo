@@ -37,12 +37,12 @@ class Login extends React.Component {
 
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     <div class="form-group">
-                        <label>Email</label>
+                        <label>uts student id</label>
                         <input class="form-control" ref={(c) =>{this.emailField = c}} placeholder="Email"  />
                     </div>
 
                     <div class="form-group">
-                        <label>Password</label>
+                        <label>uts password</label>
                         <input class="form-control" ref={(c) =>{this.passwordField = c}} placeholder="Password"  />
                     </div>
 

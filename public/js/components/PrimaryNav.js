@@ -8,8 +8,10 @@ export default class PrimaryNav extends React.Component {
 
                 <div class="logo">
                     <div class="logo-container">
-                        <span class="logo-image"><img src="https://firebasestorage.googleapis.com/v0/b/helps-uts-project.appspot.com/o/UTS-logo.png?alt=media&token=df24fd5f-1c18-46d6-bb89-6e83cf47609f" alt="logo" /></span>
-                        <span class="logo-text">UTS:HELPS</span>
+                        <Link to="/">
+                            <span class="logo-image"><img src="https://firebasestorage.googleapis.com/v0/b/helps-uts-project.appspot.com/o/UTS-logo.png?alt=media&token=df24fd5f-1c18-46d6-bb89-6e83cf47609f" alt="logo" /></span>
+                            <span class="logo-text">UTS:HELPS</span>
+                        </Link>
                     </div>
                 </div>
                 <div class="menu-container">
