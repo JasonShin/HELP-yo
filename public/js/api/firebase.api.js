@@ -1,7 +1,7 @@
 import * as firebase from 'firebase';
 import * as firebaseConfig from '../../config/firebase.config';
 
-export default class HELPFirebase {
+export default class FirebaseAPI {
     static init = false;
 
 

@@ -1,6 +1,6 @@
 import {chai, assert} from 'chai';
-import HELPFirebase from '../../public/js/api/HELPFirebase';
-import {registerHELP, registerFirebase, loginFirebase} from '../../public/js/api/student/StudentAPI';
+import FirebaseAPI from '../../public/js/api/firebase.api';
+import {registerHELP, registerFirebase, loginFirebase} from '../../public/js/api/student.api';
 
 //TO-DO: ADD SHOULD ASSERTIONS INSTEAD OF LOGGING TO CONSOLE
 describe('Registering as a student', function(){

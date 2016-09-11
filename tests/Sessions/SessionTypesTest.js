@@ -1,6 +1,6 @@
 import {chai, assert} from 'chai';
-import HELPFirebase from '../../public/js/api/HELPFirebase';
-import {getAllSessionsTypes} from '../../public/js/api/session/SessionsAPI';
+import HELPFirebase from '../../public/js/api/firebase.api';
+import {getAllSessionsTypes} from '../../public/js/api/sessions.api';
 
 
 describe('Retreiving session types', function() {

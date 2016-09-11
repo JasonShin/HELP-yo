@@ -1,4 +1,4 @@
-import config from '../../../config/config';
+import config from '../../config/config';
 const request = require('superagent');
 
 export const getAllSessionsTypes = () => {
