@@ -15,13 +15,10 @@ export default class PrimaryNav extends React.Component {
                 <div class="menu-container">
                     <div class="menu-main-container">
                         <ul>
-                            <i class="fa fa-bars" aria-hidden="true"></i>
-                            <li><Link to="/login">Login</Link></li>
-                            <li><Link to="/bookings/history">Nav1</Link></li>
-
-                            <li>Nav3</li>
-                            <li>Nav4</li>
-                            <li>Nav6</li>
+                            <li><Link to="/login">workshops</Link></li>
+                            <li><Link to="/bookings/history">my bookings</Link></li>
+                            <li>my info</li>
+                            <li>faq's</li>
                         </ul>
                     </div>
                     <div class="menu-sub-container">

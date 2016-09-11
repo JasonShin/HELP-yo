@@ -3,10 +3,11 @@ TOC
 1. Settings
   1.1 globals
   1.2 colors
+2. Generics
 
-2. Elements
+3. Elements
 
-3. Components
+4. Components
 */
 
 
@@ -15,15 +16,18 @@ TOC
 
 /* 1. Settings ENDS */
 
+/* 2.Generics STARTS */
+@import "generic/normalize";
+/* 2.Generics ENDS */
 
-/* 2. Elements STARTS */
+/* 3. Elements STARTS */
+@import "elements/page";
+/* 3. Elements ENDS */
 
-/* 2. Elements ENDS */
 
 
-
-/* 3. Components STARTS */
+/* 4. Components STARTS */
 
 @import 'components/navigation';
 
-/* 3. Components ENDS */
+/* 4. Components ENDS */

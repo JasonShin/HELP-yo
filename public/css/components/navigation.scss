@@ -1,12 +1,14 @@
 @import "../settings/colors";
+@import "../tools/mixins";
+
 #PrimaryNav {
-  color: $general-primary-nav-text-color;
-  background-color: $general-primary-nav-color;
+  color: $primary-nav-text-color;
+  background-color: $primary-nav-color;
 
   //LOGO STARTS
   .logo {
-    $logo-image-width: 50px;
-    $logo-text-size: 50px;
+    $logo-image-width: 35px;
+    $logo-text-size: 35px;
 
     padding-top: 10px;
     padding-bottom: 20px;
@@ -21,6 +23,7 @@
         img {
           width: $logo-image-width;
           vertical-align: middle;
+          @include achorfy(false);
         }
       }
       .logo-text {
@@ -28,25 +31,43 @@
         font-weight: bolder;
         vertical-align: middle;
         padding-left: 15px;
+        @include achorfy(false);
       }
     }
+
+
   }
   //LOGO ENDS
 
+  //Navigation STARTS
+  .menu-container {
+    $nav-item-size: 14px;
+    $menu-height: 50px;
+    $menu-item-padding-side: 15px;
+    $menu-container-padding-top: ($menu-height / 4);
 
-  //TODO: Make mixin for following later
-  a:visited {
-    color: $general-primary-nav-text-color;
-  }
+    text-align: center;
+    min-height: $menu-height;
+    background-color: $primary-nav-sub-color;
 
-  ul {
-    padding: 0;
-    overflow: hidden;
-    margin: 0;
-  }
+    .menu-main-container {
+      display: inline-block;
+      padding-top: $menu-container-padding-top;
+      ul li {
+        padding-right: $menu-item-padding-side;
+        padding-left: $menu-item-padding-side;
+        font-size: $nav-item-size;
+        text-transform: uppercase;
 
-  ul li {
-    list-style: none;
-    float: left;
+        a {
+          text-decoration: none;
+        }
+
+      }
+    }
   }
+  //Navigation ENDS
+
+
+  @include normalizeList(true);
 }

@@ -7,10 +7,8 @@ export default class Layout extends React.Component {
             <div>
                 <PrimaryNav />
 
-                <div class='container'>
-                    <div class='row'>
-                        {this.props.children}
-                    </div>
+                <div id="Page">
+                    {this.props.children}
                 </div>
             </div>
         );

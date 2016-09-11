@@ -1,0 +1,10 @@
+$page-width: 1150px;
+
+#Page {
+  width: 100%;
+  overflow: hidden;
+}
+#PageContent {
+  width: $page-width;
+  margin: 0px auto;
+}

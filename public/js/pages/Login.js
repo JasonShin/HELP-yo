@@ -3,11 +3,14 @@ import { browserHistory, withRouter } from 'react-router'
 import TodoList from '../components/TodoList';
 import TodoStore from '../stores/TodoStore';
 import { registerFirebase, loginFirebase } from '../api/student.api';
+import config from '../../config/config';
 
 
 class Login extends React.Component {
 
-
+    componentWillMount(){
+        document.title = `Login${config.titleEnding}`;
+    }
 
     handleSubmit(e) {
         e.preventDefault();
@@ -29,7 +32,7 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div>
+            <div id="PageContent">
                 <h1>You must login to goto any other pages222</h1>
 
                 <form onSubmit={this.handleSubmit.bind(this)}>

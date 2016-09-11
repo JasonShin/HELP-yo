@@ -1,0 +1,29 @@
+@mixin achorfy($selectable) {
+  @if $selectable == false {
+    //Below disables text highlight
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  cursor: pointer;
+}
+
+@mixin normalizeList($float-left) {
+  a:visited {
+    color: $primary-nav-text-color;
+  }
+
+  ul {
+    padding: 0;
+    overflow: hidden;
+    margin: 0;
+  }
+
+  ul li {
+    list-style: none;
+    @if $float-left == true {
+      float: left;
+    }
+  }
+}
