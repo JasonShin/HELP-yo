@@ -10,6 +10,7 @@ describe('Registering as a student', function(){
         //Nothing to do here
     });
 
+
     it('should fail at registering as a student Jason Shin', async () => {
         const response = await registerHELP({
             studentId: '123456',
