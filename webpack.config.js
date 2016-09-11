@@ -37,13 +37,12 @@ module.exports = {
         path: __dirname + '/public/js',
         filename: 'client.min.js'
     },
-    //Added to resolve => https://github.com/jviotti/ghrequest/issues/3
-    /*node: {
-        console: 'empty',
-        fs: 'empty',
-        net: 'empty',
-        tls: 'empty'
-    },*/
+    devServer: {
+        //This is added to server index.thml for all urls. It must be disabled to server 404s
+        historyApiFallback: {
+            index: 'index.html'
+        }
+    },
     plugins: debug ? [] : [
         new webpack.optimize.DebugPlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
