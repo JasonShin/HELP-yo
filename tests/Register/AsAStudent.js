@@ -2,6 +2,7 @@ import {chai, assert} from 'chai';
 import HELPFirebase from '../../public/js/api/HELPFirebase';
 import {registerHELP, registerFirebase, loginFirebase} from '../../public/js/api/student/StudentAPI';
 
+//TO-DO: ADD SHOULD ASSERTIONS INSTEAD OF LOGGING TO CONSOLE
 describe('Registering as a student', function(){
     this.timeout(20000);
 
@@ -9,8 +10,8 @@ describe('Registering as a student', function(){
         //Nothing to do here
     });
 
-    it('should fail at registering as a student Jason Shin', function(done){
-        registerHELP({
+    it('should fail at registering as a student Jason Shin', async () => {
+        const response = await registerHELP({
             studentId: '123456',
             dob: '1 January 1995',
             degreeType: 'UG',
@@ -25,60 +26,28 @@ describe('Registering as a student', function(){
             preferredName: 'Tom',
             completedHsc: 'true',
             hscMark: '100'
-        })
-        .then((body) => {
-            console.log(body);
-            done();
-        })
-        .catch((err) => {
-            console.log(err);
-            done();
+        });
+        console.log(response.data);
+    });
+
+    it('should fail creating user in firebase', async () => {
+        const response = await registerFirebase({
+            email: 'jasonshin8123@yoghu.com.au',
+            password: 'giewjgi'
         });
     });
 
-    it('should fail creating user in firebase', (done)=> {
-        registerFirebase({
+    it('should register to firebase', async () => {
+        const response = await registerFirebase({
             email: 'jasonshin8123@yoghu.com.au',
             password: 'giewjgi'
-        })
-            .then((body) => {
-                console.log(body);
-            })
-            .catch((err)=>{
-                console.log(err);
-            });
-
-        console.log('called!');
-    });
-
-    it('should register to firebase', (done)=>{
-        registerFirebase({
-            email: 'jasonshin8123@yoghu.com.au',
-            password: 'giewjgi'
-        })
-        .then((body) => {
-            console.log(body);
-            done();
-        })
-        .catch((err)=>{
-            console.log(err);
-            done();
         });
-
     });
 
-    it('should login as yong.j.shin@help.com.au', (done) => {
-        loginFirebase({
+    it('should login as yong.j.shin@help.com.au', async () => {
+        const response = await loginFirebase({
             email: 'yong.j.shin@help.com.au',
             password: 'test123'
-        })
-        .then((body) => {
-            console.log(body);
-            done();
-        })
-        .catch((err) => {
-            console.log(err);
-            done();
         });
     });
 
