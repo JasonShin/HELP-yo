@@ -28,7 +28,7 @@ ReactDOM.render(
         <Route path="/" component={GeneralLayout}>
             <IndexRoute component={Home}></IndexRoute>
             <Route path="login" component={Login}></Route>
-            <Route path="bookings/history" component={BookingsHistory} onEnter={HELPFirebase.requireAuth}></Route>
+            <Route path="bookings/history" component={BookingsHistory} onEnter={FirebaseAPI.requireAuth}></Route>
         </Route>
     </Router>,
     app
