@@ -7,15 +7,18 @@
     <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
 
     <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
         ga('create', 'UA-83990833-1', 'auto');
-        ga('send', 'pageview');
 
+        // Replace the following lines with the plugins you want to use.
+        ga('require', 'eventTracker');
+        ga('require', 'outboundLinkTracker');
+        ga('require', 'urlChangeTracker');
+
+        ga('send', 'pageview');
     </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <script async src='https://firebasestorage.googleapis.com/v0/b/helps-uts-project.appspot.com/o/autotrack.js?alt=media&token=e3d23a5c-4458-4e1c-9b7d-1ec64c9621a8'></script>
 </head>
 <body>
     <div id="app"></div>
