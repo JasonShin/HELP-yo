@@ -8,7 +8,8 @@ class TodoStore {
 
     @computed get filteredTodos() {
         var matchesFilter = new RegExp(this.filter, 'i');
-        return this.todos.filter(todo => !this.filter || matchesFilter.test(todo));
+        console.log('filer ' , this.filter);
+        return this.todos.filter(todo => !this.filter || matchesFilter.test(todo.value));
     }
 
     createTodo(value) {
