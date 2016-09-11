@@ -1,22 +1,60 @@
 import config from '../../config/config';
-const request = require('superagent');
+const axios = require('axios');
+const axiosConfig = {
+    headers: {
+        'AppKey': config.appKey,
+        'Accept': 'application/json'
+    }
+};
 
 export const getAllSessionsTypes = () => {
-    return new Promise((resolve, reject) => {
 
-        const callback = (error, response) => {
-            if(!error && response.statusCode == 200) {
-                resolve('resolved all sessions types! ', JSON.stringify(response));
-            } else {
-                reject('could not resolve all session types!' , JSON.stringify(error));
-            }
-        };
+    return axios.get(`${config.baseURL}session/sessionTypes/true`, {},axiosConfig);
+};
 
-        request
-            .get(`${config.baseURL}session/sessionTypes/true`)
-            .set('AppKey', config.appKey)
-            .set('Accept', 'application/json')
-            .end(callback);
-        
-    });
+export const searchSessionBookingsByDate = (opt) => {
+
+    const {studentId, startingDtBegin, startingDtEnd, endingDtBegin, endingDtEnd} = opt;
+    const params = {
+        studentId,
+        startingDtBegin,
+        startingDtEnd,
+        endingDtBegin,
+        endingDtEnd
+    };
+
+    return axios.get(`${config.baseURL}session/booking/search`, {axiosConfig, params});
+};
+
+
+//(studentId, sessionTypeId) => filtered sessions  topic = session type
+export const searchSessionBookingsByTopic = (opt) => {
+    const {studentId, sessionTypeId} = opt;
+    const params = {
+        studentId,
+        sessionTypeId
+    };
+
+    return axios.get(`${config.baseURL}session/booking/search`, {}, {axiosConfig, params});
+};
+
+export const searchSessionBookingByLocation = (opt) => {
+    const {studentId, campus} = opt;
+    const params = {
+        studentId,
+        campus
+    };
+
+    return axios.get(`${config.baseURL}session/booking/search`, {}, {axiosConfig, params});
+
+};
+
+export const searchSessionBookingByTutor = (opt) => {
+    const {studentId, lecturerId} = opt;
+    const params = {
+        studentId,
+        lecturerId
+    };
+
+    return axios.get(`${config.baseURL}session/booking/search`, {}, {axiosConfig, params});
 };
