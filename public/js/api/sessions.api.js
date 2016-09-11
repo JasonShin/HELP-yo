@@ -7,11 +7,6 @@ const axiosConfig = {
     }
 };
 
-export const getAllSessionsTypes = () => {
-
-    return axios.get(`${config.baseURL}session/sessionTypes/true`, {},axiosConfig);
-};
-
 export const searchSessionBookingsByDate = (opt) => {
 
     const {studentId, startingDtBegin, startingDtEnd, endingDtBegin, endingDtEnd} = opt;
