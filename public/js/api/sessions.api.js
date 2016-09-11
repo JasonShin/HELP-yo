@@ -17,6 +17,6 @@ export const getAllSessionsTypes = () => {
             .set('AppKey', config.appKey)
             .set('Accept', 'application/json')
             .end(callback);
-
+        
     });
 };
