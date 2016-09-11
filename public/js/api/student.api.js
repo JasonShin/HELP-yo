@@ -1,5 +1,4 @@
 import config from '../../config/config';
-//import * as firebase from 'firebase';
 import FirebaseAPI from './firebase.api';
 const axios = require('axios');
 const axiosConfig = {
@@ -59,6 +58,6 @@ export const registerFirebase = (opts) => {
 };
 
 export const loginFirebase = (opts) => {
-  const {email, password} = opts;
+  const { email, password } = opts;
   return FirebaseAPI.context.auth().signInWithEmailAndPassword(email, password);
 };
