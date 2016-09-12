@@ -4,6 +4,8 @@ $page-width: 1150px;
   width: 100%;
   overflow: hidden;
 }
+
+//Ensures all contents are contained within this central container
 #PageContent {
   width: $page-width;
   margin: 0px auto;

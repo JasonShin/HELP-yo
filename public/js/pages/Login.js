@@ -33,7 +33,8 @@ class Login extends React.Component {
     render() {
         return (
             <div id="PageContent">
-                <div class="contentWrapper loginWrapper">
+
+                <div class="container-login">
                     <div>
                         <h2>Student Login</h2>
                         <div>Login to register for workshops, programs, and appointments</div>

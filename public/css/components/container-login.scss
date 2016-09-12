@@ -1,0 +1,39 @@
+@import "container";
+@import "../tools/constants";
+
+.container-login {
+  @extend .container;
+  width: 450px;
+  margin: 0px auto;
+  margin-top: $consistent-margin-top;
+  
+  //Student Login heading section
+  > div:first-child {
+    h2 {
+      margin-bottom: 0px;
+    }
+
+    margin-bottom: $consistent-margin-bottom;
+  }
+
+  form {
+    .form-group {
+      input {
+        //Needed to avoid 100% width going outside of boundary
+        width: 95%;
+      }
+
+      label {
+        margin-bottom: $consistent-margin-bottom / 2;
+      }
+
+      margin-bottom: $consistent-margin-bottom;
+    }
+
+    button {
+      width: 100%;
+
+    }
+  }
+
+}
