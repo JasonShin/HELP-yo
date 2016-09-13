@@ -87,23 +87,26 @@
           border-width: 0;
           outline: none;
           border-radius: 2px;
-          box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+
 
           color: white;
 
           transition: background-color .3s;
           padding: 6px 12px;
           line-height: normal;
+          cursor: pointer;
         }
 
         .auth-button-login {
           @extend .auth-button;
+          box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
           background-color: #2ecc71;
         }
 
         .auth-button-logout {
           @extend .auth-button;
           background-color: red;
+          box-shadow: 0 !important;
         }
 
       }
