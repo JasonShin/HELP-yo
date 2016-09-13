@@ -63,11 +63,17 @@
     .menu-main-container {
       display: inline-block;
       padding-top: $menu-container-padding-top;
+
       ul li {
         padding-right: $menu-item-padding-side;
         padding-left: $menu-item-padding-side;
         font-size: $nav-item-size;
         text-transform: uppercase;
+
+        //Required to make vertical alignment
+        height: 30px;
+        line-height: 30px;
+
 
         a {
           text-decoration: none;
@@ -75,22 +81,29 @@
 
         .auth-button {
           position: relative;
-
           display: block;
           padding: 0;
-
           overflow: hidden;
-
           border-width: 0;
           outline: none;
           border-radius: 2px;
           box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
 
-          background-color: #2ecc71;
-          color: #white;
+          color: white;
 
           transition: background-color .3s;
           padding: 6px 12px;
+          line-height: normal;
+        }
+
+        .auth-button-login {
+          @extend .auth-button;
+          background-color: #2ecc71;
+        }
+
+        .auth-button-logout {
+          @extend .auth-button;
+          background-color: red;
         }
 
       }

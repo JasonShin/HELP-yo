@@ -48,9 +48,9 @@ class PrimaryNav extends React.Component {
 
         if(this.state.loggedIn !== null) {
             if(this.state.loggedIn === false) {
-                authButton = (<span class="auth-button" onClick={this.handleLoginUser.bind(this)}>Login</span>);
+                authButton = (<span class="auth-button-login" onClick={this.handleLoginUser.bind(this)}>Login</span>);
             } else {
-                authButton = (<span class="auth-button" onClick={this.handleLogoutUser.bind(this)}>Logout</span>);
+                authButton = (<span class="auth-button-logout" onClick={this.handleLogoutUser.bind(this)}>Logout</span>);
             }
         }
 
