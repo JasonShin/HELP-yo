@@ -33,6 +33,7 @@ module.exports = {
             }*/
         ]
     },
+
     output: {
         path: __dirname + '/public/js',
         filename: 'client.min.js'
@@ -47,7 +48,13 @@ module.exports = {
         new webpack.optimize.DebugPlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.UglifyJsPlugin({mangle: false, sourcemap: false}),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery',
+            'root.jQuery': 'jquery'
+        })
     ]
 };
 

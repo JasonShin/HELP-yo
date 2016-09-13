@@ -4,18 +4,23 @@ import TodoList from '../components/TodoList';
 import TodoStore from '../stores/TodoStore';
 import { registerFirebase, loginFirebase } from '../api/student.api';
 import config from '../../config/config';
+import {materialLoading} from '../material-motion/material-motion';
 
 
 class Login extends React.Component {
 
     componentWillMount(){
         document.title = `Login${config.titleEnding}`;
+
     }
 
     handleSubmit(e) {
         e.preventDefault();
         var email = this.emailField.value;
         var password = this.passwordField.value;
+
+        /*Enable loading*/
+        materialLoading({elm: '.container-login', enable: true});
 
         loginFirebase({
             email: email,
@@ -24,9 +29,11 @@ class Login extends React.Component {
          then((body) => {
             console.log(body);
             this.props.router.push('/');
+            materialLoading({elm: '.container-login', enable: false});
          }).
          catch((err) => {
             console.log(err);
+            materialLoading({elm: '.container-login', enable: false});
          });
     }
 
@@ -53,6 +60,7 @@ class Login extends React.Component {
 
                         <div>
                             <p><b>Hint</b>: this is the same password you use to login to your UTS student email</p>
+                            <p>Demo username: demo@student.uts.edu.au / password: test123</p>
                         </div>
 
                         <button class="button-red" type="submit">login</button>
