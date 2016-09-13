@@ -1,7 +1,5 @@
 import React from 'react';
 import { browserHistory, withRouter } from 'react-router'
-import TodoList from '../components/TodoList';
-import TodoStore from '../stores/TodoStore';
 import { registerFirebase, loginFirebase } from '../api/student.api';
 import config from '../../config/config';
 import {materialLoading} from '../material-motion/material-motion';

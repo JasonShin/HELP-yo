@@ -61,3 +61,7 @@ export const loginFirebase = (opts) => {
   const { email, password } = opts;
   return FirebaseAPI.context.auth().signInWithEmailAndPassword(email, password);
 };
+
+export const logoutFirebase = (opts) => {
+    FirebaseAPI.context.auth().signOut();
+};

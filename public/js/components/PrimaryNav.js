@@ -1,8 +1,59 @@
 import React from 'react';
-import {ReactRouter, Router, Link} from 'react-router';
+import {ReactRouter, Router, Link, withRouter} from 'react-router';
+import FirebaseAPI from '../api/firebase.api';
+import {logoutFirebase} from '../api/student.api';
 
-export default class PrimaryNav extends React.Component {
+class PrimaryNav extends React.Component {
+
+    constructor() {
+        super();
+
+        //Setting initial state null ensures no Login flicker
+        this.state = {
+            loggedIn: null
+        };
+    }
+
+
+    componentWillMount() {
+
+        //Get Firebase Auth state
+        FirebaseAPI.context.auth().onAuthStateChanged(firebaseUser => {
+
+            this.setState({
+                loggedIn: (null !== firebaseUser)
+            });
+
+            if (firebaseUser) {
+                console.log("Logged IN", firebaseUser);
+            } else {
+                console.log('Not logged in');
+            }
+        });
+    }
+
+    handleLoginUser() {
+        console.log('login pressed!');
+        this.props.router.push('/login');
+    }
+
+    handleLogoutUser() {
+        logoutFirebase();
+        this.props.router.push('/');
+    }
+
     render() {
+
+        var authButton = '';
+
+        if(this.state.loggedIn !== null) {
+            if(this.state.loggedIn === false) {
+                authButton = (<span onClick={this.handleLoginUser.bind(this)}>Login</span>);
+            } else {
+                authButton = (<span onClick={this.handleLogoutUser.bind(this)}>Logout</span>);
+            }
+        }
+
         return (
             <div id='PrimaryNav'>
 
@@ -17,10 +68,11 @@ export default class PrimaryNav extends React.Component {
                 <div class="menu-container">
                     <div class="menu-main-container">
                         <ul>
-                            <li><Link to="/login">workshops</Link></li>
+                            <li class="motion-ripple-button">workshops</li>
                             <li><Link to="/bookings/history">my bookings</Link></li>
                             <li>my info</li>
                             <li>faq's</li>
+                            <li>{authButton}</li>
                         </ul>
                     </div>
                     <div class="menu-sub-container">
@@ -31,3 +83,5 @@ export default class PrimaryNav extends React.Component {
         );
     }
 }
+
+export default withRouter(PrimaryNav);
