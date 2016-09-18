@@ -9,6 +9,7 @@ var history = createBrowserHistory({queryKey: false});
 
 //Styles
 import '../css/style.scss';
+import 'react-date-picker/index.css'; //Date picker dependent css
 
 //Import pages
 import GeneralLayout from './pages/layouts/GeneralLayout';
@@ -19,7 +20,7 @@ import Booking from './pages/Booking';
 import BookingsHistory from './pages/BookingsHistory';
 import Sessions from './pages/Sessions';
 
-import { registerHELP, registerFirebase, loginFirebase } from './api/student.api';
+//import { registerHELP, registerFirebase, loginFirebase } from './api/student.api';
 //Finds root element
 const app = document.getElementById('app');
 
