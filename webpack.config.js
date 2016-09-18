@@ -27,7 +27,7 @@ module.exports = {
                 loader: 'style-loader!css-loader?minimize!sass-loader'
             },
 
-
+            { test: /\.css$/, loader: "style-loader!css-loader" },
 
         ]
     },

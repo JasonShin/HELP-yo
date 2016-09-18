@@ -1,0 +1,13 @@
+@import "container";
+@import "container-small";
+@import "../tools/constants";
+
+.container-register {
+  @extend .container;
+  @extend .container-small;
+
+  > div:first-child {
+    padding-bottom: 10px;
+  }
+
+}

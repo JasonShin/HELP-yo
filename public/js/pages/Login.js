@@ -1,5 +1,5 @@
 import React from 'react';
-import { browserHistory, withRouter } from 'react-router'
+import { browserHistory, Link, withRouter } from 'react-router'
 import { registerFirebase, loginFirebase } from '../api/student.api';
 import config from '../../config/config';
 import {materialLoading} from '../material-motion/material-motion';
@@ -59,6 +59,10 @@ class Login extends React.Component {
                         <div>
                             <p><b>Hint</b>: this is the same password you use to login to your UTS student email</p>
                             <p>Demo username: demo@student.uts.edu.au / password: test123</p>
+                        </div>
+
+                        <div class="register-now-row">
+                            <Link to="/register">Don't have an account? Register now.</Link>
                         </div>
 
                         <button class="button-red" type="submit">login</button>

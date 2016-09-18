@@ -13,6 +13,7 @@ import '../css/style.scss';
 //Import pages
 import GeneralLayout from './pages/layouts/GeneralLayout';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import Home from './pages/Home';
 import Booking from './pages/Booking';
 import BookingsHistory from './pages/BookingsHistory';
@@ -28,23 +29,9 @@ ReactDOM.render(
         <Route path="/" component={GeneralLayout}>
             <IndexRoute component={Home}></IndexRoute>
             <Route path="login" component={Login}></Route>
+            <Route path="register" component={Register}></Route>
             <Route path="bookings/history" component={BookingsHistory} onEnter={FirebaseAPI.requireAuth}></Route>
         </Route>
     </Router>,
     app
 );
-
-/*
-var Routes = (
-    <Router history={history}>
-        <Route path="/" component={GeneralLayout}>
-            <IndexRoute component={Home}></IndexRoute>
-            <Route path="login" component={Login}></Route>
-            <Route path="bookings/history" component={BookingsHistory} onEnter={HELPFirebase.requireAuth}></Route>
-        </Route>
-    </Router>
-);
-
-Router.run(Routes, function (Handler) {
-    React.render(<Handler />, app);
-});*/
