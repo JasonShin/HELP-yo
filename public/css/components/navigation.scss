@@ -63,7 +63,9 @@
     .menu-main-container {
       display: inline-block;
       padding-top: $menu-container-padding-top;
-
+      ul {
+        height: 32px;
+      }
       ul li {
         padding-right: $menu-item-padding-side;
         padding-left: $menu-item-padding-side;
@@ -95,18 +97,26 @@
           padding: 6px 12px;
           line-height: normal;
           cursor: pointer;
+
+          i {
+            margin-right: 5px;
+          }
         }
 
         .auth-button-login {
           @extend .auth-button;
-          box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
-          background-color: #2ecc71;
+          border: 1px solid white;
+          -webkit-border-radius: 9px;
+          -moz-border-radius: 9px;
+          border-radius: 9px;
         }
 
         .auth-button-logout {
           @extend .auth-button;
-          background-color: red;
-          box-shadow: 0 !important;
+          border: 1px solid white;
+          -webkit-border-radius: 9px;
+          -moz-border-radius: 9px;
+          border-radius: 9px;
         }
 
       }
