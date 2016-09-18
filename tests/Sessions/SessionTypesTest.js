@@ -8,9 +8,10 @@ describe('Retreiving session types', function() {
 
     it('should retreive all session types with success code', (done) => {
         getAllSessionsTypes().
-            success(function(e) {
+            then(function(e) {
                 console.log("success!");
-               console.log(e);
+                console.log(e);
+                done();
             });
             /*then((response) => {
                 console.log(response.data);

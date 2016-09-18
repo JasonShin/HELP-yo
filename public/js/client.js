@@ -16,6 +16,7 @@ import GeneralLayout from './pages/layouts/GeneralLayout';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
+import SessionTypesPage from './pages/SessionTypesPage';
 import Booking from './pages/Booking';
 import BookingsHistory from './pages/BookingsHistory';
 import Sessions from './pages/Sessions';
@@ -28,7 +29,7 @@ const app = document.getElementById('app');
 ReactDOM.render(
     <Router history={history}>
         <Route path="/" component={GeneralLayout}>
-            <IndexRoute component={Home}></IndexRoute>
+            <IndexRoute component={SessionTypesPage}></IndexRoute>
             <Route path="login" component={Login}></Route>
             <Route path="register" component={Register}></Route>
             <Route path="bookings/history" component={BookingsHistory} onEnter={FirebaseAPI.requireAuth}></Route>
