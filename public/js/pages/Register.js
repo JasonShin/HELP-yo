@@ -12,14 +12,48 @@ class Register extends React.Component {
     componentWillMount(){
         document.title = `Register${config.titleEnding}`;
 
+        //InitialState
+        this.state = {
+            passwordStrength: ''
+        };
     }
 
-    onChange (dateString, { dateMoment, timestamp }) {
+    onDOBChange (dateString, { dateMoment, timestamp }) {
 
         //TODO: FIND HOW TO SET PROPS -> There's no way to access Calenadr component's value directly
         this.setProps({
            dobString:  dateString
         });
+    }
+
+    //TODO: Optimise this to make it more realistic
+    onPasswordChange() {
+        let passwordVal = this.password.value;
+        let passwordLength = passwordVal.length;
+        if(passwordLength > 0) {
+
+            let color = 'black';
+            if(passwordLength < 10) {
+                color = 'red';
+            } else if (passwordLength > 10 && passwordLength < 25) {
+                color = 'rgba(173, 162, 0, 1)';
+            } else {
+                color = 'green';
+            }
+
+            var challengeStyle = {
+                'color': color
+            };
+
+            this.setState({
+                passwordStrength: (<span style={challengeStyle}>It would take {passwordLength / 10} min to hack your password</span>)
+            });
+        } else {
+            this.setState({
+                passwordStrength: ''
+            });
+        }
+
     }
 
     handleSubmit(e) {
@@ -30,6 +64,8 @@ class Register extends React.Component {
     render() {
 
         let DOBDefault = '1991-01-01';  //Default value for calendar component
+        const {passwordStrength} = this.state;
+
 
 
         return (
@@ -48,7 +84,8 @@ class Register extends React.Component {
                       </div>
                       <div class="form-group">
                           <label>password</label>
-                          <input type="password" class="form-control" ref={(c) =>{this.password = c}} />
+                          <input type="password" class="form-control" ref={(c) =>{this.password = c}} onChange={this.onPasswordChange.bind(this)} />
+                          {passwordStrength}
                       </div>
 
                       <div class="form-group">
@@ -66,7 +103,7 @@ class Register extends React.Component {
                           <Calendar
                               dateFormat="YYYY-MM-DD"
                               date={DOBDefault}
-                              onChange={this.onChange.bind(this)}
+                              onChange={this.onDOBChange.bind(this)}
                               ref={(c) => {this.dob = c}}
                           />
                       </div>
