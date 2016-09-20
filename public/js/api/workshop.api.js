@@ -1,13 +1,22 @@
 import config from '../../config/config';
 const axios = require('axios');
 const headers = {
-    'AppKey': config.appKey,
-    'Accept': 'application/json'
+  'AppKey': config.appKey,
+  'Accept': 'application/json'
 };
 
-export const listWorkshopSets = (opts) => {
+export const listWorkshopSets = async (opts) => {
   const { active } = opts;
-  return axios.get(`${config.baseURL}workshop/workshopSets/${active}`, { headers, });
+  return new Promise((resolve, reject) => {
+    axios.get(`${config.baseURL}workshop/workshopSets/${active}`, { headers, })
+    .then((val) => {
+      if (val.IsSuccess === 'false') {
+        reject(val.DisplayMessage);
+      } else {
+        resolve(val);
+      }
+    });
+  });
 };
 
 export const createWorkshopBooking = (opts) => {
@@ -17,7 +26,16 @@ export const createWorkshopBooking = (opts) => {
     studentId,
     userId,
   };
-  return axios.post(`${config.baseURL}workshop/booking/create`, {}, { headers, params, });
+  return new Promise((resolve, reject) => {
+    axios.post(`${config.baseURL}workshop/booking/create`, {}, { headers, params, })
+    .then((val) => {
+      if (val.IsSuccess === 'false') {
+        reject(val.DisplayMessage);
+      } else {
+        resolve(val);
+      }
+    });
+  });
 };
 
 export const createWorkshopWaiting = (opts) => {
@@ -27,7 +45,16 @@ export const createWorkshopWaiting = (opts) => {
     studentId,
     userId,
   };
-  return axios.post(`${config.baseURL}workshop/wait/create`, {}, { headers, params, });
+  return new Promise((resolve, reject) => {
+    axios.post(`${config.baseURL}workshop/wait/create`, {}, { headers, params, })
+    .then((val) => {
+      if (val.IsSuccess === 'false') {
+        reject(val.DisplayMessage);
+      } else {
+        resolve(val);
+      }
+    });
+  });
 };
 
 export const cancelWorkshopBooking = (opts) => {
@@ -37,7 +64,16 @@ export const cancelWorkshopBooking = (opts) => {
     studentId,
     userId,
   };
-  return axios.post(`${config.baseURL}workshop/booking/cancel`, {}, { headers, params, });
+  return new Promise((resolve, reject) => {
+    axios.post(`${config.baseURL}workshop/booking/cancel`, {}, { headers, params, })
+    .then((val) => {
+      if (val.IsSuccess === 'false') {
+        reject(val.DisplayMessage);
+      } else {
+        resolve(val);
+      }
+    });
+  });
 };
 
 export const searchWorkshopBookings = (opts) => {
@@ -50,10 +86,19 @@ export const searchWorkshopBookings = (opts) => {
     endingDtEnd,
     campusId,
     active,
-    age,
+    page,
     pageSize,
   };
-  return axios.get(`${config.baseURL}workshop/search`, { headers, params, });
+  return new Promise((resolve, reject) => {
+    axios.get(`${config.baseURL}workshop/search`, { headers, params, })
+    .then((val) => {
+      if (val.IsSuccess === 'false') {
+        reject(val.DisplayMessage);
+      } else {
+        resolve(val);
+      }
+    });
+  });
 };
 
 export const searchWorkshops = (opts) => {
@@ -70,16 +115,36 @@ export const searchWorkshops = (opts) => {
     page,
     pageSize,
   };
-  return axios.get(`${config.baseURL}workshop/workshop/search`, { headers, params, });
+  return new Promise((resolve, reject) => {
+    axios.get(`${config.baseURL}workshop/workshop/search`, { headers, params, })
+    .then((val) => {
+      if (val.IsSuccess === 'false') {
+        console.log(val.DisplayMessage);
+        reject(val.DisplayMessage);
+      } else {
+        resolve(val);
+      }
+    });
+  });
 };
 
 export const updateWorkshopBooking = (opts) => {
   const { workshopId, studentId, canceled, attended, userId } = opts;
-  return axios.put(`${config.baseURL}workshop/booking/update`, {
+  const payload = { 
     workshopId,
     studentId,
     canceled,
     attended,
-    userId
-  }, { headers, });
+    userId 
+  };
+  return new Promise((resolve, reject) => {
+    axios.put(`${config.baseURL}workshop/booking/update`, payload, { headers, })
+    .then((val) => {
+      if (val.IsSuccess === 'false') {
+        reject(val.DisplayMessage);
+      } else {
+        resolve(val);
+      }
+    });
+  });
 };

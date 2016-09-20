@@ -7,7 +7,8 @@
     "dev": "./node_modules/.bin/webpack-dev-server --content-base public/ --inline --hot --port 8181",
     "test": "echo true",
     "test:all": "mocha --recursive tests/.",
-    "test:all:es6": "mocha --compilers js:babel-core/register --recursive tests/."
+    "test:all:es6": "mocha --compilers js:babel-core/register --recursive tests/.",
+    "test:api:es6": "mocha --compilers js:babel-core/register --recursive tests/index.js"
   },
   "repository": {
     "type": "git",

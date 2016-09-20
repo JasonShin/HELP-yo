@@ -19,7 +19,8 @@ export const registerHELP = (opts) => {
       throw new Error('[Register] Required parameter not included. Check REST docs for required parameters.');
     }
 
-    return axios.post(`${config.baseURL}student/register`,
+    return new Promise((resolve, reject) => {
+      axios.post(`${config.baseURL}student/register`,
       {
         'StudentId': studentId,
         'DateOfBirth': dob,
@@ -49,7 +50,15 @@ export const registerHELP = (opts) => {
         'InsearchDiplomaMark': insearchDiplomaMark,
         'FoundationCourse': completedFoundationCourse,
         'FoundationCourseMark': foundationCourseMark,
-      }, axiosConfig);
+      }, axiosConfig)
+      .then((val) => {
+        if (val.IsSuccess === 'false') {
+          reject(val.DisplayMessage);
+        } else {
+          resolve(val);
+        }
+      });
+    });
 };
 
 export const registerFirebase = (opts) => {
@@ -63,5 +72,5 @@ export const loginFirebase = (opts) => {
 };
 
 export const logoutFirebase = (opts) => {
-    FirebaseAPI.context.auth().signOut();
+  return FirebaseAPI.context.auth().signOut();
 };

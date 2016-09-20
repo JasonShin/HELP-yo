@@ -10,7 +10,6 @@ const axiosHeader = {
 export const getAllSessionsTypes = () => {
     const getParams = {
         headers: axiosHeader,
-
     };
 
     //Todo: find out how to resolve or reject. HELP API does not send correct code and axios doesn't know how to catch errors. Everything is success
@@ -18,9 +17,17 @@ export const getAllSessionsTypes = () => {
      then((response) => {
          if(response.data.IsSuccess == true) {
             this.addEventListener('success');
-
          }
      });
      */
-    return axios.get(`${config.baseURL}session/sessionTypes/true`, getParams);
+  return new Promise((resolve, reject) => {
+    axios.get(`${config.baseURL}session/sessionTypes/true`, getParams)
+    .then((val) => {
+      if (val.IsSuccess === 'false') {
+        reject(val.DisplayMessage);
+      } else {
+        resolve(val);
+      }
+    });
+  });
 };

@@ -9,6 +9,14 @@ const axiosConfig = {
 
 //TODO: Implement tutor API call
 export const getAllLecturers = () => {
-
-    return axios.get(`${config.baseURL}session/sessionTypes/true`, {},axiosConfig);
+  return new Promise((resolve, reject) => {
+    axios.get(`${config.baseURL}session/sessionTypes/true`, {},axiosConfig)
+    .then((val) => {
+      if (val.IsSuccess === 'false') {
+        reject(val.DisplayMessage);
+      } else {
+        resolve(val);
+      }
+    });
+  });
 };
