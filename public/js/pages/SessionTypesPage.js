@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import SessionTypeList from '../components/SessionTypeList';
+import SessionTypesStore from '../stores/SessionTypesStore';
 import config from '../../config/config';
 
 export default class Home extends React.Component {
@@ -14,7 +15,7 @@ export default class Home extends React.Component {
         return (
             <div id="PageContent">
                 <h1>Homepage !! sessions types page</h1>
-                <SessionTypeList />
+                <SessionTypeList store={SessionTypesStore} />
             </div>
         );
     }

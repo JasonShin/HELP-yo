@@ -4,7 +4,6 @@
 
 import React from 'react';
 import { observer } from 'mobx-react';
-import {getAllSessionsTypes} from '../api/sessionsTypes.api';
 
 @observer
 export default class SessionTypeList extends React.Component {
@@ -16,27 +15,23 @@ export default class SessionTypeList extends React.Component {
         }
     }
 
-    componentWillMount() {
-
-        getAllSessionsTypes()
-            .then((response) => {
-                this.setState({
-                    sessionTypes: response.data.Results
-                });
-            });
-
+    componentDidMount() {
 
     }
 
     render() {
-
-        const {sessionTypes} = this.state;
-
-        console.log(sessionTypes);
+        
+        const sessionTypesList = this.props.store.sessionTypes.map((sessionType) => {
+            return (
+                <li key={sessionType.id}>
+                    {sessionType.fullName}
+                </li>
+            );
+        });
 
         return (
           <div>
-             hey
+              {sessionTypesList}
           </div>
         );
 
