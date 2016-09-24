@@ -12,12 +12,14 @@ import '../css/style.scss';
 import 'react-date-picker/index.css'; //Date picker dependent css
 
 //Import pages
+//TODO: Refactor all these pages to have component naming convention: e.g. SessionsPage
 import GeneralLayout from './pages/layouts/GeneralLayout';
 import Login from './pages/Login';
-import Register from './pages/Register';
+import RegisterPage from './pages/RegisterPage';
 import MyProfile from './pages/MyProfile';
 import SessionTypesPage from './pages/SessionTypesPage';
 import BookingsHistory from './pages/BookingsHistory';
+import SessionsPage from './pages/SessionsPage';
 
 //Finds root element
 const app = document.getElementById('app');
@@ -29,8 +31,9 @@ ReactDOM.render(
         <Route path="/" component={GeneralLayout}>
             <IndexRoute component={SessionTypesPage}></IndexRoute>
             <Route path="login" component={Login}></Route>
-            <Route path="register" component={Register}></Route>
+            <Route path="register" component={RegisterPage}></Route>
             <Route path="profile" component={MyProfile}></Route>
+            <Route path='sessions/:sessionTypeId' component={SessionsPage} />
             <Route path="bookings/history" component={BookingsHistory} onEnter={FirebaseAPI.requireAuth}></Route>
         </Route>
     </Router>,

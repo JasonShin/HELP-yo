@@ -22,8 +22,8 @@ export default class SessionTypeList extends React.Component {
             return (
                 <Link key={sessionType.id}
                       class="session-type"
-                      to={"session/" + (sessionType.abbName.replace(/[\/\s]/, '_'))}
-                      params={{id: sessionType.id, type: sessionType.abbName}}>
+                      to={"/sessions/" + (sessionType.abbName.replace(/[\/\s]/, '_'))}
+                      params={{sessionTypeId: sessionType.id, type: sessionType.abbName}}>
 
                 {sessionType.fullName}
                 </Link>
@@ -32,7 +32,6 @@ export default class SessionTypeList extends React.Component {
 
         return (
           <div class="session-types-list">
-
               {sessionTypesList}
           </div>
         );
