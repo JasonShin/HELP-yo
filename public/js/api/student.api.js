@@ -8,50 +8,59 @@ const axiosConfig = {
   }
 };
 
-export const registerHELP = (opts) => {
-    const { studentId, dob, degreeType, studentStatus, firstLang, countryOrigin, creatorId,
-      gender, background, degreeDetails, altContact, preferredName, completedHsc, hscMark, 
-      completedIelts, ieltsMark, completedToefl, toeflMark, completedTafe, tafeMark, completedCult,
-      cultMark, completedInsearchDeep, insearchDeepMark, completedInsearchDiploma, insearchDiplomaMark,
-      completedFoundationCourse, foundationCourseMark } = opts;
+/*
+ "StudentId" : "123456", // required
+ "DateOfBirth" : "1 January 1995",
+ "Gender" : "M", // optional
+ "Degree" : "UG", // required
+ "Status" : "International", // required
+ "FirstLanguage" : "English", // required
+ "CountryOrigin" : "Australia", // required
+ "Background" : "Degree", // optional
+ "DegreeDetails" : "1st", // optional
+ "AltContact" : "0405294958", // optional
+ "PreferredName" : "Tom", // optional
+ "HSC" : "true", // optional
+ "HSCMark" : "100", // optional
+ "IELTS" : "false", // optional
+ "IELTSMark" : "", // optional
+ "TOEFL" : "false", // optional
+ "TOEFLMark" : "", // optional
+ "TAFE" : "false", // optional
+ "TAFEMark" : "", // optional
+ "CULT" : "false", // optional
+ "CULTMark" : "", // optional
+ "InsearchDEEP" : "false", // optional
+ "InsearchDEEPMark" : "", // optional
+ "InsearchDiploma" : "false", // optional
+ "InsearchDiplomaMark" : "", // optional
+ "FoundationCourse" : "false", // optional
+ "FoundationCourseMark" : "", // optional
+ "CreatorId" : "123456" // required
 
-    if (!studentId || !dob || !degreeType || !studentStatus || !firstLang || !countryOrigin || !creatorId) {
-      throw new Error('[Register] Required parameter not included. Check REST docs for required parameters.');
+ */
+
+//() => first raw of params = required, others = optional
+export const registerHELPNew = (
+    StudentId, DateOfBirth, Degree, Status, FirstLanguage, CountryOrigin, CreatorId,
+    Gender, Background, DegreeDetails, AltContact, Preferred, HSC, HSCMark, IELTS, IELTSMark, TAFE, TAFEMark,
+    CULT, CULTMark, InsearchDEEP, InsearchDEEPMark, InsearchDiploma, InsearchDiplomaMark,
+    FoundationCourse, FoundationCourseMark
+) => {
+
+    //TODO: Optimise this so it tells exactly what is wrong (what params is missing)
+    if (!StudentId || !DateOfBirth || !Degree || !Status || !FirstLanguage || !CountryOrigin || !CreatorId) {
+        throw new Error('Missed out on a required param');
     }
 
+    //TODO: Please find if this is the only way to throw an error about HTTP request failed while interacting with HELP API
     return new Promise((resolve, reject) => {
-      axios.post(`${config.baseURL}student/register`,
-      {
-        'StudentId': studentId,
-        'DateOfBirth': dob,
-        'Degree': degreeType,
-        'Status':  studentStatus,
-        'FirstLanguage': firstLang,
-        'CountryOrigin': countryOrigin,
-        'CreatorId': creatorId,
-        'Gender': gender,
-        'Background': background,
-        'DegreeDetails': degreeDetails,
-        'AltContact': altContact,
-        'PreferredName': preferredName,
-        'HSC': completedHsc,
-        'HSCMark': hscMark,
-        'IELTS': completedIelts,
-        'IELTSMark': ieltsMark,
-        'TOEFL': completedToefl,
-        'TOEFLMark': toeflMark,
-        'TAFE': completedTafe,
-        'TAFEMark': tafeMark,
-        'CULT': completedCult,
-        'CULTMark': cultMark,
-        'InsearchDEEP': completedInsearchDeep,
-        'InsearchDEEPMark': insearchDeepMark,
-        'InsearchDiploma': completedInsearchDiploma,
-        'InsearchDiplomaMark': insearchDiplomaMark,
-        'FoundationCourse': completedFoundationCourse,
-        'FoundationCourseMark': foundationCourseMark,
-      }, axiosConfig)
-      .then((val) => {
+      axios.post(`${config.baseURL}student/register`,{
+        StudentId, DateOfBirth, Degree, Status, FirstLanguage, CountryOrigin, CreatorId,
+        Gender, Background, DegreeDetails, AltContact, Preferred, HSC, HSCMark, IELTS, IELTSMark, TAFE, TAFEMark,
+        CULT, CULTMark, InsearchDEEP, InsearchDEEPMark, InsearchDiploma, InsearchDiplomaMark,
+        FoundationCourse, FoundationCourseMark
+      }, axiosConfig).then((val) => {
         if (val.IsSuccess === 'false') {
           reject(val.DisplayMessage);
         } else {
@@ -60,6 +69,7 @@ export const registerHELP = (opts) => {
       });
     });
 };
+
 
 export const registerFirebase = (opts) => {
   const { email, password } = opts;

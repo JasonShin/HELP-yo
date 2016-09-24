@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import config from '../../config/config';
+import { registerHELPNew } from '../api/student.api';
 
 import { DateField, Calendar } from 'react-date-picker';
 
@@ -23,7 +24,13 @@ class MyProfile extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-
+        registerHELPNew(...['test', 'test2','test', 'test2','test', 'test2','test', 'test2','test', 'test2']).
+        then((response) => {
+            console.log(response);
+        }).
+        catch((error) => {
+            console.log(error);
+        });
     }
 
     render() {
