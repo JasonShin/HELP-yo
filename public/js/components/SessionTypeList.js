@@ -4,6 +4,7 @@
 
 import React from 'react';
 import { observer } from 'mobx-react';
+import {Link, withRouter} from 'react-router';
 
 @observer
 export default class SessionTypeList extends React.Component {
@@ -15,22 +16,23 @@ export default class SessionTypeList extends React.Component {
         }
     }
 
-    componentDidMount() {
-
-    }
-
     render() {
 
         const sessionTypesList = this.props.store.sessionTypes.map((sessionType) => {
             return (
-                <li key={sessionType.id}>
-                    {sessionType.fullName} {sessionType.abbName} {sessionType.isCurrent}
-                </li>
+                <Link key={sessionType.id}
+                      class="session-type"
+                      to={"session/" + (sessionType.abbName.replace(/[\/\s]/, '_'))}
+                      params={{id: sessionType.id, type: sessionType.abbName}}>
+
+                {sessionType.fullName}
+                </Link>
             );
         });
 
         return (
-          <div>
+          <div class="session-types-list">
+
               {sessionTypesList}
           </div>
         );

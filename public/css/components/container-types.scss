@@ -1,0 +1,29 @@
+@import "container";
+@import "container-small";
+@import "../tools/constants";
+
+.container-types {
+  @extend .container;
+  @extend .container-small;
+
+  .session-types-list {
+
+    //This is an anchor element selector
+    //TODO: Hover effect. Make sure this is consistent with other similar components
+    .session-type {
+
+        display: block;
+        color: black;
+        text-decoration: none;
+        padding: 20px;
+        background-color: #CCC;
+        margin-bottom: 15px;
+    }
+
+    .session-type:visited {
+      color: black;
+    }
+
+  }
+
+}
