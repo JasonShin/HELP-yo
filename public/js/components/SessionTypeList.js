@@ -20,11 +20,11 @@ export default class SessionTypeList extends React.Component {
     }
 
     render() {
-        
+
         const sessionTypesList = this.props.store.sessionTypes.map((sessionType) => {
             return (
                 <li key={sessionType.id}>
-                    {sessionType.fullName}
+                    {sessionType.fullName} {sessionType.abbName} {sessionType.isCurrent}
                 </li>
             );
         });
