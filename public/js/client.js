@@ -15,23 +15,22 @@ import 'react-date-picker/index.css'; //Date picker dependent css
 import GeneralLayout from './pages/layouts/GeneralLayout';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Home from './pages/Home';
+import MyProfile from './pages/MyProfile';
 import SessionTypesPage from './pages/SessionTypesPage';
-import Booking from './pages/Booking';
 import BookingsHistory from './pages/BookingsHistory';
-import Sessions from './pages/Sessions';
 
-//import { registerHELP, registerFirebase, loginFirebase } from './api/student.api';
 //Finds root element
 const app = document.getElementById('app');
 
 
+//TODO: Create <Route path="register/profile" component={MyProfile}></Route>  for UX = keeping users in context
 ReactDOM.render(
     <Router history={history}>
         <Route path="/" component={GeneralLayout}>
             <IndexRoute component={SessionTypesPage}></IndexRoute>
             <Route path="login" component={Login}></Route>
             <Route path="register" component={Register}></Route>
+            <Route path="profile" component={MyProfile}></Route>
             <Route path="bookings/history" component={BookingsHistory} onEnter={FirebaseAPI.requireAuth}></Route>
         </Route>
     </Router>,

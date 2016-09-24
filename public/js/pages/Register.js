@@ -8,10 +8,6 @@ import { DateField, Calendar } from 'react-date-picker';
 
 class Register extends React.Component {
 
-    //TODO: Move to const file
-    DOBDefault = '1991-01-01';
-
-    currentDOBString = null;
 
     componentWillMount(){
         document.title = `Register${config.titleEnding}`;
@@ -22,9 +18,7 @@ class Register extends React.Component {
         };
     }
 
-    onDOBChange (dateString, { dateMoment, timestamp }) {
-        this.currentDOBString = dateString;
-    }
+
 
     //TODO: Optimise this to make it more realistic
     onPasswordChange() {
@@ -56,6 +50,7 @@ class Register extends React.Component {
 
     }
 
+    //() => on succes, sends to register profile page
     handleSubmit(e) {
         e.preventDefault();
 
@@ -98,36 +93,6 @@ class Register extends React.Component {
                           <label>password</label>
                           <input type="password" class="form-control" ref={(c) =>{this.studentPassword = c}} onChange={this.onPasswordChange.bind(this)} />
                           {passwordStrength}
-                      </div>
-
-                      <div class="form-group">
-                          <label>your fullname</label>
-                          <input type="text" class="form-control" ref={(c) =>{this.fullName = c}} />
-                      </div>
-                      <div class="form-group">
-                          <label>preferred other name</label>
-                          <input type="text" class="form-control" ref={(c) =>{this.otherName = c}} />
-
-                      </div>
-
-                      <div class="form-group">
-                          <label>date of birth</label>
-                          <Calendar
-                              dateFormat="YYYY-MM-DD"
-                              date={this.DOBDefault}
-                              onChange={this.onDOBChange.bind(this)}
-                              ref={(c) => {this.dob = c}}
-                          />
-                      </div>
-
-                      <div class="form-group">
-                          <label>gender</label>
-                          <select>
-                              <option disabled selected value> -- select an option -- </option>
-                              <option value="male">Male</option>
-                              <option value="female">Female</option>
-                              <option value="other">Other</option>
-                          </select>
                       </div>
 
                       <button class="button-red" type="submit">register</button>
