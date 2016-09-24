@@ -1,0 +1,45 @@
+@import "container";
+@import "container-medium";
+@import "../tools/constants";
+
+.container-sessions-list {
+  @extend .container;
+  @extend .container-medium;
+
+  overflow: hidden;
+
+  > div:first-child {
+    padding-bottom: 10px;
+  }
+
+
+  .session {
+    width: 50%;
+    float: left;
+    margin-bottom: 15px;
+    overflow: hidden;
+
+    .session-inner {
+      margin: 15px;
+      padding: 15px;
+      overflow: hidden;
+      background-color: #f8f8fa;
+
+      .session-meta-left {
+        width: 80%;
+        float: left;
+      }
+
+      .session-meta-right {
+        width: 19%;
+        float: right;
+
+        > div:first-child {
+          margin-bottom: 15px;
+        }
+      }
+
+    }
+  }
+
+}

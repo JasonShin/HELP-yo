@@ -1,0 +1,27 @@
+@import '../settings/colors';
+
+.building-number-meta {
+  text-align: center;
+
+  i {
+    display: block;
+  }
+  span {
+    display: block;
+  }
+
+}
+
+.date-meta {
+  border: 1.5px solid #828282;
+
+  span {
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  span:first-child {
+    background: $date-meta-color;
+    color: white;
+  }
+}

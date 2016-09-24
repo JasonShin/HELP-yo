@@ -9,9 +9,11 @@ export default class Sessions extends React.Component {
         const {sessionTypeId} = this.props.location.query;
 
         return (
-            <div>
-                <h1>Sessions</h1>
-                <SessionList sessionTypeId={sessionTypeId} store={SessionsStore} />
+            <div id="PageContent">
+                <div class="container-sessions-list">
+                    <h1>Sessions</h1>
+                    <SessionList sessionTypeId={sessionTypeId} store={SessionsStore} />
+                </div>
             </div>
         );
     }
