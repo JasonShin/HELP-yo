@@ -1,5 +1,3 @@
-$page-width: 1150px;
-
 #Page {
   width: 100%;
   overflow: hidden;
@@ -8,6 +6,12 @@ $page-width: 1150px;
 
 //Ensures all contents are contained within this central container
 #PageContent {
-  width: $page-width;
+  width: 1150px;
   margin: 0px auto;
+}
+
+@media (max-width: 1150px) {
+  #PageContent {
+    width: 100%;
+  }
 }

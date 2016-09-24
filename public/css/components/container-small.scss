@@ -4,6 +4,13 @@
   margin: 0px auto;
   margin-top: $consistent-margin-top;
 
+  @media (max-width: 450px) {
+    .container-small {
+      width:95%;
+    }
+  }
+
+
   form {
     .form-group {
       input {
