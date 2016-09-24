@@ -13,6 +13,7 @@ class SessionsStore {
     fetchSessions(studentId, sessionTypeId) {
         searchSessionBookingsByTopic(studentId,sessionTypeId).
         then((response) => {
+            console.log(response.data.Results);
             this.sessions = response.data.Results.map((data) => {
                 return new SessionModel(
                     data.AppointmentType,

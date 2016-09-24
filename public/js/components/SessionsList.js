@@ -16,9 +16,10 @@ export default class SessionsList extends React.Component {
     render() {
         const sessionsList = this.props.store.sessions.map( (session) => {
             return (
-                <div>
+                <article class="session" key={session.SessionId}>
+                    <header>{session.Campus}</header>
                     {session.SessionId}
-                </div>
+                </article>
             )
         } );
 
