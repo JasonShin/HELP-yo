@@ -20,6 +20,7 @@ import MyProfile from './pages/MyProfile';
 import SessionTypesPage from './pages/SessionTypesPage';
 import BookingsHistory from './pages/BookingsHistory';
 import SessionsPage from './pages/SessionsPage';
+import WorkshopSetsPage from './pages/WorkshopSetsPage';
 
 //Finds root element
 const app = document.getElementById('app');
@@ -34,6 +35,8 @@ ReactDOM.render(
             <Route path="register" component={RegisterPage}></Route>
             <Route path="profile" component={MyProfile}></Route>
             <Route path='sessions' component={SessionsPage} />
+            <Route path='workshopSets' component={WorkshopSetsPage} />
+
             <Route path="bookings/history" component={BookingsHistory} onEnter={FirebaseAPI.requireAuth}></Route>
         </Route>
     </Router>,

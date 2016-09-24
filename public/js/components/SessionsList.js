@@ -34,14 +34,15 @@ export default class SessionsList extends React.Component {
             var monthDate = this.getMonthDate(session.StartDate);
 
             return (
-                <article class="session" key={session.SessionId}>
-                    <div class="session-inner">
-                        <div class="session-meta-left">
+                <article class="card" key={session.SessionId}>
+                    <div class="card-inner">
+                        <div class="card-meta-left">
                             <header>{session.SessionType}</header>
-                            <div>{session.StartDate}</div>
+                            <div><i class="fa fa-graduation-cap" aria-hidden="true"></i> {session.LecturerEmail}</div>
+                            <div class="card-more-details">more details</div>
                         </div>
 
-                        <div class="session-meta-right">
+                        <div class="card-meta-right">
                             <div class="date-meta">
                                 <span>{monthDate.monthAsString}</span>
                                 <span>{monthDate.date}</span>

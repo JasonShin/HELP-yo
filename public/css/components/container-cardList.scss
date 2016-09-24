@@ -1,0 +1,58 @@
+@import "container";
+@import "container-medium";
+@import "../tools/constants";
+
+.container-sessions-list {
+  @extend .container;
+  @extend .container-medium;
+
+  overflow: hidden;
+
+  > div:first-child {
+    padding-bottom: 10px;
+  }
+
+
+  .card {
+    width: 50%;
+    float: left;
+    margin-bottom: 15px;
+    overflow: hidden;
+
+    .card-inner {
+      margin: 15px;
+      padding: 15px;
+      overflow: hidden;
+      background-color: #f8f8fa;
+
+      .card-meta-left {
+        width: 80%;
+        float: left;
+
+        header {
+          font-weight: bold;
+          margin-bottom: 15px;
+        }
+
+        .card-more-details {
+          color: $date-meta-color;
+          font-weight: bold;
+          //TODO: Put all these 15 px into globals variable. Make padding margin consistent
+          margin-top: 15px;
+        }
+
+      }
+
+      .card-meta-right {
+        width: 19%;
+        float: right;
+
+        > div:first-child {
+          margin-bottom: 15px;
+        }
+      }
+
+    }
+  }
+
+}

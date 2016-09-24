@@ -1,0 +1,26 @@
+/**
+ * Created by Shin on 24/09/2016.
+ */
+import React from 'react';
+
+import WorkshopSetsStore from '../stores/WorkshopSetsStore';
+import WorkshopSetList from '../components/WorkshopSetList';
+import config from '../../config/config';
+
+export default class Home extends React.Component {
+    componentWillMount() {
+        document.title = `Workshop Sets${config.titleEnding}`;
+    }
+
+    render() {
+        console.log('workshop sets!');
+        return (
+            <div id="PageContent">
+                <div class="container-types">
+                    <h1>Choose a workshop set</h1>
+                    <WorkshopSetList store={WorkshopSetsStore}/>
+                </div>
+            </div>
+        );
+    }
+}

@@ -5,8 +5,8 @@ const headers = {
   'Accept': 'application/json'
 };
 
-export const listWorkshopSets = async (opts) => {
-  const { active } = opts;
+export const listWorkshopSets = async (active) => {
+
   return new Promise((resolve, reject) => {
     axios.get(`${config.baseURL}workshop/workshopSets/${active}`, { headers, })
     .then((val) => {
