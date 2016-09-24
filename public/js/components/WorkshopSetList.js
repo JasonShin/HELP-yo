@@ -19,7 +19,7 @@ export default class WorkshopSetList extends React.Component {
         const workshopSetList = this.props.store.workshopSets.map((workshopSet) => {
             return (
                 <Link key={workshopSet.id}
-                      class="workshop-set"
+                      class="session-type"
                       to={"/workshops?workshopSetId=" + (workshopSet.id)}
                       params={{workshopSetId: workshopSet.id, name: workshopSet.name}}>
 
@@ -29,7 +29,7 @@ export default class WorkshopSetList extends React.Component {
         });
 
         return (
-            <div class="workshop-set-list">
+            <div class="session-types-list">
                 {workshopSetList}
             </div>
         );
