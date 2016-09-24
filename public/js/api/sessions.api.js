@@ -5,6 +5,7 @@ const axiosGetHeaders = {
     'Accept': 'application/json'
 };
 
+//TODO: implement generic search function that accepts all of the below params
 
 export const searchSessionBookingsByDate = (opt) => {
   const {studentId, startingDtBegin, startingDtEnd, endingDtBegin, endingDtEnd} = opt;
@@ -32,8 +33,7 @@ export const searchSessionBookingsByDate = (opt) => {
 
 
 //(studentId, sessionTypeId) => filtered sessions  topic = session type
-export const searchSessionBookingsByTopic = (opt) => {
-  const {studentId, sessionTypeId} = opt;
+export const searchSessionBookingsByTopic = (studentId, sessionTypeId) => {
   const getParams = {
     headers: axiosGetHeaders,
     params: {
@@ -51,6 +51,7 @@ export const searchSessionBookingsByTopic = (opt) => {
       }
     });
   });
+
 };
 
 export const searchSessionBookingByLocation = (opt) => {
