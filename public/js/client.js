@@ -33,7 +33,7 @@ ReactDOM.render(
             <Route path="login" component={Login}></Route>
             <Route path="register" component={RegisterPage}></Route>
             <Route path="profile" component={MyProfile}></Route>
-            <Route path='sessions/:sessionTypeId' component={SessionsPage} />
+            <Route path='sessions' component={SessionsPage} />
             <Route path="bookings/history" component={BookingsHistory} onEnter={FirebaseAPI.requireAuth}></Route>
         </Route>
     </Router>,
