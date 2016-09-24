@@ -8,6 +8,7 @@ import { DateField, Calendar } from 'react-date-picker';
 class MyProfile extends React.Component {
 
     //TODO: Move to const file
+    //TODO: react-date-picker's default value creates permanent blue dot on the calendar, it is not user friendly.
     DOBDefault = '1991-01-01';
 
     currentDOBString = null;
@@ -22,15 +23,26 @@ class MyProfile extends React.Component {
         this.currentDOBString = dateString;
     }
 
+    //TODO: Save additional data on firebase registeration so it can link to HELP API registeration
     handleSubmit(e) {
         e.preventDefault();
-        registerHELPNew(...['test', 'test2','test', 'test2','test', 'test2','test', 'test2','test', 'test2']).
+
+        let StudentId = this.studentIdField.value;
+        let DateOfBirth = this.currentDOBString;
+        let Degree = this.degreeField.value;
+        let Status = this.statusField.value;
+        let FirstLanguage = this.firstLanguageField.value;
+        let CountryOrigin = this.countryOfOriginField.value;
+        let CreatorId = StudentId;
+
+        registerHELPNew(StudentId, DateOfBirth, Degree, Status, FirstLanguage, CountryOrigin, CreatorId).
         then((response) => {
             console.log(response);
         }).
         catch((error) => {
             console.log(error);
         });
+
     }
 
     render() {
@@ -43,12 +55,17 @@ class MyProfile extends React.Component {
                 </div>
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     <div class="form-group">
+                        <label>your student ID*</label>
+                        <input type="text" class="form-control" ref={(c) =>{this.studentIdField = c}} />
+                    </div>
+
+                    <div class="form-group">
                         <label>your fullname*</label>
-                        <input type="text" class="form-control" ref={(c) =>{this.fullName = c}} />
+                        <input type="text" class="form-control" ref={(c) =>{this.fullNameField = c}} />
                     </div>
                     <div class="form-group">
                         <label>preferred other name</label>
-                        <input type="text" class="form-control" ref={(c) =>{this.otherName = c}} />
+                        <input type="text" class="form-control" ref={(c) =>{this.otherNameField = c}} />
 
                     </div>
 
@@ -58,14 +75,14 @@ class MyProfile extends React.Component {
                             dateFormat="YYYY-MM-DD"
                             date={this.DOBDefault}
                             onChange={this.onDOBChange.bind(this)}
-                            ref={(c) => {this.dob = c}}
+                            ref={(c) => {this.dobField = c}}
                         />
                     </div>
 
 
                     <div class="form-group">
                         <label>status*</label>
-                        <select>
+                        <select ref={ (c) => {this.statusField = c} }>
                             <option disabled selected value> -- select an option -- </option>
                             <option value="local">Local</option>
                             <option value="international">International</option>
@@ -74,7 +91,7 @@ class MyProfile extends React.Component {
 
                     <div class="form-group">
                         <label>degree*</label>
-                        <select>
+                        <select ref={ (c) => {this.degreeField = c} }>
                             <option disabled selected value> -- select an option -- </option>
                             <option value="UG">undergraduate</option>
                             <option value="PG">Postgraduate</option>
@@ -83,17 +100,17 @@ class MyProfile extends React.Component {
 
                     <div class="form-group">
                         <label>first language*</label>
-                        <input type="text" />
+                        <input type="text" ref={ (c) => {this.firstLanguageField = c} } />
                     </div>
 
                     <div class="form-group">
                         <label>country of origin*</label>
-                        <input type="text" />
+                        <input type="text" ref={ (c) => {this.countryOfOriginField = c} } />
                     </div>
 
                     <div class="form-group">
                         <label>gender</label>
-                        <select>
+                        <select ref={ (c) => {this.genderField = c} }>
                             <option disabled selected value> -- select an option -- </option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
