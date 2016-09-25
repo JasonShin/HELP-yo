@@ -6,6 +6,7 @@ import React from 'react';
 import SessionTypeList from '../components/SessionTypeList';
 import SessionTypesStore from '../stores/SessionTypesStore';
 import config from '../../config/config';
+const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 export default class Home extends React.Component {
     componentWillMount(){
@@ -14,12 +15,18 @@ export default class Home extends React.Component {
 
     render() {
         return (
-            <div id="PageContent">
-                <div class="container-types">
-                    <h1>Choose a session topic</h1>
-                    <SessionTypeList store={SessionTypesStore} />
+            <ReactCSSTransitionGroup 
+              transitionName="page-transition"
+              transitionAppear={true}
+              transitionAppearTimeout={800}
+              transitionEnterTimeout={800}>
+                <div id="PageContent">
+                    <div class="container-types">
+                        <h1>Choose a session topic</h1>
+                        <SessionTypeList store={SessionTypesStore} />
+                    </div>
                 </div>
-            </div>
+            </ReactCSSTransitionGroup>
         );
     }
 }

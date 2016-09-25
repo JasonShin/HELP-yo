@@ -3,7 +3,7 @@ import { browserHistory, Link, withRouter } from 'react-router'
 import { registerFirebase, loginFirebase } from '../api/student.api';
 import config from '../../config/config';
 import {materialLoading} from '../material-motion/material-motion';
-
+const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 class Login extends React.Component {
 
@@ -37,38 +37,44 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div id="PageContent">
+            <ReactCSSTransitionGroup 
+              transitionName="page-transition"
+              transitionAppear={true}
+              transitionAppearTimeout={800}
+              transitionEnterTimeout={800}>
+                <div id="PageContent">
 
-                <div class="container-login">
-                    <div>
-                        <h2>Student Login</h2>
-                        <div>Login to register for workshops, programs, and appointments</div>
-                    </div>
-
-                    <form onSubmit={this.handleSubmit.bind(this)}>
-                        <div class="form-group">
-                            <label>uts student id</label>
-                            <input type="text" class="form-control" ref={(c) =>{this.emailField = c}} placeholder="Email"  />
-                        </div>
-
-                        <div class="form-group">
-                            <label>uts password</label>
-                            <input type="password" class="form-control" ref={(c) =>{this.passwordField = c}} placeholder="Password"  />
-                        </div>
-
+                    <div class="container-login">
                         <div>
-                            <p><b>Hint</b>: this is the same password you use to login to your UTS student email</p>
-                            <p>Demo username: demo@student.uts.edu.au / password: test123</p>
+                            <h2>Student Login</h2>
+                            <div>Login to register for workshops, programs, and appointments</div>
                         </div>
 
-                        <div class="register-now-row">
-                            <Link to="/register">Don't have an account? Register now.</Link>
-                        </div>
+                        <form onSubmit={this.handleSubmit.bind(this)}>
+                            <div class="form-group">
+                                <label>uts student id</label>
+                                <input type="text" class="form-control" ref={(c) =>{this.emailField = c}} placeholder="Email"  />
+                            </div>
 
-                        <button class="button-red" type="submit">login</button>
-                    </form>
+                            <div class="form-group">
+                                <label>uts password</label>
+                                <input type="password" class="form-control" ref={(c) =>{this.passwordField = c}} placeholder="Password"  />
+                            </div>
+
+                            <div>
+                                <p><b>Hint</b>: this is the same password you use to login to your UTS student email</p>
+                                <p>Demo username: demo@student.uts.edu.au / password: test123</p>
+                            </div>
+
+                            <div class="register-now-row">
+                                <Link to="/register">Don't have an account? Register now.</Link>
+                            </div>
+
+                            <button class="button-red" type="submit">login</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            </ReactCSSTransitionGroup>
         );
     }
 }
