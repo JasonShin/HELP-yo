@@ -107,7 +107,7 @@ class Register extends React.Component {
 
         console.log(passwordStrengthScore);
 
-        if(SECURITY_SCORE_REQUIREMENT > passwordStrengthScore) {
+        if(SECURITY_SCORE_REQUIREMENT >= passwordStrengthScore) {
             registerFirebase(
                 {
                     email: this.studentEmail.value,
@@ -115,13 +115,14 @@ class Register extends React.Component {
                 }
             ).
             then((response) => {
+                this.props.router.push('/register/profile');
                 console.log('yoyo! success ' + response);
             }).
             catch((error) => {
                 console.log('failed! ' + error);
             });
         } else {
-
+            console.log('nah');
         }
     }
 
