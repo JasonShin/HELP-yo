@@ -10,7 +10,7 @@ export default class Sessions extends React.Component {
 
         return (
             <div id="PageContent">
-                <div class="container-sessions-list">
+                <div class="container-cards-list">
                     <h1>Sessions</h1>
                     <SessionList sessionTypeId={sessionTypeId} store={SessionsStore} />
                 </div>

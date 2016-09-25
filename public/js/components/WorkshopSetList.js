@@ -15,7 +15,7 @@ export default class WorkshopSetList extends React.Component {
     }
 
     render() {
-
+        //REMINDER: WorkshopSets list uses same styling as SessionTypes
         const workshopSetList = this.props.store.workshopSets.map((workshopSet) => {
             return (
                 <Link key={workshopSet.id}
