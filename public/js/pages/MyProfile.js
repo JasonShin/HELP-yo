@@ -47,6 +47,9 @@ class MyProfile extends React.Component {
     }
 
     render() {
+        const progressBarStyle = {
+            width: '50%'
+        };
         return (
         <ReactCSSTransitionGroup 
           transitionName="page-transition"
@@ -54,6 +57,9 @@ class MyProfile extends React.Component {
           transitionAppearTimeout={800}
           transitionEnterTimeout={800}>
             <div id="PageContent">
+                <div class="progress">
+                  <div class="determinate" style={progressBarStyle}></div>
+                </div>
                 <div class="container-register">
                     <div>
                         <h2>Tell us more about you</h2>
