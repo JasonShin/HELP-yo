@@ -9,7 +9,7 @@ class WorkshopsStore {
     @observable workshops = [];
 
 
-
+    //TODO: Complete this when Workshop API is working
     fetchWorkshops(studentId, workshopSetId) {
         searchWorkshops({
             workshopSetId: 3
