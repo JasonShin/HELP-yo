@@ -5,12 +5,6 @@ form {
     display: block;
     font-weight: bolder;
     text-transform: uppercase;
-    transform: translateY(-32px) translateX(10px);
-    z-index: -1;
-    transition: all .4s;
-    &.hasVal {
-      transform: scale(.9) translate(-20px,-70px);
-    }
   }
 
   input[type='text'] {
