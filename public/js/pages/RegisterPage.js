@@ -148,12 +148,12 @@ class Register extends React.Component {
 
                       <form onSubmit={this.handleSubmit.bind(this)}>
                           <div class="form-group">
-                              <label>your student email</label>
                               <input type="text" class="form-control" ref={(c) =>{this.studentEmail = c}} />
+                              <label>your student email</label>
                           </div>
                           <div class="form-group">
-                              <label>password</label>
                               <input type="password" class="form-control" ref={(c) =>{this.studentPassword = c}} onChange={this.onPasswordChange.bind(this)} />
+                              <label>password</label>
                               {passwordStrengthLabel}
                           </div>
 
