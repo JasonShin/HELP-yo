@@ -28,12 +28,15 @@ const app = document.getElementById('app');
 
 
 //TODO: Create <Route path="register/profile" component={MyProfile}></Route>  for UX = keeping users in context
+//TODO: Priority 2
 ReactDOM.render(
     <Router history={history}>
         <Route path="/" component={GeneralLayout}>
             <IndexRoute component={SessionTypesPage}></IndexRoute>
             <Route path="login" component={Login}></Route>
-            <Route path="register" component={RegisterPage}></Route>
+            <Route path="register" component={RegisterPage}>
+                <Route path="profile" component={MyProfile} />
+            </Route>
             <Route path="profile" component={MyProfile}></Route>
             <Route path='sessions' component={SessionsPage} />
             <Route path='workshopSets' component={WorkshopSetsPage} />
