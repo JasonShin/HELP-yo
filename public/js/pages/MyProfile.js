@@ -4,6 +4,7 @@ import config from '../../config/config';
 import { registerHELPNew } from '../api/student.api';
 
 import { DateField, Calendar } from 'react-date-picker';
+const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 class MyProfile extends React.Component {
 
@@ -46,85 +47,97 @@ class MyProfile extends React.Component {
     }
 
     render() {
+        const progressBarStyle = {
+            width: '50%'
+        };
         return (
-        <div id="PageContent">
-            <div class="container-register">
-                <div>
-                    <h2>Tell us more about you</h2>
-                    <div>setting up your profile (* denotes required data)</div>
+        <ReactCSSTransitionGroup 
+          transitionName="page-transition"
+          transitionAppear={true}
+          transitionAppearTimeout={800}
+          transitionEnterTimeout={800}>
+            <div id="PageContent">
+                <div class="progress">
+                  <div class="determinate" style={progressBarStyle}></div>
                 </div>
-                <form onSubmit={this.handleSubmit.bind(this)}>
-                    <div class="form-group">
-                        <label>your student ID*</label>
-                        <input type="text" class="form-control" ref={(c) =>{this.studentIdField = c}} />
+                <div class="container-register">
+                    <div>
+                        <h2>Tell us more about you</h2>
+                        <div>setting up your profile (* denotes required data)</div>
                     </div>
+                    <form onSubmit={this.handleSubmit.bind(this)}>
+                        <div class="form-group">
+                            <label>your student ID*</label>
+                            <input type="text" class="form-control" ref={(c) =>{this.studentIdField = c}} />
+                        </div>
 
-                    <div class="form-group">
-                        <label>your fullname*</label>
-                        <input type="text" class="form-control" ref={(c) =>{this.fullNameField = c}} />
-                    </div>
-                    <div class="form-group">
-                        <label>preferred other name</label>
-                        <input type="text" class="form-control" ref={(c) =>{this.otherNameField = c}} />
+                        <div class="form-group">
+                            <label>your fullname*</label>
+                            <input type="text" class="form-control" ref={(c) =>{this.fullNameField = c}} />
+                        </div>
+                        <div class="form-group">
+                            <label>preferred other name</label>
+                            <input type="text" class="form-control" ref={(c) =>{this.otherNameField = c}} />
 
-                    </div>
+                        </div>
 
-                    <div class="form-group">
-                        <label>date of birth*</label>
-                        <Calendar
-                            dateFormat="YYYY-MM-DD"
-                            date={this.DOBDefault}
-                            onChange={this.onDOBChange.bind(this)}
-                            ref={(c) => {this.dobField = c}}
-                        />
-                    </div>
+                        <div class="form-group">
+                            <label>date of birth*</label>
+                            <Calendar
+                                dateFormat="YYYY-MM-DD"
+                                date={this.DOBDefault}
+                                onChange={this.onDOBChange.bind(this)}
+                                ref={(c) => {this.dobField = c}}
+                            />
+                        </div>
 
 
-                    <div class="form-group">
-                        <label>status*</label>
-                        <select ref={ (c) => {this.statusField = c} }>
-                            <option disabled selected value> -- select an option -- </option>
-                            <option value="local">Local</option>
-                            <option value="international">International</option>
-                        </select>
-                    </div>
+                        <div class="form-group">
+                            <label>status*</label>
+                            <select ref={ (c) => {this.statusField = c} }>
+                                <option disabled selected value> -- select an option -- </option>
+                                <option value="local">Local</option>
+                                <option value="international">International</option>
+                            </select>
+                        </div>
 
-                    <div class="form-group">
-                        <label>degree*</label>
-                        <select ref={ (c) => {this.degreeField = c} }>
-                            <option disabled selected value> -- select an option -- </option>
-                            <option value="UG">undergraduate</option>
-                            <option value="PG">Postgraduate</option>
-                        </select>
-                    </div>
+                        <div class="form-group">
+                            <label>degree*</label>
+                            <select ref={ (c) => {this.degreeField = c} }>
+                                <option disabled selected value> -- select an option -- </option>
+                                <option value="UG">undergraduate</option>
+                                <option value="PG">Postgraduate</option>
+                            </select>
+                        </div>
 
-                    <div class="form-group">
-                        <label>first language*</label>
-                        <input type="text" ref={ (c) => {this.firstLanguageField = c} } />
-                    </div>
+                        <div class="form-group">
+                            <label>first language*</label>
+                            <input type="text" ref={ (c) => {this.firstLanguageField = c} } />
+                        </div>
 
-                    <div class="form-group">
-                        <label>country of origin*</label>
-                        <input type="text" ref={ (c) => {this.countryOfOriginField = c} } />
-                    </div>
+                        <div class="form-group">
+                            <label>country of origin*</label>
+                            <input type="text" ref={ (c) => {this.countryOfOriginField = c} } />
+                        </div>
 
-                    <div class="form-group">
-                        <label>gender</label>
-                        <select ref={ (c) => {this.genderField = c} }>
-                            <option disabled selected value> -- select an option -- </option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
+                        <div class="form-group">
+                            <label>gender</label>
+                            <select ref={ (c) => {this.genderField = c} }>
+                                <option disabled selected value> -- select an option -- </option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
 
-                    <span>expand to see optional fields</span>
+                        <span>expand to see optional fields</span>
 
-                    <button class="button-red" type="submit">register</button>
+                        <button class="button-red" type="submit">register</button>
 
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
+        </ReactCSSTransitionGroup>
         );
     }
 }

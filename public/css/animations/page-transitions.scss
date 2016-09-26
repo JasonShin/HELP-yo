@@ -1,0 +1,17 @@
+.page-transition-appear {
+  opacity: 0.01;
+}
+
+.page-transition-appear.page-transition-appear-active {
+  opacity: 1;
+  transition: opacity 800ms ease-in;
+}
+
+.page-transition-enter {
+  opacity: 0.01;
+}
+
+.page-transition-enter.page-transition-enter-active {
+  opacity: 1;
+  transition: opacity 800ms ease-in;
+}

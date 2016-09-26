@@ -4,6 +4,7 @@ import { registerFirebase, loginFirebase } from '../api/student.api';
 import config from '../../config/config';
 
 import { DateField, Calendar } from 'react-date-picker';
+const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 const SECURITY_SCORE_REQUIREMENT = 100; //User must pass this security mark to register
 
@@ -105,20 +106,24 @@ class Register extends React.Component {
 
         const {passwordStrengthScore} = this.state;
 
-        if(passwordStrengthScore > SECURITY_SCORE_REQUIREMENT) {
+        console.log(passwordStrengthScore);
+
+        if(SECURITY_SCORE_REQUIREMENT >= passwordStrengthScore) {
             registerFirebase(
                 {
                     email: this.studentEmail.value,
                     password: this.studentPassword.value
                 }
-            ).then((response) => {
-                this.props.router.push('/profile');
+            ).
+            then((response) => {
+                this.props.router.push('/register/profile');
                 console.log('yoyo! success ' + response);
-            }).catch((error) => {
+            }).
+            catch((error) => {
                 console.log('failed! ' + error);
             });
         } else {
-
+            console.log('nah');
         }
     }
 
@@ -128,30 +133,36 @@ class Register extends React.Component {
         const {passwordStrengthLabel, passwordStrengthScore} = this.state;
 
         return (
-          <div id="PageContent">
-              <div class="container-register">
+        <ReactCSSTransitionGroup 
+          transitionName="page-transition"
+          transitionAppear={true}
+          transitionAppearTimeout={800}
+          transitionEnterTimeout={800}>
+              <div id="PageContent">
+                  <div class="container-register">
 
-                  <div>
-                      <h2>Student Register</h2>
-                      <div>register as new HELPS user</div>
+                      <div>
+                          <h2>Student Register</h2>
+                          <div>register as new HELPS user</div>
+                      </div>
+
+                      <form onSubmit={this.handleSubmit.bind(this)}>
+                          <div class="form-group">
+                              <label>your student email</label>
+                              <input type="text" class="form-control" ref={(c) =>{this.studentEmail = c}} />
+                          </div>
+                          <div class="form-group">
+                              <label>password</label>
+                              <input type="password" class="form-control" ref={(c) =>{this.studentPassword = c}} onChange={this.onPasswordChange.bind(this)} />
+                              {passwordStrengthLabel}
+                          </div>
+
+                          <button class="button-red" type="submit">register</button>
+
+                      </form>
                   </div>
-
-                  <form onSubmit={this.handleSubmit.bind(this)}>
-                      <div class="form-group">
-                          <label>your student email</label>
-                          <input type="text" class="form-control" ref={(c) =>{this.studentEmail = c}} />
-                      </div>
-                      <div class="form-group">
-                          <label>password</label>
-                          <input type="password" class="form-control" ref={(c) =>{this.studentPassword = c}} onChange={this.onPasswordChange.bind(this)} />
-                          {passwordStrengthLabel}
-                      </div>
-
-                      <button class="button-red" type="submit">register</button>
-
-                  </form>
               </div>
-          </div>
+          </ReactCSSTransitionGroup>
         );
     }
 }

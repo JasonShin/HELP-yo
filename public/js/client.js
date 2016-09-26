@@ -34,9 +34,8 @@ ReactDOM.render(
         <Route path="/" component={GeneralLayout}>
             <IndexRoute component={SessionTypesPage}></IndexRoute>
             <Route path="login" component={Login}></Route>
-            <Route path="register" component={RegisterPage}>
-                <Route path="profile" component={MyProfile} />
-            </Route>
+            <Route path="register" component={RegisterPage}></Route>
+            <Route path="register/profile" component={MyProfile}></Route>
             <Route path="profile" component={MyProfile}></Route>
             <Route path='sessions' component={SessionsPage} />
             <Route path='workshopSets' component={WorkshopSetsPage} />
