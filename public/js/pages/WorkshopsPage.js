@@ -4,6 +4,7 @@
 import React from 'react';
 import WorkshopsStore from '../stores/WorkshopsStore';
 import WorkshopList from '../components/WorkshopList';
+import animationConstants from '../constants/animationConstants';
 const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 export default class Workshops extends React.Component {
@@ -11,11 +12,11 @@ export default class Workshops extends React.Component {
     render() {
 
         return (
-            <ReactCSSTransitionGroup 
+            <ReactCSSTransitionGroup
               transitionName="page-transition"
               transitionAppear={true}
-              transitionAppearTimeout={800}
-              transitionEnterTimeout={800}>
+              transitionAppearTimeout={animationConstants.animationDelay}
+              transitionEnterTimeout={animationConstants.animationDelay}>
                 <div id="PageContent">
                     <div class="container-cards-list">
                         <h1>Workshops!</h1>

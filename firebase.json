@@ -20,6 +20,14 @@
         "source": "**/*",
         "destination": "/index.html"
       }
+    ],
+    "redirects": [
+      {
+        "source": "https://helps-uts-project.firebaseapp.com/",
+        "destination" : "https://www.utsapi.me/",
+        "type" : 301
+      }
     ]
   }
+
 }

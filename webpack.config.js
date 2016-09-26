@@ -1,5 +1,8 @@
-var debug = process.env.NODE_ENV !== "production";
+var config = require('./public/config/config');
+var debug = config.webpackEnv !== "production";
 var webpack = require('webpack');
+console.log('debugging?');
+console.log(debug);
 
 module.exports = {
     context: __dirname,
@@ -43,16 +46,21 @@ module.exports = {
         }
     },
     plugins: debug ? [] : [
-        new webpack.optimize.DebugPlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.UglifyJsPlugin({mangle: false, sourcemap: false}),
         new webpack.HotModuleReplacementPlugin(),
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
+        })
+        /*
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
             'window.jQuery': 'jquery',
             'root.jQuery': 'jquery'
-        })
+        })*/
     ]
 };
 

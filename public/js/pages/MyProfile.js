@@ -5,6 +5,7 @@ import { registerHELPNew } from '../api/student.api';
 
 import { DateField, Calendar } from 'react-date-picker';
 const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+import animationConstants from '../constants/animationConstants';
 
 class MyProfile extends React.Component {
 
@@ -54,8 +55,8 @@ class MyProfile extends React.Component {
         <ReactCSSTransitionGroup 
           transitionName="page-transition"
           transitionAppear={true}
-          transitionAppearTimeout={800}
-          transitionEnterTimeout={800}>
+          transitionAppearTimeout={animationConstants.animationDelay}
+          transitionEnterTimeout={animationConstants.animationDelay}>
             <div id="PageContent">
                 <div class="progress">
                   <div class="determinate" style={progressBarStyle}></div>

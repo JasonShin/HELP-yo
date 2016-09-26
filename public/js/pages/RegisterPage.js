@@ -23,7 +23,10 @@ class Register extends React.Component {
         };
     }
 
+    onEmailChange() {
+        let emailVal = this.studentEmail.value;
 
+    }
 
     //TODO: Optimise this to make it more realistic
     //TODO: Create the password field in a separate component
@@ -33,7 +36,6 @@ class Register extends React.Component {
         let passwordLabelColour = '';
         let passwordStrengthMessage = '';
         let passwordStrengthScore = 0;
-        let passwordStrengthLabel = '';
 
         let rules = [
             {
@@ -66,11 +68,10 @@ class Register extends React.Component {
                 passwordStrengthScore += data.score;
             }
         });
-
-        if(passwordStrengthScore === 0) {
-
+        console.log(passwordVal.length);
+        if(passwordVal.length === 0) {
             this.setState({
-                passwordStrength: ''
+                passwordStrengthLabel: ''
             });
 
         } else {
@@ -149,7 +150,7 @@ class Register extends React.Component {
                       <form onSubmit={this.handleSubmit.bind(this)}>
                           <div class="form-group">
                               <label>your student email</label>
-                              <input type="text" class="form-control" ref={(c) =>{this.studentEmail = c}} />
+                              <input type="text" class="form-control" ref={(c) =>{this.studentEmail = c}} placeholder="@student.uts.edu.au" />
                           </div>
                           <div class="form-group">
                               <label>password</label>
