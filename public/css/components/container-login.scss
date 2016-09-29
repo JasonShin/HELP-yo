@@ -8,11 +8,17 @@
 
   //Student Login heading section
   > div:first-child {
+
     h2 {
       margin-bottom: 0px;
     }
 
     margin-bottom: $consistent-margin-bottom;
+
+  }
+
+  .login-header {
+    padding-bottom: 20px;
   }
 
   form {

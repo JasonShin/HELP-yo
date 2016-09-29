@@ -1,45 +1,114 @@
 import {observable} from 'mobx';
 
+/*
+ Object
+ BookingCount
+
+ DaysOfWeek
+
+ EndDate
+
+ NumOfWeeks
+
+ ProgramEndDate
+
+ ProgramId
+
+ ProgramStartDate
+
+ StartDate
+
+ WorkShopSetID
+
+ WorkshopId
+
+ archived
+
+ campus
+
+ cutoff
+
+ description
+
+ maximum
+
+ reminder_num
+
+ reminder_sent
+
+ targetingGroup
+
+ topic
+
+ type
+
+ */
+
 export default class WorkshopModel {
-    @observable id;
-    @observable topic;
-    @observable description;
-    @observable targetingGroup;
-    @observable campusID;
-    @observable starting;
-    @observable ending;
-    @observable maximum;
-    @observable cutoff;
-    @observable creatorID;
-    @observable created;
-    @observable modifierID;
-    @observable modified;
-    @observable archiverID;
-    @observable archived;
+
+    @observable BookingCount;
+    @observable DaysOfWeek;
+    @observable EndDate;
+    @observable NumOfWeeks;
+    @observable ProgramEndDate;
+    @observable ProgramId;
+    @observable ProgramStartDate;
+    @observable StartDate;
     @observable WorkShopSetID;
-    @observable type;
+    @observable WorkshopId;
+    @observable archived;
+    @observable campus;
+    @observable cutoff;
+    @observable description;
+    @observable maximum;
     @observable reminder_num;
     @observable reminder_sent;
+    @observable targetingGroup;
+    @observable topic;
+    @observable type;
 
-    constructor(value) {
-    	this.id = id;
-    	this.topic = topic;
-    	this.description = description;
-    	this.targetingGroup = targetingGroup;
-    	this.campusID = campusID;
-    	this.starting = starting;
-    	this.ending = ending;
-    	this.maximum = maximum;
-    	this.cutoff = cutoff;
-    	this.creatorID = creatorID;
-    	this.created = created;
-    	this.modifierID = modifierID;
-    	this.modified = modified;
-    	this.archiverID = archiverID;
-    	this.archived = archived;
-    	this.WorkShopSetID = WorkShopSetID;
-    	this.type = type;
-    	this.reminder_num = reminder_num;
-    	this.reminder_sent = reminder_sent;
+
+    constructor(BookingCount,
+                DaysOfWeek,
+                EndDate,
+                NumOfWeeks,
+                ProgramEndDate,
+                ProgramId,
+                ProgramStartDate,
+                StartDate,
+                WorkShopSetID,
+                WorkshopId,
+                archived,
+                campus,
+                cutoff,
+                description,
+                maximum,
+                reminder_num,
+                reminder_sent,
+                targetingGroup,
+                topic,
+                type) {
+
+        this.BookingCount = BookingCount;
+        this.DaysOfWeek = DaysOfWeek;
+        this.EndDate = EndDate;
+        this.NumOfWeeks = NumOfWeeks;
+        this.ProgramEndDate = ProgramEndDate;
+        this.ProgramId = ProgramId;
+        this.ProgramStartDate = ProgramStartDate;
+        this.StartDate = StartDate;
+        this.WorkShopSetID = WorkShopSetID;
+        this.WorkshopId = WorkshopId;
+        this.archived = archived;
+        this.campus = campus;
+        this.cutoff = cutoff;
+        this.description = description;
+        this.maximum = maximum;
+        this.reminder_num = reminder_num;
+        this.reminder_sent = reminder_sent;
+        this.targetingGroup = targetingGroup;
+        this.topic = topic;
+        this.type = type;
+
     }
 }

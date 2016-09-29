@@ -3,12 +3,17 @@ import { browserHistory, Link, withRouter } from 'react-router'
 import { registerFirebase, loginFirebase } from '../api/student.api';
 import config from '../../config/config';
 import {materialLoading} from '../material-motion/material-motion';
+import Spinner from '../components/Spinner';
 const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 class Login extends React.Component {
 
     componentWillMount(){
         document.title = `Login${config.titleEnding}`;
+
+        this.state = {
+            enableSpinner: false
+        };
 
     }
 
@@ -17,8 +22,9 @@ class Login extends React.Component {
         var email = this.emailField.value;
         var password = this.passwordField.value;
 
-        /*Enable loading*/
-        materialLoading({elm: '.container-login', enable: true});
+        this.setState({
+            enableSpinner: true
+        });
 
         loginFirebase({
             email: email,
@@ -27,15 +33,22 @@ class Login extends React.Component {
          then((body) => {
             console.log(body);
             this.props.router.push('/');
-            materialLoading({elm: '.container-login', enable: false});
+            this.setState({
+                enableSpinner: false
+            });
          }).
          catch((err) => {
             console.log(err);
-            materialLoading({elm: '.container-login', enable: false});
+            this.setState({
+                enableSpinner: false
+            });
          });
     }
 
     render() {
+
+        const {enableSpinner} = this.state;
+
         return (
             <ReactCSSTransitionGroup 
               transitionName="page-transition"
@@ -44,21 +57,28 @@ class Login extends React.Component {
               transitionEnterTimeout={800}>
                 <div id="PageContent">
 
-                    <div class="container-login">
-                        <div>
+                    <div class="container-login container-small">
+
+                        <Spinner visible={enableSpinner} />
+
+                        <div class='login-header'>
                             <h2>Student Login</h2>
                             <div>Login to register for workshops, programs, and appointments</div>
                         </div>
 
                         <form onSubmit={this.handleSubmit.bind(this)}>
                             <div class="form-group">
+                                <input type="text" class="form-control" ref={(c) =>{this.emailField = c}} required />
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
                                 <label>uts student id</label>
-                                <input type="text" class="form-control" ref={(c) =>{this.emailField = c}} placeholder="Email"  />
                             </div>
 
                             <div class="form-group">
+                                <input type="password" class="form-control" ref={(c) =>{this.passwordField = c}} required />
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
                                 <label>uts password</label>
-                                <input type="password" class="form-control" ref={(c) =>{this.passwordField = c}} placeholder="Password"  />
                             </div>
 
                             <div>

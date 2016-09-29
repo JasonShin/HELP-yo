@@ -16,16 +16,13 @@ export default class Home extends React.Component {
     render() {
         console.log('workshop sets!');
         return (
-            <ReactCSSTransitionGroup 
-              transitionName="page-transition"
-              transitionAppear={true}
-              transitionAppearTimeout={800}
-              transitionEnterTimeout={800}>
+            <ReactCSSTransitionGroup
+                transitionName="page-transition"
+                transitionAppear={true}
+                transitionAppearTimeout={800}
+                transitionEnterTimeout={800}>
                 <div id="PageContent">
-                    <div class="container-types">
-                        <h1>Choose a workshop set</h1>
-                        <WorkshopSetList store={WorkshopSetsStore}/>
-                    </div>
+                    <WorkshopSetList store={WorkshopSetsStore}/>
                 </div>
             </ReactCSSTransitionGroup>
         );

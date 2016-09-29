@@ -2,11 +2,11 @@ import React from 'react';
 import { browserHistory, Link, withRouter } from 'react-router';
 import { registerFirebase, loginFirebase } from '../api/student.api';
 import config from '../../config/config';
-
+import Spinner from '../components/Spinner';
 import { DateField, Calendar } from 'react-date-picker';
-const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 const SECURITY_SCORE_REQUIREMENT = 100; //User must pass this security mark to register
+const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 class Register extends React.Component {
 
@@ -153,44 +153,44 @@ class Register extends React.Component {
         const {passwordStrengthLabel, loginError, enableSpinner} = this.state;
 
         return (
-        <ReactCSSTransitionGroup 
-          transitionName="page-transition"
-          transitionAppear={true}
-          transitionAppearTimeout={400}
-          transitionEnterTimeout={400}>
+            <ReactCSSTransitionGroup
+                transitionName="page-transition"
+                transitionAppear={true}
+                transitionAppearTimeout={400}
+                transitionEnterTimeout={400}>
+                <div id="PageContent">
+                    <div class="container-small container-register">
+                        <Spinner visible={enableSpinner} />
+                        <div class="register-form-header">
+                            <h2>Student Register</h2>
+                            <div>register as new HELPS user</div>
+                        </div>
 
-              <div id="PageContent">
-                  <div class="container-small container-register">
-                      <Spinner visible={enableSpinner} />
-                      <div class="register-form-header">
-                          <h2>Student Register</h2>
-                          <div>register as new HELPS user</div>
-                      </div>
+                        <form onSubmit={this.handleSubmit.bind(this)}>
+                            <div class="form-group">
 
-                      <form onSubmit={this.handleSubmit.bind(this)}>
-                          <div class="form-group">
+                                <input type="text" class="form-control" ref={(c) =>{this.studentEmail = c}} required="true" />
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>your student email</label>
+                                {loginError}
+                            </div>
+                            <div class="form-group">
 
-                              <input type="text" class="form-control" ref={(c) =>{this.studentEmail = c}} required="true" />
-                              <span class="highlight"></span>
-                              <span class="bar"></span>
-                              <label>your student email</label>
-                              {loginError}
-                          </div>
-                          <div class="form-group">
+                                <input type="password" class="form-control" ref={(c) =>{this.studentPassword = c}} onChange={this.onPasswordChange.bind(this)}  required="true" />
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>password</label>
+                                {passwordStrengthLabel}
+                            </div>
 
-                              <input type="password" class="form-control" ref={(c) =>{this.studentPassword = c}} onChange={this.onPasswordChange.bind(this)}  required="true" />
-                              <span class="highlight"></span>
-                              <span class="bar"></span>
-                              <label>password</label>
-                              {passwordStrengthLabel}
-                          </div>
+                            <button class="button-red" type="submit">register</button>
 
-                          <button class="button-red" type="submit">register</button>
+                        </form>
+                    </div>
+                </div>
 
-                      </form>
-                  </div>
-              </div>
-          </ReactCSSTransitionGroup>
+            </ReactCSSTransitionGroup>
         );
     }
 }

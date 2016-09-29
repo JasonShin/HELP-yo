@@ -14,6 +14,7 @@ export default class WorkshopSetList extends React.Component {
         super();
     }
 
+
     render() {
         //REMINDER: WorkshopSets list uses same styling as SessionTypes
         const workshopSetList = this.props.store.workshopSets.map((workshopSet) => {
@@ -21,7 +22,7 @@ export default class WorkshopSetList extends React.Component {
                 <Link key={workshopSet.id}
                       class="session-type"
                       to={"/workshops?workshopSetId=" + (workshopSet.id)}
-                      params={{workshopSetId: workshopSet.id, name: workshopSet.name}}>
+                      params={{workshopSetId: workshopSet.id, workshopName: workshopSet.name}}>
 
                     {workshopSet.name}
                 </Link>
@@ -29,8 +30,11 @@ export default class WorkshopSetList extends React.Component {
         });
 
         return (
-            <div class="session-types-list">
-                {workshopSetList}
+            <div class="container-types container-small">
+                <h1>Choose a workshop set</h1>
+                <div class="session-types-list">
+                    {workshopSetList}
+                </div>
             </div>
         );
 

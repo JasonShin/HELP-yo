@@ -10,6 +10,8 @@ const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 export default class Workshops extends React.Component {
 
     render() {
+        const {workshopSetId} = this.props.location.query;
+
 
         return (
             <ReactCSSTransitionGroup
@@ -18,10 +20,9 @@ export default class Workshops extends React.Component {
               transitionAppearTimeout={animationConstants.animationDelay}
               transitionEnterTimeout={animationConstants.animationDelay}>
                 <div id="PageContent">
-                    <div class="container-cards-list">
-                        <h1>Workshops!</h1>
-                        <WorkshopList store={WorkshopsStore} />
-                    </div>
+
+                        <WorkshopList store={WorkshopsStore} workshopSetId={workshopSetId} />
+
                 </div>
             </ReactCSSTransitionGroup>
         );
