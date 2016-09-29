@@ -12,11 +12,7 @@ import Spinner from '../components/Spinner';
 
 export default class Home extends React.Component {
     componentWillMount(){
-        document.title = `Home${config.titleEnding}`;
-
-        this.state = {
-            enableSpinner: true
-        };
+        document.title = `Session Topics${config.titleEnding}`;
     }
 
     render() {
@@ -24,16 +20,12 @@ export default class Home extends React.Component {
 
         return (
             <ReactCSSTransitionGroup
-              transitionName="page-transition"
-              transitionAppear={true}
-              transitionAppearTimeout={animationConstants.animationDelay}
-              transitionEnterTimeout={animationConstants.animationDelay}>
+                transitionName="page-transition"
+                transitionAppear={true}
+                transitionAppearTimeout={animationConstants.animationDelay}
+                transitionEnterTimeout={animationConstants.animationDelay}>
                 <div id="PageContent">
-                    <div class="container-types">
-
-                        <h1>Choose a session topic</h1>
-                        <SessionTypeList store={SessionTypesStore} />
-                    </div>
+                    <SessionTypeList store={SessionTypesStore} />
                 </div>
             </ReactCSSTransitionGroup>
         );

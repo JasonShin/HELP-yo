@@ -2,7 +2,6 @@ import React from 'react';
 import { browserHistory, Link, withRouter } from 'react-router';
 import { registerFirebase, loginFirebase } from '../api/student.api';
 import config from '../../config/config';
-import Spinner from '../components/Spinner';
 
 import { DateField, Calendar } from 'react-date-picker';
 const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
@@ -147,18 +146,18 @@ class Register extends React.Component {
     }
 
 
+    //TODO: Move everything to register form component
+    //TODO: Make Layout component that has ReactCSSTransitionGroup and Spinner. It knows how to listen to custom events: Enable Spinner, Disable Spinner
     render() {
 
         const {passwordStrengthLabel, loginError, enableSpinner} = this.state;
-
-
 
         return (
         <ReactCSSTransitionGroup 
           transitionName="page-transition"
           transitionAppear={true}
-          transitionAppearTimeout={800}
-          transitionEnterTimeout={800}>
+          transitionAppearTimeout={400}
+          transitionEnterTimeout={400}>
 
               <div id="PageContent">
                   <div class="container-small container-register">

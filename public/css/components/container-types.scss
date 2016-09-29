@@ -4,7 +4,8 @@
 
 .container-types {
   @extend .container;
-  @extend .container-small;
+
+  min-height: 300px;
 
   .session-types-list {
 

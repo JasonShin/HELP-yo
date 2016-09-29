@@ -7,6 +7,7 @@ import { observer } from 'mobx-react';
 import {Link, withRouter} from 'react-router';
 import moment from 'moment';
 import {monthOfYearString} from '../tools/Helpers';
+import Spinner from '../components/Spinner';
 
 @observer
 export default class SessionsList extends React.Component {
@@ -34,6 +35,7 @@ export default class SessionsList extends React.Component {
             var monthDate = this.getMonthDate(session.StartDate);
 
             return (
+
                 <article class="card" key={session.SessionId}>
                     <div class="card-inner">
                         <div class="card-meta-left">
@@ -58,9 +60,21 @@ export default class SessionsList extends React.Component {
             )
         } );
 
+        let enableSpinner = true;
+
+        if(sessionsList.length > 0) {
+            enableSpinner = false;
+        }
+
+
         return (
-            <div>
-                {sessionsList}
+            <div class="container-cards-list container-medium">
+                <Spinner visible={enableSpinner} />
+                <h1>Sessions</h1>
+                <div>
+                    {sessionsList}
+                </div>
+
             </div>
         );
     }

@@ -11,16 +11,13 @@ export default class Sessions extends React.Component {
         const {sessionTypeId} = this.props.location.query;
 
         return (
-            <ReactCSSTransitionGroup 
-              transitionName="page-transition"
-              transitionAppear={true}
-              transitionAppearTimeout={animationConstants.animationDelay}
-              transitionEnterTimeout={animationConstants.animationDelay}>
+            <ReactCSSTransitionGroup
+                transitionName="page-transition"
+                transitionAppear={true}
+                transitionAppearTimeout={animationConstants.animationDelay}
+                transitionEnterTimeout={animationConstants.animationDelay}>
                 <div id="PageContent">
-                    <div class="container-cards-list">
-                        <h1>Sessions</h1>
-                        <SessionList sessionTypeId={sessionTypeId} store={SessionsStore} />
-                    </div>
+                    <SessionList sessionTypeId={sessionTypeId} store={SessionsStore} />
                 </div>
             </ReactCSSTransitionGroup>
         );

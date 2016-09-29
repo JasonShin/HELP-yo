@@ -5,6 +5,8 @@ $container-width: 900px;
   width: $container-width;
   margin: 0px auto;
   margin-top: $consistent-margin-top;
+  position: relative;
+  min-height: 300px;
 
   @media (max-width: 450px) {
     .container-medium {
