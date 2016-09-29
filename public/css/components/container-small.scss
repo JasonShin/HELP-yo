@@ -5,6 +5,7 @@
   width: 450px;
   margin: 0px auto;
   margin-top: $consistent-margin-top;
+  position: relative;
 
   @media all and (max-width: 480px) {
       width:80% !important;
@@ -16,10 +17,13 @@
       input {
         //Needed to avoid 100% width going outside of boundary
         width: 95%;
+
+        @media all and (max-width: 481px) {
+          width: 90%;
+        }
       }
 
       label {
-        margin-bottom: $consistent-margin-bottom / 2;
       }
 
       margin-bottom: $consistent-margin-bottom;

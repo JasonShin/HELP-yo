@@ -2,6 +2,7 @@ import React from 'react';
 import { browserHistory, Link, withRouter } from 'react-router';
 import { registerFirebase, loginFirebase } from '../api/student.api';
 import config from '../../config/config';
+import Spinner from '../components/Spinner';
 
 import { DateField, Calendar } from 'react-date-picker';
 const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
@@ -19,7 +20,9 @@ class Register extends React.Component {
         //InitialState
         this.state = {
             passwordStrength: '',
-            passwordStrengthScore: 0
+            passwordStrengthScore: 0,
+            loginError: '',
+            enableSpinner: false
         };
     }
 
@@ -68,7 +71,6 @@ class Register extends React.Component {
                 passwordStrengthScore += data.score;
             }
         });
-        console.log(passwordVal.length);
         if(passwordVal.length === 0) {
             this.setState({
                 passwordStrengthLabel: ''
@@ -107,7 +109,7 @@ class Register extends React.Component {
 
         const {passwordStrengthScore} = this.state;
 
-        console.log(passwordStrengthScore);
+        this.enableSpinnerForRegisterContainer();
 
         if(SECURITY_SCORE_REQUIREMENT >= passwordStrengthScore) {
             registerFirebase(
@@ -118,20 +120,38 @@ class Register extends React.Component {
             ).
             then((response) => {
                 this.props.router.push('/register/profile');
-                console.log('yoyo! success ' + response);
+                this.disableSpinnerForRegisterContainer();
             }).
             catch((error) => {
-                console.log('failed! ' + error);
+                this.disableSpinnerForRegisterContainer();
+                this.setState({
+                    loginError: (<span class="error-generic">{error.message}</span>)
+                });
+
             });
         } else {
             console.log('nah');
         }
     }
 
+    enableSpinnerForRegisterContainer() {
+        this.setState({
+            enableSpinner: true
+        });
+    }
+
+    disableSpinnerForRegisterContainer() {
+        this.setState({
+            enableSpinner: false
+        });
+    }
+
 
     render() {
 
-        const {passwordStrengthLabel, passwordStrengthScore} = this.state;
+        const {passwordStrengthLabel, loginError, enableSpinner} = this.state;
+
+
 
         return (
         <ReactCSSTransitionGroup 
@@ -139,22 +159,30 @@ class Register extends React.Component {
           transitionAppear={true}
           transitionAppearTimeout={800}
           transitionEnterTimeout={800}>
-              <div id="PageContent">
-                  <div class="container-small">
 
-                      <div>
+              <div id="PageContent">
+                  <div class="container-small container-register">
+                      <Spinner visible={enableSpinner} />
+                      <div class="register-form-header">
                           <h2>Student Register</h2>
                           <div>register as new HELPS user</div>
                       </div>
 
                       <form onSubmit={this.handleSubmit.bind(this)}>
                           <div class="form-group">
+
+                              <input type="text" class="form-control" ref={(c) =>{this.studentEmail = c}} required="true" />
+                              <span class="highlight"></span>
+                              <span class="bar"></span>
                               <label>your student email</label>
-                              <input type="text" class="form-control" ref={(c) =>{this.studentEmail = c}} placeholder="@student.uts.edu.au" />
+                              {loginError}
                           </div>
                           <div class="form-group">
+
+                              <input type="password" class="form-control" ref={(c) =>{this.studentPassword = c}} onChange={this.onPasswordChange.bind(this)}  required="true" />
+                              <span class="highlight"></span>
+                              <span class="bar"></span>
                               <label>password</label>
-                              <input type="password" class="form-control" ref={(c) =>{this.studentPassword = c}} onChange={this.onPasswordChange.bind(this)} />
                               {passwordStrengthLabel}
                           </div>
 

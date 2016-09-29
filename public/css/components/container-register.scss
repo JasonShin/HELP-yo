@@ -3,11 +3,9 @@
 @import "../tools/constants";
 
 .container-register {
-  @extend .container;
-  @extend .container-small;
 
-  > div:first-child {
-    padding-bottom: 10px;
+  .register-form-header {
+    padding-bottom: 35px;
   }
 
 }
