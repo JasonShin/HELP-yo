@@ -61,7 +61,7 @@ class MyProfile extends React.Component {
                 <div class="progress">
                   <div class="determinate" style={progressBarStyle}></div>
                 </div>
-                <div class="container-register">
+                <div class="container-small">
                     <div>
                         <h2>Tell us more about you</h2>
                         <div>setting up your profile (* denotes required data)</div>

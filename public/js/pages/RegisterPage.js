@@ -140,7 +140,7 @@ class Register extends React.Component {
           transitionAppearTimeout={800}
           transitionEnterTimeout={800}>
               <div id="PageContent">
-                  <div class="container-register">
+                  <div class="container-small">
 
                       <div>
                           <h2>Student Register</h2>

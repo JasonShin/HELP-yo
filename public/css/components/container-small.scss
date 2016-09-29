@@ -1,13 +1,13 @@
 @import "../tools/constants";
+@import "container";
 .container-small {
+  @extend .container;
   width: 450px;
   margin: 0px auto;
   margin-top: $consistent-margin-top;
 
-  @media (max-width: 450px) {
-    .container-small {
-      width:95%;
-    }
+  @media all and (max-width: 480px) {
+      width:80% !important;
   }
 
 
