@@ -71,7 +71,7 @@ class PrimaryNav extends React.Component {
                         <ul>
                             <li class="motion-ripple-button">workshops</li>
                             <li><Link to="/bookings/history">my bookings</Link></li>
-                            <li>my info</li>
+                            <li><Link to="/profile">my info</Link></li>
                             <li>faq's</li>
                             <li>{authButton}</li>
                         </ul>

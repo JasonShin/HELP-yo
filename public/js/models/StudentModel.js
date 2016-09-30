@@ -37,7 +37,10 @@ export default class StudentModel {
     @observable batch;
     @observable preferred_name;
 
-    constructor(value) {
+    constructor(studentID, dob, gender, degree, status, first_language, country_origin, background, HSC, HSC_mark,
+        IELTS, IELTS_mark, TOEFL, TOEFL_mark, TAFE, TAFE_mark, CULT, CULT_mark, InsearchDEEP, InsearchDEEP_mark,
+        InsearchDiploma, InsearchDiploma_mark, foundationcourse, foundationcourse_mark, created, creatorID, modified,
+        modifierID, archived, archiverID, degree_details, alternative_contact, caf, batch, preferred_name) {
     	this.studentID = studentID;
     	this.dob = dob;
     	this.gender = gender;

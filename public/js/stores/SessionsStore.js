@@ -1,6 +1,6 @@
 import { computed, observable, autorun } from 'mobx';
 import SessionModel from '../models/SessionModel';
-import {searchSessionBookingsByTopic} from '../api/sessions.api';
+import { searchSessionBookingsByTopic } from '../api/sessions.api';
 
 class SessionsStore {
     @observable sessions = [];

@@ -3,6 +3,7 @@ import { withRouter } from 'react-router';
 import config from '../../config/config';
 import { registerHELPNew } from '../api/student.api';
 
+import StudentStore from '../stores/StudentStore';
 import { DateField, Calendar } from 'react-date-picker';
 const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 import animationConstants from '../constants/animationConstants';
@@ -18,7 +19,25 @@ class MyProfile extends React.Component {
 
     componentWillMount(){
         document.title = `Profiles${config.titleEnding}`;
+    }
 
+    componentDidMount(){
+        const studentHELP = StudentStore.returnStudent();
+        console.log(studentHELP);
+        if(studentHELP.studentId) {
+            StudentStore.fetchStudent(studentHELP.studentId)
+            .then((student) => {
+                this.studentIdField.value = student.studentId;
+                this.currentDOBString = student.dob;
+                this.degreeField.value = student.degree;
+                this.statusField.value = student.status.toLowerCase();
+                this.firstLanguageField.value = student.first_language;
+                this.countryOfOriginField.value = student.country_origin;
+            })
+            .catch((error) => {
+                console.log(`MyProfile Error: ${error}`);
+            });
+        }
     }
 
     onDOBChange (dateString, { dateMoment, timestamp }) {
@@ -37,14 +56,13 @@ class MyProfile extends React.Component {
         let CountryOrigin = this.countryOfOriginField.value;
         let CreatorId = StudentId;
 
-        registerHELPNew(StudentId, DateOfBirth, Degree, Status, FirstLanguage, CountryOrigin, CreatorId).
-        then((response) => {
+        StudentStore.registerHELPstudent(StudentId, DateOfBirth, Degree, Status, FirstLanguage, CountryOrigin, CreatorId)
+        .then((response) => {
             console.log(response);
-        }).
-        catch((error) => {
+        })
+        .catch((error) => {
             console.log(error);
         });
-
     }
 
     render() {
@@ -69,16 +87,16 @@ class MyProfile extends React.Component {
                     <form onSubmit={this.handleSubmit.bind(this)}>
                         <div class="form-group">
                             <label>your student ID*</label>
-                            <input type="text" class="form-control" ref={(c) =>{this.studentIdField = c}} />
+                            <input type="text" value={this.studentIdField} class="form-control" ref={(c) =>{this.studentIdField = c}} />
                         </div>
 
                         <div class="form-group">
                             <label>your fullname*</label>
-                            <input type="text" class="form-control" ref={(c) =>{this.fullNameField = c}} />
+                            <input type="text" value={this.fullNameField} class="form-control" ref={(c) =>{this.fullNameField = c}} />
                         </div>
                         <div class="form-group">
                             <label>preferred other name</label>
-                            <input type="text" class="form-control" ref={(c) =>{this.otherNameField = c}} />
+                            <input type="text" value={this.otherNameField} class="form-control" ref={(c) =>{this.otherNameField = c}} />
 
                         </div>
 
@@ -86,7 +104,7 @@ class MyProfile extends React.Component {
                             <label>date of birth*</label>
                             <Calendar
                                 dateFormat="YYYY-MM-DD"
-                                date={this.DOBDefault}
+                                date={this.dobField || this.DOBDefault}
                                 onChange={this.onDOBChange.bind(this)}
                                 ref={(c) => {this.dobField = c}}
                             />
@@ -95,7 +113,7 @@ class MyProfile extends React.Component {
 
                         <div class="form-group">
                             <label>status*</label>
-                            <select ref={ (c) => {this.statusField = c} }>
+                            <select value={this.statusField} ref={ (c) => {this.statusField = c} }>
                                 <option disabled selected value> -- select an option -- </option>
                                 <option value="local">Local</option>
                                 <option value="international">International</option>
@@ -104,7 +122,7 @@ class MyProfile extends React.Component {
 
                         <div class="form-group">
                             <label>degree*</label>
-                            <select ref={ (c) => {this.degreeField = c} }>
+                            <select value={this.degreeField} ref={ (c) => {this.degreeField = c} }>
                                 <option disabled selected value> -- select an option -- </option>
                                 <option value="UG">undergraduate</option>
                                 <option value="PG">Postgraduate</option>
@@ -113,17 +131,17 @@ class MyProfile extends React.Component {
 
                         <div class="form-group">
                             <label>first language*</label>
-                            <input type="text" ref={ (c) => {this.firstLanguageField = c} } />
+                            <input type="text" value={this.firstLanguageField} ref={ (c) => {this.firstLanguageField = c} } />
                         </div>
 
                         <div class="form-group">
                             <label>country of origin*</label>
-                            <input type="text" ref={ (c) => {this.countryOfOriginField = c} } />
+                            <input type="text" value={this.countryOfOriginField} ref={ (c) => {this.countryOfOriginField = c} } />
                         </div>
 
                         <div class="form-group">
                             <label>gender</label>
-                            <select ref={ (c) => {this.genderField = c} }>
+                            <select value={this.genderField} ref={ (c) => {this.genderField = c} }>
                                 <option disabled selected value> -- select an option -- </option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>

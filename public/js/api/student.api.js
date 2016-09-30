@@ -25,7 +25,7 @@ export const registerHELPNew = (
 
     //TODO: Please find if this is the only way to throw an error about HTTP request failed while interacting with HELP API
     return new Promise((resolve, reject) => {
-      axios.post(`${config.baseURL}student/register`,{
+      axios.post(`${config.baseURL}student/register`, {
         StudentId, DateOfBirth, Degree, Status, FirstLanguage, CountryOrigin, CreatorId,
         Gender, Background, DegreeDetails, AltContact, Preferred, HSC, HSCMark, IELTS, IELTSMark, TAFE, TAFEMark,
         CULT, CULTMark, InsearchDEEP, InsearchDEEPMark, InsearchDiploma, InsearchDiplomaMark,
