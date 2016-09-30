@@ -31,6 +31,10 @@ describe('All the things', function(){
   it('should do all the things', async() => {
       await runApiMethods();
   });
+  it('should get student 12345', async() => {
+    const student = await Student.getStudent({studentId,});
+    console.log(student);
+  })
 });
 
 async function runApiMethods() {
@@ -44,22 +48,22 @@ async function runApiMethods() {
   promises.push(Sessions.searchSessionBookingByLocation({studentId, campus}));
   promises.push(Sessions.searchSessionBookingByTutor({studentId, lecturerId}));
   promises.push(SessionsTypes.getAllSessionsTypes());
-  promises.push(Student.registerHELP({
+  promises.push(Student.registerHELPNew(
     studentId,
-    dob: '1 January 1995',
-    degreeType: 'UG',
-    studentStatus: 'International',
-    firstLang: 'English',
-    countryOrigin: 'Australia',
-    creatorId: '123456',
-    gender: 'M',
-    background: 'Degree',
-    degreeDetails: '1st',
-    altContact: '0405294958',
-    preferredName: 'Tom',
-    completedHsc: 'true',
-    hscMark: '100'
-  }));
+    '1 January 1995',
+    'UG',
+    'International',
+    'English',
+    'Australia',
+    '123456',
+    'M',
+    'Degree',
+    '1st',
+    '0405294958',
+    'Tom',
+    'true',
+    '100'
+  ));
   promises.push(Workshop.listWorkshopSets({active: true}));
 
   // Create Workshop Booking Endpoint is broken. These tests won't pass

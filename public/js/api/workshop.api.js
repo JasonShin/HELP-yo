@@ -10,8 +10,8 @@ export const listWorkshopSets = async (active) => {
   return new Promise((resolve, reject) => {
     axios.get(`${config.baseURL}workshop/workshopSets/${active}`, { headers, })
     .then((val) => {
-      if (val.IsSuccess === 'false') {
-        reject(val.DisplayMessage);
+      if (val.data.IsSuccess === 'false') {
+        reject(val.data.DisplayMessage);
       } else {
         resolve(val);
       }
@@ -29,8 +29,8 @@ export const createWorkshopBooking = (opts) => {
   return new Promise((resolve, reject) => {
     axios.post(`${config.baseURL}workshop/booking/create`, {}, { headers, params, })
     .then((val) => {
-      if (val.IsSuccess === 'false') {
-        reject(val.DisplayMessage);
+      if (val.data.IsSuccess === 'false') {
+        reject(val.data.DisplayMessage);
       } else {
         resolve(val);
       }
@@ -48,8 +48,8 @@ export const createWorkshopWaiting = (opts) => {
   return new Promise((resolve, reject) => {
     axios.post(`${config.baseURL}workshop/wait/create`, {}, { headers, params, })
     .then((val) => {
-      if (val.IsSuccess === 'false') {
-        reject(val.DisplayMessage);
+      if (val.data.IsSuccess === 'false') {
+        reject(val.data.DisplayMessage);
       } else {
         resolve(val);
       }
@@ -67,8 +67,8 @@ export const cancelWorkshopBooking = (opts) => {
   return new Promise((resolve, reject) => {
     axios.post(`${config.baseURL}workshop/booking/cancel`, {}, { headers, params, })
     .then((val) => {
-      if (val.IsSuccess === 'false') {
-        reject(val.DisplayMessage);
+      if (val.data.IsSuccess === 'false') {
+        reject(val.data.DisplayMessage);
       } else {
         resolve(val);
       }
@@ -92,8 +92,8 @@ export const searchWorkshopBookings = (opts) => {
   return new Promise((resolve, reject) => {
     axios.get(`${config.baseURL}workshop/search`, { headers, params, })
     .then((val) => {
-      if (val.IsSuccess === 'false') {
-        reject(val.DisplayMessage);
+      if (val.data.IsSuccess === 'false') {
+        reject(val.data.DisplayMessage);
       } else {
         resolve(val);
       }
@@ -132,9 +132,8 @@ export const searchWorkshops = (opts) => {
   return new Promise((resolve, reject) => {
     axios.get(`${config.baseURL}workshop/search`, { headers, params, })
     .then((val) => {
-      if (val.IsSuccess === 'false') {
-        console.log(val.DisplayMessage);
-        reject(val.DisplayMessage);
+      if (val.data.IsSuccess === 'false') {
+        reject(val.data.DisplayMessage);
       } else {
         resolve(val);
       }
@@ -154,8 +153,8 @@ export const updateWorkshopBooking = (opts) => {
   return new Promise((resolve, reject) => {
     axios.put(`${config.baseURL}workshop/booking/update`, payload, { headers, })
     .then((val) => {
-      if (val.IsSuccess === 'false') {
-        reject(val.DisplayMessage);
+      if (val.data.IsSuccess === 'false') {
+        reject(val.data.DisplayMessage);
       } else {
         resolve(val);
       }

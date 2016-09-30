@@ -10,8 +10,8 @@ export const listCampuses = (opts) => {
   return new Promise((resolve, reject) => {
     axios.get(`${config.baseURL}misc/campus/${active}`, { headers, })
     .then((val) => {
-      if (val.IsSuccess === 'false') {
-        reject(val.DisplayMessage);
+      if (val.data.IsSuccess === 'false') {
+        reject(val.data.DisplayMessage);
       } else {
         resolve(val);
       }
@@ -24,8 +24,8 @@ export const listLecturers = (opts) => {
   return new Promise((resolve, reject) => {
     axios.get(`${config.baseURL}misc/lecturer/${active}`, { headers, })
     .then((val) => {
-      if (val.IsSuccess === 'false') {
-        reject(val.DisplayMessage);
+      if (val.data.IsSuccess === 'false') {
+        reject(val.data.DisplayMessage);
       } else {
         resolve(val);
       }
@@ -38,8 +38,8 @@ export const listAppointments = (opts) => {
   return new Promise((resolve, reject) => {
     axios.get(`${config.baseURL}misc/appointment/${active}`, { headers, })
     .then((val) => {
-      if (val.IsSuccess === 'false') {
-        reject(val.DisplayMessage);
+      if (val.data.IsSuccess === 'false') {
+        reject(val.data.DisplayMessage);
       } else {
         resolve(val);
       }
@@ -52,8 +52,8 @@ export const listAssignments = (opts) => {
   return new Promise((resolve, reject) => {
     axios.get(`${config.baseURL}misc/assignment/${active}`, { headers, })
     .then((val) => {
-      if (val.IsSuccess === 'false') {
-        reject(val.DisplayMessage);
+      if (val.data.IsSuccess === 'false') {
+        reject(val.data.DisplayMessage);
       } else {
         resolve(val);
       }

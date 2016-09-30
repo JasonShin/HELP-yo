@@ -23,8 +23,8 @@ export const getAllSessionsTypes = () => {
   return new Promise((resolve, reject) => {
     axios.get(`${config.baseURL}session/sessionTypes/true`, getParams)
     .then((val) => {
-      if (val.IsSuccess === 'false') {
-        reject(val.DisplayMessage);
+      if (val.data.IsSuccess === 'false') {
+        reject(val.data.DisplayMessage);
       } else {
         resolve(val);
       }

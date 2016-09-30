@@ -1,11 +1,9 @@
 import config from '../../config/config';
 import FirebaseAPI from './firebase.api';
 const axios = require('axios');
-const axiosConfig = {
-  headers: {
-    'AppKey': config.appKey,
-    'Accept': 'application/json'
-  }
+const headers = {
+  'AppKey': config.appKey,
+  'Accept': 'application/json'
 };
 
 //() => first raw of params = required, others = optional
@@ -15,6 +13,10 @@ export const registerHELPNew = (
     CULT, CULTMark, InsearchDEEP, InsearchDEEPMark, InsearchDiploma, InsearchDiplomaMark,
     FoundationCourse, FoundationCourseMark
 ) => {
+
+    const postParams = {
+      headers,
+    };
 
     //TODO: Optimise this so it tells exactly what is wrong (what params is missing)
     if (!StudentId || !DateOfBirth || !Degree || !Status || !FirstLanguage || !CountryOrigin || !CreatorId) {
@@ -28,14 +30,36 @@ export const registerHELPNew = (
         Gender, Background, DegreeDetails, AltContact, Preferred, HSC, HSCMark, IELTS, IELTSMark, TAFE, TAFEMark,
         CULT, CULTMark, InsearchDEEP, InsearchDEEPMark, InsearchDiploma, InsearchDiplomaMark,
         FoundationCourse, FoundationCourseMark
-      }, axiosConfig).then((val) => {
-        if (val.IsSuccess === 'false') {
-          reject(val.DisplayMessage);
+      }, postParams).then((val) => {
+        if (val.data.IsSuccess === 'false') {
+          reject(val.data.DisplayMessage);
         } else {
           resolve(val);
         }
       });
     });
+};
+
+export const getStudent = (opts) => {
+  const { studentId } = opts;
+
+  const getParams = {
+    headers,
+    params: {
+      studentId,
+    }
+  };
+
+  return new Promise((resolve, reject) => {
+    axios.get(`${config.baseURL}student`, getParams)
+    .then((val) => {
+      if (val.data.IsSuccess === 'false') {
+        reject(val.data.DisplayMessage);
+      } else {
+        resolve(val);
+      }
+    });
+  });
 };
 
 
