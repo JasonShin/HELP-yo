@@ -28,6 +28,7 @@ export default class SessionsList extends React.Component {
                     title={session.SessionType} lecturerEmail={session.LecturerEmail}
                     dateMeta={[monthDate.monthAsString,monthDate.date]}
                     campus={session.Campus}
+                    cardType="session"
                 />
             );
 

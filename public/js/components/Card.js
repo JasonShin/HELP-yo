@@ -2,9 +2,15 @@
  * Created by Shin on 1/10/2016.
  */
 import React from 'react';
+import {ReactRouter, Router, Link, withRouter} from 'react-router';
 
 //TODO: Used this on WorkshopList and SessionsList components
 export default class Card extends React.Component {
+
+    cardTypes = {
+        workshop: 'workshop',
+        session: 'session'
+    };
 
     constructor() {
         super();
@@ -16,7 +22,7 @@ export default class Card extends React.Component {
 
     render() {
 
-        let {id = '',
+        let {id = '', cardType = '',
             type = '', title = '', rangeDate = '', lecturerEmail = '',
             maxSeats = '', availableSeats = '', dateMeta = '', campus = ''} = this.props;
 
@@ -64,6 +70,14 @@ export default class Card extends React.Component {
             )
         }
 
+        let moreDetailsLink = '';
+        if(cardType === this.cardTypes.workshop) {
+
+            moreDetailsLink = (
+                <Link key={id} to={"workshop?workshopId=" + id} >more details</Link>
+            );
+        }
+
         return (
             <article class="card" key={id}>
                 <div class="card-inner">
@@ -73,7 +87,7 @@ export default class Card extends React.Component {
                         {maxSeats}
                         {availableSeats}
                         {lecturerEmail}
-                        <div class="card-more-details">more details</div>
+                        <div class="card-more-details">{moreDetailsLink}</div>
                     </div>
 
                     <div class="card-meta-right">

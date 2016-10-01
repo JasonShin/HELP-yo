@@ -20,9 +20,7 @@ export default class Workshops extends React.Component {
               transitionAppearTimeout={animationConstants.animationDelay}
               transitionEnterTimeout={animationConstants.animationDelay}>
                 <div id="PageContent">
-
-                        <WorkshopList store={WorkshopsStore} workshopSetId={workshopSetId} />
-
+                    <WorkshopList store={WorkshopsStore} workshopSetId={workshopSetId} />
                 </div>
             </ReactCSSTransitionGroup>
         );

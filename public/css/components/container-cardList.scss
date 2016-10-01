@@ -24,6 +24,7 @@
       padding: 15px;
       overflow: hidden;
       background-color: #f8f8fa;
+      min-height: 150px;
 
       .card-meta-left {
         width: 80%;
@@ -35,10 +36,16 @@
         }
 
         .card-more-details {
-          color: $date-meta-color;
-          font-weight: bold;
+          a {
+            color: $date-meta-color;
+            text-decoration: none;
+            color: red;
+            font-weight: bold;
+            font-size: 12px;
+          }
           //TODO: Put all these 15 px into globals variable. Make padding margin consistent
           margin-top: 15px;
+          text-transform: uppercase;
         }
 
       }
