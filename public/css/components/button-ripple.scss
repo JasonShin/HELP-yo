@@ -1,0 +1,16 @@
+.button {
+  border: none;
+  outline:none;
+  cursor: pointer;
+  padding: 18px 60px;
+  border-radius: 2px;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.button-book {
+  @extend .button;
+  background: #00d656;
+  color: white;
+
+}

@@ -1,0 +1,96 @@
+.single {
+
+  //Generics
+  h3 {
+    text-transform: uppercase;
+    margin-top: 25px;
+    margin-bottom: 10px;
+  }
+
+  header {
+    font-weight: bold;
+    font-size: 25px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .single-meta-top {
+    overflow: hidden;
+    .single-meta-top-left {
+
+      >div {
+        padding: 20px;
+      }
+
+      float: left;
+      width: 60%;
+    }
+
+    .single-meta-top-right {
+      background-color: #e8e8e6;
+      >div {
+        padding: 20px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+      }
+      float: left;
+      width: 40%;
+      .single-ranged-date {
+        color: #666A73;
+      }
+      .single-target-group > div {
+        color: #666A73;
+      }
+
+    }
+
+  }
+
+
+  .single-controls {
+    overflow: hidden;
+    border-bottom: 1px solid #D2D6DF;
+    > div {
+      overflow: hidden;
+      padding: 20px;
+      padding-right: 0px;
+    }
+
+    .single-controls-right {
+      float: right;
+      overflow: hidden;
+      width: 40%;
+      >div {
+
+        button {
+          width: 100%;
+        }
+      }
+
+    }
+  }
+
+  .single-meta-bottom {
+    overflow: hidden;
+    .single-meta-bottom-left {
+      >div {
+        padding: 20px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+      }
+      float: left;
+      width: 60%;
+    }
+
+    .single-meta-bottom-right {
+      >div {
+        padding: 20px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+      }
+      float: left;
+      width: 40%;
+    }
+  }
+
+}

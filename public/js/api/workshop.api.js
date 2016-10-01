@@ -101,23 +101,11 @@ export const searchWorkshopBookings = (opts) => {
   });
 };
 
-/*
-
- workshopSetId
- topic
- startingDtBegin
- startingDtEnd
- endingDtBegin
- endingDtEnd
- campusId
- active
- page
- pageSize
- */
 
 export const searchWorkshops = (opts) => {
-  const { workshopSetId, topic, startingDtBegin, startingDtEnd, endingDtBegin, endingDtEnd, campusId, active, page, pageSize } = opts;
+  const { workshopId, workshopSetId, topic, startingDtBegin, startingDtEnd, endingDtBegin, endingDtEnd, campusId, active, page, pageSize } = opts;
   const params = {
+    workshopId,
     workshopSetId,
     topic,
     startingDtBegin,

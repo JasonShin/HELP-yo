@@ -1,7 +1,9 @@
 @import "../tools/constants";
+@import "container";
 $container-width: 900px;
 
 .container-medium {
+  @extend .container;
   width: $container-width;
   margin: 0px auto;
   margin-top: $consistent-margin-top;

@@ -4,20 +4,34 @@
 
 import React from 'react';
 import WorkshopsStore from '../stores/WorkshopsStore';
-import WorkshopList from '../components/WorkshopList';
 import animationConstants from '../constants/animationConstants';
+
 const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+import Single from '../components/Single';
 
 export default class Workshop extends React.Component {
 
+
     constructor() {
         super();
+        this.state = {
+            currentWorkshop: null
+        };
+    }
+
+    componentWillMount() {
+
+        const {workshopId} = this.props.location.query;
+        WorkshopsStore.findWorkshopById(workshopId);
+
     }
 
     render() {
+
+
         return (
             <div>
-                Single workshop
+                <Single store={WorkshopsStore} />
             </div>
         )
     }

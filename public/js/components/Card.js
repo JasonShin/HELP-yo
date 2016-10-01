@@ -74,7 +74,7 @@ export default class Card extends React.Component {
         if(cardType === this.cardTypes.workshop) {
 
             moreDetailsLink = (
-                <Link key={id} to={"workshop?workshopId=" + id} >more details</Link>
+                <Link key={id} to={"workshop?workshopId=" + id}>more details</Link>
             );
         }
 
