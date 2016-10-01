@@ -1,0 +1,22 @@
+{
+  "id": "e4c8c55d-30b8-17f2-0b20-c8b143569c55",
+  "name": "UTS API",
+  "values": [
+    {
+      "key": "url",
+      "value": "https://api.utsapi.me",
+      "type": "text",
+      "enabled": true
+    },
+    {
+      "key": "appKey",
+      "value": "d08f1438a39947458d02a70fab255cfd",
+      "type": "text",
+      "enabled": true
+    }
+  ],
+  "timestamp": 1475301408006,
+  "_postman_variable_scope": "environment",
+  "_postman_exported_at": "2016-10-01T08:34:49.093Z",
+  "_postman_exported_using": "Postman/4.7.2"
+}
