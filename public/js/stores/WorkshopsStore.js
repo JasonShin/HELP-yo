@@ -30,6 +30,7 @@ class WorkshopsStore {
     //Ability to fetch from local data if local data exist
     findWorkshopById(workshopId) {
 
+        //TODO: Fix API code
         //API does not know how to use workshopId to search.
         //Use page and pageSize trick to search.
         //Plussing 1 because page starts from 1
