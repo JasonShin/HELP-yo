@@ -5,9 +5,9 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 import {Link, withRouter} from 'react-router';
-import moment from 'moment';
-import {monthOfYearString, getMonthDate, getBuildingNumber} from '../tools/Helpers';
+import {getMonthDate} from '../tools/Helpers';
 import Spinner from '../components/Spinner';
+import Card from '../components/Card';
 
 @observer
 export default class SessionsList extends React.Component {
@@ -20,34 +20,20 @@ export default class SessionsList extends React.Component {
 
     render() {
         const sessionsList = this.props.store.sessions.map( (session) => {
+
             var monthDate = getMonthDate(session.StartDate);
-
             return (
+                <Card
+                    id={session.SessionId}
+                    title={session.SessionType} lecturerEmail={session.LecturerEmail}
+                    dateMeta={[monthDate.monthAsString,monthDate.date]}
+                    campus={session.Campus}
+                />
+            );
 
-                <article class="card" key={session.SessionId}>
-                    <div class="card-inner">
-                        <div class="card-meta-left">
-                            <header>{session.SessionType}</header>
-                            <div><i class="fa fa-graduation-cap" aria-hidden="true"></i> {session.LecturerEmail}</div>
-                            <div class="card-more-details">more details</div>
-                        </div>
-
-                        <div class="card-meta-right">
-                            <div class="date-meta">
-                                <span>{monthDate.monthAsString}</span>
-                                <span>{monthDate.date}</span>
-                            </div>
-
-                            <div class="building-number-meta">
-                                <i class="fa fa-building" aria-hidden="true"></i>
-                                <span>{getBuildingNumber(session.Campus)}</span>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-            )
         } );
 
+        //Enabling spinner depending on list of sessions returned
         let enableSpinner = true;
 
         if(sessionsList.length > 0) {
@@ -62,7 +48,6 @@ export default class SessionsList extends React.Component {
                 <div>
                     {sessionsList}
                 </div>
-
             </div>
         );
     }
