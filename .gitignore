@@ -5,3 +5,4 @@ public/npm-debug.log
 public/js/client.min.js
 *.hot-update.json
 *.hot-update.js
+config/
