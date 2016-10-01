@@ -1,3 +1,13 @@
+@import "container-medium";
+
+@mixin responsive() {
+  //Responsive
+  @media all and (max-width: $container-width) {
+    width: 100%;
+    float: none;
+  }
+}
+
 .single {
 
   //Generics
@@ -24,6 +34,8 @@
 
       float: left;
       width: 60%;
+      @include responsive();
+
     }
 
     .single-meta-top-right {
@@ -35,6 +47,9 @@
       }
       float: left;
       width: 40%;
+      @include responsive();
+
+
       .single-ranged-date {
         color: #666A73;
       }
@@ -61,6 +76,8 @@
       float: right;
       overflow: hidden;
       width: 40%;
+      @include responsive();
+
       >div {
 
         button {
@@ -81,6 +98,7 @@
       }
       float: left;
       width: 60%;
+      @include responsive();
     }
 
     .single-meta-bottom-right {
@@ -91,6 +109,7 @@
       }
       float: left;
       width: 40%;
+      @include responsive();
     }
   }
 

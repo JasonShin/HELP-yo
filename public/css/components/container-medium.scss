@@ -1,6 +1,7 @@
 @import "../tools/constants";
 @import "container";
 $container-width: 900px;
+$container-width-mobile: 90%;
 
 .container-medium {
   @extend .container;
@@ -10,10 +11,16 @@ $container-width: 900px;
   position: relative;
   min-height: 300px;
 
+  /*
   @media (max-width: 450px) {
     .container-medium {
       width:95%;
     }
+  }*/
+
+  @media all and (max-width: $container-width) {
+    width: $container-width-mobile;
+
   }
 
 

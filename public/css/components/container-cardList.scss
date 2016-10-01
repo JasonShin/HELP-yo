@@ -4,7 +4,6 @@
 
 .container-cards-list {
   @extend .container;
-  @extend .container-medium;
 
   overflow: hidden;
 
@@ -18,6 +17,11 @@
     float: left;
     margin-bottom: 15px;
     overflow: hidden;
+
+    @media all and (max-width: $container-width) {
+      width: 100%;
+    }
+
 
     .card-inner {
       margin: 15px;
