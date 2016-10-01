@@ -7,3 +7,5 @@ public/js/client.min.js
 *.hot-update.js
 config/
 google/
+.firebaserc
+.firebasrc
