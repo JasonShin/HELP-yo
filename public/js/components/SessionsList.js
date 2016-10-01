@@ -6,7 +6,7 @@ import React from 'react';
 import { observer } from 'mobx-react';
 import {Link, withRouter} from 'react-router';
 import moment from 'moment';
-import {monthOfYearString} from '../tools/Helpers';
+import {monthOfYearString, getMonthDate, getBuildingNumber} from '../tools/Helpers';
 import Spinner from '../components/Spinner';
 
 @observer
@@ -17,22 +17,10 @@ export default class SessionsList extends React.Component {
         this.props.store.fetchSessions('', sessionTypeId);
     }
 
-    getBuildingNumber(building) {
-        return building.split('\.')[0];
-    }
-
-    //TODO: Possibly refactored
-    getMonthDate(rawDate) {
-        let momentDate = moment(rawDate)
-        let monthAsString = monthOfYearString(momentDate.month()).substring(0,3);
-        let date = momentDate.date();
-
-        return {monthAsString, date};
-    }
 
     render() {
         const sessionsList = this.props.store.sessions.map( (session) => {
-            var monthDate = this.getMonthDate(session.StartDate);
+            var monthDate = getMonthDate(session.StartDate);
 
             return (
 
@@ -52,7 +40,7 @@ export default class SessionsList extends React.Component {
 
                             <div class="building-number-meta">
                                 <i class="fa fa-building" aria-hidden="true"></i>
-                                <span>{this.getBuildingNumber(session.Campus)}</span>
+                                <span>{getBuildingNumber(session.Campus)}</span>
                             </div>
                         </div>
                     </div>

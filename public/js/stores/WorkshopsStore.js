@@ -15,6 +15,10 @@ class WorkshopsStore {
 
             workshopSetId: workshopSetId
         }).then((response) => {
+
+            console.log('Workshop data fetched');
+            console.log(response.data.Results);
+
             this.workshops = response.data.Results.map((data) => {
                 return new WorkshopModel(
                     data.BookingCount,
