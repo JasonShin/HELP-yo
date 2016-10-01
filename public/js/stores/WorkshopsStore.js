@@ -29,8 +29,14 @@ class WorkshopsStore {
 
     //Ability to fetch from local data if local data exist
     findWorkshopById(workshopId) {
+
+        //API does not know how to use workshopId to search.
+        //Use page and pageSize trick to search.
+        //Plussing 1 because page starts from 1
+        //Default number of items queries is 10
+        let pageVal = Math.floor(workshopId / 10) + 1;
         searchWorkshops({
-            workshopId: workshopId
+            page: pageVal
         }).then((response) => {
             this.single = this.mapDataToModel(
                 response.data.Results.find((workshop) => {
