@@ -27,16 +27,27 @@ class WorkshopsStore {
         })
     }
 
-    //Ability to fetch from local data if local data exist
-    findWorkshopById(workshopId) {
-
+    getPageNum(workshopId) {
         //TODO: Fix API code
         //API does not know how to use workshopId to search.
         //Use page and pageSize trick to search.
         //Plussing 1 because page starts from 1
         //Default number of items queries is 10
         let pageVal = Math.floor(workshopId / 10) + 1;
-        console.log(pageVal);
+        //If its % 10 = 0, then assign normal value to pageVal
+        if(workshopId % 10 === 0) {
+            pageVal = workshopId / 10;
+        }
+
+        return pageVal
+    }
+
+    //Ability to fetch from local data if local data exist
+    findWorkshopById(workshopId) {
+
+
+        let pageVal = this.getPageNum(workshopId);
+
         searchWorkshops({
             page: pageVal
         }).then((response) => {
