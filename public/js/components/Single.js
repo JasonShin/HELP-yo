@@ -35,7 +35,12 @@ export default class Single extends React.Component {
                 let userEmail = user.email;
 
                 //Bind Mobx listener to single observable
-                WorkshopBookingsStore.listenToSingleBooking(this.props.workshopId);
+                console.log(
+                    'listening with',
+                    workshopId,
+                    userEmail
+                );
+                WorkshopBookingsStore.listenToSingleBooking(workshopId, userEmail);
 
                 //Disable spinner since the component is authorized
                 this.setState({
@@ -45,7 +50,6 @@ export default class Single extends React.Component {
                     userEmail: userEmail
                 });
             } else {
-
                 console.log('<Single /> is not authorized!');
             }
         });
@@ -70,7 +74,8 @@ export default class Single extends React.Component {
         e.preventDefault();
         if(this.state.authorized) {
             deleteWorkshopBookingFirebase({
-                workshopId: this.state.workshopId
+                workshopId: this.state.workshopId,
+                userId: this.state.userEmail
             });
             //Making sure nullifying single booking observable
             //TODO: Optimize this

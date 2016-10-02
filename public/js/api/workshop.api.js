@@ -1,4 +1,5 @@
 import config from '../../config/config';
+import {parseEmailForFirebase} from '../tools/Helpers';
 import FirebaseAPI from '../api/firebase.api';
 const axios = require('axios');
 const headers = {
@@ -31,7 +32,7 @@ export const createWorkshopBookingFirebase = (opts) => {
   };
 
 
-  FirebaseAPI.context.database().ref('/workshopBookings/' + workshopId).set({
+  FirebaseAPI.context.database().ref('/workshopBookings/userId/' + parseEmailForFirebase(userId) + '/workshopId/' + workshopId).set({
     workshopId,
     studentId,
     userId
@@ -40,22 +41,23 @@ export const createWorkshopBookingFirebase = (opts) => {
 
 export const deleteWorkshopBookingFirebase = (opts) => {
 
-  const { workshopId} = opts;
+  const { workshopId, userId} = opts;
   const params = {
-    workshopId
+    workshopId,
+    userId
   };
 
-
-  FirebaseAPI.context.database().ref('/workshopBookings/' + workshopId).remove();
+  FirebaseAPI.context.database().ref('/workshopBookings/userId/' + parseEmailForFirebase(userId) + '/workshopId/' + workshopId).remove();
 };
 
 export const getWorkshopBookingFirebase = (opts) => {
-  const { workshopId } = opts;
+  const { workshopId, userId } = opts;
   const params = {
-    workshopId
+    workshopId,
+    userId
   };
-  console.log('searching for! ' , workshopId);
-  return FirebaseAPI.context.database().ref('/workshopBookings').orderByChild("workshopId").equalTo(workshopId);
+  console.log('searching for! ' , workshopId, userId);
+  return FirebaseAPI.context.database().ref('/workshopBookings/userId/' + parseEmailForFirebase(userId) + '/workshopId/' + workshopId);
 };
 /* WorkshopBookings FIREBASE ENDS */
 

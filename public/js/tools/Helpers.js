@@ -46,3 +46,8 @@ export const getFormattedRangeDate = (rawStartDate, rawEndDate, delimeter) => {
     let end = getFormattedEndDate(rawEndDate);
     return [start, end].join(delimeter);
 };
+
+//TODO: Optimize this for 'firebase.js:353 Uncaught Error: Firebase.child failed: First argument was an invalid path: "/workshopBookings/demo@student.uts.edu.au/23". Paths must be non-empty strings and can't contain ".", "#", "$", "[", or "]"'
+export const parseEmailForFirebase = (userId) => {
+    return userId.replace(/\./g, '_');
+};

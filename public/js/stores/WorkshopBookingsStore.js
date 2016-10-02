@@ -9,13 +9,12 @@ class WorkshopBookingsStore {
     @observable bookings = [];
     @observable single = null;
 
-    listenToSingleBooking(workshopID) {
-        getWorkshopBookingFirebase({workshopId: workshopID}).on('value', (snapshot) => {
+    listenToSingleBooking(workshopID, userId) {
+        getWorkshopBookingFirebase({workshopId: workshopID, userId: userId}).on('value', (snapshot) => {
 
             if(snapshot.val() !== null){
 
-                var data = snapshot.val()[workshopID];
-
+                var data = snapshot.val();
                 this.single = new WorkshopBookingModel(
                     data.workshopId, data.userId
                 );
