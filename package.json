@@ -4,7 +4,10 @@
   "description": "Help System",
   "main": "webpack.config.js",
   "scripts": {
-    "dev": "./node_modules/.bin/webpack-dev-server --content-base public/ --inline --hot --port 8181",
+
+    "dev": "./node_modules/.bin/webpack-dev-server --content-base public/ --inline --port 8181 --hot --watch",
+    "dev2": "webpack-dev-server --content-base public/",
+    "build-production": "webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors & firebase deploy",
     "test": "echo true",
     "test:all": "mocha --recursive tests/.",
     "test:all:es6": "mocha --compilers js:babel-core/register --recursive tests/.",

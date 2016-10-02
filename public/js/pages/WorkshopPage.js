@@ -24,14 +24,19 @@ export default class Workshop extends React.Component {
         const {workshopId} = this.props.location.query;
         WorkshopsStore.findWorkshopById(workshopId);
 
+        this.setState({
+            workshopId
+        });
+
     }
 
     render() {
 
+        const {workshopId} = this.state;
 
         return (
             <div>
-                <Single store={WorkshopsStore} />
+                <Single store={WorkshopsStore} workshopId={workshopId} />
             </div>
         )
     }

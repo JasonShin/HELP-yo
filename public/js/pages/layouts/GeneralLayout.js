@@ -9,7 +9,7 @@ export default class Layout extends React.Component {
                 <PrimaryNav />
                 <div id="Page">
 
-                        {this.props.children}
+                    {this.props.children}
                 </div>
             </div>
 

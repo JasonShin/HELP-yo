@@ -24,6 +24,7 @@ export default class SessionsList extends React.Component {
             var monthDate = getMonthDate(session.StartDate);
             return (
                 <Card
+                    key={session.SessionId}
                     id={session.SessionId}
                     title={session.SessionType} lecturerEmail={session.LecturerEmail}
                     dateMeta={[monthDate.monthAsString,monthDate.date]}

@@ -14,3 +14,10 @@
   color: white;
 
 }
+
+.button-book-cancel {
+  @extend .button;
+  background: #b31c20;
+  color: white;
+
+}

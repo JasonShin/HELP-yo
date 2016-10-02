@@ -36,11 +36,13 @@ class WorkshopsStore {
         //Plussing 1 because page starts from 1
         //Default number of items queries is 10
         let pageVal = Math.floor(workshopId / 10) + 1;
+        console.log(pageVal);
         searchWorkshops({
             page: pageVal
         }).then((response) => {
             this.single = this.mapDataToModel(
                 response.data.Results.find((workshop) => {
+
                     return workshop.WorkshopId == workshopId;
                 })
             );

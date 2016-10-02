@@ -1,13 +1,12 @@
 var config = require('./public/config/config');
 var debug = config.webpackEnv !== "production";
 var webpack = require('webpack');
-console.log('debugging?');
-console.log(debug);
+var path = require('path');
 
 module.exports = {
     context: __dirname,
     devtool: debug ? 'inline-sourcemap' : null,
-    entry: './public/js/client.js',
+    entry: ['./public/js/client.js'],
 
     module: {
         preLoaders: [
@@ -39,10 +38,14 @@ module.exports = {
         path: __dirname + '/public/js',
         filename: 'client.min.js'
     },
+    watch: true,
     devServer: {
-        //This is added to server index.thml for all urls. It must be disabled to server 404s
+        //This is added to serve index.html for all urls. It must be disabled to server 404s
         historyApiFallback: {
             index: 'index.html'
+        },
+        devServer:{
+            contentBase: './public/'
         }
     },
     plugins: debug ? [] : [

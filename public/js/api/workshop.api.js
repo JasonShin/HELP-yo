@@ -1,4 +1,5 @@
 import config from '../../config/config';
+import FirebaseAPI from '../api/firebase.api';
 const axios = require('axios');
 const headers = {
   'AppKey': config.appKey,
@@ -19,6 +20,45 @@ export const listWorkshopSets = async (active) => {
   });
 };
 
+/* WorkshopBookings FIREBASE STARTS */
+export const createWorkshopBookingFirebase = (opts) => {
+
+  const { workshopId, studentId, userId } = opts;
+  const params = {
+    workshopId,
+    studentId,
+    userId,
+  };
+
+
+  FirebaseAPI.context.database().ref('/workshopBookings/' + workshopId).set({
+    workshopId,
+    studentId,
+    userId
+  });
+};
+
+export const deleteWorkshopBookingFirebase = (opts) => {
+
+  const { workshopId} = opts;
+  const params = {
+    workshopId
+  };
+
+
+  FirebaseAPI.context.database().ref('/workshopBookings/' + workshopId).remove();
+};
+
+export const getWorkshopBookingFirebase = (opts) => {
+  const { workshopId } = opts;
+  const params = {
+    workshopId
+  };
+  console.log('searching for! ' , workshopId);
+  return FirebaseAPI.context.database().ref('/workshopBookings').orderByChild("workshopId").equalTo(workshopId);
+};
+/* WorkshopBookings FIREBASE ENDS */
+
 export const createWorkshopBooking = (opts) => {
   const { workshopId, studentId, userId } = opts;
   const params = {
@@ -37,6 +77,7 @@ export const createWorkshopBooking = (opts) => {
     });
   });
 };
+
 
 export const createWorkshopWaiting = (opts) => {
   const { workshopId, studentId, userId } = opts;

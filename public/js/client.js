@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, IndexRoute, hashHistory, browserHistory, routes } from 'react-router';
+import { Router, Route, IndexRoute, browserHistory, routes } from 'react-router';
 var createBrowserHistory = require('history/lib/createBrowserHistory'); //TODO: Find browserHistory compatibility and if it's not compatible, role back to hashHistory
 import FirebaseAPI from './api/firebase.api';
 
@@ -31,7 +31,7 @@ const app = document.getElementById('app');
 //TODO: Create <Route path="register/profile" component={MyProfile}></Route>  for UX = keeping users in context
 //TODO: Priority 2
 ReactDOM.render(
-    <Router history={history}>
+    <Router history={browserHistory}>
         <Route path="/" component={GeneralLayout}>
             <IndexRoute component={SessionTypesPage} />
             <Route path="login" component={Login} />

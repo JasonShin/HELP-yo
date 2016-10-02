@@ -4,6 +4,11 @@ import * as firebaseConfig from '../../config/firebase.config';
 export default class FirebaseAPI {
     static init = false;
 
+    static constructor() {
+        console.log('initialized!');
+        this.initialize();
+    }
+
     static initialize() {
         //TODO: Find a way to validate firebase has initialized.
         //Possible issues => firebase context timeout
@@ -20,8 +25,13 @@ export default class FirebaseAPI {
         return firebase;
     }
 
+    static getAuth() {
+
+    }
+
     // () => returns authenticated status
     static requireAuth(nextState, replace) {
+
         if(null === firebase.auth().currentUser) {
             replace({
                 pathname: '/login',

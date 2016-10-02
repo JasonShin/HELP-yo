@@ -1,7 +1,7 @@
 import {observable} from 'mobx';
 
 export default class WorkshopBookingModel {
-    @observable id;
+    //@observable id;
     @observable workshopID;
     @observable studentID;
     @observable created;
@@ -13,8 +13,8 @@ export default class WorkshopBookingModel {
     @observable canceled;
     @observable attended;
 
-    constructor(value) {
-    	this.id = id;
+    constructor(workshopID, studentID, created, creatorID, modified, modifierID, archived, archiverID, canceled, attended) {
+    	//this.id = id;
     	this.workshopID = workshopID;
     	this.studentID = studentID;
     	this.created = created;

@@ -38,6 +38,7 @@ export default class WorkshopList extends React.Component {
 
             return (
                 <Card
+                    key={workshop.WorkshopId}
                     id={workshop.WorkshopId}
                     title={workshop.topic} rangeDate={formattedRangeDate}
                     maxSeats={maxSeats} availableSeats={availables}
