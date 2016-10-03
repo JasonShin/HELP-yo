@@ -25,15 +25,17 @@ class WorkshopBookingsStore {
         getWorkshopBookingFirebaseByUserId(userId).on('value', (snapshot) => {
 
             //Emptying bookings array
-            this.bookings.empty();
+            this.bookings = [];
 
             if(snapshot.val() !== null) {
                 var data = snapshot.val().workshopId;
                 for(var key in data) {
                     let currentBooking = data[key];
-                    this.bookings.push(new WorkshopBookingModel(
-                        data.workshopId,
-                        data.userId));
+                    console.log('pushing');
+                    console.log(currentBooking);
+                    this.bookings.push(
+                        new WorkshopBookingModel(currentBooking.workshopId, currentBooking.userId)
+                    );
                 }
             }
 

@@ -12,8 +12,8 @@ export default class BookingsHistory extends React.Component {
             <ReactCSSTransitionGroup 
               transitionName="page-transition"
               transitionAppear={true}
-              transitionAppearTimeout={800}
-              transitionEnterTimeout={800}>
+              transitionAppearTimeout={400}
+              transitionEnterTimeout={400}>
                 <div>
                     <h1>My bookings</h1>
                     <WorkshopBookingsList />
