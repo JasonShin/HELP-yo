@@ -21,3 +21,9 @@
   color: white;
 
 }
+
+.button-reminder {
+  @extend .button;
+  background: #ff9b30;
+  color: white;
+}

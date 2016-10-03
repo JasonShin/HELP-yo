@@ -3,22 +3,40 @@
  */
 import { computed, observable, autorun } from 'mobx';
 import WorkshopBookingModel from '../models/WorkshopBookingModel';
-import {getWorkshopBookingFirebase} from '../api/workshop.api';
+import {getWorkshopBookingFirebaseByWorkshopId, getWorkshopBookingFirebaseByUserId} from '../api/workshopBookings.api';
 
 class WorkshopBookingsStore {
     @observable bookings = [];
     @observable single = null;
 
-    listenToSingleBooking(workshopID, userId) {
-        getWorkshopBookingFirebase({workshopId: workshopID, userId: userId}).on('value', (snapshot) => {
+    listenToSingleBookingByWorkshopId(workshopID, userId) {
+        getWorkshopBookingFirebaseByWorkshopId({workshopId: workshopID, userId: userId}).on('value', (snapshot) => {
 
             if(snapshot.val() !== null){
-
                 var data = snapshot.val();
                 this.single = new WorkshopBookingModel(
                     data.workshopId, data.userId
                 );
             }
+        });
+    }
+
+    listenToBookingsByUserId(userId) {
+        getWorkshopBookingFirebaseByUserId(userId).on('value', (snapshot) => {
+
+            //Emptying bookings array
+            this.bookings.empty();
+
+            if(snapshot.val() !== null) {
+                var data = snapshot.val().workshopId;
+                for(var key in data) {
+                    let currentBooking = data[key];
+                    this.bookings.push(new WorkshopBookingModel(
+                        data.workshopId,
+                        data.userId));
+                }
+            }
+
         });
     }
 

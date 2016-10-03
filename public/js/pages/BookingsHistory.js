@@ -1,4 +1,5 @@
 import React from 'react';
+import WorkshopBookingsList from '../components/WorkshopBookingsList';
 const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 export default class BookingsHistory extends React.Component {
@@ -15,7 +16,7 @@ export default class BookingsHistory extends React.Component {
               transitionEnterTimeout={800}>
                 <div>
                     <h1>My bookings</h1>
-
+                    <WorkshopBookingsList />
                 </div>
             </ReactCSSTransitionGroup>
         );

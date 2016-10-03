@@ -8,7 +8,7 @@ import {getFormattedRangeDate} from '../tools/Helpers';
 import WorkshopBookingsStore from '../stores/WorkshopBookingsStore';
 import FirebaseAPI from '../api/firebase.api';
 import Spinner from '../components/Spinner';
-import {createWorkshopBookingFirebase, deleteWorkshopBookingFirebase} from '../api/workshop.api';
+import {createWorkshopBookingFirebase, deleteWorkshopBookingFirebase, setReminderForBooking} from '../api/workshopBookings.api';
 
 @observer
 export default class Single extends React.Component {
@@ -40,7 +40,7 @@ export default class Single extends React.Component {
                     workshopId,
                     userEmail
                 );
-                WorkshopBookingsStore.listenToSingleBooking(workshopId, userEmail);
+                WorkshopBookingsStore.listenToSingleBookingByWorkshopId(workshopId, userEmail);
 
                 //Disable spinner since the component is authorized
                 this.setState({
@@ -85,19 +85,42 @@ export default class Single extends React.Component {
         }
     }
 
+    //TODO: Fix reminder feature => Throws 404 error
+    onClickReminder(e) {
+        e.preventDefault();
+        let reminderMethod = this.reminderMethod.value;
+        setReminderForBooking({
+            StartDate: '2016-10-03T18:47:00',
+            to: 'visualbbasic@gmail.com',
+            subject: 'Test email from frontend',
+            content: 'test!!'
+        });
+        //2012-07-31T17:00:00
+        console.log(this.props.store.single.StartDate);
+        switch(reminderMethod) {
+            case 'email':
+
+                break;
+
+            case 'sms':
+
+                break;
+        }
+
+    }
+
     render() {
         const singleInstance = this.props.store.single;
         const {spinnerEnabled} = this.state;
 
         let singleComponent = '';
 
-
-
         if(singleInstance instanceof WorkshopModel) {
 
             let formattedDate = getFormattedRangeDate(singleInstance.StartDate, singleInstance.EndDate, this.rangeDateDelimeter);
             let availables = singleInstance.maximum - singleInstance.BookingCount;
             let bookingButton = '';
+            let reminderButton = '';
 
             //Show cancel booking
             let singleBooking = WorkshopBookingsStore.single;
@@ -106,8 +129,19 @@ export default class Single extends React.Component {
 
             if(singleBooking !== null) {
                 bookingButton = (<button class="button-book-cancel" onClick={this.onBookCancelClick.bind(this)}>cancel booking</button>);
+                reminderButton = (
+                    <div class="reminder-methods">
+                        <select ref={(c) => this.reminderMethod = c}>
+                            <option value="">choose a reminder method</option>
+                            <option value="email">Email</option>
+                            <option value="sms">SMS</option>
+                        </select>
+                        <button class="button-reminder" onClick={this.onClickReminder.bind(this)}>Set reminder</button>
+                    </div>
+                );
             } else {
                 bookingButton = (<button class="button-book" onClick={this.onBookNowClick.bind(this)}>book now</button>);
+
             }
 
 
@@ -145,6 +179,9 @@ export default class Single extends React.Component {
                             <div class="single-controls-right">
                                 <div>
                                     {bookingButton}
+                                </div>
+                                <div>
+                                    {reminderButton}
                                 </div>
                             </div>
                         </div>
