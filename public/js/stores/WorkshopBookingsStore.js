@@ -11,7 +11,7 @@ class WorkshopBookingsStore {
 
     listenToSingleBookingByWorkshopId(workshopID, userId) {
         getWorkshopBookingFirebaseByWorkshopId({workshopId: workshopID, userId: userId}).on('value', (snapshot) => {
-
+            console.log('INFO: got value of workshop bookings by workshop ID')
             if(snapshot.val() !== null){
                 var data = snapshot.val();
                 this.single = new WorkshopBookingModel(
@@ -23,7 +23,7 @@ class WorkshopBookingsStore {
 
     listenToBookingsByUserId(userId) {
         getWorkshopBookingFirebaseByUserId(userId).on('value', (snapshot) => {
-
+            console.log('INFO: got value of workshop bookings by user ID')
             //Emptying bookings array
             this.bookings = [];
 

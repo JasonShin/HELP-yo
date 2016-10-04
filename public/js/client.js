@@ -42,7 +42,7 @@ ReactDOM.render(
             <Route path='workshopSets' component={WorkshopSetsPage} />
             <Route path='workshops' component={WorkshopsPage} />
             <Route path='workshop' component={WorkshopPage} />
-            <Route path="bookings/history" component={BookingsHistory} onEnter={FirebaseAPI.requireAuth}></Route>
+            <Route path="bookings/history" component={BookingsHistory}></Route>
         </Route>
     </Router>,
     app

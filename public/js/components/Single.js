@@ -34,12 +34,9 @@ export default class Single extends React.Component {
                 let workshopId = this.props.workshopId;
                 let userEmail = user.email;
 
+
                 //Bind Mobx listener to single observable
-                console.log(
-                    'listening with',
-                    workshopId,
-                    userEmail
-                );
+
                 WorkshopBookingsStore.listenToSingleBookingByWorkshopId(workshopId, userEmail);
 
                 //Disable spinner since the component is authorized
@@ -59,10 +56,19 @@ export default class Single extends React.Component {
     onBookNowClick(e) {
         e.preventDefault();
         if(this.state.authorized) {
+
+            //Required to easily figure out workshop details from bookings data stored on Firebase
+            let workshopTopic = this.props.workshopStore.single.topic;
+            let workshopDescription = this.props.workshopStore.single.description;
+            let workshopStartDate = this.props.workshopStore.single.StartDate;
+
             createWorkshopBookingFirebase({
                 workshopId: this.state.workshopId,
                 studentId: this.state.studentId,
                 userId: this.state.userEmail,
+                topic: workshopTopic,
+                description: workshopDescription,
+                StartDate: workshopStartDate
             });
         } else {
             console.log('You are not authorized to perform Booking action');
@@ -96,7 +102,7 @@ export default class Single extends React.Component {
             content: 'test!!'
         });
         //2012-07-31T17:00:00
-        console.log(this.props.store.single.StartDate);
+        console.log(this.props.workshopStore.single.StartDate);
         switch(reminderMethod) {
             case 'email':
 
@@ -109,12 +115,22 @@ export default class Single extends React.Component {
 
     }
 
+    //TODO: Fix naming convention spinnerEnabled => workshopSpinnerEnabled   singleInstance => workshopSingleInstance
     render() {
-        const singleInstance = this.props.store.single;
+        const singleInstance = this.props.workshopStore.single;
         const {spinnerEnabled} = this.state;
 
-        let singleComponent = '';
+        var bookingSpinnerEnabled = true;
 
+        //Find out if workshop booking single has been fetched
+        console.log('Workshop booking store single!');
+        if(WorkshopBookingsStore.single !== null) {
+            bookingSpinnerEnabled = false;
+        }
+
+
+        //Rendering Single component STARTS
+        let singleComponent = '';
         if(singleInstance instanceof WorkshopModel) {
 
             let formattedDate = getFormattedRangeDate(singleInstance.StartDate, singleInstance.EndDate, this.rangeDateDelimeter);
@@ -177,6 +193,7 @@ export default class Single extends React.Component {
                     <div class="single-controls">
                         <div>
                             <div class="single-controls-right">
+                                <Spinner visible={bookingSpinnerEnabled} />
                                 <div>
                                     {bookingButton}
                                 </div>
@@ -222,6 +239,7 @@ export default class Single extends React.Component {
                 </div>
             );
         }
+        //Rendering Single component ENDS
 
         return (
             <div class="container-medium">

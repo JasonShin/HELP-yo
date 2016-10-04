@@ -36,7 +36,7 @@ export default class Workshop extends React.Component {
 
         return (
             <div>
-                <Single store={WorkshopsStore} workshopId={workshopId} />
+                <Single workshopStore={WorkshopsStore} workshopId={workshopId} />
             </div>
         )
     }

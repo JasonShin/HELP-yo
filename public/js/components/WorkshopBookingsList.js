@@ -13,7 +13,6 @@ export default class WorkshopBookingsList extends React.Component {
 
     constructor() {
         super();
-        console.log('invoked workshop booking list!');
     }
 
     componentWillMount() {
@@ -31,11 +30,9 @@ export default class WorkshopBookingsList extends React.Component {
     render() {
 
         const bookingList = WorkshopBookingsStore.bookings.map((booking) => {
-            console.log('test!');
-            console.log(booking);
+
             return (
                 <div key={booking.workshopID}>
-                    yoyo
                     <div>{booking.workshopID}</div>
                     <div>{booking.studentID}</div>
                 </div>
@@ -43,7 +40,7 @@ export default class WorkshopBookingsList extends React.Component {
         });
 
         return (
-            <div>
+            <div class="container-small">
                 {bookingList}
             </div>
         );

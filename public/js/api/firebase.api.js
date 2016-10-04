@@ -12,7 +12,9 @@ export default class FirebaseAPI {
     static initialize() {
         //TODO: Find a way to validate firebase has initialized.
         //Possible issues => firebase context timeout
+        console.log('calling!');
         if(this.init === false) {
+
             firebase.initializeApp(firebaseConfig);
             this.init = true;
         }
@@ -20,6 +22,7 @@ export default class FirebaseAPI {
 
     // () => retreives initialized firebase context. Does not initiate already initiated context.
     static get context () {
+        console.log('calling!');
         this.initialize();
         window.firebase = firebase;
         return firebase;
