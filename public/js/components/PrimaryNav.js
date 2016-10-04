@@ -42,6 +42,29 @@ class PrimaryNav extends React.Component {
         this.props.router.push('/');
     }
 
+    getWorkshopSearchFilters() {
+        return (
+            <div>
+                <li>
+                    <span>topic</span>
+                </li>
+
+                <li>
+                    <span>date</span>
+                </li>
+
+                <li>
+                    <span>location</span>
+                </li>
+
+                <li>
+                    <span>tutor</span>
+                </li>
+            </div>
+        );
+    }
+
+
     render() {
 
         var authButton = '';
@@ -53,6 +76,11 @@ class PrimaryNav extends React.Component {
                 authButton = (<span class="auth-button-logout" onClick={this.handleLogoutUser.bind(this)}>Logout</span>);
             }
         }
+
+
+        //TODO: Work on from this point
+        var pathname = window.location.pathname;
+        console.log(pathname);
 
         //TODO: Find better looking overflow-y design than default one on desktop browsers
         return (
