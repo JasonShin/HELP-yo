@@ -10,7 +10,8 @@ class PrimaryNav extends React.Component {
 
         //Setting initial state null ensures no Login flicker
         this.state = {
-            loggedIn: null
+            loggedIn: null,
+            selectedMenu: null,
         };
     }
 
@@ -41,6 +42,14 @@ class PrimaryNav extends React.Component {
         logoutFirebase();
         this.props.router.push('/');
     }
+    
+    handleWorkshopsToggle() {
+        if (this.state.selectedMenu) {
+            this.state.selectedMenu = null;
+        } else {
+            this.state.selectedMenu = 'workshops';
+        }
+    }
 
     getWorkshopSearchFilters() {
         return (
@@ -64,6 +73,10 @@ class PrimaryNav extends React.Component {
         );
     }
 
+    handleWorkshopQueryChange() {
+        let workshopQuery = this.workshopQuery.value;
+        console.log(workshopQuery);
+    }
 
     render() {
 
@@ -77,36 +90,47 @@ class PrimaryNav extends React.Component {
             }
         }
 
+        var SecondaryNav = '';
+        if(this.state.selectedMenu === 'workshops'){
+            SecondaryNav = (
+                <div id="SecondaryNav">
+                    <input type="text" onChange={this.handleWorkshopQueryChange.bind(this)} class="form-control" ref={(c) =>{this.workshopQuery = c}} required />
+                    <label><i class="fa fa-search" aria-hidden="true"></i>Search all workshops{this.workshopQuery}</label>
+                </div>
+            );
+        }
         //TODO: Work on from this point
         var pathname = window.location.pathname;
         console.log(pathname);
 
         //TODO: Find better looking overflow-y design than default one on desktop browsers
         return (
-            <div id='PrimaryNav'>
+            <div>
+                <div id='PrimaryNav'>
+                    <div class="logo">
+                        <div class="logo-container">
+                            <Link to="/">
+                                <span class="logo-image"><img src="https://firebasestorage.googleapis.com/v0/b/helps-uts-project.appspot.com/o/UTS-logo.png?alt=media&token=df24fd5f-1c18-46d6-bb89-6e83cf47609f" alt="logo" /></span>
+                                <span class="logo-text">UTS:HELPS</span>
+                            </Link>
+                        </div>
+                    </div>
+                    <div class="menu-container">
+                        <div class="menu-main-container">
+                            <ul>
+                                <li class="motion-ripple-button"><Link onClick={this.handleWorkshopsToggle.bind(this)} to="/workshopSets">workshops</Link></li>
+                                <li><Link to="/bookings/history">my bookings</Link></li>
+                                <li><Link to="/profile">my info</Link></li>
+                                <li>faq's</li>
+                                <li>{authButton}</li>
+                            </ul>
+                        </div>
+                        <div class="menu-sub-container">
 
-                <div class="logo">
-                    <div class="logo-container">
-                        <Link to="/">
-                            <span class="logo-image"><img src="https://firebasestorage.googleapis.com/v0/b/helps-uts-project.appspot.com/o/UTS-logo.png?alt=media&token=df24fd5f-1c18-46d6-bb89-6e83cf47609f" alt="logo" /></span>
-                            <span class="logo-text">UTS:HELPS</span>
-                        </Link>
+                        </div>
                     </div>
                 </div>
-                <div class="menu-container">
-                    <div class="menu-main-container">
-                        <ul>
-                            <li class="motion-ripple-button"><Link to="/workshopSets">workshops</Link></li>
-                            <li><Link to="/bookings/history">my bookings</Link></li>
-                            <li><Link to="/profile">my info</Link></li>
-                            <li>faq's</li>
-                            <li>{authButton}</li>
-                        </ul>
-                    </div>
-                    <div class="menu-sub-container">
-
-                    </div>
-                </div>
+                {SecondaryNav}
             </div>
         );
     }
