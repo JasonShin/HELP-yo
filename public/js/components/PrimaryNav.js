@@ -77,7 +77,6 @@ class PrimaryNav extends React.Component {
             }
         }
 
-
         //TODO: Work on from this point
         var pathname = window.location.pathname;
         console.log(pathname);

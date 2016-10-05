@@ -23,7 +23,6 @@ class WorkshopBookingsStore {
 
     listenToBookingsByUserId(userId) {
         getWorkshopBookingFirebaseByUserId(userId).on('value', (snapshot) => {
-            console.log('INFO: got value of workshop bookings by user ID')
             //Emptying bookings array
             this.bookings = [];
 
@@ -31,10 +30,15 @@ class WorkshopBookingsStore {
                 var data = snapshot.val().workshopId;
                 for(var key in data) {
                     let currentBooking = data[key];
-                    console.log('pushing');
-                    console.log(currentBooking);
+
                     this.bookings.push(
-                        new WorkshopBookingModel(currentBooking.workshopId, currentBooking.userId)
+                        new WorkshopBookingModel(
+                            currentBooking.workshopId,
+                            currentBooking.userId,
+                            currentBooking.topic,
+                            currentBooking.description,
+                            currentBooking.StartDate,
+                        )
                     );
                 }
             }

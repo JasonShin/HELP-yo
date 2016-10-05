@@ -4,6 +4,9 @@ export default class WorkshopBookingModel {
     //@observable id;
     @observable workshopID;
     @observable studentID;
+    @observable topic;
+    @observable description;
+    @observable StartDate;
     @observable created;
     @observable creatorID;
     @observable modified;
@@ -13,10 +16,13 @@ export default class WorkshopBookingModel {
     @observable canceled;
     @observable attended;
 
-    constructor(workshopID, studentID, created, creatorID, modified, modifierID, archived, archiverID, canceled, attended) {
+    constructor(workshopID, studentID, topic, description, StartDate, created, creatorID, modified, modifierID, archived, archiverID, canceled, attended) {
     	//this.id = id;
     	this.workshopID = workshopID;
     	this.studentID = studentID;
+        this.topic = topic;
+        this.description = description;
+        this.StartDate = StartDate;
     	this.created = created;
     	this.creatorID = creatorID;
     	this.modified = modified;

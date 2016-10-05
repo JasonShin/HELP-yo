@@ -35,6 +35,7 @@ export default class WorkshopBookingsList extends React.Component {
                 <div key={booking.workshopID}>
                     <div>{booking.workshopID}</div>
                     <div>{booking.studentID}</div>
+                    <div>{booking.StartDate}</div>
                 </div>
             )
         });
