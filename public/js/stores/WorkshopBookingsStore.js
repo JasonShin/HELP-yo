@@ -11,12 +11,16 @@ class WorkshopBookingsStore {
 
     listenToSingleBookingByWorkshopId(workshopID, userId) {
         getWorkshopBookingFirebaseByWorkshopId({workshopId: workshopID, userId: userId}).on('value', (snapshot) => {
-            console.log('INFO: got value of workshop bookings by workshop ID')
+            console.log('INFO: got value of workshop bookings by workshop ID');
+            console.log(snapshot.val());
             if(snapshot.val() !== null){
+                console.log('INFO: ', snapshot.val());
                 var data = snapshot.val();
                 this.single = new WorkshopBookingModel(
                     data.workshopId, data.userId
                 );
+            } else {
+                this.single = '';
             }
         });
     }

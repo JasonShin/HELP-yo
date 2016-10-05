@@ -7,9 +7,12 @@ import {Link, withRouter} from 'react-router';
 import FirebaseAPI from '../api/firebase.api';
 import Spinner from '../components/Spinner';
 import WorkshopBookingsStore from '../stores/WorkshopBookingsStore';
+import Card from '../components/Card';
 
 @observer
 export default class WorkshopBookingsList extends React.Component {
+
+    rageDateDelimeter = ' - ';
 
     constructor() {
         super();
@@ -31,13 +34,22 @@ export default class WorkshopBookingsList extends React.Component {
 
         const bookingList = WorkshopBookingsStore.bookings.map((booking) => {
 
+
+            let formattedRangeDate = getFormattedRangeDate(booking.StartDate, workshop.EndDate, this.rageDateDelimeter);
+            let availables = workshop.maximum - workshop.BookingCount;
+            let monthDate = getMonthDate(booking.StartDate);
+
             return (
-                <div key={booking.workshopID}>
-                    <div>{booking.workshopID}</div>
-                    <div>{booking.studentID}</div>
-                    <div>{booking.StartDate}</div>
-                </div>
-            )
+                <Card
+                    key={workshop.WorkshopId}
+                    id={workshop.WorkshopId}
+                    title={workshop.topic} rangeDate={formattedRangeDate}
+                    maxSeats={maxSeats} availableSeats={availables}
+                    dateMeta={[monthDate.monthAsString,monthDate.date]}
+                    campus={workshop.campus}
+                    cardType="workshop"
+                />
+            );
         });
 
         return (

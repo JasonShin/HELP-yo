@@ -61,6 +61,10 @@ export default class Single extends React.Component {
             let workshopTopic = this.props.workshopStore.single.topic;
             let workshopDescription = this.props.workshopStore.single.description;
             let workshopStartDate = this.props.workshopStore.single.StartDate;
+            let workshopEndDate = this.props.workshopStore.single.EndDate;
+            let maxSeats = this.props.workshopStore.single.maximum;
+            let BookingCount = this.props.workshopStore.single.BookingCount;
+            let campus = this.props.workshopStore.single.campus;
 
             createWorkshopBookingFirebase({
                 workshopId: this.state.workshopId,
@@ -68,7 +72,11 @@ export default class Single extends React.Component {
                 userId: this.state.userEmail,
                 topic: workshopTopic,
                 description: workshopDescription,
-                StartDate: workshopStartDate
+                StartDate: workshopStartDate,
+                EndDate: workshopEndDate,
+                maxSeats,
+                BookingCount,
+                campus
             });
         } else {
             console.log('You are not authorized to perform Booking action');
@@ -119,12 +127,12 @@ export default class Single extends React.Component {
     render() {
         const singleInstance = this.props.workshopStore.single;
         const {spinnerEnabled} = this.state;
-
+        var singleBooking = WorkshopBookingsStore.single;
         var bookingSpinnerEnabled = true;
 
         //Find out if workshop booking single has been fetched
-        console.log('Workshop booking store single!');
-        if(WorkshopBookingsStore.single !== null) {
+        console.log('Workshop booking store single!  ' , WorkshopBookingsStore.single);
+        if(singleBooking !== null || singleBooking === '') {
             bookingSpinnerEnabled = false;
         }
 
@@ -139,11 +147,11 @@ export default class Single extends React.Component {
             let reminderButton = '';
 
             //Show cancel booking
-            let singleBooking = WorkshopBookingsStore.single;
+
             //Todo optimize this to properly wait for response from Firebase
 
 
-            if(singleBooking !== null) {
+            if(singleBooking !== null && singleBooking !== '') {
                 bookingButton = (<button class="button-book-cancel" onClick={this.onBookCancelClick.bind(this)}>cancel booking</button>);
                 reminderButton = (
                     <div class="reminder-methods">
