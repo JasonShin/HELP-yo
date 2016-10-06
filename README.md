@@ -16,6 +16,50 @@ $ webpack --watch
 
 Make sure you are in HELP project folder
 
+
+
+## Dependent config files
+There are few dependent config files requires in order to run the system.
+
+
+```javascript
+//config/config.js   => Required for HELP API and Firebase API
+
+module.exports = {
+	baseURL: %API_URL%,
+	appKey: %APP_KEY%,
+	firebaseURL: %FIREBASE_URL%,
+	titleEnding: ' - UTS HELPS',
+	webpackEnv: %CURRENT_DEV_ENVIRONEMENT (development || production)%
+};
+
+```
+
+
+```javascript
+
+//config/firebase.config.js   => required for firebase authentication
+module.exports = {
+    apiKey: %API_KEY%,
+    authDomain: %AUTH_DOMAIN%,
+    databaseURL: %DATEBASE_URL%,
+    storageBucket: %STORAGE_BUCKET%,
+};
+
+```
+
+
+```javascript
+//.firebaserc    =>  firebase hosting config
+
+{
+  "projects": {
+    "default": %PROJECT_NAME_FIREBASE_CONSOLE%
+  }
+}
+```
+
+
 ### Tech
 
 Help current uses several technologies
