@@ -1,0 +1,18 @@
+.menu-filter-container {
+  border: 0px solid black;
+
+  .menu-container {
+    .menu-main-container {
+      //Black navigation colour for filter menus
+      a {
+        color: black;
+      }
+
+      a:visited {
+        color: black;
+      }
+    }
+  }
+
+
+}

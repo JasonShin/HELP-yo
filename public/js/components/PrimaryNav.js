@@ -5,6 +5,8 @@ import {logoutFirebase} from '../api/student.api';
 
 class PrimaryNav extends React.Component {
 
+    pathWorkshops = '/workshops';
+
     constructor() {
         super();
 
@@ -53,9 +55,9 @@ class PrimaryNav extends React.Component {
 
     getWorkshopSearchFilters() {
         return (
-            <div>
+            <ul>
                 <li>
-                    <span>topic</span>
+                    <span><Link to="/workshopSets">topic</Link></span>
                 </li>
 
                 <li>
@@ -69,7 +71,7 @@ class PrimaryNav extends React.Component {
                 <li>
                     <span>tutor</span>
                 </li>
-            </div>
+            </ul>
         );
     }
 
@@ -90,18 +92,14 @@ class PrimaryNav extends React.Component {
             }
         }
 
-        var SecondaryNav = '';
-        if(this.state.selectedMenu === 'workshops'){
-            SecondaryNav = (
-                <div id="SecondaryNav">
-                    <input type="text" onChange={this.handleWorkshopQueryChange.bind(this)} class="form-control" ref={(c) =>{this.workshopQuery = c}} required />
-                    <label><i class="fa fa-search" aria-hidden="true"></i>Search all workshops{this.workshopQuery}</label>
-                </div>
-            );
-        }
         //TODO: Work on from this point
+        var filter = '';
         var pathname = window.location.pathname;
-        console.log(pathname);
+
+        //Workshops page filter
+        if(pathname === this.pathWorkshops) {
+            filter = this.getWorkshopSearchFilters();
+        }
 
         //TODO: Find better looking overflow-y design than default one on desktop browsers
         return (
@@ -125,12 +123,17 @@ class PrimaryNav extends React.Component {
                                 <li>{authButton}</li>
                             </ul>
                         </div>
-                        <div class="menu-sub-container">
 
+                    </div>
+
+                </div>
+                <div class="menu-filter-container">
+                    <div class="menu-container">
+                        <div class="menu-main-container">
+                            {filter}
                         </div>
                     </div>
                 </div>
-                {SecondaryNav}
             </div>
         );
     }
