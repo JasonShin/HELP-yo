@@ -3,6 +3,7 @@ import {ReactRouter, Router, Link, withRouter} from 'react-router';
 import FirebaseAPI from '../api/firebase.api';
 import {logoutFirebase} from '../api/student.api';
 import WorkshopsStore from '../stores/WorkshopsStore';
+import { DateField, Calendar } from 'react-date-picker';
 
 class PrimaryNav extends React.Component {
 
@@ -15,7 +16,9 @@ class PrimaryNav extends React.Component {
         this.state = {
             loggedIn: null,
             selectedMenu: null,
-            currentFilter: ''
+            currentFilter: '',
+            workshopStartDate: '',
+            workshopEndDate: ''
         };
     }
 
@@ -55,6 +58,9 @@ class PrimaryNav extends React.Component {
         }
     }
 
+    /************************
+    * On Filter Click STARTS
+    *************************/
     onClickWorkshopTopicFilter(e) {
         e.preventDefault();
         this.setState({
@@ -83,6 +89,10 @@ class PrimaryNav extends React.Component {
         });
     }
 
+    /************************
+     * On Filter Click ENDS
+     *************************/
+
     onWorkshopTopicSearchChange(e) {
         e.preventDefault();
         WorkshopsStore.topicFilter = this.topicSearch.value;
@@ -91,6 +101,16 @@ class PrimaryNav extends React.Component {
     onWorkshopLocationSearchChange(e) {
         e.preventDefault();
         //WorkshopsStore.topicFilter = this.locationSearch.value;
+    }
+
+    onStartDateChange(dateString, { dateMoment, timestamp }) {
+        console.log(dateString);
+
+    }
+
+    onEndDateChange(dateString, { dateMoment, timestamp }) {
+        console.log(dateString);
+
     }
 
     //TODO: Make this working so it can apply multiple query paramsters
@@ -121,7 +141,28 @@ class PrimaryNav extends React.Component {
                 </div>
             );
         } else if(currentFilter === 'date') {
-            filter = (<div>Date Filter showing!</div>);
+            filter = (
+                <div class="search-group search-group-date">
+                    <div>
+                        <label>Start Date</label>
+                        <Calendar
+                            dateFormat="YYYY-MM-DD"
+                            onChange={this.onStartDateChange.bind(this)}
+                            ref={(c) => {this.workshopStartDate = c}}
+                        />
+                    </div>
+
+                    <div>
+                        <label>End Date</label>
+                        <Calendar
+                            dateFormat="YYYY-MM-DD"
+                            onChange={this.onEndDateChange.bind(this)}
+                            ref={(c) => {this.workshopEndDate = c}}
+                        />
+                    </div>
+
+                </div>
+            );
         } else if(currentFilter === 'location') {
             filter = (
                 <div class="search-bar">

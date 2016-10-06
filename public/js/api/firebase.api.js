@@ -39,7 +39,7 @@ export default class FirebaseAPI {
             replace({
                 pathname: '/login',
                 state: { nextPathname: nextState.location.pathname }
-            })
+            });
         }
     }
 

@@ -7,4 +7,17 @@
     border:none;
     border-bottom:1px solid #757575;
   }
+
+}
+
+.search-group-date {
+  overflow: hidden;
+  >div {
+    > label {
+      width: 100%;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      display: block;
+    }
+  }
 }

@@ -26,7 +26,25 @@ class WorkshopsStore {
             });
         }).catch((error) => {
             console.log(error);
-        })
+        });
+    }
+
+    //TODO: Search by StartStartDate and StartEndDate
+    fetchWorkshopsByStartEndDate(workshopSetId, StartDate, EndDate) {
+        searchWorkshops({
+            pageSize: 150,
+            workshopSetId: workshopSetId
+        }).then((response) => {
+
+            console.log('Workshop data fetched');
+            console.log(response.data.Results);
+
+            this.workshops = response.data.Results.map((data) => {
+                return this.mapDataToModel(data);
+            });
+        }).catch((error) => {
+            console.log(error);
+        });
     }
 
     fetchMoreWorkshops() {
