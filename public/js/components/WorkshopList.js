@@ -29,7 +29,7 @@ export default class WorkshopList extends React.Component {
 
 
     render() {
-        const workshopsList = this.props.store.workshops.map( (workshop) => {
+        const workshopsList = this.props.store.filteredWorkshops.map( (workshop) => {
 
             let formattedRangeDate = getFormattedRangeDate(workshop.StartDate, workshop.EndDate, this.rageDateDelimeter);
             let maxSeats = workshop.maximum;

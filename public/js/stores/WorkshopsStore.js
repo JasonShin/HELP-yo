@@ -7,12 +7,13 @@ import { searchWorkshops } from '../api/workshop.api';
 
 class WorkshopsStore {
     @observable workshops = [];
+    @observable topicFilter = '';
     @observable single = null;
 
     //TODO: Complete this when Workshop API is working
     fetchWorkshops(studentId, workshopSetId) {
         searchWorkshops({
-
+            pageSize: 100,
             workshopSetId: workshopSetId
         }).then((response) => {
 
@@ -25,6 +26,20 @@ class WorkshopsStore {
         }).catch((error) => {
             console.log(error);
         })
+    }
+
+    @computed get filteredWorkshops() {
+        var topicMatcher = new RegExp(this.topicFilter, 'i');
+        console.log('INFO: Topic filter changed ', this.topicFilter, this.topicFilter == '' );
+        if(this.topicFilter == '') {
+            return this.workshops;
+        }
+
+        return this.workshops.filter(
+            (workshop) => {
+                return topicMatcher.test(workshop.topic);
+            }
+        );
     }
 
     getPageNum(workshopId) {

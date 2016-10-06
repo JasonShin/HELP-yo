@@ -2,6 +2,7 @@ import React from 'react';
 import {ReactRouter, Router, Link, withRouter} from 'react-router';
 import FirebaseAPI from '../api/firebase.api';
 import {logoutFirebase} from '../api/student.api';
+import WorkshopsStore from '../stores/WorkshopsStore';
 
 class PrimaryNav extends React.Component {
 
@@ -54,6 +55,13 @@ class PrimaryNav extends React.Component {
         }
     }
 
+    onClickWorkshopTopicFilter(e) {
+        e.preventDefault();
+        this.setState({
+            currentFilter: 'topic'
+        });
+    }
+
     onClickWorkshopDateFilter(e) {
         e.preventDefault();
         this.setState({
@@ -75,16 +83,51 @@ class PrimaryNav extends React.Component {
         });
     }
 
-    getWorkshopSearchFilters() {
+    onWorkshopTopicSearchChange(e) {
+        e.preventDefault();
+        WorkshopsStore.topicFilter = this.topicSearch.value;
+    }
 
+    onWorkshopLocationSearchChange(e) {
+        e.preventDefault();
+        //WorkshopsStore.topicFilter = this.locationSearch.value;
+    }
+
+    //TODO: Make this working so it can apply multiple query paramsters
+    workshopModifyQueryParams(newParams) {
+        //New query params
+
+
+        //Existing query params
+        var objParams = {};
+
+        var params = window.location.search;
+        var paramExist = window.location.search.indexOf(newParams.key);
+        if(paramExist > -1) {
+            var test = params.replace(/newParams\.key=[\w\d]*]/g,newParams.key+'='+newParams.val);
+        }
+
+    }
+
+    getWorkshopSearchFilters() {
         const {currentFilter} = this.state;
         //var dateFilter, locationFilter, tutorFilter = '';
         var filter = '';
 
-        if(currentFilter === 'date') {
+        if(currentFilter === 'topic') {
+            filter = (
+                <div class="search-bar">
+                    <input type="text" onChange={this.onWorkshopTopicSearchChange.bind(this)} ref={(c) => this.topicSearch = c} />
+                </div>
+            );
+        } else if(currentFilter === 'date') {
             filter = (<div>Date Filter showing!</div>);
         } else if(currentFilter === 'location') {
-            filter = (<div>Location filter showing</div>);
+            filter = (
+                <div class="search-bar">
+                    <input type="text" onChange={this.onWorkshopLocationSearchChange.bind(this)} ref={(c) => this.locationSearch = c} />
+                </div>
+            );
         } else if(currentFilter === 'tutor') {
             filter = (<div>Tutor filter!</div>);
         }
@@ -93,7 +136,7 @@ class PrimaryNav extends React.Component {
             <div>
                 <ul class="filters-control">
                     <li>
-                        <span><Link to="/workshopSets">topic</Link></span>
+                        <span onClick={this.onClickWorkshopTopicFilter.bind(this)}>topic</span>
                     </li>
 
                     <li>
@@ -119,7 +162,6 @@ class PrimaryNav extends React.Component {
     }
 
     render() {
-
         var authButton = '';
 
         if(this.state.loggedIn !== null) {
