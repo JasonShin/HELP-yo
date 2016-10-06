@@ -116,7 +116,7 @@ class PrimaryNav extends React.Component {
 
         if(currentFilter === 'topic') {
             filter = (
-                <div class="search-bar">
+                <div class="search-group">
                     <input type="text" onChange={this.onWorkshopTopicSearchChange.bind(this)} ref={(c) => this.topicSearch = c} />
                 </div>
             );

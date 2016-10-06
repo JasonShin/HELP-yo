@@ -8,6 +8,7 @@ import {Link, withRouter} from 'react-router';
 import Spinner from '../components/Spinner';
 import Card from '../components/Card';
 import {getFormattedRangeDate, getMonthDate} from '../tools/Helpers';
+import WorkshopsStore from '../stores/WorkshopsStore';
 
 @observer
 export default class WorkshopList extends React.Component {
@@ -26,6 +27,9 @@ export default class WorkshopList extends React.Component {
         this.props.store.fetchWorkshops(null, workshopSetId);
     }
 
+    componentWillUnmount() {
+        WorkshopsStore.topicFilter = '';
+    }
 
 
     render() {

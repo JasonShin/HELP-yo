@@ -11,9 +11,10 @@ class WorkshopsStore {
     @observable single = null;
 
     //TODO: Complete this when Workshop API is working
+    //NOTE: Inital fetching
     fetchWorkshops(studentId, workshopSetId) {
         searchWorkshops({
-            pageSize: 100,
+            pageSize: 150,
             workshopSetId: workshopSetId
         }).then((response) => {
 
@@ -26,6 +27,10 @@ class WorkshopsStore {
         }).catch((error) => {
             console.log(error);
         })
+    }
+
+    fetchMoreWorkshops() {
+
     }
 
     @computed get filteredWorkshops() {

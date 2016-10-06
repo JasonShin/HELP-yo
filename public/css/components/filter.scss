@@ -4,12 +4,21 @@
   .menu-container {
     .menu-main-container {
       //Black navigation colour for filter menus
+      span {
+        cursor: pointer;
+      }
+
       a {
         color: black;
       }
       
       a:visited {
         color: black;
+      }
+
+      //UL
+      .filters-control {
+        display: inline-block;
       }
     }
   }
