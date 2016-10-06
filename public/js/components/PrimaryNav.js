@@ -14,6 +14,7 @@ class PrimaryNav extends React.Component {
         this.state = {
             loggedIn: null,
             selectedMenu: null,
+            currentFilter: ''
         };
     }
 
@@ -53,25 +54,62 @@ class PrimaryNav extends React.Component {
         }
     }
 
+    onClickWorkshopDateFilter(e) {
+        e.preventDefault();
+        this.setState({
+            currentFilter: 'date'
+        });
+    }
+
+    onClickWorkshopLocationFilter(e) {
+        e.preventDefault();
+        this.setState({
+            currentFilter: 'location'
+        });
+    }
+
+    onClickWorkshopTutorFilter(e) {
+        e.preventDefault();
+        this.setState({
+            currentFilter: 'tutor'
+        });
+    }
+
     getWorkshopSearchFilters() {
+
+        const {currentFilter} = this.state;
+        //var dateFilter, locationFilter, tutorFilter = '';
+        var filter = '';
+
+        if(currentFilter === 'date') {
+            filter = (<div>Date Filter showing!</div>);
+        } else if(currentFilter === 'location') {
+            filter = (<div>Location filter showing</div>);
+        } else if(currentFilter === 'tutor') {
+            filter = (<div>Tutor filter!</div>);
+        }
+
         return (
-            <ul>
-                <li>
-                    <span><Link to="/workshopSets">topic</Link></span>
-                </li>
+            <div>
+                <ul class="filters-control">
+                    <li>
+                        <span><Link to="/workshopSets">topic</Link></span>
+                    </li>
 
-                <li>
-                    <span>date</span>
-                </li>
+                    <li>
+                        <span class="filter-control-date" onClick={this.onClickWorkshopDateFilter.bind(this)}>date</span>
+                    </li>
 
-                <li>
-                    <span>location</span>
-                </li>
+                    <li>
+                        <span onClick={this.onClickWorkshopLocationFilter.bind(this)}>location</span>
+                    </li>
 
-                <li>
-                    <span>tutor</span>
-                </li>
-            </ul>
+                    <li>
+                        <span onClick={this.onClickWorkshopTutorFilter.bind(this)}>tutor</span>
+                    </li>
+                </ul>
+                {filter}
+            </div>
         );
     }
 
