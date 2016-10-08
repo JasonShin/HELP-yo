@@ -45,7 +45,7 @@ export default class WorkshopBookingsList extends React.Component {
                     key={booking.WorkshopId}
                     id={booking.WorkshopId}
                     title={booking.topic} rangeDate={formattedRangeDate}
-                    maxSeats={booking} availableSeats={availables}
+                    maxSeats={booking.maximum} availableSeats={availables}
                     dateMeta={[monthDate.monthAsString,monthDate.date]}
                     campus={booking.campus}
                     cardType="workshop"
@@ -54,8 +54,10 @@ export default class WorkshopBookingsList extends React.Component {
         });
 
         return (
-            <div class="container-small">
+            <div class="container-cards-list container-small">
+
                 {bookingList}
+
             </div>
         );
     }

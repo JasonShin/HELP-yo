@@ -18,7 +18,7 @@ import Login from './pages/Login';
 import RegisterPage from './pages/RegisterPage';
 import MyProfile from './pages/MyProfile';
 import SessionTypesPage from './pages/SessionTypesPage';
-import BookingsHistory from './pages/BookingsHistory';
+import Bookings from './pages/Bookings';
 import SessionsPage from './pages/SessionsPage';
 import WorkshopSetsPage from './pages/WorkshopSetsPage';
 import WorkshopsPage from './pages/WorkshopsPage';
@@ -42,7 +42,7 @@ ReactDOM.render(
             <Route path='workshopSets' component={WorkshopSetsPage} />
             <Route path='workshops' component={WorkshopsPage} />
             <Route path='workshop' component={WorkshopPage} />
-            <Route path="bookings/history" component={BookingsHistory}></Route>
+            <Route path="bookings/" component={Bookings}></Route>
         </Route>
     </Router>,
     app
