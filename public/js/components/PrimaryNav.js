@@ -17,8 +17,8 @@ class PrimaryNav extends React.Component {
             loggedIn: null,
             selectedMenu: null,
             currentFilter: '',
-            workshopStartDate: '',
-            workshopEndDate: ''
+            workshopStartStartDate: '',
+            workshopStartEndDate: ''
         };
     }
 
@@ -103,29 +103,34 @@ class PrimaryNav extends React.Component {
         //WorkshopsStore.topicFilter = this.locationSearch.value;
     }
 
-    onStartDateChange(dateString, { dateMoment, timestamp }) {
+    onStartStartDateChange(dateString, { dateMoment, timestamp }) {
         console.log(dateString);
 
+        this.workshopModifyQueryParams('workshopSetId', dateString);
     }
 
-    onEndDateChange(dateString, { dateMoment, timestamp }) {
+    onStartEndDateChange(dateString, { dateMoment, timestamp }) {
         console.log(dateString);
-
+        /*this.setState({
+            workshopStartEndDate: dateString
+        });*/
     }
 
     //TODO: Make this working so it can apply multiple query paramsters
-    workshopModifyQueryParams(newParams) {
-        //New query params
-
-
-        //Existing query params
-        var objParams = {};
-
-        var params = window.location.search;
-        var paramExist = window.location.search.indexOf(newParams.key);
+    workshopModifyQueryParams(param, val) {
+        console.log(param, val)
+        var paramKeyTest = new RegExp(param, 'g');
+        var currentParams = window.location.search;
+        if(paramKeyTest.test(currentParams)){
+            var targetParamPattern = new RegExp(param+'\\=[\\d\\w\\s\\/\?\\-\\*]*', 'g');
+            var test = currentParams.replace(targetParamPattern, param + '=' + val);
+            console.log(test);
+        }
+        console.log(currentParams);
+        /*var paramExist = window.location.search.indexOf(newParams.key);
         if(paramExist > -1) {
             var test = params.replace(/newParams\.key=[\w\d]*]/g,newParams.key+'='+newParams.val);
-        }
+        }*/
 
     }
 
@@ -147,7 +152,7 @@ class PrimaryNav extends React.Component {
                         <label>Start Date</label>
                         <Calendar
                             dateFormat="YYYY-MM-DD"
-                            onChange={this.onStartDateChange.bind(this)}
+                            onChange={this.onStartStartDateChange.bind(this)}
                             ref={(c) => {this.workshopStartDate = c}}
                         />
                     </div>
@@ -156,7 +161,7 @@ class PrimaryNav extends React.Component {
                         <label>End Date</label>
                         <Calendar
                             dateFormat="YYYY-MM-DD"
-                            onChange={this.onEndDateChange.bind(this)}
+                            onChange={this.onStartEndDateChange.bind(this)}
                             ref={(c) => {this.workshopEndDate = c}}
                         />
                     </div>
