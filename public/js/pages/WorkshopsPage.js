@@ -17,6 +17,7 @@ export default class Workshops extends React.Component {
     render() {
         const {workshopSetId} = this.props.location.query;
 
+        console.log('testing');
 
         return (
             <ReactCSSTransitionGroup

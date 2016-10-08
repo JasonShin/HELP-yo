@@ -106,32 +106,30 @@ class PrimaryNav extends React.Component {
     onStartStartDateChange(dateString, { dateMoment, timestamp }) {
         console.log(dateString);
 
-        this.workshopModifyQueryParams('workshopSetId', dateString);
+        this.workshopModifyQueryParams('StartDtBegin', dateString);
     }
 
     onStartEndDateChange(dateString, { dateMoment, timestamp }) {
         console.log(dateString);
-        /*this.setState({
-            workshopStartEndDate: dateString
-        });*/
+        this.workshopModifyQueryParams('StartDtEnd', dateString);
+
     }
 
     //TODO: Make this working so it can apply multiple query paramsters
     workshopModifyQueryParams(param, val) {
-        console.log(param, val)
+
         var paramKeyTest = new RegExp(param, 'g');
         var currentParams = window.location.search;
         if(paramKeyTest.test(currentParams)){
+            //Param exist so replacing it with new value
             var targetParamPattern = new RegExp(param+'\\=[\\d\\w\\s\\/\?\\-\\*]*', 'g');
-            var test = currentParams.replace(targetParamPattern, param + '=' + val);
-            console.log(test);
+            var edittedParam = currentParams.replace(targetParamPattern, param + '=' + val);
+            this.props.router.push('/workshops'+edittedParam);
+        } else {
+            //TODO: Refactor this
+            currentParams += ('&' + param + '=' + val);
+            this.props.router.push('/workshops'+currentParams);
         }
-        console.log(currentParams);
-        /*var paramExist = window.location.search.indexOf(newParams.key);
-        if(paramExist > -1) {
-            var test = params.replace(/newParams\.key=[\w\d]*]/g,newParams.key+'='+newParams.val);
-        }*/
-
     }
 
     getWorkshopSearchFilters() {
