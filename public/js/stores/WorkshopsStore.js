@@ -30,10 +30,19 @@ class WorkshopsStore {
     }
 
     //TODO: Search by StartStartDate and StartEndDate
-    fetchWorkshopsByStartEndDate(workshopSetId, StartDate, EndDate) {
+    //TODO: startingDtBegin=2013-04-10T10:00&startingDtEnd=2013-04-17T10:00
+    //
+    fetchWorkshopsByStartEndDate(workshopSetId, StartDtBegin, StartDtEnd) {
+
+        console.log('INFO: Fetching by date: ' , workshopSetId, StartDtBegin, StartDtEnd);
+        var newStartDtBegin = StartDtBegin+'T00:00:00';
+        var newStartDtEnd = StartDtEnd+'T00:00:00';
+
         searchWorkshops({
             pageSize: 150,
-            workshopSetId: workshopSetId
+            workshopSetId: workshopSetId,
+            startingDtBegin: newStartDtBegin,
+            startingDtEnd: newStartDtEnd
         }).then((response) => {
 
             console.log('Workshop data fetched');
@@ -47,9 +56,7 @@ class WorkshopsStore {
         });
     }
 
-    fetchMoreWorkshops() {
 
-    }
 
     @computed get filteredWorkshops() {
         var topicMatcher = new RegExp(this.topicFilter, 'i');

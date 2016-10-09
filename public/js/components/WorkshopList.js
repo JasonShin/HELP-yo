@@ -42,6 +42,9 @@ export default class WorkshopList extends React.Component {
     //TODO: Use react router built in feature to replace this procedure or put this in helper to make it reusable
     componentWillReceiveProps(nextProps) {
         var newStates = this.getCurrentParamsObject();
+
+        WorkshopsStore.fetchWorkshopsByStartEndDate(newStates.workshopSetId, newStates.StartDtBegin, newStates.StartDtEnd);
+
         this.setState(newStates);
     }
 

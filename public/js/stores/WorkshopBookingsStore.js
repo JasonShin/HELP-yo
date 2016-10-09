@@ -9,16 +9,26 @@ import {getWorkshopBookingFirebaseByWorkshopId, getWorkshopBookingFirebaseByUser
 class WorkshopBookingsStore {
     @observable bookings = [];
     @observable StartDtBegin = null;
-    @observable StartDtEnd = null;
+    @observable showFuture = false;
     @observable single = null;
 
     @computed get filteredBookings() {
+        var currentDate = moment();
+        if(this.showFuture === false) {
+            return this.bookings.filter( (booking) =>{
+                var bookingEndDate = moment(booking.EndDate);
+                return bookingEndDate.isBefore(currentDate);
+            } );
+        } else {
+            return this.bookings.filter( (booking) =>{
+                var bookingEndDate = moment(booking.EndDate);
+                return bookingEndDate.isAfter(currentDate);
+            } );
+        }
 
-        return bookings.filter( (booking) => {
-            var currentStartDtBegin = moment(booking.StartDtBegin);
-            return currentStartDtBegin.isAfter(this.StartDtBegin);
-        } );
     }
+
+
 
     listenToSingleBookingByWorkshopId(workshopID, userId) {
         getWorkshopBookingFirebaseByWorkshopId({workshopId: workshopID, userId: userId}).on('value', (snapshot) => {
@@ -40,7 +50,7 @@ class WorkshopBookingsStore {
         getWorkshopBookingFirebaseByUserId(userId).on('value', (snapshot) => {
             //Emptying bookings array
             this.bookings = [];
-
+            
             if(snapshot.val() !== null) {
                 var data = snapshot.val().workshopId;
                 for(var key in data) {
@@ -53,10 +63,12 @@ class WorkshopBookingsStore {
                             currentBooking.topic,
                             currentBooking.description,
                             currentBooking.StartDate,
+                            currentBooking.EndDate,
                             currentBooking.campus
                         )
                     );
                 }
+
             }
 
         });

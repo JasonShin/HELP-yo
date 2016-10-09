@@ -6,6 +6,7 @@ import { observer } from 'mobx-react';
 import WorkshopModel from '../models/WorkshopModel';
 import {getFormattedRangeDate} from '../tools/Helpers';
 import WorkshopBookingsStore from '../stores/WorkshopBookingsStore';
+import StudentStore from '../stores/StudentStore';
 import FirebaseAPI from '../api/firebase.api';
 import Spinner from '../components/Spinner';
 import {createWorkshopBookingFirebase, deleteWorkshopBookingFirebase, setReminderForBooking} from '../api/workshopBookings.api';
@@ -34,10 +35,10 @@ export default class Single extends React.Component {
                 let workshopId = this.props.workshopId;
                 let userEmail = user.email;
 
-
                 //Bind Mobx listener to single observable
-
                 WorkshopBookingsStore.listenToSingleBookingByWorkshopId(workshopId, userEmail);
+
+                StudentStore.fetchStudent(userEmail);
 
                 //Disable spinner since the component is authorized
                 this.setState({
@@ -50,8 +51,8 @@ export default class Single extends React.Component {
                 console.log('<Single /> is not authorized!');
             }
         });
-
     }
+
 
     onBookNowClick(e) {
         e.preventDefault();
@@ -100,27 +101,44 @@ export default class Single extends React.Component {
     }
 
     //TODO: Fix reminder feature => Throws 404 error
+    //TODO: get these working
     onClickReminder(e) {
         e.preventDefault();
         let reminderMethod = this.reminderMethod.value;
-        setReminderForBooking({
-            StartDate: '2016-11-09T13:41:10',
-            to: 'visualbbasic@gmail.com',
-            subject: 'Test email from frontend',
-            content: 'test!!'
-        });
-        //2012-07-31T17:00:00
-        console.log(this.props.workshopStore.single.StartDate);
+        let reminderTime = this.reminderTime.value;
+
+        console.log(reminderMethod);
+        console.log(reminderTime);
+        console.log(StudentStore.student);
 
         switch(reminderMethod) {
             case 'email':
-
+                this.setEmailNotification(reminderTime);
                 break;
 
             case 'sms':
 
                 break;
         }
+
+    }
+
+    setEmailNotification(reminderTime) {
+        switch(reminderTime) {
+            case '30second':
+                break;
+            case '2min':
+                break;
+            case '30min':
+                break;
+        }
+
+        setReminderForBooking({
+            StartDate: '2016-11-09T22:22:10',
+            to: this.state.userEmail,
+            subject: 'Test email from frontend',
+            content: 'test!!'
+        });
 
     }
 
@@ -156,11 +174,24 @@ export default class Single extends React.Component {
                 bookingButton = (<button class="button-book-cancel" onClick={this.onBookCancelClick.bind(this)}>cancel booking</button>);
                 reminderButton = (
                     <div class="reminder-methods">
-                        <select ref={(c) => this.reminderMethod = c}>
-                            <option value="">choose a reminder method</option>
-                            <option value="email">Email</option>
-                            <option value="sms">SMS</option>
-                        </select>
+                        <div class="form-group-select">
+                            <label>choose a reminder method</label>
+                            <select ref={(c) => this.reminderMethod = c}>
+                                <option value="">--- options ---</option>
+                                <option value="email">Email</option>
+                                <option value="sms">SMS</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group-select">
+                            <label>reminder time</label>
+                            <select ref={(c) => this.reminderTime = c}>
+                                <option value="">--- options ---</option>
+                                <option value="30second">30 seconds before</option>
+                                <option value="2min">2 minute before</option>
+                                <option value="30min">30 minute before</option>
+                            </select>
+                        </div>
                         <button class="button-reminder" onClick={this.onClickReminder.bind(this)}>Set reminder</button>
                     </div>
                 );
@@ -168,7 +199,6 @@ export default class Single extends React.Component {
                 bookingButton = (<button class="button-book" onClick={this.onBookNowClick.bind(this)}>book now</button>);
 
             }
-
 
             singleComponent = (
 

@@ -241,7 +241,7 @@ class PrimaryNav extends React.Component {
                         <div class="menu-main-container">
                             <ul>
                                 <li class="motion-ripple-button"><Link onClick={this.handleWorkshopsToggle.bind(this)} to="/workshopSets">workshops</Link></li>
-                                <li><Link to="/bookings">my bookings</Link></li>
+                                <li><Link to="/bookings/past">my bookings</Link></li>
                                 <li><Link to="/profile">my info</Link></li>
                                 <li>faq's</li>
                                 <li>{authButton}</li>

@@ -14,8 +14,6 @@ class StudentStore {
         getStudentFirebaseProfile(email).on('value', (snapshot) => {
             var rawData = snapshot.val();
             //TODO: Put this in model later
-            console.log('INFO: FOUND FROM STORE:');
-            console.log(rawData);
             this.student = rawData;
         });
     }

@@ -2,4 +2,19 @@
   > .card {
     width: 100% !important;
   }
+
+  .bookings-filter {
+    overflow: hidden;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    > span {
+      float :left;
+      width: 50%;
+      cursor: pointer;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+  }
 }

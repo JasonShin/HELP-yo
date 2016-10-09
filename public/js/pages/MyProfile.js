@@ -43,20 +43,22 @@ class MyProfile extends React.Component {
         e.preventDefault();
 
         let StudentId = this.studentIdField.value;
+        let fullname = this.fullNameField.value;
+        let preferredOtherName = this.otherNameField.value;
         let DateOfBirth = this.currentDOBString;
         let Degree = this.degreeField.value;
         let Status = this.statusField.value;
         let FirstLanguage = this.firstLanguageField.value;
         let CountryOrigin = this.countryOfOriginField.value;
+        let Gender = this.genderField.value;
         let CreatorId = StudentId;
 
-        setStudentProfile(StudentId, DateOfBirth, Degree, Status, FirstLanguage, CountryOrigin, CreatorId)
+        setStudentProfile(StudentId, DateOfBirth, fullname, preferredOtherName, Degree, Status, FirstLanguage, CountryOrigin, Gender, CreatorId)
             .then((response) => {
                 console.log(response);
             }).catch((error) => {
                 console.log(error);
             });
-        //setStudentProfile(StudentId, DateOfBirth, Degree, Status, FirstLanguage, CountryOrigin, CreatorId);
     }
 
     render() {
@@ -64,9 +66,79 @@ class MyProfile extends React.Component {
             width: '50%'
         };
 
-        console.log('SINGLE FOUND');
-        console.log(StudentStore.student);
-        let currentStudent = StudentStore.student;
+        var currentStudent = StudentStore.student;
+        var StudentId = currentStudent.StudentId;
+        var fullname  = currentStudent.fullname;
+        var preferredOtherName = currentStudent.preferredOtherName;
+        var status = currentStudent.Status;
+        var degree = currentStudent.Degree;
+        var firstLanguage = currentStudent.FirstLanguage;
+        var countryOrigin = currentStudent.CountryOrigin;
+
+        var StudentIdField = (<input type="text" class="form-control" ref={(c) =>{this.studentIdField = c}} required="true" />);
+        var fullnameField = (<input type="text" class="form-control" ref={(c) =>{this.fullNameField = c}} required="true" />);
+        var preferredOtherNameField = (<input type="text" class="form-control" required="true" ref={(c) =>{this.otherNameField = c}} />);
+        var statusField = (
+            <select  ref={ (c) => {this.statusField = c} }>
+                <option disabled selected value> -- select an option -- </option>
+                <option value="local">Local</option>
+                <option value="international">International</option>
+            </select>
+        );
+        var degreeField = (
+            <select ref={ (c) => {this.degreeField = c} }>
+                <option disabled selected value> -- select an option -- </option>
+                <option value="UG">undergraduate</option>
+                <option value="PG">Postgraduate</option>
+            </select>
+        );
+        var firstLanguageField = (
+            <input type="text" class="form-control" required="true" ref={ (c) => {this.firstLanguageField = c} } />
+        );
+        var countryOriginField = (
+            <input type="text" class="form-control" required="true" ref={ (c) => {this.countryOfOriginField = c} } />
+        );
+
+        if(StudentId !== undefined) {
+            StudentIdField = (<input type="text" class="form-control" defaultValue={StudentId} ref={(c) =>{this.studentIdField = c}} required="true" />);
+        }
+
+        if(fullname !== undefined) {
+            fullnameField = (<input type="text" class="form-control" defaultValue={fullname} ref={(c) =>{this.fullNameField = c}} required="true" />);
+        }
+
+        if(preferredOtherName !== undefined) {
+            preferredOtherNameField = (<input type="text" defaultValue={preferredOtherName} class="form-control" required="true" ref={(c) =>{this.otherNameField = c}} />);
+        }
+
+        if(status !== undefined) {
+            statusField = (
+                <select  ref={ (c) => {this.statusField = c} } defaultValue={status}>
+                    <option disabled selected value> -- select an option -- </option>
+                    <option value="local">Local</option>
+                    <option value="international">International</option>
+                </select>
+            );
+        }
+
+        if(degree !== undefined) {
+            degreeField = (
+                <select ref={ (c) => {this.degreeField = c} } defaultValue={degree}>
+                    <option disabled selected value> -- select an option -- </option>
+                    <option value="UG">undergraduate</option>
+                    <option value="PG">Postgraduate</option>
+                </select>
+            );
+        }
+
+        if(firstLanguage !== undefined) {
+            firstLanguageField = (<input type="text" defaultValue={firstLanguage} class="form-control" required="true" ref={ (c) => {this.firstLanguageField = c} } />);
+        }
+
+        if(countryOrigin !== undefined) {
+            countryOriginField = (<input type="text" defaultValue={countryOrigin} class="form-control" required="true" ref={ (c) => {this.countryOfOriginField = c} } />);
+        }
+
 
         return (
         <ReactCSSTransitionGroup 
@@ -86,7 +158,7 @@ class MyProfile extends React.Component {
                     <form onSubmit={this.handleSubmit.bind(this)}>
                         <div class="form-group">
 
-                            <input type="text" class="form-control" ref={(c) =>{this.studentIdField = c}} required="true" />
+                            {StudentIdField}
                             <span class="highlight"></span>
                             <span class="bar"></span>
                             <label>your student ID*</label>
@@ -95,7 +167,7 @@ class MyProfile extends React.Component {
 
                         <div class="form-group">
 
-                            <input type="text" class="form-control" ref={(c) =>{this.fullNameField = c}} required="true" />
+                            {fullnameField}
                             <span class="highlight"></span>
                             <span class="bar"></span>
                             <label>your fullname*</label>
@@ -103,7 +175,7 @@ class MyProfile extends React.Component {
                         </div>
                         <div class="form-group">
 
-                            <input type="text" class="form-control" required="true" ref={(c) =>{this.otherNameField = c}} />
+                            {preferredOtherNameField}
                             <span class="highlight"></span>
                             <span class="bar"></span>
                             <label>preferred other name</label>
@@ -114,7 +186,6 @@ class MyProfile extends React.Component {
                             <label>date of birth*</label>
                             <Calendar
                                 dateFormat="YYYY-MM-DD"
-                                date={this.dobField || this.DOBDefault}
                                 onChange={this.onDOBChange.bind(this)}
                                 ref={(c) => {this.dobField = c}}
                             />
@@ -124,26 +195,18 @@ class MyProfile extends React.Component {
                         <div class="form-group-select">
 
                             <label>status*</label>
-                            <select  ref={ (c) => {this.statusField = c} }>
-                                <option disabled selected value> -- select an option -- </option>
-                                <option value="local">Local</option>
-                                <option value="international">International</option>
-                            </select>
+                            {statusField}
 
                         </div>
 
                         <div class="form-group-select">
                             <label>degree*</label>
-                            <select ref={ (c) => {this.degreeField = c} }>
-                                <option disabled selected value> -- select an option -- </option>
-                                <option value="UG">undergraduate</option>
-                                <option value="PG">Postgraduate</option>
-                            </select>
+                            {degreeField}
                         </div>
 
                         <div class="form-group">
 
-                            <input type="text" class="form-control" required="true" ref={ (c) => {this.firstLanguageField = c} } />
+                            {firstLanguageField}
                             <span class="highlight"></span>
                             <span class="bar"></span>
                             <label>first language*</label>
@@ -152,7 +215,7 @@ class MyProfile extends React.Component {
 
                         <div class="form-group">
 
-                            <input type="text" class="form-control" required="true" value={this.countryOfOriginField} ref={ (c) => {this.countryOfOriginField = c} } />
+                            {countryOriginField}
                             <span class="highlight"></span>
                             <span class="bar"></span>
                             <label>country of origin*</label>
