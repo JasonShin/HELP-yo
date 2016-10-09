@@ -3,11 +3,22 @@
  */
 import { computed, observable, autorun } from 'mobx';
 import WorkshopBookingModel from '../models/WorkshopBookingModel';
+import moment from 'moment';
 import {getWorkshopBookingFirebaseByWorkshopId, getWorkshopBookingFirebaseByUserId} from '../api/workshopBookings.api';
 
 class WorkshopBookingsStore {
     @observable bookings = [];
+    @observable StartDtBegin = null;
+    @observable StartDtEnd = null;
     @observable single = null;
+
+    @computed get filteredBookings() {
+
+        return bookings.filter( (booking) => {
+            var currentStartDtBegin = moment(booking.StartDtBegin);
+            return currentStartDtBegin.isAfter(this.StartDtBegin);
+        } );
+    }
 
     listenToSingleBookingByWorkshopId(workshopID, userId) {
         getWorkshopBookingFirebaseByWorkshopId({workshopId: workshopID, userId: userId}).on('value', (snapshot) => {
@@ -42,6 +53,7 @@ class WorkshopBookingsStore {
                             currentBooking.topic,
                             currentBooking.description,
                             currentBooking.StartDate,
+                            currentBooking.campus
                         )
                     );
                 }

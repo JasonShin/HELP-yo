@@ -8,6 +8,8 @@ export default class StudentModel {
     @observable status;
     @observable first_language;
     @observable country_origin;
+    @observable creatorID;
+    @observable email;
     @observable background;
     @observable HSC;
     @observable HSC_mark;
@@ -26,7 +28,6 @@ export default class StudentModel {
     @observable foundationcourse;
     @observable foundationcourse_mark;
     @observable created;
-    @observable creatorID;
     @observable modified;
     @observable modifierID;
     @observable archived;
@@ -36,10 +37,14 @@ export default class StudentModel {
     @observable caf;
     @observable batch;
     @observable preferred_name;
+    //{StudentId, DateOfBirth, Degree, Status, FirstLanguage, CountryOrigin, CreatorId};
 
-    constructor(studentID, dob, gender, degree, status, first_language, country_origin, background, HSC, HSC_mark,
+
+    constructor(
+        studentID, dob, gender, degree, status, first_language, country_origin, creatorID, email,
+        background, HSC, HSC_mark,
         IELTS, IELTS_mark, TOEFL, TOEFL_mark, TAFE, TAFE_mark, CULT, CULT_mark, InsearchDEEP, InsearchDEEP_mark,
-        InsearchDiploma, InsearchDiploma_mark, foundationcourse, foundationcourse_mark, created, creatorID, modified,
+        InsearchDiploma, InsearchDiploma_mark, foundationcourse, foundationcourse_mark, created, modified,
         modifierID, archived, archiverID, degree_details, alternative_contact, caf, batch, preferred_name) {
     	this.studentID = studentID;
     	this.dob = dob;
@@ -48,6 +53,9 @@ export default class StudentModel {
     	this.status = status;
     	this.first_language = first_language;
     	this.country_origin = country_origin;
+        this.creatorID = creatorID;
+        this.email = email;
+
     	this.background = background;
     	this.HSC = HSC;
     	this.HSC_mark = HSC_mark;
@@ -66,7 +74,6 @@ export default class StudentModel {
     	this.foundationcourse = foundationcourse;
     	this.foundationcourse_mark = foundationcourse_mark;
     	this.created = created;
-    	this.creatorID = creatorID;
     	this.modified = modified;
     	this.modifierID = modifierID;
     	this.archived = archived;

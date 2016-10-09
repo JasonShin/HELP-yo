@@ -91,9 +91,9 @@ export default class Single extends React.Component {
                 workshopId: this.state.workshopId,
                 userId: this.state.userEmail
             });
-            //Making sure nullifying single booking observable
-            //TODO: Optimize this
-            WorkshopBookingsStore.single = null;
+
+            //TODO: Make sure nullifying single into '' no bugs
+            WorkshopBookingsStore.single = '';
         } else {
             console.log('You are not authorized to perform Booking action');
         }
@@ -104,13 +104,14 @@ export default class Single extends React.Component {
         e.preventDefault();
         let reminderMethod = this.reminderMethod.value;
         setReminderForBooking({
-            StartDate: '2016-10-03T18:47:00',
+            StartDate: '2016-11-09T13:41:10',
             to: 'visualbbasic@gmail.com',
             subject: 'Test email from frontend',
             content: 'test!!'
         });
         //2012-07-31T17:00:00
         console.log(this.props.workshopStore.single.StartDate);
+
         switch(reminderMethod) {
             case 'email':
 

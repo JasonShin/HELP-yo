@@ -1,5 +1,6 @@
 import config from '../../config/config';
 import FirebaseAPI from './firebase.api';
+import {parseEmailForFirebase} from '../tools/Helpers';
 const axios = require('axios');
 const headers = {
   'AppKey': config.appKey,
@@ -7,7 +8,8 @@ const headers = {
 };
 
 //() => first raw of params = required, others = optional
-export const registerHELPNew = (
+//TODO: Correct exceptions
+export const setStudentProfile = (
     StudentId, DateOfBirth, Degree, Status, FirstLanguage, CountryOrigin, CreatorId,
     Gender, Background, DegreeDetails, AltContact, Preferred, HSC, HSCMark, IELTS, IELTSMark, TAFE, TAFEMark,
     CULT, CULTMark, InsearchDEEP, InsearchDEEPMark, InsearchDiploma, InsearchDiplomaMark,
@@ -31,13 +33,51 @@ export const registerHELPNew = (
         CULT, CULTMark, InsearchDEEP, InsearchDEEPMark, InsearchDiploma, InsearchDiplomaMark,
         FoundationCourse, FoundationCourseMark
       }, postParams).then((val) => {
-        if (val.data.IsSuccess === 'false') {
-          reject(val.data.DisplayMessage);
-        } else {
-          resolve(val);
-        }
+
+        //NOTE: Setting profile on Firebase
+        setStudentFirebaseProfile(StudentId, DateOfBirth, Degree, Status, FirstLanguage, CountryOrigin, CreatorId).
+        then(
+            () => {
+              console.log('INFO: setting profile on HELP API');
+              if (val.data.IsSuccess === 'false') {
+                reject(val.data.DisplayMessage);
+              } else {
+                resolve(val);
+              }
+            }
+        ).
+        catch(
+            () => {
+
+            }
+        );
+
       });
     });
+};
+
+export const setStudentFirebaseProfile = (
+    StudentId, DateOfBirth, Degree, Status, FirstLanguage, CountryOrigin, CreatorId,
+    Gender, Background, DegreeDetails, AltContact, Preferred, HSC, HSCMark, IELTS, IELTSMark, TAFE, TAFEMark,
+    CULT, CULTMark, InsearchDEEP, InsearchDEEPMark, InsearchDiploma, InsearchDiplomaMark,
+    FoundationCourse, FoundationCourseMark
+) => {
+      return new Promise((resolve, reject) => {
+        FirebaseAPI.context.auth().onAuthStateChanged(firebaseUser => {
+
+          let studentEmail = firebaseUser.email;
+          let opt = {StudentId, DateOfBirth, Degree, Status, FirstLanguage, CountryOrigin, CreatorId};
+
+          FirebaseAPI.context.database().ref('/students/' + parseEmailForFirebase(studentEmail)).set(opt);
+          resolve();
+        });
+      });
+
+    //
+};
+
+export const getStudentFirebaseProfile = (email) => {
+    return FirebaseAPI.context.database().ref('/students/'+ parseEmailForFirebase(email));
 };
 
 export const getStudent = (opts) => {

@@ -28,19 +28,21 @@ export default class FirebaseAPI {
         return firebase;
     }
 
-    static getAuth() {
-
-    }
-
     // () => returns authenticated status
-    static requireAuth(nextState, replace) {
+    static requireAuth(nextState, replace, callback) {
+        FirebaseAPI.initialize();
+        FirebaseAPI.context.auth().onAuthStateChanged(firebaseUser => {
+            if (firebaseUser) {
+                //When user is authenticated from Firebase
+                callback();
+            } else {
+                replace({
+                    pathname: '/login',
+                    state: { nextPathname: nextState.location.pathname }
+                });
+            }
+        });
 
-        if(null === firebase.auth().currentUser) {
-            replace({
-                pathname: '/login',
-                state: { nextPathname: nextState.location.pathname }
-            });
-        }
     }
 
 }

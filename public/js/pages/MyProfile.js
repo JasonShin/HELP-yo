@@ -1,13 +1,15 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import config from '../../config/config';
-import { registerHELPNew } from '../api/student.api';
-
+import { setStudentProfile } from '../api/student.api';
 import StudentStore from '../stores/StudentStore';
+import FirebaseAPI from '../api/firebase.api';
 import { DateField, Calendar } from 'react-date-picker';
+import { observer } from 'mobx-react';
 const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 import animationConstants from '../constants/animationConstants';
 
+@observer
 class MyProfile extends React.Component {
 
     //TODO: Move to const file
@@ -22,22 +24,14 @@ class MyProfile extends React.Component {
     }
 
     componentDidMount(){
-        const studentHELP = StudentStore.returnStudent();
-        console.log(studentHELP);
-        if(studentHELP.studentId) {
-            StudentStore.fetchStudent(studentHELP.studentId)
-            .then((student) => {
-                this.studentIdField.value = student.studentId;
-                this.currentDOBString = student.dob;
-                this.degreeField.value = student.degree;
-                this.statusField.value = student.status.toLowerCase();
-                this.firstLanguageField.value = student.first_language;
-                this.countryOfOriginField.value = student.country_origin;
-            })
-            .catch((error) => {
-                console.log(`MyProfile Error: ${error}`);
-            });
-        }
+        FirebaseAPI.context.auth().onAuthStateChanged(firebaseUser => {
+
+            if (firebaseUser) {
+                StudentStore.fetchStudent(firebaseUser.email);
+            } else {
+                console.log('Not logged in');
+            }
+        });
     }
 
     onDOBChange (dateString, { dateMoment, timestamp }) {
@@ -56,19 +50,24 @@ class MyProfile extends React.Component {
         let CountryOrigin = this.countryOfOriginField.value;
         let CreatorId = StudentId;
 
-        StudentStore.registerHELPstudent(StudentId, DateOfBirth, Degree, Status, FirstLanguage, CountryOrigin, CreatorId)
-        .then((response) => {
-            console.log(response);
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+        setStudentProfile(StudentId, DateOfBirth, Degree, Status, FirstLanguage, CountryOrigin, CreatorId)
+            .then((response) => {
+                console.log(response);
+            }).catch((error) => {
+                console.log(error);
+            });
+        //setStudentProfile(StudentId, DateOfBirth, Degree, Status, FirstLanguage, CountryOrigin, CreatorId);
     }
 
     render() {
         const progressBarStyle = {
             width: '50%'
         };
+
+        console.log('SINGLE FOUND');
+        console.log(StudentStore.student);
+        let currentStudent = StudentStore.student;
+
         return (
         <ReactCSSTransitionGroup 
           transitionName="page-transition"
@@ -79,28 +78,39 @@ class MyProfile extends React.Component {
                 <div class="progress">
                   <div class="determinate" style={progressBarStyle}></div>
                 </div>
-                <div class="container-small">
-                    <div>
+                <div class="container-small container-profile">
+                    <div class="profile-header">
                         <h2>Tell us more about you</h2>
                         <div>setting up your profile (* denotes required data)</div>
                     </div>
                     <form onSubmit={this.handleSubmit.bind(this)}>
                         <div class="form-group">
+
+                            <input type="text" class="form-control" ref={(c) =>{this.studentIdField = c}} required="true" />
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
                             <label>your student ID*</label>
-                            <input type="text" value={this.studentIdField} class="form-control" ref={(c) =>{this.studentIdField = c}} />
+
                         </div>
 
                         <div class="form-group">
+
+                            <input type="text" class="form-control" ref={(c) =>{this.fullNameField = c}} required="true" />
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
                             <label>your fullname*</label>
-                            <input type="text" value={this.fullNameField} class="form-control" ref={(c) =>{this.fullNameField = c}} />
+
                         </div>
                         <div class="form-group">
+
+                            <input type="text" class="form-control" required="true" ref={(c) =>{this.otherNameField = c}} />
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
                             <label>preferred other name</label>
-                            <input type="text" value={this.otherNameField} class="form-control" ref={(c) =>{this.otherNameField = c}} />
 
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group-calendar">
                             <label>date of birth*</label>
                             <Calendar
                                 dateFormat="YYYY-MM-DD"
@@ -111,18 +121,20 @@ class MyProfile extends React.Component {
                         </div>
 
 
-                        <div class="form-group">
+                        <div class="form-group-select">
+
                             <label>status*</label>
-                            <select value={this.statusField} ref={ (c) => {this.statusField = c} }>
+                            <select  ref={ (c) => {this.statusField = c} }>
                                 <option disabled selected value> -- select an option -- </option>
                                 <option value="local">Local</option>
                                 <option value="international">International</option>
                             </select>
+
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group-select">
                             <label>degree*</label>
-                            <select value={this.degreeField} ref={ (c) => {this.degreeField = c} }>
+                            <select ref={ (c) => {this.degreeField = c} }>
                                 <option disabled selected value> -- select an option -- </option>
                                 <option value="UG">undergraduate</option>
                                 <option value="PG">Postgraduate</option>
@@ -130,18 +142,26 @@ class MyProfile extends React.Component {
                         </div>
 
                         <div class="form-group">
+
+                            <input type="text" class="form-control" required="true" ref={ (c) => {this.firstLanguageField = c} } />
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
                             <label>first language*</label>
-                            <input type="text" value={this.firstLanguageField} ref={ (c) => {this.firstLanguageField = c} } />
+
                         </div>
 
                         <div class="form-group">
+
+                            <input type="text" class="form-control" required="true" value={this.countryOfOriginField} ref={ (c) => {this.countryOfOriginField = c} } />
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
                             <label>country of origin*</label>
-                            <input type="text" value={this.countryOfOriginField} ref={ (c) => {this.countryOfOriginField = c} } />
+
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group-select">
                             <label>gender</label>
-                            <select value={this.genderField} ref={ (c) => {this.genderField = c} }>
+                            <select ref={ (c) => {this.genderField = c} }>
                                 <option disabled selected value> -- select an option -- </option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
@@ -151,7 +171,7 @@ class MyProfile extends React.Component {
 
                         <span>expand to see optional fields</span>
 
-                        <button class="button-red" type="submit">register</button>
+                        <button class="button-red" type="submit">set profile</button>
 
                     </form>
                 </div>

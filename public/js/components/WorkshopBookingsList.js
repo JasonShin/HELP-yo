@@ -39,7 +39,7 @@ export default class WorkshopBookingsList extends React.Component {
             let formattedRangeDate = getFormattedRangeDate(booking.StartDate, booking.EndDate, this.rageDateDelimeter);
             let availables = booking.maximum - booking.BookingCount;
             let monthDate = getMonthDate(booking.StartDate);
-
+            console.log(booking.campus);
             return (
                 <Card
                     key={booking.WorkshopId}
@@ -48,16 +48,16 @@ export default class WorkshopBookingsList extends React.Component {
                     maxSeats={booking.maximum} availableSeats={availables}
                     dateMeta={[monthDate.monthAsString,monthDate.date]}
                     campus={booking.campus}
-                    cardType="workshop"
+                    cardType="booking"
+                    disableMoreDetails={true}
                 />
             );
         });
 
         return (
-            <div class="container-cards-list container-small">
-
+            <div class="container-cards-list container-small container-bookings-list">
+                <h1>My bookings</h1>
                 {bookingList}
-
             </div>
         );
     }

@@ -7,6 +7,7 @@ export default class WorkshopBookingModel {
     @observable topic;
     @observable description;
     @observable StartDate;
+    @observable campus;
     @observable created;
     @observable creatorID;
     @observable modified;
@@ -16,13 +17,15 @@ export default class WorkshopBookingModel {
     @observable canceled;
     @observable attended;
 
-    constructor(workshopID, studentID, topic, description, StartDate, created, creatorID, modified, modifierID, archived, archiverID, canceled, attended) {
+    //TODO: Find an efficient way to do this http://cloudmark.github.io/Json-Mapping/
+    constructor(workshopID, studentID, topic, description, StartDate, campus, created, creatorID, modified, modifierID, archived, archiverID, canceled, attended) {
     	//this.id = id;
     	this.workshopID = workshopID;
     	this.studentID = studentID;
         this.topic = topic;
         this.description = description;
         this.StartDate = StartDate;
+        this.campus = campus;
     	this.created = created;
     	this.creatorID = creatorID;
     	this.modified = modified;

@@ -36,13 +36,13 @@ ReactDOM.render(
             <IndexRoute component={SessionTypesPage} />
             <Route path="login" component={Login} />
             <Route path="register" component={RegisterPage} />
-            <Route path="register/profile" component={MyProfile} />
-            <Route path="profile" component={MyProfile} />
-            <Route path='sessions' component={SessionsPage} />
-            <Route path='workshopSets' component={WorkshopSetsPage} />
-            <Route path='workshops' component={WorkshopsPage} />
-            <Route path='workshop' component={WorkshopPage} />
-            <Route path="bookings/" component={Bookings}></Route>
+            <Route path="register/profile" component={MyProfile} onEnter={FirebaseAPI.requireAuth} />
+            <Route path="profile" component={MyProfile} onEnter={FirebaseAPI.requireAuth} />
+            <Route path='sessions' component={SessionsPage} onEnter={FirebaseAPI.requireAuth} />
+            <Route path='workshopSets' component={WorkshopSetsPage} onEnter={FirebaseAPI.requireAuth} />
+            <Route path='workshops' component={WorkshopsPage} onEnter={FirebaseAPI.requireAuth} />
+            <Route path='workshop' component={WorkshopPage} onEnter={FirebaseAPI.requireAuth} />
+            <Route path="bookings" component={Bookings} onEnter={FirebaseAPI.requireAuth} />
         </Route>
     </Router>,
     app
