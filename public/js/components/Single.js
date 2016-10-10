@@ -210,7 +210,7 @@ export default class Single extends React.Component {
                         <div class="single-meta-top-left">
                             <div>
 
-                                banner
+                                <img src="https://firebasestorage.googleapis.com/v0/b/helps-uts-project.appspot.com/o/photo-1427477321886-abc24e8ce923.jpg?alt=media&token=5eed6ce0-cacc-4962-aa63-0386fe1025cc" />
 
                             </div>
                         </div>
