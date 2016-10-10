@@ -173,16 +173,13 @@ class PrimaryNav extends React.Component {
         }
 
         return (
-            <div>
-                <ul class="filters-control">
-                    <li>
-                        <span onClick={this.onClickWorkshopTopicFilter.bind(this)}>topic</span>
-                    </li>
-
-                    <li>
-                        <span class="filter-control-date" onClick={this.onClickWorkshopDateFilter.bind(this)}>date</span>
-                    </li>
-                </ul>
+            <div class="secondary-nav">
+                <div class="filters-control">
+                    <span onClick={this.onClickWorkshopTopicFilter.bind(this)}>topic</span>
+                </div>
+                <div class="filters-control">
+                    <span class="filter-control-date" onClick={this.onClickWorkshopDateFilter.bind(this)}>date</span>
+                </div>
                 {filter}
             </div>
         );
@@ -194,26 +191,34 @@ class PrimaryNav extends React.Component {
     }
 
     handleBookingsToggle() {
-        if (this.state.selectedMenu) {
+        if (this.state.selectedMenu === 'bookings') {
             this.state.selectedMenu = null;
         } else {
-            this.state.selectedMenu = 'workshops';
+            this.state.selectedMenu = 'bookings';
         }
     }
     
     handleInfoToggle() {
-        if (this.state.selectedMenu) {
+        if (this.state.selectedMenu === 'info') {
+            this.state.selectedMenu = null;
+        } else {
+            this.state.selectedMenu = 'info';
+        }
+    }
+
+    handleWorkshopsToggle() {
+        if (this.state.selectedMenu === 'workshops') {
             this.state.selectedMenu = null;
         } else {
             this.state.selectedMenu = 'workshops';
         }
     }
 
-    handleWorkshopsToggle() {
-        if (this.state.selectedMenu) {
+    handleFaqsToggle() {
+        if (this.state.selectedMenu === 'faqs') {
             this.state.selectedMenu = null;
         } else {
-            this.state.selectedMenu = 'workshops';
+            this.state.selectedMenu = 'faqs';
         }
     }
 
@@ -238,9 +243,26 @@ class PrimaryNav extends React.Component {
             filter = this.getWorkshopSearchFilters();
         }
 
+        const workshopsLinkStyle = classNames({
+            'menu-navbar-div': true,
+            'emphasise-nav-link': this.state.selectedMenu === 'workshops'
+        });
+        const bookingsLinkStyle = classNames({
+            'menu-navbar-div': true,
+            'emphasise-nav-link': this.state.selectedMenu === 'bookings'
+        });
+        const infoLinkStyle = classNames({
+            'menu-navbar-div': true,
+            'emphasise-nav-link': this.state.selectedMenu === 'info'
+        });
+        const faqLinkStyle = classNames({
+            'menu-navbar-div': true,
+            'emphasise-nav-link': this.state.selectedMenu === 'faqs'
+        });
+
         //TODO: Find better looking overflow-y design than default one on desktop browsers
         return (
-            <div>
+            <div class="sticky">
                 <div id='PrimaryNav'>
                     <div class="logo">
                         <div class="logo-container">
@@ -252,11 +274,11 @@ class PrimaryNav extends React.Component {
                     </div>
                     <div class="menu-container">
                         <div class="menu-navbar">
-                            <div class="menu-navbar-div"><Link onClick={this.handleWorkshopsToggle.bind(this)} to="/workshopSets">workshops</Link></div>
-                            <div class="menu-navbar-div"><Link onClick={this.handleBookingsToggle.bind(this)} to="/bookings/past">my bookings</Link></div>
-                            <div class="menu-navbar-div"><Link onClick={this.handleInfoToggle.bind(this)} to="/profile">my info</Link></div>
-                            <div class="menu-navbar-div">faq's</div>
-                            <div class="menu-navbar-div">{authButton}</div>
+                            <div className={workshopsLinkStyle}><Link onClick={this.handleWorkshopsToggle.bind(this)} to="/workshopSets">workshops</Link></div>
+                            <div className={bookingsLinkStyle}><Link onClick={this.handleBookingsToggle.bind(this)} to="/bookings/past">my bookings</Link></div>
+                            <div className={infoLinkStyle}><Link onClick={this.handleInfoToggle.bind(this)} to="/profile">my info</Link></div>
+                            <div className={faqLinkStyle}>faq's</div>
+                            <div className="menu-navbar-div">{authButton}</div>
                         </div>
                     </div>
                 </div>

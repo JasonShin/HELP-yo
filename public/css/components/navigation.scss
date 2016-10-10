@@ -1,6 +1,18 @@
 @import "../settings/colors";
 @import "../tools/mixins";
 
+.emphasise-nav-link {
+  border-bottom: 2px white solid;
+  font-weight: bold;
+}
+
+.sticky {
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+  top: 0;
+}
+
 #PrimaryNav {
   color: $primary-nav-text-color;
   background-color: $primary-nav-color;
