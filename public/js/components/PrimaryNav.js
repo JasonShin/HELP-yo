@@ -82,6 +82,7 @@ class PrimaryNav extends React.Component {
         });
     }
 
+    //TODO: Search by tutor does not work from API endpoint
     onClickWorkshopTutorFilter(e) {
         e.preventDefault();
         this.setState({
@@ -98,6 +99,7 @@ class PrimaryNav extends React.Component {
         WorkshopsStore.topicFilter = this.topicSearch.value;
     }
 
+    //TODO: search by location does not work from API endpoint
     onWorkshopLocationSearchChange(e) {
         e.preventDefault();
         //WorkshopsStore.topicFilter = this.locationSearch.value;
@@ -185,14 +187,6 @@ class PrimaryNav extends React.Component {
 
                     <li>
                         <span class="filter-control-date" onClick={this.onClickWorkshopDateFilter.bind(this)}>date</span>
-                    </li>
-
-                    <li>
-                        <span onClick={this.onClickWorkshopLocationFilter.bind(this)}>location</span>
-                    </li>
-
-                    <li>
-                        <span onClick={this.onClickWorkshopTutorFilter.bind(this)}>tutor</span>
                     </li>
                 </ul>
                 {filter}
