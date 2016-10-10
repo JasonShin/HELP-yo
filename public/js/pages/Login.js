@@ -32,10 +32,10 @@ class Login extends React.Component {
          }).
          then((body) => {
             console.log(body);
-            this.props.router.push('/');
             this.setState({
                 enableSpinner: false
             });
+            this.props.router.push('/');
          }).
          catch((err) => {
             console.log(err);
