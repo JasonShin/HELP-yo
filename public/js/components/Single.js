@@ -102,10 +102,11 @@ export default class Single extends React.Component {
 
     //TODO: Fix reminder feature => Throws 404 error
     //TODO: get these working
-    onClickReminder(e) {
+    onClickReminder(e, workshopTime, reminderPayload) {
         e.preventDefault();
         let reminderMethod = this.reminderMethod.value;
         let reminderTime = this.reminderTime.value;
+        let workshopStart = new Date(workshopTime);
 
         console.log(reminderMethod);
         console.log(reminderTime);
@@ -113,31 +114,63 @@ export default class Single extends React.Component {
 
         switch(reminderMethod) {
             case 'email':
-                this.setEmailNotification(reminderTime);
+                this.setEmailNotification(workshopStart, reminderTime, reminderPayload);
                 break;
-
             case 'sms':
-
+                this.setSmsNotification(workshopStart, reminderTime, reminderPayload);
                 break;
         }
-
     }
 
-    setEmailNotification(reminderTime) {
+    setEmailNotification(workshopTime, reminderTime, reminderPayload) {
+        let absoluteReminderTime = workshopTime;
         switch(reminderTime) {
-            case '30second':
+            case '1hour': {
+                absoluteReminderTime.setHours(absoluteReminder.getHours() - 1); 
                 break;
-            case '2min':
+            }
+            case '1day': {
+                absoluteReminderTime.setDate(absoluteReminder.getDate() - 1);
                 break;
-            case '30min':
+            }
+            case '2days': {
+                absoluteReminderTime.setDate(absoluteReminder.getDate() - 2);
                 break;
+            }
         }
 
         setReminderForBooking({
-            StartDate: '2016-11-09T22:22:10',
+            StartDate: absoluteReminderTime.toISOString().slice(0, 19),
             to: this.state.userEmail,
-            subject: 'Test email from frontend',
-            content: 'test!!'
+            subject: 'HELPS - Workshop Reminder',
+            content: `You have registered for the ${reminderPayload.title} workshop at ${reminderPayload.room} at ${reminderPayload.duration}`,
+            type: 'mail',
+        });
+    }
+
+    setSmsNotification(workshopTime, reminderTime, reminderPayload) {
+        let absoluteReminderTime = workshopTime;
+        switch(reminderTime) {
+            case '1hour': {
+                absoluteReminderTime.setHours(absoluteReminder.getHours() - 1); 
+                break;
+            }
+            case '1day': {
+                absoluteReminderTime.setDate(absoluteReminder.getDate() - 1);
+                break;
+            }
+            case '2days': {
+                absoluteReminderTime.setDate(absoluteReminder.getDate() - 2);
+                break;
+            }
+        }
+
+        setReminderForBooking({
+            StartDate: absoluteReminderTime.toISOString().slice(0, 19),
+            to: this.state.phone,
+            subject: 'HELPS - Workshop Reminder',
+            content: `You have registered for the ${reminderPayload.title} workshop at ${reminderPayload.room} at ${reminderPayload.duration}`,
+            type: 'sms',
         });
 
     }
@@ -165,6 +198,12 @@ export default class Single extends React.Component {
             let bookingButton = '';
             let reminderButton = '';
 
+            const reminderPayload = {
+                title: singleInstance.topic,
+                room: singleInstance.campus,
+                duration: formattedDate,
+            };
+
             //Show cancel booking
 
             //Todo optimize this to properly wait for response from Firebase
@@ -187,12 +226,12 @@ export default class Single extends React.Component {
                             <label>reminder time</label>
                             <select ref={(c) => this.reminderTime = c}>
                                 <option value="">--- options ---</option>
-                                <option value="30second">30 seconds before</option>
-                                <option value="2min">2 minute before</option>
-                                <option value="30min">30 minute before</option>
+                                <option value="1hour">1 hour before</option>
+                                <option value="1day">1 day before</option>
+                                <option value="2days">2 days before</option>
                             </select>
                         </div>
-                        <button class="button-reminder" onClick={this.onClickReminder.bind(this)}>Set reminder</button>
+                        <button class="button-reminder" onClick={this.onClickReminder.bind(this, singleInstance.StartDate, reminderPayload)}>Set reminder</button>
                     </div>
                 );
             } else {
