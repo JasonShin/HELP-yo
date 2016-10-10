@@ -11,7 +11,7 @@ import WorkshopBookingsStore from '../stores/WorkshopBookingsStore';
 import Card from '../components/Card';
 
 @observer
-export default class WorkshopBookingsList extends React.Component {
+class WorkshopBookingsList extends React.Component {
 
     rageDateDelimeter = ' - ';
 
