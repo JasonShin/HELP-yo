@@ -173,7 +173,7 @@ class PrimaryNav extends React.Component {
         }
 
         return (
-            <div class="secondary-nav">
+            <div class="animated slideInDown secondary-nav">
                 <div class="filters-control">
                     <span onClick={this.onClickWorkshopTopicFilter.bind(this)}>topic</span>
                 </div>
