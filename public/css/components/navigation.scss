@@ -53,44 +53,78 @@
   }
   //LOGO ENDS
 
+  .auth-button {
+    position: relative;
+    display: block;
+    padding: 0;
+    overflow: hidden;
+    border-width: 0;
+    outline: none;
+    border-radius: 2px;
+
+
+    color: white;
+
+    transition: background-color .3s;
+    padding: 6px 12px;
+    line-height: normal;
+    cursor: pointer;
+
+    i {
+      margin-right: 5px;
+    }
+  }
+
+  .auth-button-login {
+    @extend .auth-button;
+    border: 1px solid white;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+  }
+
+  .auth-button-logout {
+    @extend .auth-button;
+    border: 1px solid white;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+  }
 
   .menu-container {
     background-color: $primary-nav-sub-color;
+    .menu-navbar {
+      z-index: 1;
+      display: flex;                  /* establish flex container */
+      justify-content: center; /* switched from default (flex-start, see below) */
+      align-items: center;
+      padding: 15px 15px 12px 15px; 
+      overflow-x: auto;
+    }
   }
 
-
-}
-
-
-//Navigation STARTS
-.menu-container {
-  $nav-item-size: 14px;
-  $menu-height: 50px;
-  $menu-item-padding-side: 15px;
-  $menu-container-padding-top: ($menu-height / 4);
-
-  text-align: center;
-  min-height: $menu-height;
-
-
-  .menu-main-container {
-    width: 495px;
-    display: inline-block;
-    padding-top: $menu-container-padding-top;
-    ul {
-      height: 32px;
+  .menu-navbar-div {
+    margin-right: 10px;
+    margin-left: 10px;
+    font-size: 10px;
+    text-transform: uppercase;
+    a {
+      text-decoration: none;
+      color: white;
     }
-    ul li {
-      padding-right: $menu-item-padding-side;
-      padding-left: $menu-item-padding-side;
-      font-size: $nav-item-size;
+
+    a:visited {
+      text-decoration: none;
+      color: white;
+    }
+  }
+
+  @media only screen and (min-width: 380px) {
+    .menu-navbar-div {
+      margin-right: 15px;
+      margin-left: 15px;
+      font-size: 13px;
       text-transform: uppercase;
-
-      //Required to make vertical alignment
-      height: 30px;
-      line-height: 30px;
-
-
       a {
         text-decoration: none;
         color: white;
@@ -100,49 +134,92 @@
         text-decoration: none;
         color: white;
       }
-
-      .auth-button {
-        position: relative;
-        display: block;
-        padding: 0;
-        overflow: hidden;
-        border-width: 0;
-        outline: none;
-        border-radius: 2px;
-
-
-        color: white;
-
-        transition: background-color .3s;
-        padding: 6px 12px;
-        line-height: normal;
-        cursor: pointer;
-
-        i {
-          margin-right: 5px;
-        }
-      }
-
-      .auth-button-login {
-        @extend .auth-button;
-        border: 1px solid white;
-        -webkit-border-radius: 9px;
-        -moz-border-radius: 9px;
-        border-radius: 9px;
-      }
-
-      .auth-button-logout {
-        @extend .auth-button;
-        border: 1px solid white;
-        -webkit-border-radius: 9px;
-        -moz-border-radius: 9px;
-        border-radius: 9px;
-      }
-
     }
   }
-  @include normalizeList(true);
 }
+
+// //Navigation STARTS
+// .menu-container-nested {
+//   $nav-item-size: 14px;
+//   $menu-height: 50px;
+//   $menu-item-padding-side: 15px;
+//   $menu-container-padding-top: ($menu-height / 4);
+
+//   text-align: center;
+//   min-height: $menu-height;
+
+
+
+//   .menu-main-container {
+//     width: 100%;
+//     display: inline-block;
+//     padding-top: $menu-container-padding-top;
+//     ul {
+//       height: 32px;
+//     }
+//     ul li {
+//       padding-right: $menu-item-padding-side;
+//       padding-left: $menu-item-padding-side;
+//       font-size: $nav-item-size;
+//       text-transform: uppercase;
+
+//       //Required to make vertical alignment
+//       height: 30px;
+//       line-height: 30px;
+
+
+//       a {
+//         text-decoration: none;
+//         color: white;
+//       }
+
+//       a:visited {
+//         text-decoration: none;
+//         color: white;
+//       }
+
+//       .auth-button {
+//         position: relative;
+//         display: block;
+//         padding: 0;
+//         overflow: hidden;
+//         border-width: 0;
+//         outline: none;
+//         border-radius: 2px;
+
+
+//         color: white;
+
+//         transition: background-color .3s;
+//         padding: 6px 12px;
+//         line-height: normal;
+//         cursor: pointer;
+
+//         i {
+//           margin-right: 5px;
+//         }
+//       }
+
+//       .auth-button-login {
+//         @extend .auth-button;
+//         border: 1px solid white;
+//         -webkit-border-radius: 9px;
+//         -moz-border-radius: 9px;
+//         border-radius: 9px;
+//       }
+
+//       .auth-button-logout {
+//         @extend .auth-button;
+//         border: 1px solid white;
+//         -webkit-border-radius: 9px;
+//         -moz-border-radius: 9px;
+//         border-radius: 9px;
+//       }
+
+//     }
+//   }
+//   @include normalizeList(true);
+// }
 //Navigation ENDS
 
 

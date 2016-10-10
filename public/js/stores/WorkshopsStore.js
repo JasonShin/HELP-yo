@@ -109,7 +109,6 @@ class WorkshopsStore {
 
     //TODO: Fake date here
     mapDataToModel(data) {
-        
         return new WorkshopModel(
             data.BookingCount,
             data.DaysOfWeek,

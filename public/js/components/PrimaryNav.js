@@ -5,6 +5,8 @@ import {logoutFirebase} from '../api/student.api';
 import WorkshopsStore from '../stores/WorkshopsStore';
 import { DateField, Calendar } from 'react-date-picker';
 
+const classNames = require('classnames');
+
 class PrimaryNav extends React.Component {
 
     pathWorkshops = '/workshops';
@@ -48,14 +50,6 @@ class PrimaryNav extends React.Component {
     handleLogoutUser() {
         logoutFirebase();
         this.props.router.push('/');
-    }
-    
-    handleWorkshopsToggle() {
-        if (this.state.selectedMenu) {
-            this.state.selectedMenu = null;
-        } else {
-            this.state.selectedMenu = 'workshops';
-        }
     }
 
     /************************
@@ -199,6 +193,31 @@ class PrimaryNav extends React.Component {
         console.log(workshopQuery);
     }
 
+    handleBookingsToggle() {
+        if (this.state.selectedMenu) {
+            this.state.selectedMenu = null;
+        } else {
+            this.state.selectedMenu = 'workshops';
+        }
+    }
+    
+    handleInfoToggle() {
+        if (this.state.selectedMenu) {
+            this.state.selectedMenu = null;
+        } else {
+            this.state.selectedMenu = 'workshops';
+        }
+    }
+
+    handleWorkshopsToggle() {
+        if (this.state.selectedMenu) {
+            this.state.selectedMenu = null;
+        } else {
+            this.state.selectedMenu = 'workshops';
+        }
+    }
+
+
     render() {
         var authButton = '';
 
@@ -232,18 +251,14 @@ class PrimaryNav extends React.Component {
                         </div>
                     </div>
                     <div class="menu-container">
-                        <div class="menu-main-container">
-                            <ul>
-                                <li class="motion-ripple-button"><Link onClick={this.handleWorkshopsToggle.bind(this)} to="/workshopSets">workshops</Link></li>
-                                <li><Link to="/bookings/past">my bookings</Link></li>
-                                <li><Link to="/profile">my info</Link></li>
-                                <li>faq's</li>
-                                <li>{authButton}</li>
-                            </ul>
+                        <div class="menu-navbar">
+                            <div class="menu-navbar-div"><Link onClick={this.handleWorkshopsToggle.bind(this)} to="/workshopSets">workshops</Link></div>
+                            <div class="menu-navbar-div"><Link onClick={this.handleBookingsToggle.bind(this)} to="/bookings/past">my bookings</Link></div>
+                            <div class="menu-navbar-div"><Link onClick={this.handleInfoToggle.bind(this)} to="/profile">my info</Link></div>
+                            <div class="menu-navbar-div">faq's</div>
+                            <div class="menu-navbar-div">{authButton}</div>
                         </div>
-
                     </div>
-
                 </div>
                 <div class="menu-filter-container">
                     <div class="menu-container">
