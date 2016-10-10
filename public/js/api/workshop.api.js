@@ -5,6 +5,25 @@ const headers = {
   'Accept': 'application/json'
 };
 
+export const createWorkshop = (opts) => {
+  return new Promise((resolve, reject) => {
+
+    var params = {
+      headers: {
+        'AppKey': config.appKey,
+        "content-type": "application/json"
+      },
+      data: JSON.stringify(opts)
+    };
+
+    axios.post(config.createWorkshopURL, {params}).
+        then((response) => {
+          resolve(response);
+        });
+
+  });
+};
+
 export const listWorkshopSets = async (active) => {
 
   return new Promise((resolve, reject) => {

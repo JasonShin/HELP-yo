@@ -31,7 +31,6 @@ class WorkshopsStore {
 
     //TODO: Search by StartStartDate and StartEndDate
     //TODO: startingDtBegin=2013-04-10T10:00&startingDtEnd=2013-04-17T10:00
-    //
     fetchWorkshopsByStartEndDate(workshopSetId, StartDtBegin, StartDtEnd) {
 
         console.log('INFO: Fetching by date: ' , workshopSetId, StartDtBegin, StartDtEnd);
@@ -108,7 +107,9 @@ class WorkshopsStore {
         });
     }
 
+    //TODO: Fake date here
     mapDataToModel(data) {
+        
         return new WorkshopModel(
             data.BookingCount,
             data.DaysOfWeek,
