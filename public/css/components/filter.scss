@@ -7,6 +7,7 @@
       span {
         cursor: pointer;
         color: white;
+        text-transform:uppercase;
       }
 
       a {
@@ -19,15 +20,14 @@
       }
       .secondary-nav {
         background-color: $secondary-nav-color;
-        height: 40px;
+        padding: 8px;
         z-index: 1;
         display: flex;                  /* establish flex container */
         justify-content: center; /* switched from default (flex-start, see below) */
-        align-items: center; 
+        align-items: center;
         overflow-x: auto;
         //UL
         .filters-control {
-          display: inline-block;
           list-style-type: none;
           margin-right: 10px;
           margin-left: 10px;

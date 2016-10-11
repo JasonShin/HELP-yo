@@ -20,7 +20,9 @@ class PrimaryNav extends React.Component {
             selectedMenu: null,
             currentFilter: '',
             workshopStartStartDate: '',
-            workshopStartEndDate: ''
+            workshopStartEndDate: '',
+            showWorkshopFilterGroup: false,
+            workshopFilterSelected: '',
         };
     }
 
@@ -111,6 +113,40 @@ class PrimaryNav extends React.Component {
 
     }
 
+    onWorkshopSearchChange() {
+        const {workshopFilterSelected, showWorkshopFilterGroup} = this.state;
+        if (showWorkshopFilterGroup && workshopFilterSelected && workshopFilterSelected.trim() !== '') {
+            switch (workshopFilterSelected) {
+                case 'topic': {
+                    WorkshopsStore.topicFilter = this.searchQuery.value;
+                    break;
+                }
+                case 'date': {
+                    // WorkshopsStore.topicFilter = this.searchQuery.value;
+                    break;
+                }
+                case 'location': {
+                    // WorkshopsStore.topicFilter = this.searchQuery.value;
+                    break;
+                }
+                case 'tutor': {
+                    // WorkshopsStore.topicFilter = this.searchQuery.value;
+                    break;
+                }
+            }
+        } else {
+            if (this.searchQuery.value && this.searchQuery.value.trim() !== '') {
+                this.setState({
+                    showWorkshopFilterGroup: true 
+                });
+            } else {
+                this.setState({
+                    showWorkshopFilterGroup: false
+                });
+            }
+        }
+    }
+
     //TODO: Make this working so it can apply multiple query paramsters
     workshopModifyQueryParams(param, val) {
 
@@ -128,11 +164,39 @@ class PrimaryNav extends React.Component {
         }
     }
 
+    handleTopicSearch() {
+        this.setState({
+            workshopFilterSelected: 'topic'
+        });
+        WorkshopsStore.topicFilter = this.searchQuery.value;
+    }
+
+    handleDateSearch() {
+        this.setState({
+            workshopFilterSelected: 'date'
+        });
+        this.dateSearch = this.searchQuery.value;
+
+    }
+
+    handleLocationSearch() {
+        this.setState({
+            workshopFilterSelected: 'location'
+        });
+        this.locationSearch = this.searchQuery.value;
+    }
+
+    handleTutorSearch() {
+        this.setState({
+            workshopFilterSelected: 'tutor'
+        });
+        this.tutorSearch = this.searchQuery.value;
+    }
+
     getWorkshopSearchFilters() {
-        const {currentFilter} = this.state;
+        const {currentFilter, showWorkshopFilterGroup} = this.state;
         //var dateFilter, locationFilter, tutorFilter = '';
         var filter = '';
-
         if(currentFilter === 'topic') {
             filter = (
                 <div class="search-group">
@@ -169,18 +233,61 @@ class PrimaryNav extends React.Component {
                 </div>
             );
         } else if(currentFilter === 'tutor') {
-            filter = (<div>Tutor filter!</div>);
+            filter = (
+                <div class="search-bar">
+                    <input type="text" onChange={this.onWorkshopLocationSearchChange.bind(this)} ref={(c) => this.locationSearch = c} />
+                </div>
+            );
         }
+        let filterGroup;
+        const topicStyle = classNames({
+            filter: true,
+            'filter-selected': this.state.workshopFilterSelected === 'topic',
+        });
+
+        const dateStyle = classNames({
+            filter: true,
+            'filter-selected': this.state.workshopFilterSelected === 'date',
+        });
+
+        const locationStyle = classNames({
+            filter: true,
+            'filter-selected': this.state.workshopFilterSelected === 'location',
+        });
+
+        const tutorStyle = classNames({
+            filter: true,
+            'filter-selected': this.state.workshopFilterSelected === 'tutor',
+        });
+
+        if (showWorkshopFilterGroup) {
+            filterGroup = (
+                <div class="filter-group animated slideInDown">
+                    <div class="filter">Search by</div>
+                    <div className={topicStyle} onClick={this.handleTopicSearch.bind(this)}>TOPIC</div>
+                    <div className={dateStyle} onClick={this.handleDateSearch.bind(this)}>DATE</div>
+                    <div className={locationStyle} onClick={this.handleLocationSearch.bind(this)}>LOCATION</div>
+                    <div className={tutorStyle} onClick={this.handleTutorSearch.bind(this)}>TUTOR</div>
+                </div>
+            );
+        }
+        filter = (
+            <div class="stretch-secondary-nav">
+                <div class="search-group">
+                    <div class="search-container">
+                        <i class="fa fa-search offset-icon-right" aria-hidden="true"></i>
+                        <input type="text" placeholder="Search all workshops" onChange={this.onWorkshopSearchChange.bind(this)} ref={(c) => this.searchQuery = c} />
+                    </div>
+                </div>
+            </div>
+        );
 
         return (
-            <div class="animated slideInDown secondary-nav">
-                <div class="filters-control">
-                    <span onClick={this.onClickWorkshopTopicFilter.bind(this)}>topic</span>
+            <div>
+                <div class="animated slideInDown secondary-nav">
+                    {filter}
                 </div>
-                <div class="filters-control">
-                    <span class="filter-control-date" onClick={this.onClickWorkshopDateFilter.bind(this)}>date</span>
-                </div>
-                {filter}
+                {filterGroup}
             </div>
         );
     }
@@ -225,7 +332,6 @@ class PrimaryNav extends React.Component {
 
     render() {
         var authButton = '';
-
         if(this.state.loggedIn !== null) {
             if(this.state.loggedIn === false) {
                 authButton = (<span class="auth-button-login" onClick={this.handleLoginUser.bind(this)}><i class="fa fa-sign-in" aria-hidden="true"></i>Login</span>);

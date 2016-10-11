@@ -1,13 +1,61 @@
-.search-group {
-  input[type='text'] {
-    font-size:18px;
-    padding:10px 10px 10px 5px;
-    display:block;
-    width: 100%;
-    border:none;
-    border-bottom:1px solid #757575;
-  }
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
 
+.offset-icon-right {
+  color: white;
+  transform: translate(25px);
+}
+
+.search-group {
+  height:60%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  input[type='text'] {
+    font-size: 12px;
+    padding: 5px 5px 5px 30px;
+    color: #FFFFFF;
+    border:none;
+    background-color: #701214;
+    @include border-radius(10px);
+  }
+}
+
+@media only screen and (min-width: 380px) {
+  .search-group {
+    height:60%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    input[type='text'] {
+      font-size: 18px;
+      padding: 5px 5px 5px 30px;
+      color: #FFFFFF;
+      border:none;
+      background-color: #701214;
+      @include border-radius(10px);
+    }
+  }
+}
+
+.stretch-secondary-nav {
+  width: 80%;
+}
+
+@media only screen and (min-width: 380px) {
+  .stretch-secondary-nav {
+    width: 40%;
+  }
+}
+
+.search-container {
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .search-group-date {
@@ -18,6 +66,48 @@
       padding-top: 5px;
       padding-bottom: 5px;
       display: block;
+    }
+  }
+}
+
+.filter-group {
+  padding: 15px 15px 12px 15px;
+  display:flex;
+  justify-content: center;
+  align-items: flex-end;
+  background-color: #FFFFFF;
+  overflow-x: auto;
+  .filter {
+    font-weight: bold;
+    color: #333333;
+    margin-right: 10px;
+    margin-left: 10px;
+    font-size: 10px;
+  }
+  .filter-selected {
+    border-bottom: medium solid #9c9c9c;
+    color: #333333;
+  }
+}
+
+@media only screen and (min-width: 380px) {
+  .filter-group {
+    padding: 15px 15px 12px 15px;
+    display:flex;
+    justify-content: center;
+    align-items: flex-end;
+    background-color: #FFFFFF;
+    overflow-x: auto;
+    .filter {
+      font-weight: bold;
+      color: #333333;
+      margin-right: 15px;
+      margin-left: 15px;
+      font-size: 13px;
+    }
+    .filter-selected {
+      border-bottom: medium solid #9c9c9c;
+      color: #333333;
     }
   }
 }

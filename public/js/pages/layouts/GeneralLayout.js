@@ -10,9 +10,12 @@ class Layout extends React.Component {
     }
 
     render () {
+        const styleItUpStooge = {
+            backgroundColor: '#FAFAFA',
+        };
         return (
 
-            <div>
+            <div style={styleItUpStooge}>
                 <PrimaryNav />
                 <div id="Page">
 
