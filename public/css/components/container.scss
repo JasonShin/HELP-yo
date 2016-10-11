@@ -1,12 +1,12 @@
 //Content wrapper covers the whole screen on mobile
 .container {
-  background-color: white;
+  background-color: #FAFAFA;
   padding: 15px;
 
   //Following box shadow creates dropshadow effects
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.1);  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.1);  /* Firefox 3.5 - 3.6 */
-  box-shadow: 0 1px 2px rgba(0,0,0,.1);
+  // -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.1);  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  // -moz-box-shadow: 0 1px 2px rgba(0,0,0,.1);  /* Firefox 3.5 - 3.6 */
+  // box-shadow: 0 1px 2px rgba(0,0,0,.1);
 
 
   //Replace following to individual files

@@ -45,7 +45,7 @@ export const getWorkshopBookingFirebaseByWorkshopId = (opts) => {
  * @param opt
  */
 export const setReminderForBooking = (opt) => {
-    const {StartDate, to, subject, content} = opt;
+    const {StartDate, to, subject, content, type} = opt;
     var workshopStartDate = moment(StartDate);
     let year = workshopStartDate.year();
     let month = workshopStartDate.month();
@@ -55,8 +55,20 @@ export const setReminderForBooking = (opt) => {
     let second = workshopStartDate.second();
 
     var params = {
-        year, month, date, hour, minute, second, to, subject, content
+        year, month, date, hour, minute, second,
     };
+
+    let urlPrefix;
+    if (type === 'mail') {
+        urlPrefix = config.mailBaseURL;
+        params.to = to;
+        params.subject = subject
+        params.content = content;
+    } else if (type === 'sms') {
+        urlPrefix = config.smsBaseURL;
+        params.number = to;
+        params.message = content;
+    }
 
     var postParams = {
         params: params
@@ -64,10 +76,10 @@ export const setReminderForBooking = (opt) => {
 
     return new Promise((resolve, reject) => {
 
-        console.log('INFO: reminder mail URL: ', (`${config.mailBaseURL}setReminder`) );
+        console.log(`INFO: reminder ${type} URL: `, (`${urlPrefix}setReminder`) );
         console.log(params);
 
-        axios.get(`${config.mailBaseURL}setReminder`, postParams).then((val) => {
+        axios.get(`${urlPrefix}setReminder`, postParams).then((val) => {
             if (val.data.IsSuccess === 'false') {
                 reject(val.data.DisplayMessage);
             } else {

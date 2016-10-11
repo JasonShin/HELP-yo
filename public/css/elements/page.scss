@@ -2,17 +2,20 @@
   width: 100%;
   overflow: hidden;
   padding-bottom: 200px;
+  margin-top: 200px;
 }
 
 //Ensures all contents are contained within this central container
 #PageContent {
   width: 1150px;
   margin: 0px auto;
+  background-color: #FAFAFA;
 }
 
 @media (max-width: 1150px) {
   #PageContent {
     width: 100%;
+    background-color: #FAFAFA;
   }
 }
 

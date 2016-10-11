@@ -10,16 +10,16 @@ class Layout extends React.Component {
     }
 
     render () {
+        const styleItUpStooge = {
+            backgroundColor: '#FAFAFA',
+        };
         return (
 
-            <div>
+            <div style={styleItUpStooge}>
                 <PrimaryNav />
                 <div id="Page">
 
                     {this.props.children}
-                    <div id="GenericHelper">
-                        <i class="fa fa-question-circle generic-help-trigger" aria-hidden="true" onClick={this.onHelpClick.bind(this)}></i>
-                    </div>
 
                 </div>
             </div>

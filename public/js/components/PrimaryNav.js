@@ -5,6 +5,8 @@ import {logoutFirebase} from '../api/student.api';
 import WorkshopsStore from '../stores/WorkshopsStore';
 import { DateField, Calendar } from 'react-date-picker';
 
+const classNames = require('classnames');
+
 class PrimaryNav extends React.Component {
 
     pathWorkshops = '/workshops';
@@ -18,7 +20,9 @@ class PrimaryNav extends React.Component {
             selectedMenu: null,
             currentFilter: '',
             workshopStartStartDate: '',
-            workshopStartEndDate: ''
+            workshopStartEndDate: '',
+            showWorkshopFilterGroup: false,
+            workshopFilterSelected: '',
         };
     }
 
@@ -48,14 +52,6 @@ class PrimaryNav extends React.Component {
     handleLogoutUser() {
         logoutFirebase();
         this.props.router.push('/');
-    }
-    
-    handleWorkshopsToggle() {
-        if (this.state.selectedMenu) {
-            this.state.selectedMenu = null;
-        } else {
-            this.state.selectedMenu = 'workshops';
-        }
     }
 
     /************************
@@ -117,6 +113,40 @@ class PrimaryNav extends React.Component {
 
     }
 
+    onWorkshopSearchChange() {
+        const {workshopFilterSelected, showWorkshopFilterGroup} = this.state;
+        if (showWorkshopFilterGroup && workshopFilterSelected && workshopFilterSelected.trim() !== '') {
+            switch (workshopFilterSelected) {
+                case 'topic': {
+                    WorkshopsStore.topicFilter = this.searchQuery.value;
+                    break;
+                }
+                case 'date': {
+                    // WorkshopsStore.topicFilter = this.searchQuery.value;
+                    break;
+                }
+                case 'location': {
+                    // WorkshopsStore.topicFilter = this.searchQuery.value;
+                    break;
+                }
+                case 'tutor': {
+                    // WorkshopsStore.topicFilter = this.searchQuery.value;
+                    break;
+                }
+            }
+        } else {
+            if (this.searchQuery.value && this.searchQuery.value.trim() !== '') {
+                this.setState({
+                    showWorkshopFilterGroup: true 
+                });
+            } else {
+                this.setState({
+                    showWorkshopFilterGroup: false
+                });
+            }
+        }
+    }
+
     //TODO: Make this working so it can apply multiple query paramsters
     workshopModifyQueryParams(param, val) {
 
@@ -134,11 +164,39 @@ class PrimaryNav extends React.Component {
         }
     }
 
+    handleTopicSearch() {
+        this.setState({
+            workshopFilterSelected: 'topic'
+        });
+        WorkshopsStore.topicFilter = this.searchQuery.value;
+    }
+
+    handleDateSearch() {
+        this.setState({
+            workshopFilterSelected: 'date'
+        });
+        this.dateSearch = this.searchQuery.value;
+
+    }
+
+    handleLocationSearch() {
+        this.setState({
+            workshopFilterSelected: 'location'
+        });
+        this.locationSearch = this.searchQuery.value;
+    }
+
+    handleTutorSearch() {
+        this.setState({
+            workshopFilterSelected: 'tutor'
+        });
+        this.tutorSearch = this.searchQuery.value;
+    }
+
     getWorkshopSearchFilters() {
-        const {currentFilter} = this.state;
+        const {currentFilter, showWorkshopFilterGroup} = this.state;
         //var dateFilter, locationFilter, tutorFilter = '';
         var filter = '';
-
         if(currentFilter === 'topic') {
             filter = (
                 <div class="search-group">
@@ -175,21 +233,61 @@ class PrimaryNav extends React.Component {
                 </div>
             );
         } else if(currentFilter === 'tutor') {
-            filter = (<div>Tutor filter!</div>);
+            filter = (
+                <div class="search-bar">
+                    <input type="text" onChange={this.onWorkshopLocationSearchChange.bind(this)} ref={(c) => this.locationSearch = c} />
+                </div>
+            );
         }
+        let filterGroup;
+        const topicStyle = classNames({
+            filter: true,
+            'filter-selected': this.state.workshopFilterSelected === 'topic',
+        });
+
+        const dateStyle = classNames({
+            filter: true,
+            'filter-selected': this.state.workshopFilterSelected === 'date',
+        });
+
+        const locationStyle = classNames({
+            filter: true,
+            'filter-selected': this.state.workshopFilterSelected === 'location',
+        });
+
+        const tutorStyle = classNames({
+            filter: true,
+            'filter-selected': this.state.workshopFilterSelected === 'tutor',
+        });
+
+        if (showWorkshopFilterGroup) {
+            filterGroup = (
+                <div class="filter-group animated slideInDown">
+                    <div class="filter">Search by</div>
+                    <div className={topicStyle} onClick={this.handleTopicSearch.bind(this)}>TOPIC</div>
+                    <div className={dateStyle} onClick={this.handleDateSearch.bind(this)}>DATE</div>
+                    <div className={locationStyle} onClick={this.handleLocationSearch.bind(this)}>LOCATION</div>
+                    <div className={tutorStyle} onClick={this.handleTutorSearch.bind(this)}>TUTOR</div>
+                </div>
+            );
+        }
+        filter = (
+            <div class="stretch-secondary-nav">
+                <div class="search-group">
+                    <div class="search-container">
+                        <i class="fa fa-search offset-icon-right" aria-hidden="true"></i>
+                        <input type="text" placeholder="Search all workshops" onChange={this.onWorkshopSearchChange.bind(this)} ref={(c) => this.searchQuery = c} />
+                    </div>
+                </div>
+            </div>
+        );
 
         return (
             <div>
-                <ul class="filters-control">
-                    <li>
-                        <span onClick={this.onClickWorkshopTopicFilter.bind(this)}>topic</span>
-                    </li>
-
-                    <li>
-                        <span class="filter-control-date" onClick={this.onClickWorkshopDateFilter.bind(this)}>date</span>
-                    </li>
-                </ul>
-                {filter}
+                <div class="animated slideInDown secondary-nav">
+                    {filter}
+                </div>
+                {filterGroup}
             </div>
         );
     }
@@ -199,9 +297,41 @@ class PrimaryNav extends React.Component {
         console.log(workshopQuery);
     }
 
+    handleBookingsToggle() {
+        if (this.state.selectedMenu === 'bookings') {
+            this.state.selectedMenu = null;
+        } else {
+            this.state.selectedMenu = 'bookings';
+        }
+    }
+    
+    handleInfoToggle() {
+        if (this.state.selectedMenu === 'info') {
+            this.state.selectedMenu = null;
+        } else {
+            this.state.selectedMenu = 'info';
+        }
+    }
+
+    handleWorkshopsToggle() {
+        if (this.state.selectedMenu === 'workshops') {
+            this.state.selectedMenu = null;
+        } else {
+            this.state.selectedMenu = 'workshops';
+        }
+    }
+
+    handleFaqsToggle() {
+        if (this.state.selectedMenu === 'faqs') {
+            this.state.selectedMenu = null;
+        } else {
+            this.state.selectedMenu = 'faqs';
+        }
+    }
+
+
     render() {
         var authButton = '';
-
         if(this.state.loggedIn !== null) {
             if(this.state.loggedIn === false) {
                 authButton = (<span class="auth-button-login" onClick={this.handleLoginUser.bind(this)}><i class="fa fa-sign-in" aria-hidden="true"></i>Login</span>);
@@ -219,9 +349,26 @@ class PrimaryNav extends React.Component {
             filter = this.getWorkshopSearchFilters();
         }
 
+        const workshopsLinkStyle = classNames({
+            'menu-navbar-div': true,
+            'emphasise-nav-link': this.state.selectedMenu === 'workshops'
+        });
+        const bookingsLinkStyle = classNames({
+            'menu-navbar-div': true,
+            'emphasise-nav-link': this.state.selectedMenu === 'bookings'
+        });
+        const infoLinkStyle = classNames({
+            'menu-navbar-div': true,
+            'emphasise-nav-link': this.state.selectedMenu === 'info'
+        });
+        const faqLinkStyle = classNames({
+            'menu-navbar-div': true,
+            'emphasise-nav-link': this.state.selectedMenu === 'faqs'
+        });
+
         //TODO: Find better looking overflow-y design than default one on desktop browsers
         return (
-            <div>
+            <div class="sticky">
                 <div id='PrimaryNav'>
                     <div class="logo">
                         <div class="logo-container">
@@ -232,18 +379,14 @@ class PrimaryNav extends React.Component {
                         </div>
                     </div>
                     <div class="menu-container">
-                        <div class="menu-main-container">
-                            <ul>
-                                <li class="motion-ripple-button"><Link onClick={this.handleWorkshopsToggle.bind(this)} to="/workshopSets">workshops</Link></li>
-                                <li><Link to="/bookings/past">my bookings</Link></li>
-                                <li><Link to="/profile">my info</Link></li>
-                                <li>faq's</li>
-                                <li>{authButton}</li>
-                            </ul>
+                        <div class="menu-navbar">
+                            <div className={workshopsLinkStyle}><Link onClick={this.handleWorkshopsToggle.bind(this)} to="/workshopSets">workshops</Link></div>
+                            <div className={bookingsLinkStyle}><Link onClick={this.handleBookingsToggle.bind(this)} to="/bookings/past">my bookings</Link></div>
+                            <div className={infoLinkStyle}><Link onClick={this.handleInfoToggle.bind(this)} to="/profile">my info</Link></div>
+                            <div className={faqLinkStyle}>faq's</div>
+                            <div className="menu-navbar-div">{authButton}</div>
                         </div>
-
                     </div>
-
                 </div>
                 <div class="menu-filter-container">
                     <div class="menu-container">
