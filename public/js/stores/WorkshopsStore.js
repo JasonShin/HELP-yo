@@ -30,14 +30,29 @@ class WorkshopsStore {
                 return this.mapDataToModel(data);
             });
 
-            this.workshops = apiWorkshops.concat(data.workshops.filter((workshop) => {
-                return workshop.WorkShopSetID === workshopSetId;
-            }).map((w) => {
+            console.log('apiworkshops', apiWorkshops.length)
+
+            const localWorkshops = data.workshops.filter(workshop => {
+                console.log('workshopsetId');
+                console.log('compareTo', workshopSetId);
+                console.log('workshop\'s setID', workshop.WorkShopSetID );
+
+                return workshop.WorkShopSetID.toString().trim() === workshopSetId.toString().trim();
+            });
+            const mapped = localWorkshops.map((w) => {
+                for (const key of Object.keys(w)) {
+                    if (w[key]) {
+                        w[key] = w[key].toString().trim();
+                    }
+                }
                 return this.mapDataToModel(w);
-            }));
+            });
 
-            console.log(this.workshops.length);
+            console.log('localworkshops', mapped.length);
 
+            this.workshops = apiWorkshops.concat(mapped);
+            console.log('api workshops length', apiWorkshops.length);
+            console.log('this dot workshops length', this.workshops.length);
         }).catch((error) => {
             console.log(error);
         });
@@ -89,9 +104,8 @@ class WorkshopsStore {
             return this.workshops.filter((workshop) => {
                 return locationMatcher.test(workshop.campus);
             });
-        } else {
-            return this.workshops;
         }
+        return this.workshops;
 
         // console.log('INFO: Topic filter changed ', this.topicFilter, this.topicFilter == '' );
 
