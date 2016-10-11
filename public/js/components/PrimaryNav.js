@@ -54,83 +54,24 @@ class PrimaryNav extends React.Component {
         this.props.router.push('/');
     }
 
-    /************************
-    * On Filter Click STARTS
-    *************************/
-    onClickWorkshopTopicFilter(e) {
-        e.preventDefault();
-        this.setState({
-            currentFilter: 'topic'
-        });
-    }
-
-    onClickWorkshopDateFilter(e) {
-        e.preventDefault();
-        this.setState({
-            currentFilter: 'date'
-        });
-    }
-
-    onClickWorkshopLocationFilter(e) {
-        e.preventDefault();
-        this.setState({
-            currentFilter: 'location'
-        });
-    }
-
-    //TODO: Search by tutor does not work from API endpoint
-    onClickWorkshopTutorFilter(e) {
-        e.preventDefault();
-        this.setState({
-            currentFilter: 'tutor'
-        });
-    }
-
-    /************************
-     * On Filter Click ENDS
-     *************************/
-
-    onWorkshopTopicSearchChange(e) {
-        e.preventDefault();
-        WorkshopsStore.topicFilter = this.topicSearch.value;
-    }
-
-    //TODO: search by location does not work from API endpoint
-    onWorkshopLocationSearchChange(e) {
-        e.preventDefault();
-        //WorkshopsStore.topicFilter = this.locationSearch.value;
-    }
-
-    onStartStartDateChange(dateString, { dateMoment, timestamp }) {
-        console.log(dateString);
-
-        this.workshopModifyQueryParams('StartDtBegin', dateString);
-    }
-
-    onStartEndDateChange(dateString, { dateMoment, timestamp }) {
-        console.log(dateString);
-        this.workshopModifyQueryParams('StartDtEnd', dateString);
-
-    }
-
     onWorkshopSearchChange() {
         const {workshopFilterSelected, showWorkshopFilterGroup} = this.state;
         if (showWorkshopFilterGroup && workshopFilterSelected && workshopFilterSelected.trim() !== '') {
             switch (workshopFilterSelected) {
                 case 'topic': {
-                    WorkshopsStore.topicFilter = this.searchQuery.value;
+                    this.setFilter(workshopFilterSelected);
                     break;
                 }
                 case 'date': {
-                    // WorkshopsStore.topicFilter = this.searchQuery.value;
+                    this.setFilter(workshopFilterSelected);
                     break;
                 }
                 case 'location': {
-                    // WorkshopsStore.topicFilter = this.searchQuery.value;
+                    this.setFilter(workshopFilterSelected);
                     break;
                 }
                 case 'tutor': {
-                    // WorkshopsStore.topicFilter = this.searchQuery.value;
+                    this.setFilter(workshopFilterSelected);
                     break;
                 }
             }
@@ -164,81 +105,71 @@ class PrimaryNav extends React.Component {
         }
     }
 
+    setFilter(filterGroup) {
+        switch(filterGroup) {
+            case 'topic': {
+                WorkshopsStore.dateFilter = '';
+                WorkshopsStore.locationFilter = '';
+                WorkshopsStore.tutorFilter = '';
+                WorkshopsStore.topicFilter = this.searchQuery.value;
+                break;
+            }
+            case 'date': {
+                WorkshopsStore.dateFilter = this.searchQuery.value;
+                WorkshopsStore.locationFilter = '';
+                WorkshopsStore.tutorFilter = '';
+                WorkshopsStore.topicFilter = '';
+                break;
+            }
+            case 'location': {
+                WorkshopsStore.dateFilter = '';
+                WorkshopsStore.locationFilter = this.searchQuery.value;
+                WorkshopsStore.tutorFilter = '';
+                WorkshopsStore.topicFilter = '';
+                break;
+            }
+            case 'tutor': {
+                WorkshopsStore.dateFilter = '';
+                WorkshopsStore.locationFilter = '';
+                WorkshopsStore.tutorFilter = this.searchQuery.value;
+                WorkshopsStore.topicFilter = '';
+                break;
+            }
+        }
+    }
+
     handleTopicSearch() {
         this.setState({
             workshopFilterSelected: 'topic'
         });
-        WorkshopsStore.topicFilter = this.searchQuery.value;
+        this.setFilter('topic');
     }
 
     handleDateSearch() {
         this.setState({
             workshopFilterSelected: 'date'
         });
-        this.dateSearch = this.searchQuery.value;
-
+        this.setFilter('date');
     }
 
     handleLocationSearch() {
         this.setState({
             workshopFilterSelected: 'location'
         });
-        this.locationSearch = this.searchQuery.value;
+        this.setFilter('location');
     }
 
     handleTutorSearch() {
         this.setState({
             workshopFilterSelected: 'tutor'
         });
-        this.tutorSearch = this.searchQuery.value;
+        this.setFilter('tutor');
     }
 
     getWorkshopSearchFilters() {
         const {currentFilter, showWorkshopFilterGroup} = this.state;
         //var dateFilter, locationFilter, tutorFilter = '';
-        var filter = '';
-        if(currentFilter === 'topic') {
-            filter = (
-                <div class="search-group">
-                    <input type="text" onChange={this.onWorkshopTopicSearchChange.bind(this)} ref={(c) => this.topicSearch = c} />
-                </div>
-            );
-        } else if(currentFilter === 'date') {
-            filter = (
-                <div class="search-group search-group-date">
-                    <div>
-                        <label>Start Date</label>
-                        <Calendar
-                            dateFormat="YYYY-MM-DD"
-                            onChange={this.onStartStartDateChange.bind(this)}
-                            ref={(c) => {this.workshopStartDate = c}}
-                        />
-                    </div>
-
-                    <div>
-                        <label>End Date</label>
-                        <Calendar
-                            dateFormat="YYYY-MM-DD"
-                            onChange={this.onStartEndDateChange.bind(this)}
-                            ref={(c) => {this.workshopEndDate = c}}
-                        />
-                    </div>
-
-                </div>
-            );
-        } else if(currentFilter === 'location') {
-            filter = (
-                <div class="search-bar">
-                    <input type="text" onChange={this.onWorkshopLocationSearchChange.bind(this)} ref={(c) => this.locationSearch = c} />
-                </div>
-            );
-        } else if(currentFilter === 'tutor') {
-            filter = (
-                <div class="search-bar">
-                    <input type="text" onChange={this.onWorkshopLocationSearchChange.bind(this)} ref={(c) => this.locationSearch = c} />
-                </div>
-            );
-        }
+        let filter = '';
         let filterGroup;
         const topicStyle = classNames({
             filter: true,
@@ -292,11 +223,6 @@ class PrimaryNav extends React.Component {
         );
     }
 
-    handleWorkshopQueryChange() {
-        let workshopQuery = this.workshopQuery.value;
-        console.log(workshopQuery);
-    }
-
     handleBookingsToggle() {
         if (this.state.selectedMenu === 'bookings') {
             this.state.selectedMenu = null;
@@ -341,12 +267,12 @@ class PrimaryNav extends React.Component {
         }
 
         //TODO: Work on from this point
-        var filter = '';
+        var secondaryNav = '';
         var pathname = window.location.pathname;
 
         //Workshops page filter
         if(pathname === this.pathWorkshops) {
-            filter = this.getWorkshopSearchFilters();
+            secondaryNav = this.getWorkshopSearchFilters();
         }
 
         const workshopsLinkStyle = classNames({
@@ -391,7 +317,7 @@ class PrimaryNav extends React.Component {
                 <div class="menu-filter-container">
                     <div class="menu-container">
                         <div class="menu-main-container">
-                            {filter}
+                            {secondaryNav}
                         </div>
                     </div>
                 </div>

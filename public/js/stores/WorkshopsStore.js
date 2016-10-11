@@ -5,9 +5,15 @@ import { computed, observable, autorun } from 'mobx';
 import WorkshopModel from '../models/WorkshopModel';
 import { searchWorkshops } from '../api/workshop.api';
 
+const data = require('./data');
+const moment = require('moment');
+
 class WorkshopsStore {
     @observable workshops = [];
     @observable topicFilter = '';
+    @observable dateFilter = '';
+    @observable locationFilter = '';
+    @observable tutorFilter = '';
     @observable single = null;
 
     //TODO: Complete this when Workshop API is working
@@ -19,11 +25,19 @@ class WorkshopsStore {
         }).then((response) => {
 
             console.log('Workshop data fetched');
-            console.log(response.data.Results);
 
-            this.workshops = response.data.Results.map((data) => {
+            const apiWorkshops = response.data.Results.map((data) => {
                 return this.mapDataToModel(data);
             });
+
+            this.workshops = apiWorkshops.concat(data.workshops.filter((workshop) => {
+                return workshop.WorkShopSetID === workshopSetId;
+            }).map((w) => {
+                return this.mapDataToModel(w);
+            }));
+
+            console.log(this.workshops.length);
+
         }).catch((error) => {
             console.log(error);
         });
@@ -58,17 +72,29 @@ class WorkshopsStore {
 
 
     @computed get filteredWorkshops() {
-        var topicMatcher = new RegExp(this.topicFilter, 'i');
-        console.log('INFO: Topic filter changed ', this.topicFilter, this.topicFilter == '' );
-        if(this.topicFilter == '') {
+        if (this.topicFilter !== '') {
+            var topicMatcher = new RegExp(this.topicFilter, 'i');
+            return this.workshops.filter((workshop) => {
+                return topicMatcher.test(workshop.topic);
+            });
+        } else if (this.dateFilter !== '') {
+            return this.workshops.filter((workshop) => {
+                return moment(this.dateFilter).isBetween(workshop.StartDate, workshop.EndDate, null, '[]');
+            });
+        } else if (this.tutorFilter !== '') {
+            var tutorMatcher = new RegExp(this.tutorFilter, 'i');
+            return this.workshops;
+        } else if (this.locationFilter !== '') {
+            var locationMatcher = new RegExp(this.locationFilter, 'i');
+            return this.workshops.filter((workshop) => {
+                return locationMatcher.test(workshop.campus);
+            });
+        } else {
             return this.workshops;
         }
 
-        return this.workshops.filter(
-            (workshop) => {
-                return topicMatcher.test(workshop.topic);
-            }
-        );
+        // console.log('INFO: Topic filter changed ', this.topicFilter, this.topicFilter == '' );
+
     }
 
     getPageNum(workshopId) {
