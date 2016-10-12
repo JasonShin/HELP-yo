@@ -71,7 +71,7 @@ class Login extends React.Component {
                                 <input type="text" class="form-control" ref={(c) =>{this.emailField = c}} required />
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
-                                <label>uts student id</label>
+                                <label>uts student email</label>
                             </div>
 
                             <div class="form-group">
