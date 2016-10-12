@@ -28,7 +28,9 @@ export default class Single extends React.Component {
             studentId: 0,
             userEmail: '',
             spinnerEnabled: true,
-            authorized: false
+            authorized: false,
+            reminderType: '',
+            reminderPeriod: ''
         }
     }
 
@@ -127,18 +129,22 @@ export default class Single extends React.Component {
     onClickReminder(e, reminderPayload) {
         let reminderMethod = this.reminderMethod.value;
         let reminderTime = this.reminderTime.value;
+        let phoneNumber = this.phoneNumber.value;
+
         let workshopStart = new Date(reminderPayload.start);
         console.log(reminderMethod);
         console.log(reminderTime);
         console.log(StudentStore.student);
 
         switch(reminderMethod) {
-            case 'email':
+            case 'email': {
                 this.setEmailNotification(workshopStart, reminderTime, reminderPayload);
                 break;
-            case 'sms':
-                this.setSmsNotification(workshopStart, reminderTime, reminderPayload);
-                break;
+            }
+            case 'sms': {
+                this.setSmsNotification(workshopStart, reminderTime, reminderPayload, phoneNumber);
+                break;    
+            }
         }
     }
 
@@ -168,8 +174,9 @@ export default class Single extends React.Component {
         });
     }
 
-    setSmsNotification(workshopTime, reminderTime, reminderPayload) {
+    setSmsNotification(workshopTime, reminderTime, reminderPayload, phoneNumber) {
         let absoluteReminderTime = workshopTime;
+        console.log(reminderPayload);
         switch(reminderTime) {
             case '1hour': {
                 absoluteReminderTime.setHours(absoluteReminderTime.getHours() - 1); 
@@ -184,15 +191,24 @@ export default class Single extends React.Component {
                 break;
             }
         }
-
+        const message = `Reminder: You have a '${reminderPayload.title}' workshop at ${reminderPayload.room} on ${reminderPayload.duration}`;
         setReminderForBooking({
             StartDate: absoluteReminderTime.toISOString().slice(0, 19),
-            to: this.state.phone,
+            to: phoneNumber,
             subject: 'HELPS - Workshop Reminder',
-            content: `You have registered for the ${reminderPayload.title} workshop at ${reminderPayload.room} at ${reminderPayload.duration}`,
+            content: message,
             type: 'sms',
         });
 
+    }
+
+    onReminderTypeChange() {
+        const reminderType = this.reminderMethod.value;
+        if (reminderType && reminderType.trim() !== '') {
+            this.setState({
+                reminderType,
+            });
+        }
     }
 
     //TODO: Fix naming convention spinnerEnabled => workshopSpinnerEnabled   singleInstance => workshopSingleInstance
@@ -217,6 +233,7 @@ export default class Single extends React.Component {
             let availables = singleInstance.maximum - singleInstance.BookingCount;
             let bookingButton = '';
             let reminderButton = '';
+            let phoneNumberInput = '';
             let attendanceFields = '';
 
             const reminderPayload = {
@@ -233,11 +250,18 @@ export default class Single extends React.Component {
             const isWorkshopOver = (moment(Date.now()).isAfter(singleInstance.EndDate));
             if(singleBooking !== null && singleBooking !== '') {
                 bookingButton = (<button class="button-book-cancel" onClick={this.onBookCancelClick.bind(this)}>cancel booking</button>);
+                if (this.state.reminderType === 'sms') {
+                    phoneNumberInput = (
+                        <div class="form-group">
+                            <input type="text" ref={ (c) => this.phoneNumber = c  } required="true" />
+                        </div>
+                    );
+                }
                 reminderButton = (
                     <div class="reminder-methods">
                         <div class="form-group-select">
                             <label>choose a reminder method</label>
-                            <select ref={(c) => this.reminderMethod = c}>
+                            <select onChange={this.onReminderTypeChange.bind(this)} ref={(c) => this.reminderMethod = c}>
                                 <option value="">--- options ---</option>
                                 <option value="email">Email</option>
                                 <option value="sms">SMS</option>
@@ -253,6 +277,7 @@ export default class Single extends React.Component {
                                 <option value="2days">2 days before</option>
                             </select>
                         </div>
+                        {phoneNumberInput}
                         <button class="button-reminder" onClick={this.onClickReminder.bind(this, {}, reminderPayload)}>Set reminder</button>
                     </div>
                 );
