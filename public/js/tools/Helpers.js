@@ -34,7 +34,6 @@ export const getFormattedStartDate = (rawStartDate) => {
     return formattedDate.toUpperCase();
 };
 
-
 export const getFormattedEndDate = (rawEndDate) => {
     let momentDate = moment(rawEndDate);
     let formattedDate = momentDate.format('DD/MM/YYYY');

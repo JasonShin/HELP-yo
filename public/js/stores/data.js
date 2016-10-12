@@ -1,7 +1,7 @@
 module.exports = {
   workshops: [
     {
-      WorkshopId: 8,
+      WorkshopId: 4208,
       topic: "Studying at UTS",
       description: "“I’m new to UTS and I don’t know what’s going on!” This workshop provides practical information to help you prepare for your course of study, e.g. what your lecturers and tutors expect from you; independent and group learning; assessments and grades; using subject outlines, UTS Online and Turnitin; and where to seek help.",
       targetingGroup: "1st year undergraduate and postgraduate coursework students, especially those who are new to the Australian education system",
@@ -23,7 +23,7 @@ module.exports = {
       ProgramId: null
     },
     {
-      WorkshopId: 9,
+      WorkshopId: 4209,
       topic: "Studying at UTS (repeat)",
       description: "“I’m new to UTS and I don’t know what’s going on!” This workshop provides practical information to help you prepare for your course of study, e.g. what your lecturers and tutors expect from you; independent and group learning; assessments and grades; using subject outlines, UTS Online and Turnitin; and where to seek help.",
       targetingGroup: "1st year undergraduate and postgraduate coursework students, especially those who are new to the Australian education system",
@@ -45,7 +45,7 @@ module.exports = {
       ProgramId: null
     },
     {
-      WorkshopId: 10,
+      WorkshopId: 42010,
       topic: "Reading and note-taking",
       description: "“I have so much to read and so little time. How do I know which is more important?” This workshop introduces you to the reading and note-taking strategies that will help you to read selectively and critically, and make notes to prepare for an assignment and/or exam revision.",
       targetingGroup: "all student",
@@ -67,7 +67,7 @@ module.exports = {
       ProgramId: null
     },
     {
-      WorkshopId: 23,
+      WorkshopId: 42023,
       topic: "Planning and researching for an assignment",
       description: "“I have an assignment due soon, but I don’t know where and how to begin. I have found all these materials, but I don’t know which are good and which are not.” This workshop focuses on (1) the importance of planning for an assignment before you embark on writing the first draft; and (2) how to determine if the materials are suitable for the assignment – their academic value, validity, reliability and currency.",
       targetingGroup: "all students",
@@ -89,7 +89,7 @@ module.exports = {
       ProgramId: null
     },
     {
-      WorkshopId: 40,
+      WorkshopId: 42040,
       topic: "Monday general conversation sessions",
       description: "Want to feel more confident when you speak?\r\nWant to practice effective ways to speak socially and professionally?\r\nLooking forward to meeting new people, making new friends and learning to network in a friendly, supportive environment? Love to talk and keen to support others get over their shyness?\r\nDon't wait, register now!",
       targetingGroup: "All students",
@@ -111,7 +111,7 @@ module.exports = {
       ProgramId: null
     },
     {
-      WorkshopId: 41,
+      WorkshopId: 42041,
       topic: "Tuesday general conversation sessions",
       description: null,
       targetingGroup: null,
@@ -133,7 +133,7 @@ module.exports = {
       ProgramId: null
     },
     {
-      WorkshopId: 42,
+      WorkshopId: 42042,
       topic: "Wednesday general conversation sessions",
       description: null,
       targetingGroup: null,
@@ -155,7 +155,7 @@ module.exports = {
       ProgramId: null
     },
     {
-      WorkshopId: 3,
+      WorkshopId: 4203,
       topic: "Academic Writing",
       description: "The workshop (total of 15 hours) will take you through the entire writing process, from analysing an assignment question to planning, researching, writing and editing your assignment draft. The skills that you will learn can then be easily transferred to your context of learning.\r\nOBJECTIVES:\r\n\r\n* To analyse assignment questions and plan for assignments\r\n* To understand different types of assignments and their structures\r\n* To practise academic reading and note-taking skills\r\n* To practise paraphrasing and synthesizing skills\r\n* To correctly use Harvard (UTS) referencing style conventions\r\n* To write clear academic paragraphs\r\n* To understand common sentence-level grammar errors\r\n* To edit and proofread your writing",
       targetingGroup: "All UTS students",
@@ -177,7 +177,7 @@ module.exports = {
       ProgramId: null
     },
     {
-      WorkshopId: 4,
+      WorkshopId: 4204,
       topic: "Oral Presentation",
       description: "The workshop (total of 10 hours) aims to equip you with the skills to prepare for and deliver an effective presentation. Your verbal and non-verbal communication skills, and ability to use audiovisual aids appropriately will hopefully improve over the 5-day workshop. You will be given plenty of opportunities to present, and receive feedback from your presentations.\r\n\r\nOBJECTIVES:\r\n\r\n* To write a presentation objective and use it to focus as you prepare for your presentation\r\n* To select relevant material for your presentation\r\n* To express yourself clearly, audibly and fluently\r\n* To choose a speaking style appropriate to the situation\r\n* To use appropriate non-verbal communication\r\n* To use audio visual aids such as PowerPoint and Prezi to support your presentation\r\n* To handle questions from an audience\r\n* To put some strategies into place for overcoming nerves\r\n* To compose and deliver a short presentation and gain feedback from this presentation\r\n* To evaluate your own performance",
       targetingGroup: "All UTS students",
@@ -199,7 +199,7 @@ module.exports = {
       ProgramId: null
     },
     {
-      WorkshopId: 5,
+      WorkshopId: 4205,
       topic: "Academic Writing - evening",
       description: "The workshop (total of 15 hours) will take you through the entire writing process, from analysing an assignment question to planning, researching, writing and editing your assignment draft. The skills that you will learn can then be easily transferred to your context of learning.\r\n\r\nOBJECTIVES:\r\n\r\n* To analyse assignment questions and plan for assignments\r\n* To understand different types of assignments and their structures\r\n* To practise academic reading and note-taking skills\r\n* To practise paraphrasing and synthesizing skills\r\n* To correctly use Harvard (UTS) referencing style conventions\r\n* To write clear academic paragraphs",
       targetingGroup: "All UTS students",
@@ -221,7 +221,7 @@ module.exports = {
       ProgramId: null
     },
     {
-      WorkshopId: 11,
+      WorkshopId: 42011,
       topic: "Planning and researching for an assignment",
       description: "“I have an assignment due soon, but I don’t know where and how to begin. I have found all these materials, but I don’t know which are good and which are not.” This workshop focuses on (1) the importance of planning for an assignment before you embark on writing the first draft; and (2) how to determine if the materials are suitable for the assignment – their academic value, validity, reliability and currency.",
       targetingGroup: "all students",
@@ -243,7 +243,7 @@ module.exports = {
       ProgramId: null
     },
     {
-      WorkshopId: 12,
+      WorkshopId: 42012,
       topic: "Planning and researching for an assignment (repeat)",
       description: "“I have an assignment due soon, but I don’t know where and how to begin. I have found all these materials, but I don’t know which are good and which are not.” This workshop focuses on (1) the importance of planning for an assignment before you embark on writing the first draft; and (2) how to determine if the materials are suitable for the assignment – their academic value, validity, reliability and currency.",
       targetingGroup: "all students",
@@ -265,7 +265,7 @@ module.exports = {
       ProgramId: null
     },
     {
-      WorkshopId: 13,
+      WorkshopId: 42013,
       topic: "Analysing an assignment question",
       description: "“What does it mean by ‘analyse’, or ‘discuss’, or ‘critically examine’? I don’t understand the assignment question, and what is required of me.” This workshop helps you to identify the key words and break down an assignment question so you can address each component adequately and comprehensively.",
       targetingGroup: "All students",
@@ -287,7 +287,7 @@ module.exports = {
       ProgramId: null
     },
     {
-      WorkshopId: 35,
+      WorkshopId: 42035,
       topic: "Participating in tutorials",
       description: "“I’m too afraid to speak up in tutorials.” This workshop provides practical information on how to prepare for your tutorials, and how to overcome your nervousness in speaking in front of a group.",
       targetingGroup: "all students",
@@ -309,7 +309,7 @@ module.exports = {
       ProgramId: null
     },
     {
-      WorkshopId: 36,
+      WorkshopId: 42036,
       topic: "Participating in tutorials (repeat)",
       description: "“I’m too afraid to speak up in tutorials.” This workshop provides practical information on how to prepare for your tutorials, and how to overcome your nervousness in speaking in front of a group.",
       targetingGroup: "all students",
@@ -331,7 +331,7 @@ module.exports = {
       ProgramId: null
     },
     {
-      WorkshopId: 54,
+      WorkshopId: 42054,
       topic: "Giving an oral presentation",
       description: "“I have to do an in-class presentation. How do I prepare for it? What can I do to ensure that my presentation is structured clearly?” The workshop aims to help you plan, organise and structure your oral presentation, and teach you how to use visual aids effectively. Practical information will be provided to help you calm your nerves, and enhance your clarity in speech.",
       targetingGroup: "all students",
@@ -353,7 +353,7 @@ module.exports = {
       ProgramId: null
     },
     {
-      WorkshopId: 37,
+      WorkshopId: 42037,
       topic: "Writing clinic 1",
       description: "A writing clinic provides a space and an opportunity for you to work on your assignment. It is held in a training room at the UTS Library where desktop computers are provided, plus all the materials – books, journals, audio-visual materials – you need under one roof! On top of that, a HELPS advisor is on hand to answer your questions while you work. Writing clinics take place on Fridays (1 – 5pm.) during semester.",
       targetingGroup: "All students",
@@ -375,7 +375,7 @@ module.exports = {
       ProgramId: null
     },
     {
-      WorkshopId: 38,
+      WorkshopId: 42038,
       topic: "Writing clinic 2",
       description: "A writing clinic provides a space and an opportunity for you to work on your assignment. It is held in a training room at the UTS Library where desktop computers are provided, plus all the materials – books, journals, audio-visual materials – you need under one roof! On top of that, a HELPS advisor is on hand to answer your questions while you work. Writing clinics take place on Fridays (1 – 5pm.) during semester.\r\nIf you bring your own computer, you may attend the clinic session without having to make a booking.",
       targetingGroup: "All students",
@@ -397,7 +397,7 @@ module.exports = {
       ProgramId: null
     },
     {
-      WorkshopId: 39,
+      WorkshopId: 42039,
       topic: "Writing clinic 3",
       description: "A writing clinic provides a space and an opportunity for you to work on your assignment. It is held in a training room at the UTS Library where desktop computers are provided, plus all the materials – books, journals, audio-visual materials – you need under one roof! On top of that, a HELPS advisor is on hand to answer your questions while you work. Writing clinics take place on Fridays (1 – 5pm.) during semester.\r\nIf you bring your own computer, you may attend the clinic session without having to make a booking.",
       targetingGroup: "All students",
@@ -419,7 +419,7 @@ module.exports = {
       ProgramId: null
     },
     {
-      WorkshopId: 77,
+      WorkshopId: 42077,
       topic: "IELTS-STYLE SPEAKING",
       description: "together, we discuss, plan, practise & give feedback on typical IELTS Speaking topics",
       targetingGroup: null,
@@ -441,7 +441,7 @@ module.exports = {
       ProgramId: null
     },
     {
-      WorkshopId: 78,
+      WorkshopId: 42078,
       topic: "GENERAL CONVERSATION SESSION",
       description: null,
       targetingGroup: null,
@@ -463,7 +463,7 @@ module.exports = {
       ProgramId: null
     },
     {
-      WorkshopId: 79,
+      WorkshopId: 42079,
       topic: "OUT & ABOUT",
       description: "Summer in Sydney is wonderful, with many things to see and do. Each week, choose an activity then come back and tell us all about it.  This is a great way to enjoy the summer and practise your presentation skills.",
       targetingGroup: null,
@@ -485,7 +485,7 @@ module.exports = {
       ProgramId: null
     },
     {
-      WorkshopId: 1011,
+      WorkshopId: 4201011,
       topic: "U:PASSwrite for MPO students ONLY",
       description: null,
       targetingGroup: null,
@@ -507,7 +507,7 @@ module.exports = {
       ProgramId: 99
     },
     {
-      WorkshopId: 1012,
+      WorkshopId: 4201012,
       topic: "U:PASSwrite for MPO students ONLY",
       description: null,
       targetingGroup: null,
@@ -529,7 +529,7 @@ module.exports = {
       ProgramId: 99
     },
     {
-      WorkshopId: 1013,
+      WorkshopId: 4201013,
       topic: "U:PASSwrite for MPO students ONLY",
       description: null,
       targetingGroup: null,
@@ -551,7 +551,7 @@ module.exports = {
       ProgramId: 99
     },
     {
-      WorkshopId: 1091,
+      WorkshopId: 4201091,
       topic: "U:PASSwrite for EngComm Students",
       description: null,
       targetingGroup: null,
@@ -573,7 +573,7 @@ module.exports = {
       ProgramId: 106
     },
     {
-      WorkshopId: 1092,
+      WorkshopId: 4201092,
       topic: "U:PASSwrite for EngComm Students",
       description: null,
       targetingGroup: null,
@@ -595,7 +595,7 @@ module.exports = {
       ProgramId: 106
     },
     {
-      WorkshopId: 1093,
+      WorkshopId: 4201093,
       topic: "U:PASSwrite for EngComm Students",
       description: null,
       targetingGroup: null,
@@ -617,7 +617,7 @@ module.exports = {
       ProgramId: 106
     },
     {
-      WorkshopId: 1163,
+      WorkshopId: 4201163,
       topic: "U:PASSwrite for CITP students ONLY",
       description: null,
       targetingGroup: null,
@@ -639,7 +639,7 @@ module.exports = {
       ProgramId: 112
     },
     {
-      WorkshopId: 1164,
+      WorkshopId: 4201164,
       topic: "U:PASSwrite for CITP students ONLY",
       description: null,
       targetingGroup: null,
@@ -661,7 +661,7 @@ module.exports = {
       ProgramId: 112
     },
     {
-      WorkshopId: 1165,
+      WorkshopId: 4201165,
       topic: "U:PASSwrite for CITP students ONLY",
       description: null,
       targetingGroup: null,
@@ -683,7 +683,7 @@ module.exports = {
       ProgramId: 112
     },
     {
-      WorkshopId: 1223,
+      WorkshopId: 4201223,
       topic: "U:PASSwrite for First Year Nursing students ONLY",
       description: null,
       targetingGroup: null,
@@ -705,7 +705,7 @@ module.exports = {
       ProgramId: 117
     },
     {
-      WorkshopId: 1224,
+      WorkshopId: 4201224,
       topic: "U:PASSwrite for First Year Nursing students ONLY",
       description: null,
       targetingGroup: null,
@@ -727,7 +727,7 @@ module.exports = {
       ProgramId: 117
     },
     {
-      WorkshopId: 1225,
+      WorkshopId: 4201225,
       topic: "U:PASSwrite for First Year Nursing students ONLY",
       description: null,
       targetingGroup: null,
@@ -749,7 +749,7 @@ module.exports = {
       ProgramId: 117
     },
     {
-      WorkshopId: 2370,
+      WorkshopId: 4202370,
       topic: "Assignment writing workshop: 1st year and accelerated B.Nursing students",
       description: null,
       targetingGroup: null,
@@ -771,7 +771,7 @@ module.exports = {
       ProgramId: 206
     },
     {
-      WorkshopId: 2371,
+      WorkshopId: 4202371,
       topic: "Assignment writing workshop: 1st year and accelerated B.Nursing students",
       description: null,
       targetingGroup: null,
@@ -793,7 +793,7 @@ module.exports = {
       ProgramId: 206
     },
     {
-      WorkshopId: 2372,
+      WorkshopId: 4202372,
       topic: "Assignment writing workshop: 1st year and accelerated B.Nursing students",
       description: null,
       targetingGroup: null,
@@ -815,7 +815,7 @@ module.exports = {
       ProgramId: 206
     },
     {
-      WorkshopId: 2598,
+      WorkshopId: 4202598,
       topic: "Academic Writing - Day 1",
       description: null,
       targetingGroup: null,
@@ -837,7 +837,7 @@ module.exports = {
       ProgramId: 210
     },
     {
-      WorkshopId: 2599,
+      WorkshopId: 4202599,
       topic: "Academic Writing - Day 1",
       description: null,
       targetingGroup: null,
@@ -859,7 +859,7 @@ module.exports = {
       ProgramId: 210
     },
     {
-      WorkshopId: 2600,
+      WorkshopId: 4202600,
       topic: "Academic Writing - Day 1",
       description: null,
       targetingGroup: null,
