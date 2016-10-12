@@ -16,6 +16,15 @@ export const createWorkshopBookingFirebase = (opts) => {
     FirebaseAPI.context.database().ref('/workshopBookings/userId/' + parseEmailForFirebase(userId) + '/workshopId/' + workshopId).set(opts);
 };
 
+export const updateWorkshopBookingAttendedFirebase = (opts) => {
+
+    const { workshopId, userId } = opts;
+
+    console.log('INFO: updated attendance ' , workshopId, userId);
+
+    FirebaseAPI.context.database().ref('/workshopBookings/userId/' + parseEmailForFirebase(userId) + '/workshopId/' + workshopId).update(opts);
+};
+
 export const deleteWorkshopBookingFirebase = (opts) => {
 
     const { workshopId, userId} = opts;

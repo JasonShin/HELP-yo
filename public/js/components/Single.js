@@ -9,7 +9,8 @@ import WorkshopBookingsStore from '../stores/WorkshopBookingsStore';
 import StudentStore from '../stores/StudentStore';
 import FirebaseAPI from '../api/firebase.api';
 import Spinner from '../components/Spinner';
-import {createWorkshopBookingFirebase, deleteWorkshopBookingFirebase, setReminderForBooking} from '../api/workshopBookings.api';
+import {createWorkshopBookingFirebase, updateWorkshopBookingAttendedFirebase, deleteWorkshopBookingFirebase, setReminderForBooking} from '../api/workshopBookings.api';
+import {getRandomWords} from '../tools/RandomWordHelper';
 
 @observer
 export default class Single extends React.Component {
@@ -77,7 +78,9 @@ export default class Single extends React.Component {
                 EndDate: workshopEndDate,
                 maxSeats,
                 BookingCount,
-                campus
+                campus,
+                passcode: getRandomWords(),
+                attended: false
             });
         } else {
             console.log('You are not authorized to perform Booking action');
@@ -98,6 +101,23 @@ export default class Single extends React.Component {
         } else {
             console.log('You are not authorized to perform Booking action');
         }
+    }
+
+    onClickSubmitAttendance(e) {
+        e.preventDefault();
+        var singleBooking = WorkshopBookingsStore.single;
+        var currentPasscodeVal = this.passcodeField.value;
+
+        console.log('INFO - PASSCODE HINT: ', singleBooking.passcode);
+
+        if(currentPasscodeVal === singleBooking.passcode) {
+            updateWorkshopBookingAttendedFirebase({
+                workshopId: this.state.workshopId,
+                userId: this.state.userEmail,
+                attended: true
+            });
+        }
+
     }
 
     //TODO: Fix reminder feature => Throws 404 error
@@ -197,6 +217,7 @@ export default class Single extends React.Component {
             let availables = singleInstance.maximum - singleInstance.BookingCount;
             let bookingButton = '';
             let reminderButton = '';
+            let attendanceFields = '';
 
             const reminderPayload = {
                 title: singleInstance.topic,
@@ -207,8 +228,6 @@ export default class Single extends React.Component {
             //Show cancel booking
 
             //Todo optimize this to properly wait for response from Firebase
-
-
             if(singleBooking !== null && singleBooking !== '') {
                 bookingButton = (<button class="button-book-cancel" onClick={this.onBookCancelClick.bind(this)}>cancel booking</button>);
                 reminderButton = (
@@ -234,9 +253,26 @@ export default class Single extends React.Component {
                         <button class="button-reminder" onClick={this.onClickReminder.bind(this, singleInstance.StartDate, reminderPayload)}>Set reminder</button>
                     </div>
                 );
+
+                if(singleBooking.attended == false) {
+                    attendanceFields = (
+                        <div>
+                            <h2>
+                                Please enter your passcode!
+                            </h2>
+                            <div class="form-group">
+                                <input type="text" ref={ (c) => this.passcodeField = c  } required="true" />
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>PASSCODE</label>
+                            </div>
+
+                            <button class="button-reminder" onClick={this.onClickSubmitAttendance.bind(this)}>Submit Attendance</button>
+                        </div>
+                    );
+                }
             } else {
                 bookingButton = (<button class="button-book" onClick={this.onBookNowClick.bind(this)}>book now</button>);
-
             }
 
             singleComponent = (
@@ -270,6 +306,14 @@ export default class Single extends React.Component {
 
                     <div class="single-controls">
                         <div>
+
+                            <div class="single-controls-left">
+                                <Spinner visible={bookingSpinnerEnabled} />
+                                <div>
+                                    {attendanceFields}
+                                </div>
+                            </div>
+
                             <div class="single-controls-right">
                                 <Spinner visible={bookingSpinnerEnabled} />
                                 <div>

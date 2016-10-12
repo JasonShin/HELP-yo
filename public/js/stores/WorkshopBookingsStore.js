@@ -37,9 +37,12 @@ class WorkshopBookingsStore {
             if(snapshot.val() !== null){
                 console.log('INFO: ', snapshot.val());
                 var data = snapshot.val();
-                this.single = new WorkshopBookingModel(
+
+                //TODO: Instead of creating model, just use JSON object
+                /*this.single = new WorkshopBookingModel(
                     data.workshopId, data.userId
-                );
+                );*/
+                this.single = data;
             } else {
                 this.single = '';
             }
@@ -55,7 +58,8 @@ class WorkshopBookingsStore {
                 var data = snapshot.val().workshopId;
                 for(var key in data) {
                     let currentBooking = data[key];
-
+                    console.log('INFO: workshop booking pushing list');
+                    console.log(currentBooking);
                     this.bookings.push(
                         new WorkshopBookingModel(
                             currentBooking.workshopId,
