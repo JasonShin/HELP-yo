@@ -24,11 +24,11 @@
 
   //LOGO STARTS
   .logo {
-    $logo-image-width: 35px;
-    $logo-text-size: 35px;
+    $logo-image-width: 27px;
+    $logo-text-size:  30px;
 
-    padding-top: 10px;
-    padding-bottom: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 
     text-align: center; //Required to center this wrapper
     .logo-container {
@@ -110,7 +110,7 @@
       display: flex;                  /* establish flex container */
       justify-content: center; /* switched from default (flex-start, see below) */
       align-items: center;
-      padding: 15px 15px 12px 15px; 
+      padding: 5px; 
       overflow-x: auto;
     }
   }
