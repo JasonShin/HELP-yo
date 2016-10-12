@@ -35,7 +35,7 @@ class Login extends React.Component {
             this.setState({
                 enableSpinner: false
             });
-            this.props.router.push('/');
+            this.props.router.push('/workshopSets');
          }).
          catch((err) => {
             console.log(err);
