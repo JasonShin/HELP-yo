@@ -34,8 +34,9 @@ const app = document.getElementById('app');
 ReactDOM.render(
     <Router history={browserHistory}>
         <Route path="/" component={GeneralLayout}>
-            <IndexRoute component={SessionTypesPage} />
+            <IndexRoute component={Login} />
             <Route path="login" component={Login} />
+            <Route path="sessions" component={SessionTypesPage} />
             <Route path="register" component={RegisterPage} />
             <Route path="register/profile" component={MyProfile} onEnter={FirebaseAPI.requireAuth} />
             <Route path="profile" component={MyProfile} onEnter={FirebaseAPI.requireAuth} />
