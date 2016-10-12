@@ -62,6 +62,7 @@
     "moment": "^2.15.0",
     "node-fetch": "^1.6.0",
     "node-sass": "^3.8.0",
+    "random-word-generator": "^0.9.9",
     "react": "^15.3.2",
     "react-addons-css-transition-group": "^15.3.1",
     "react-date-picker": "^5.3.28",
