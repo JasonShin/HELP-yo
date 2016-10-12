@@ -7,35 +7,42 @@
 
 .offset-icon-right {
   color: white;
-  transform: translate(25px);
+  transform: translate(13px, -2px);
+  z-index: 1;
 }
 
 .search-group {
   height:60%;
+  width: 100%;
   display:flex;
   justify-content: center;
   align-items: center;
   input[type='text'] {
+    width: 100%;
     font-size: 12px;
     padding: 5px 5px 5px 30px;
     color: #FFFFFF;
     border:none;
     background-color: #701214;
-    @include border-radius(10px);
+    transform: translate(-10px);
+    @include border-radius(10px); 
   }
 }
 
 @media only screen and (min-width: 380px) {
   .search-group {
     height:60%;
+    width: 100%;
     display:flex;
     justify-content: center;
     align-items: center;
     input[type='text'] {
+      width: 100%;
       font-size: 18px;
       padding: 5px 5px 5px 30px;
       color: #FFFFFF;
       border:none;
+      transform: translate(-10px);
       background-color: #701214;
       @include border-radius(10px);
     }
@@ -43,16 +50,17 @@
 }
 
 .stretch-secondary-nav {
-  width: 80%;
+  width: 95%;
 }
 
 @media only screen and (min-width: 380px) {
   .stretch-secondary-nav {
-    width: 40%;
+    width: 60%;
   }
 }
 
 .search-container {
+  width: 100%;
   display:flex;
   justify-content: center;
   align-items: center;

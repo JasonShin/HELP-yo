@@ -267,6 +267,7 @@ class PrimaryNav extends React.Component {
         }
 
         //TODO: Work on from this point
+        var primaryNav = '';
         var secondaryNav = '';
         var pathname = window.location.pathname;
 
@@ -292,6 +293,20 @@ class PrimaryNav extends React.Component {
             'emphasise-nav-link': this.state.selectedMenu === 'faqs'
         });
 
+        if (pathname !== '/login' && pathname !== '/') {
+            primaryNav = (
+                <div class="menu-container">
+                    <div class="menu-navbar">
+                        <div className={workshopsLinkStyle}><Link onClick={this.handleWorkshopsToggle.bind(this)} to="/workshopSets">workshops</Link></div>
+                        <div className={bookingsLinkStyle}><Link onClick={this.handleBookingsToggle.bind(this)} to="/bookings/past">my bookings</Link></div>
+                        <div className={infoLinkStyle}><Link onClick={this.handleInfoToggle.bind(this)} to="/profile">my info</Link></div>
+                        <div className={faqLinkStyle}>faq's</div>
+                        <div className="menu-navbar-div">{authButton}</div>
+                    </div>
+                </div>
+            );
+        }
+
         //TODO: Find better looking overflow-y design than default one on desktop browsers
         return (
             <div class="sticky">
@@ -304,15 +319,7 @@ class PrimaryNav extends React.Component {
                             </Link>
                         </div>
                     </div>
-                    <div class="menu-container">
-                        <div class="menu-navbar">
-                            <div className={workshopsLinkStyle}><Link onClick={this.handleWorkshopsToggle.bind(this)} to="/workshopSets">workshops</Link></div>
-                            <div className={bookingsLinkStyle}><Link onClick={this.handleBookingsToggle.bind(this)} to="/bookings/past">my bookings</Link></div>
-                            <div className={infoLinkStyle}><Link onClick={this.handleInfoToggle.bind(this)} to="/profile">my info</Link></div>
-                            <div className={faqLinkStyle}>faq's</div>
-                            <div className="menu-navbar-div">{authButton}</div>
-                        </div>
-                    </div>
+                    {primaryNav}
                 </div>
                 <div class="menu-filter-container">
                     <div class="menu-container">
