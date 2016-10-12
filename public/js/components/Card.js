@@ -21,11 +21,9 @@ export default class Card extends React.Component {
     }
 
     render() {
-
         let {id = '', cardType = '',
             type = '', title = '', rangeDate = '', lecturerEmail = '',
-            maxSeats = '', availableSeats = '', dateMeta = '', campus = ''} = this.props;
-
+            maxSeats = '', availableSeats = '', dateMeta = '', campus = '', tutor = ''} = this.props;
         //Workshop & Session
         if(title !== '') {
             title = (<header>{title}</header>);
@@ -49,6 +47,10 @@ export default class Card extends React.Component {
         //Session
         if(lecturerEmail !== '') {
             lecturerEmail = (<div><i class="fa fa-graduation-cap" aria-hidden="true"></i> {lecturerEmail}</div>);
+        }
+
+        if(tutor !== '') {
+            tutor = (<div><i class="fa fa-graduation-cap" aria-hidden="true"></i> {tutor}</div>);
         }
 
         //TODO: Stronger validation required
@@ -87,6 +89,7 @@ export default class Card extends React.Component {
                         {maxSeats}
                         {availableSeats}
                         {lecturerEmail}
+                        {tutor}
                         <div class="card-more-details">{moreDetailsLink}</div>
                     </div>
 

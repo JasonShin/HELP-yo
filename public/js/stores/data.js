@@ -6,8 +6,8 @@ module.exports = {
       description: "“I’m new to UTS and I don’t know what’s going on!” This workshop provides practical information to help you prepare for your course of study, e.g. what your lecturers and tutors expect from you; independent and group learning; assessments and grades; using subject outlines, UTS Online and Turnitin; and where to seek help.",
       targetingGroup: "1st year undergraduate and postgraduate coursework students, especially those who are new to the Australian education system",
       campus: "CB02.05.39",
-      StartDate: "2016-10-13T20:00:00",
-      EndDate: "2016-10-13T21:00:00",
+      StartDate: "2016-10-12T23:48:00",
+      EndDate: "2016-10-13T00:48:00",
       maximum: 35,
       WorkShopSetID: 3,
       cutoff: null,
@@ -20,7 +20,8 @@ module.exports = {
       NumOfWeeks: null,
       ProgramStartDate: null,
       ProgramEndDate: null,
-      ProgramId: null
+      ProgramId: null,
+      tutor: 'Hillary Clinton'
     },
     {
       WorkshopId: 4209,
@@ -42,7 +43,8 @@ module.exports = {
       NumOfWeeks: null,
       ProgramStartDate: null,
       ProgramEndDate: null,
-      ProgramId: null
+      ProgramId: null,
+      tutor: 'Hillary Clinton'
     },
     {
       WorkshopId: 42010,
@@ -64,7 +66,8 @@ module.exports = {
       NumOfWeeks: null,
       ProgramStartDate: null,
       ProgramEndDate: null,
-      ProgramId: null
+      ProgramId: null,
+      tutor: 'Kanye West'
     },
     {
       WorkshopId: 42023,
@@ -86,7 +89,8 @@ module.exports = {
       NumOfWeeks: null,
       ProgramStartDate: null,
       ProgramEndDate: null,
-      ProgramId: null
+      ProgramId: null,
+      tutor: 'Tahliah Barnett' 
     },
     {
       WorkshopId: 42040,
@@ -108,7 +112,8 @@ module.exports = {
       NumOfWeeks: null,
       ProgramStartDate: null,
       ProgramEndDate: null,
-      ProgramId: null
+      ProgramId: null,
+      tutor: 'Aubrey Graham'
     },
     {
       WorkshopId: 42041,
@@ -130,7 +135,8 @@ module.exports = {
       NumOfWeeks: null,
       ProgramStartDate: null,
       ProgramEndDate: null,
-      ProgramId: null
+      ProgramId: null,
+      tutor: 'Aubrey Graham'
     },
     {
       WorkshopId: 42042,
@@ -152,7 +158,8 @@ module.exports = {
       NumOfWeeks: null,
       ProgramStartDate: null,
       ProgramEndDate: null,
-      ProgramId: null
+      ProgramId: null,
+      tutor: 'Aubrey Graham'
     },
     {
       WorkshopId: 4203,
@@ -174,7 +181,8 @@ module.exports = {
       NumOfWeeks: null,
       ProgramStartDate: null,
       ProgramEndDate: null,
-      ProgramId: null
+      ProgramId: null,
+      tutor: 'Hillary Clinton'
     },
     {
       WorkshopId: 4204,
@@ -196,7 +204,8 @@ module.exports = {
       NumOfWeeks: null,
       ProgramStartDate: null,
       ProgramEndDate: null,
-      ProgramId: null
+      ProgramId: null,
+      tutor: 'Tahliah Barnett'
     },
     {
       WorkshopId: 4205,
@@ -218,7 +227,8 @@ module.exports = {
       NumOfWeeks: null,
       ProgramStartDate: null,
       ProgramEndDate: null,
-      ProgramId: null
+      ProgramId: null,
+      tutor: 'Kanye West'
     },
     {
       WorkshopId: 42011,
@@ -240,7 +250,8 @@ module.exports = {
       NumOfWeeks: null,
       ProgramStartDate: null,
       ProgramEndDate: null,
-      ProgramId: null
+      ProgramId: null,
+      tutor: 'Tahliah Barnett' 
     },
     {
       WorkshopId: 42012,
@@ -262,7 +273,8 @@ module.exports = {
       NumOfWeeks: null,
       ProgramStartDate: null,
       ProgramEndDate: null,
-      ProgramId: null
+      ProgramId: null,
+      tutor: 'Hillary Clinton'
     },
     {
       WorkshopId: 42013,
@@ -284,7 +296,8 @@ module.exports = {
       NumOfWeeks: null,
       ProgramStartDate: null,
       ProgramEndDate: null,
-      ProgramId: null
+      ProgramId: null,
+      tutor: 'Aubrey Graham'
     },
     {
       WorkshopId: 42035,
@@ -306,7 +319,8 @@ module.exports = {
       NumOfWeeks: null,
       ProgramStartDate: null,
       ProgramEndDate: null,
-      ProgramId: null
+      ProgramId: null,
+      tutor: 'Kanye West'
     },
     {
       WorkshopId: 42036,
@@ -328,7 +342,8 @@ module.exports = {
       NumOfWeeks: null,
       ProgramStartDate: null,
       ProgramEndDate: null,
-      ProgramId: null
+      ProgramId: null,
+      tutor: 'Hillary Clinton'
     },
     {
       WorkshopId: 42054,
@@ -350,7 +365,8 @@ module.exports = {
       NumOfWeeks: null,
       ProgramStartDate: null,
       ProgramEndDate: null,
-      ProgramId: null
+      ProgramId: null,
+      tutor: 'Hillary Clinton'
     },
     {
       WorkshopId: 42037,
@@ -372,7 +388,8 @@ module.exports = {
       NumOfWeeks: null,
       ProgramStartDate: null,
       ProgramEndDate: null,
-      ProgramId: null
+      ProgramId: null,
+      tutor: 'Kanye West'
     },
     {
       WorkshopId: 42038,
@@ -394,7 +411,8 @@ module.exports = {
       NumOfWeeks: null,
       ProgramStartDate: null,
       ProgramEndDate: null,
-      ProgramId: null
+      ProgramId: null,
+      tutor: 'Kanye West'
     },
     {
       WorkshopId: 42039,
@@ -416,7 +434,8 @@ module.exports = {
       NumOfWeeks: null,
       ProgramStartDate: null,
       ProgramEndDate: null,
-      ProgramId: null
+      ProgramId: null,
+      tutor: 'Hillary Clinton'
     },
     {
       WorkshopId: 42077,
@@ -438,7 +457,8 @@ module.exports = {
       NumOfWeeks: null,
       ProgramStartDate: null,
       ProgramEndDate: null,
-      ProgramId: null
+      ProgramId: null,
+      tutor: 'Aubrey Graham'
     },
     {
       WorkshopId: 42078,
@@ -460,7 +480,8 @@ module.exports = {
       NumOfWeeks: null,
       ProgramStartDate: null,
       ProgramEndDate: null,
-      ProgramId: null
+      ProgramId: null,
+      tutor: 'Tahliah Barnett' 
     },
     {
       WorkshopId: 42079,
@@ -482,7 +503,8 @@ module.exports = {
       NumOfWeeks: null,
       ProgramStartDate: null,
       ProgramEndDate: null,
-      ProgramId: null
+      ProgramId: null,
+      tutor: 'Tahliah Barnett' 
     },
     {
       WorkshopId: 4201011,
@@ -504,7 +526,8 @@ module.exports = {
       NumOfWeeks: 10,
       ProgramStartDate: "2014-02-11T00:00:00",
       ProgramEndDate: "2014-04-21T00:00:00",
-      ProgramId: 99
+      ProgramId: 99,
+      tutor: 'Aubrey Graham'
     },
     {
       WorkshopId: 4201012,
@@ -526,7 +549,8 @@ module.exports = {
       NumOfWeeks: 10,
       ProgramStartDate: "2014-02-11T00:00:00",
       ProgramEndDate: "2014-04-21T00:00:00",
-      ProgramId: 99
+      ProgramId: 99,
+      tutor: 'Hillary Clinton'
     },
     {
       WorkshopId: 4201013,
@@ -548,7 +572,8 @@ module.exports = {
       NumOfWeeks: 10,
       ProgramStartDate: "2014-02-11T00:00:00",
       ProgramEndDate: "2014-04-21T00:00:00",
-      ProgramId: 99
+      ProgramId: 99,
+      tutor: 'Kanye West'
     },
     {
       WorkshopId: 4201091,
@@ -570,7 +595,8 @@ module.exports = {
       NumOfWeeks: 12,
       ProgramStartDate: "2014-03-10T00:00:00",
       ProgramEndDate: "2014-06-01T00:00:00",
-      ProgramId: 106
+      ProgramId: 106,
+      tutor: 'Tahliah Barnett'
     },
     {
       WorkshopId: 4201092,
@@ -592,7 +618,8 @@ module.exports = {
       NumOfWeeks: 12,
       ProgramStartDate: "2014-03-10T00:00:00",
       ProgramEndDate: "2014-06-01T00:00:00",
-      ProgramId: 106
+      ProgramId: 106,
+      tutor: 'Hillary Clinton'
     },
     {
       WorkshopId: 4201093,
@@ -614,7 +641,8 @@ module.exports = {
       NumOfWeeks: 12,
       ProgramStartDate: "2014-03-10T00:00:00",
       ProgramEndDate: "2014-06-01T00:00:00",
-      ProgramId: 106
+      ProgramId: 106,
+      tutor: 'Tahliah Barnett' 
     },
     {
       WorkshopId: 4201163,
@@ -636,7 +664,8 @@ module.exports = {
       NumOfWeeks: 12,
       ProgramStartDate: "2014-03-11T00:00:00",
       ProgramEndDate: "2014-06-02T00:00:00",
-      ProgramId: 112
+      ProgramId: 112,
+      tutor: 'Tahliah Barnett' 
     },
     {
       WorkshopId: 4201164,
@@ -658,7 +687,8 @@ module.exports = {
       NumOfWeeks: 12,
       ProgramStartDate: "2014-03-11T00:00:00",
       ProgramEndDate: "2014-06-02T00:00:00",
-      ProgramId: 112
+      ProgramId: 112,
+      tutor: 'Kanye West'
     },
     {
       WorkshopId: 4201165,
@@ -680,7 +710,8 @@ module.exports = {
       NumOfWeeks: 12,
       ProgramStartDate: "2014-03-11T00:00:00",
       ProgramEndDate: "2014-06-02T00:00:00",
-      ProgramId: 112
+      ProgramId: 112,
+      tutor: 'Hillary Clinton'
     },
     {
       WorkshopId: 4201223,
@@ -702,7 +733,8 @@ module.exports = {
       NumOfWeeks: 12,
       ProgramStartDate: "2014-03-10T00:00:00",
       ProgramEndDate: "2014-06-01T00:00:00",
-      ProgramId: 117
+      ProgramId: 117,
+      tutor: 'Tahliah Barnett'
     },
     {
       WorkshopId: 4201224,
@@ -724,7 +756,8 @@ module.exports = {
       NumOfWeeks: 12,
       ProgramStartDate: "2014-03-10T00:00:00",
       ProgramEndDate: "2014-06-01T00:00:00",
-      ProgramId: 117
+      ProgramId: 117,
+      tutor: 'Aubrey Graham'
     },
     {
       WorkshopId: 4201225,
@@ -746,7 +779,8 @@ module.exports = {
       NumOfWeeks: 12,
       ProgramStartDate: "2014-03-10T00:00:00",
       ProgramEndDate: "2014-06-01T00:00:00",
-      ProgramId: 117
+      ProgramId: 117,
+      tutor: 'Kanye West'
     },
     {
       WorkshopId: 4202370,
@@ -768,7 +802,8 @@ module.exports = {
       NumOfWeeks: 9,
       ProgramStartDate: "2015-03-10T00:00:00",
       ProgramEndDate: "2015-05-11T00:00:00",
-      ProgramId: 206
+      ProgramId: 206,
+      tutor: 'Tahliah Barnett' 
     },
     {
       WorkshopId: 4202371,
@@ -790,7 +825,8 @@ module.exports = {
       NumOfWeeks: 9,
       ProgramStartDate: "2015-03-10T00:00:00",
       ProgramEndDate: "2015-05-11T00:00:00",
-      ProgramId: 206
+      ProgramId: 206,
+      tutor: 'Tahliah Barnett' 
     },
     {
       WorkshopId: 4202372,
@@ -812,7 +848,8 @@ module.exports = {
       NumOfWeeks: 9,
       ProgramStartDate: "2015-03-10T00:00:00",
       ProgramEndDate: "2015-05-11T00:00:00",
-      ProgramId: 206
+      ProgramId: 206,
+      tutor: 'Hillary Clinton'
     },
     {
       WorkshopId: 4202598,
@@ -834,7 +871,8 @@ module.exports = {
       NumOfWeeks: 1,
       ProgramStartDate: "2015-07-06T00:00:00",
       ProgramEndDate: "2015-07-12T00:00:00",
-      ProgramId: 210
+      ProgramId: 210,
+      tutor: 'Kanye West'
     },
     {
       WorkshopId: 4202599,
@@ -856,7 +894,8 @@ module.exports = {
       NumOfWeeks: 1,
       ProgramStartDate: "2015-07-06T00:00:00",
       ProgramEndDate: "2015-07-12T00:00:00",
-      ProgramId: 210
+      ProgramId: 210,
+      tutor: 'Aubrey Graham'
     },
     {
       WorkshopId: 4202600,
@@ -878,7 +917,8 @@ module.exports = {
       NumOfWeeks: 1,
       ProgramStartDate: "2015-07-06T00:00:00",
       ProgramEndDate: "2015-07-12T00:00:00",
-      ProgramId: 210
+      ProgramId: 210,
+      tutor: 'Hillary Clinton'
     }
-  ],
+  ]
 };

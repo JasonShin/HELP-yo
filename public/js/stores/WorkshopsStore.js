@@ -24,19 +24,11 @@ class WorkshopsStore {
             workshopSetId: workshopSetId
         }).then((response) => {
 
-            console.log('Workshop data fetched');
-
             const apiWorkshops = response.data.Results.map((data) => {
                 return this.mapDataToModel(data);
             });
 
-            console.log('apiworkshops', apiWorkshops.length)
-
             const localWorkshops = data.workshops.filter(workshop => {
-                console.log('workshopsetId');
-                console.log('compareTo', workshopSetId);
-                console.log('workshop\'s setID', workshop.WorkShopSetID );
-
                 return workshop.WorkShopSetID.toString().trim() === workshopSetId.toString().trim();
             });
             const mapped = localWorkshops.map((w) => {
@@ -47,12 +39,7 @@ class WorkshopsStore {
                 }
                 return this.mapDataToModel(w);
             });
-
-            console.log('localworkshops', mapped.length);
-
             this.workshops = apiWorkshops.concat(mapped);
-            console.log('api workshops length', apiWorkshops.length);
-            console.log('this dot workshops length', this.workshops.length);
         }).catch((error) => {
             console.log(error);
         });
@@ -98,7 +85,9 @@ class WorkshopsStore {
             });
         } else if (this.tutorFilter !== '') {
             var tutorMatcher = new RegExp(this.tutorFilter, 'i');
-            return this.workshops;
+            return this.workshops.filter((workshop) => {
+                return workshop.tutor && tutorMatcher.test(workshop.tutor);
+            });
         } else if (this.locationFilter !== '') {
             var locationMatcher = new RegExp(this.locationFilter, 'i');
             return this.workshops.filter((workshop) => {
@@ -135,13 +124,16 @@ class WorkshopsStore {
         searchWorkshops({
             page: pageVal
         }).then((response) => {
-            this.single = this.mapDataToModel(
-                response.data.Results.find((workshop) => {
+            if (response.data.Results.length === 0) {
+                this.single = this.mapDataToModel(data.workshops.find((w) => w.WorkshopId == workshopId));
+            } else {
+                this.single = this.mapDataToModel(
+                    response.data.Results.find((workshop) => {
 
-                    return workshop.WorkshopId == workshopId;
-                })
-            );
-
+                        return workshop.WorkshopId == workshopId;
+                    })
+                );                
+            }
         }).catch((error) => {
             console.log(error);
         });
@@ -169,7 +161,8 @@ class WorkshopsStore {
             data.reminder_sent,
             data.targetingGroup,
             data.topic,
-            data.type
+            data.type,
+            data.tutor,
         );
     }
 

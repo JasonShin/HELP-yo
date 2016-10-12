@@ -11,6 +11,8 @@ import FirebaseAPI from '../api/firebase.api';
 import Spinner from '../components/Spinner';
 import {createWorkshopBookingFirebase, deleteWorkshopBookingFirebase, setReminderForBooking} from '../api/workshopBookings.api';
 
+const moment = require('moment');
+
 @observer
 export default class Single extends React.Component {
 
@@ -102,12 +104,10 @@ export default class Single extends React.Component {
 
     //TODO: Fix reminder feature => Throws 404 error
     //TODO: get these working
-    onClickReminder(e, workshopTime, reminderPayload) {
-        e.preventDefault();
+    onClickReminder(e, reminderPayload) {
         let reminderMethod = this.reminderMethod.value;
         let reminderTime = this.reminderTime.value;
-        let workshopStart = new Date(workshopTime);
-
+        let workshopStart = new Date(reminderPayload.start);
         console.log(reminderMethod);
         console.log(reminderTime);
         console.log(StudentStore.student);
@@ -126,15 +126,15 @@ export default class Single extends React.Component {
         let absoluteReminderTime = workshopTime;
         switch(reminderTime) {
             case '1hour': {
-                absoluteReminderTime.setHours(absoluteReminder.getHours() - 1); 
+                absoluteReminderTime.setHours(absoluteReminderTime.getHours() - 1); 
                 break;
             }
             case '1day': {
-                absoluteReminderTime.setDate(absoluteReminder.getDate() - 1);
+                absoluteReminderTime.setDate(absoluteReminderTime.getDate() - 1);
                 break;
             }
             case '2days': {
-                absoluteReminderTime.setDate(absoluteReminder.getDate() - 2);
+                absoluteReminderTime.setDate(absoluteReminderTime.getDate() - 2);
                 break;
             }
         }
@@ -152,15 +152,15 @@ export default class Single extends React.Component {
         let absoluteReminderTime = workshopTime;
         switch(reminderTime) {
             case '1hour': {
-                absoluteReminderTime.setHours(absoluteReminder.getHours() - 1); 
+                absoluteReminderTime.setHours(absoluteReminderTime.getHours() - 1); 
                 break;
             }
             case '1day': {
-                absoluteReminderTime.setDate(absoluteReminder.getDate() - 1);
+                absoluteReminderTime.setDate(absoluteReminderTime.getDate() - 1);
                 break;
             }
             case '2days': {
-                absoluteReminderTime.setDate(absoluteReminder.getDate() - 2);
+                absoluteReminderTime.setDate(absoluteReminderTime.getDate() - 2);
                 break;
             }
         }
@@ -199,6 +199,7 @@ export default class Single extends React.Component {
             let reminderButton = '';
 
             const reminderPayload = {
+                start: singleInstance.StartDate,
                 title: singleInstance.topic,
                 room: singleInstance.campus,
                 duration: formattedDate,
@@ -208,7 +209,7 @@ export default class Single extends React.Component {
 
             //Todo optimize this to properly wait for response from Firebase
 
-
+            const isWorkshopOver = (moment(Date.now()).isAfter(singleInstance.EndDate));
             if(singleBooking !== null && singleBooking !== '') {
                 bookingButton = (<button class="button-book-cancel" onClick={this.onBookCancelClick.bind(this)}>cancel booking</button>);
                 reminderButton = (
@@ -231,12 +232,13 @@ export default class Single extends React.Component {
                                 <option value="2days">2 days before</option>
                             </select>
                         </div>
-                        <button class="button-reminder" onClick={this.onClickReminder.bind(this, singleInstance.StartDate, reminderPayload)}>Set reminder</button>
+                        <button class="button-reminder" onClick={this.onClickReminder.bind(this, {}, reminderPayload)}>Set reminder</button>
                     </div>
                 );
+            } else if (isWorkshopOver) {
+                bookingButton = (<button class="button-book-cancel">workshop is over</button>);
             } else {
                 bookingButton = (<button class="button-book" onClick={this.onBookNowClick.bind(this)}>book now</button>);
-
             }
 
             singleComponent = (

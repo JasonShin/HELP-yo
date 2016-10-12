@@ -66,6 +66,7 @@ export default class WorkshopModel {
     @observable targetingGroup;
     @observable topic;
     @observable type;
+    @observable tutor;
 
 
     constructor(BookingCount,
@@ -87,7 +88,8 @@ export default class WorkshopModel {
                 reminder_sent,
                 targetingGroup,
                 topic,
-                type) {
+                type,
+                tutor) {
 
         this.BookingCount = BookingCount;
         this.DaysOfWeek = DaysOfWeek;
@@ -109,6 +111,7 @@ export default class WorkshopModel {
         this.targetingGroup = targetingGroup;
         this.topic = topic;
         this.type = type;
+        this.tutor = tutor;
 
     }
 }

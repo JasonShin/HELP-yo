@@ -80,6 +80,7 @@ export default class WorkshopList extends React.Component {
                     maxSeats={maxSeats} availableSeats={availables}
                     dateMeta={[monthDate.monthAsString,monthDate.date]}
                     campus={workshop.campus}
+                    tutor={workshop.tutor}
                     cardType="workshop"
                 />
             );

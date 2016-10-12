@@ -48,7 +48,7 @@ export const setReminderForBooking = (opt) => {
     const {StartDate, to, subject, content, type} = opt;
     var workshopStartDate = moment(StartDate);
     let year = workshopStartDate.year();
-    let month = workshopStartDate.month();
+    let month = workshopStartDate.month() + 1;
     let date = workshopStartDate.date();
     let hour = workshopStartDate.hour();
     let minute = workshopStartDate.minute();

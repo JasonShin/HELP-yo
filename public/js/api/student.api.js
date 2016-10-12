@@ -27,41 +27,19 @@ export const setStudentProfile = (
         throw new Error('Missed out on a required param');
     }
 
-    //TODO: Please find if this is the only way to throw an error about HTTP request failed while interacting with HELP API
-    return new Promise((resolve, reject) => {
-        axios.post(`${config.baseURL}student/register`, {
-            StudentId, DateOfBirth, Degree, Status, FirstLanguage, CountryOrigin, CreatorId,
-            Gender, Background, DegreeDetails, AltContact, Preferred, HSC, HSCMark, IELTS, IELTSMark, TAFE, TAFEMark,
-            CULT, CULTMark, InsearchDEEP, InsearchDEEPMark, InsearchDiploma, InsearchDiplomaMark,
-            FoundationCourse, FoundationCourseMark
-        }, postParams).then((val) => {
-
-            //NOTE: Setting profile on Firebase
-            setStudentFirebaseProfile({StudentId, DateOfBirth, fullname, preferredOtherName, Degree, Status, FirstLanguage, CountryOrigin, Gender, CreatorId}).
-            then(
-                () => {
-                    console.log('INFO: setting profile on HELP API');
-                    if (val.data.IsSuccess === 'false') {
-                        reject(val.data.DisplayMessage);
-                    } else {
-                        resolve(val);
-                    }
-                }
-            ).
-            catch(
-                () => {
-
-                }
-            );
-
-        });
+    //NOTE: Setting profile on Firebase
+    setStudentFirebaseProfile({StudentId, DateOfBirth, fullname, preferredOtherName, Degree, Status, FirstLanguage, CountryOrigin, Gender, CreatorId})
+    .then((val) => {
+        console.log(val);
+    })
+    .catch((err) => {
+        console.log(`ERROR set student firebase profile: ${err}`);
     });
 };
 
 export const setStudentFirebaseProfile = (opt) => {
     return new Promise((resolve, reject) => {
         FirebaseAPI.context.auth().onAuthStateChanged(firebaseUser => {
-
             let studentEmail = firebaseUser.email;
             console.log('INFO: Inserting user into Firebase');
             console.log(opt);
