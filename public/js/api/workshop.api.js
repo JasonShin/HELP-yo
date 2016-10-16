@@ -59,35 +59,6 @@ export const createWorkshopWaiting = (opts) => {
   });
 };
 
-
-//TODO: Confirm and delete it
-/*
-export const searchWorkshopBookings = (opts) => {
-  const { studentId, startingDtBegin, startingDtEnd, endingDtBegin, endingDtEnd, campusId, active, page, pageSize } = opts;
-  const params = {
-    studentId,
-    startingDtBegin,
-    startingDtEnd,
-    endingDtBegin,
-    endingDtEnd,
-    campusId,
-    active,
-    page,
-    pageSize,
-  };
-  return new Promise((resolve, reject) => {
-    axios.get(`${config.baseURL}workshop/search`, { headers, params, })
-    .then((val) => {
-      if (val.data.IsSuccess === 'false') {
-        reject(val.data.DisplayMessage);
-      } else {
-        resolve(val);
-      }
-    });
-  });
-};
-*/
-
 export const searchWorkshops = (opts) => {
   const { workshopId, workshopSetId, topic, startingDtBegin, startingDtEnd, endingDtBegin, endingDtEnd, campusId, active, page, pageSize } = opts;
   const params = {

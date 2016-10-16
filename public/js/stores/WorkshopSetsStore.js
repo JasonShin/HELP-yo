@@ -3,22 +3,23 @@
  */
 import { computed, observable, autorun } from 'mobx';
 import WorkshopSetModel from '../models/WorkshopSetModel';
-import { listWorkshopSets } from '../api/workshop.api';
+import { listWorkshopSets} from '../api/workshopSets.api';
 
 class WorkshopSetsStore {
     @observable workshopSets = [];
 
     constructor() {
-        listWorkshopSets(true).
-            then((response) => {
 
-                this.workshopSets = response.data.Results.map((data) => {
-                    return new WorkshopSetModel(data.id, data.name, data.archived);
-                });
-            }).
-            catch((error) => {
-                console.log(error);
+        listWorkshopSets().
+        then((response) => {
+            console.log('INFO: Correctly fetched workshop sets from firebase');
+            this.workshopSets = response.map((data) => {
+                return new WorkshopSetModel(data.id, data.name, data.archived);
             });
+        }).
+        catch(() => {
+            //TODO: Implement catch
+        });
     }
 }
 
