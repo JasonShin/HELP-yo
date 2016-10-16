@@ -9,3 +9,6 @@ config/
 google/
 .firebaserc
 .firebasrc
+public/css/.sass-cache/
+public/css/style.css
+public/css/style.css.map

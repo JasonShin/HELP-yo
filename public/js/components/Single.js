@@ -30,7 +30,8 @@ export default class Single extends React.Component {
             spinnerEnabled: true,
             authorized: false,
             reminderType: '',
-            reminderPeriod: ''
+            reminderPeriod: '',
+            passcodeInvalid: ''
         }
     }
 
@@ -88,6 +89,7 @@ export default class Single extends React.Component {
             });
         } else {
             console.log('You are not authorized to perform Booking action');
+
         }
 
     }
@@ -119,6 +121,11 @@ export default class Single extends React.Component {
                 workshopId: this.state.workshopId,
                 userId: this.state.userEmail,
                 attended: true
+            });
+        } else {
+            console.log('Wrong workshop!!');
+            this.setState({
+                passcodeInvalid: (<div class="error-generic">passcode is invalid!</div>)
             });
         }
 
@@ -214,7 +221,7 @@ export default class Single extends React.Component {
     //TODO: Fix naming convention spinnerEnabled => workshopSpinnerEnabled   singleInstance => workshopSingleInstance
     render() {
         const singleInstance = this.props.workshopStore.single;
-        const {spinnerEnabled} = this.state;
+        const {spinnerEnabled, passcodeInvalid} = this.state;
         var singleBooking = WorkshopBookingsStore.single;
         var bookingSpinnerEnabled = true;
 
@@ -259,6 +266,11 @@ export default class Single extends React.Component {
                 }
                 reminderButton = (
                     <div class="reminder-methods">
+
+                        <h2>
+                            Control your bookings!
+                        </h2>
+
                         <div class="form-group-select">
                             <label>choose a reminder method</label>
                             <select onChange={this.onReminderTypeChange.bind(this)} ref={(c) => this.reminderMethod = c}>
@@ -294,7 +306,7 @@ export default class Single extends React.Component {
                                 <span class="bar"></span>
                                 <label>PASSCODE</label>
                             </div>
-
+                            {passcodeInvalid}
                             <button class="button-reminder" onClick={this.onClickSubmitAttendance.bind(this)}>Submit Attendance</button>
                         </div>
                     );

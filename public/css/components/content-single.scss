@@ -90,6 +90,17 @@
       }
     }
 
+    @media all and (max-width: 901px) {
+      .single-controls-left {
+        width: 100%;
+        padding-bottom: 20px;
+
+        button {
+          width: 100%;
+        }
+      }
+    }
+
     .single-controls-right {
       position: relative;
       float: right;
