@@ -1,3 +1,4 @@
+import FirebaseAPI from '../api/firebase.api';
 import config from '../../config/config';
 const axios = require('axios');
 const headers = {
@@ -24,21 +25,6 @@ export const createWorkshop = (opts) => {
   });
 };
 
-export const listWorkshopSets = async (active) => {
-
-  return new Promise((resolve, reject) => {
-    axios.get(`${config.baseURL}workshop/workshopSets/${active}`, { headers, })
-    .then((val) => {
-      if (val.data.IsSuccess === 'false') {
-        reject(val.data.DisplayMessage);
-      } else {
-        resolve(val);
-      }
-    });
-  });
-};
-
-
 
 export const createWorkshopWaiting = (opts) => {
   const { workshopId, studentId, userId } = opts;
@@ -54,6 +40,23 @@ export const createWorkshopWaiting = (opts) => {
         reject(val.data.DisplayMessage);
       } else {
         resolve(val);
+      }
+    });
+  });
+};
+
+export const searchWorkshopsFirebase = (opts) => {
+  const { workshopId, workshopSetId, topic, startingDtBegin, startingDtEnd, endingDtBegin, endingDtEnd, campusId, active, page, pageSize } = opts;
+  var workshopRef = FirebaseAPI.context.database().ref('/workshops/');
+  var workshopSetIdRef = workshopRef.orderByChild("workshopSetID").equalTo(parseInt(workshopSetId));
+
+  return new Promise( (resolve, reject) => {
+    workshopSetIdRef.on('value', (snapshot) => {
+      var data = snapshot.val();
+      if(data !== undefined) {
+        resolve(data);
+      } else {
+        reject();
       }
     });
   });

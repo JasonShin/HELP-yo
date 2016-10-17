@@ -3,9 +3,9 @@
  */
 import { computed, observable, autorun } from 'mobx';
 import WorkshopModel from '../models/WorkshopModel';
-import { searchWorkshops } from '../api/workshop.api';
+import { searchWorkshops, searchWorkshopsFirebase } from '../api/workshop.api';
 
-const data = require('./data');
+//const data = require('./data');
 const moment = require('moment');
 
 class WorkshopsStore {
@@ -19,6 +19,18 @@ class WorkshopsStore {
     //TODO: Complete this when Workshop API is working
     //NOTE: Inital fetching
     fetchWorkshops(studentId, workshopSetId) {
+
+        //TODO: Remove duplicate data
+        searchWorkshopsFirebase({
+            workshopSetId
+        }).then((response) => {
+
+            for(var curWorkshop in response) {
+                this.workshops.push(this.mapDataToModel(response[curWorkshop]));
+            }
+            
+        });
+        /*
         searchWorkshops({
             pageSize: 150,
             workshopSetId: workshopSetId
@@ -42,7 +54,7 @@ class WorkshopsStore {
             this.workshops = apiWorkshops.concat(mapped);
         }).catch((error) => {
             console.log(error);
-        });
+        });*/
     }
 
     //TODO: Search by StartStartDate and StartEndDate
@@ -150,8 +162,8 @@ class WorkshopsStore {
             data.ProgramId,
             data.ProgramStartDate,
             data.StartDate,
-            data.WorkShopSetID,
-            data.WorkshopId,
+            data.workshopSetID,
+            data.id,
             data.archived,
             data.campus,
             data.cutoff,

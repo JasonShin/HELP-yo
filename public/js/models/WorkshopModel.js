@@ -54,7 +54,7 @@ export default class WorkshopModel {
     @observable ProgramId;
     @observable ProgramStartDate;
     @observable StartDate;
-    @observable WorkShopSetID;
+    @observable workshopSetID;
     @observable WorkshopId;
     @observable archived;
     @observable campus;
@@ -77,7 +77,7 @@ export default class WorkshopModel {
                 ProgramId,
                 ProgramStartDate,
                 StartDate,
-                WorkShopSetID,
+                workshopSetID,
                 WorkshopId,
                 archived,
                 campus,
@@ -99,7 +99,7 @@ export default class WorkshopModel {
         this.ProgramId = ProgramId;
         this.ProgramStartDate = ProgramStartDate;
         this.StartDate = StartDate;
-        this.WorkShopSetID = WorkShopSetID;
+        this.workshopSetID = workshopSetID;
         this.WorkshopId = WorkshopId;
         this.archived = archived;
         this.campus = campus;
