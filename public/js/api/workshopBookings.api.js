@@ -11,8 +11,6 @@ export const createWorkshopBookingFirebase = (opts) => {
 
     const { workshopId, studentId, userId, topic, description, StartDate } = opts;
 
-    console.log('INFO: creating workshop bookings to Firebase ' , topic, description, StartDate);
-
     FirebaseAPI.context.database().ref('/workshopBookings/userId/' + parseEmailForFirebase(userId) + '/workshopId/' + workshopId).set(opts);
 };
 
@@ -20,16 +18,12 @@ export const updateWorkshopBookingAttendedFirebase = (opts) => {
 
     const { workshopId, userId } = opts;
 
-    console.log('INFO: updated attendance ' , workshopId, userId);
-
     FirebaseAPI.context.database().ref('/workshopBookings/userId/' + parseEmailForFirebase(userId) + '/workshopId/' + workshopId).update(opts);
 };
 
 export const deleteWorkshopBookingFirebase = (opts) => {
 
     const { workshopId, userId} = opts;
-
-    console.log('INFO: Deleting workshop bookings from Firebase ' , workshopId, userId);
 
     FirebaseAPI.context.database().ref('/workshopBookings/userId/' + parseEmailForFirebase(userId) + '/workshopId/' + workshopId).remove();
 };
@@ -84,9 +78,6 @@ export const setReminderForBooking = (opt) => {
     };
 
     return new Promise((resolve, reject) => {
-
-        console.log(`INFO: reminder ${type} URL: `, (`${urlPrefix}setReminder`) );
-        console.log(params);
 
         axios.get(`${urlPrefix}setReminder`, postParams).then((val) => {
             if (val.data.IsSuccess === 'false') {
