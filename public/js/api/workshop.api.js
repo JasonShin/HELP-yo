@@ -45,10 +45,28 @@ export const createWorkshopWaiting = (opts) => {
   });
 };
 
+export const searchWorkshopByIdFirebase = (opts) => {
+  const {workshopId} = opts;
+  console.log('INFO: finding workshopID ' , workshopId);
+  var workshopRef = FirebaseAPI.context.database().ref('/workshops/'+workshopId);
+
+  return new Promise( (resolve, reject) => {
+    workshopRef.on('value', (snapshot) => {
+      var data = snapshot.val();
+      if(data !== null && data !== undefined) {
+        resolve(data);
+      } else {
+        reject();
+      }
+    });
+  } )
+};
+
 export const searchWorkshopsFirebase = (opts) => {
   const { workshopId, workshopSetId, topic, startingDtBegin, startingDtEnd, endingDtBegin, endingDtEnd, campusId, active, page, pageSize } = opts;
   var workshopRef = FirebaseAPI.context.database().ref('/workshops/');
-  var workshopSetIdRef = workshopRef.orderByChild("workshopSetID").equalTo(parseInt(workshopSetId));
+  var workshopSetIdRef = workshopRef.orderByChild("workshopSetID").equalTo(parseInt(workshopSetId))
+      .limitToLast(10);
 
   return new Promise( (resolve, reject) => {
     workshopSetIdRef.on('value', (snapshot) => {

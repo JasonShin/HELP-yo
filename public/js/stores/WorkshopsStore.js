@@ -3,7 +3,7 @@
  */
 import { computed, observable, autorun } from 'mobx';
 import WorkshopModel from '../models/WorkshopModel';
-import { searchWorkshops, searchWorkshopsFirebase } from '../api/workshop.api';
+import { searchWorkshops, searchWorkshopsFirebase, searchWorkshopByIdFirebase } from '../api/workshop.api';
 
 //const data = require('./data');
 const moment = require('moment');
@@ -16,11 +16,11 @@ class WorkshopsStore {
     @observable tutorFilter = '';
     @observable single = null;
 
-    //TODO: Complete this when Workshop API is working
     //NOTE: Inital fetching
     fetchWorkshops(studentId, workshopSetId) {
 
-        //TODO: Remove duplicate data
+        this.workshops.length = 0;
+
         searchWorkshopsFirebase({
             workshopSetId
         }).then((response) => {
@@ -28,33 +28,8 @@ class WorkshopsStore {
             for(var curWorkshop in response) {
                 this.workshops.push(this.mapDataToModel(response[curWorkshop]));
             }
-            
+
         });
-        /*
-        searchWorkshops({
-            pageSize: 150,
-            workshopSetId: workshopSetId
-        }).then((response) => {
-
-            const apiWorkshops = response.data.Results.map((data) => {
-                return this.mapDataToModel(data);
-            });
-
-            const localWorkshops = data.workshops.filter(workshop => {
-                return workshop.WorkShopSetID.toString().trim() === workshopSetId.toString().trim();
-            });
-            const mapped = localWorkshops.map((w) => {
-                for (const key of Object.keys(w)) {
-                    if (w[key]) {
-                        w[key] = w[key].toString().trim();
-                    }
-                }
-                return this.mapDataToModel(w);
-            });
-            this.workshops = apiWorkshops.concat(mapped);
-        }).catch((error) => {
-            console.log(error);
-        });*/
     }
 
     //TODO: Search by StartStartDate and StartEndDate
@@ -130,7 +105,14 @@ class WorkshopsStore {
     //Ability to fetch from local data if local data exist
     findWorkshopById(workshopId) {
 
+        searchWorkshopByIdFirebase({workshopId}).
+        then((workshop) => {
+            console.log('INFO: Found workshop by ID!');
+            console.log(workshop);
+            this.single = this.mapDataToModel(workshop);
+        });
 
+        /*
         let pageVal = this.getPageNum(workshopId);
 
         searchWorkshops({
@@ -148,7 +130,7 @@ class WorkshopsStore {
             }
         }).catch((error) => {
             console.log(error);
-        });
+        });*/
     }
 
     //TODO: Fake date here
