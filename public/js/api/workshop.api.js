@@ -1,4 +1,4 @@
-import FirebaseAPI from '../api/firebase.api';
+import FirebaseAPI from './api/firebase.api';
 import config from '../../config/config';
 const axios = require('axios');
 const headers = {
