@@ -67,10 +67,22 @@ class WorkshopsStore {
                 return topicMatcher.test(workshop.topic);
             });
         } else if (this.dateFilter !== '') {
-            var dateMatcher = new RegExp(this.dateFilter, 'i');
-            return this.workshops.filter((workshop) => {
-                return (dateMatcher.test(workshop.EndDate) || dateMatcher.test(workshop.StartDate));
+            var dateMatcherWithoutProcessed = new RegExp(this.dateFilter, 'i');
+            const filteredByDate =  this.workshops.filter((workshop) => {
+                return (dateMatcherWithoutProcessed.test(workshop.EndDate) || dateMatcherWithoutProcessed.test(workshop.StartDate));
             });
+            if (!filteredByDate.length || filteredByDate.length === 0) {
+                let processed = new Date(this.dateFilter);
+                processed.setDate(processed.getDate() + 1);
+                if (processed.toString() !== 'Invalid Date') {
+                    processed = processed.toISOString().slice(0, 10);
+                    var dateMatcher = new RegExp(processed, 'i');
+                    return this.workshops.filter((workshop) => {
+                        return (dateMatcher.test(workshop.EndDate) || dateMatcher.test(workshop.StartDate));
+                    });
+                }
+            }
+            return filteredByDate;
         } else if (this.tutorFilter !== '') {
             var tutorMatcher = new RegExp(this.tutorFilter, 'i');
             return this.workshops.filter((workshop) => {
