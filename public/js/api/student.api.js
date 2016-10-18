@@ -9,16 +9,12 @@ const headers = {
 
 //() => first raw of params = required, others = optional
 //TODO: Correct exceptions
-export const setStudentProfile = (
-    StudentId, DateOfBirth, fullname, preferredOtherName, Degree, Status, FirstLanguage, CountryOrigin, Gender, CreatorId,
-    Background, DegreeDetails, AltContact, Preferred, HSC, HSCMark, IELTS, IELTSMark, TAFE, TAFEMark,
-    CULT, CULTMark, InsearchDEEP, InsearchDEEPMark, InsearchDiploma, InsearchDiplomaMark,
-    FoundationCourse, FoundationCourseMark
-) => {
+export const setStudentProfile = (opts) => {
 
-    const postParams = {
-        headers,
-    };
+    const {StudentId, DateOfBirth, fullname, preferredOtherName, Degree, Status, FirstLanguage, CountryOrigin, Gender, CreatorId,
+        Background, DegreeDetails, AltContact, Preferred, HSC, HSCMark, IELTS, IELTSMark, TAFE, TAFEMark,
+        CULT, CULTMark, InsearchDEEP, InsearchDEEPMark, InsearchDiploma, InsearchDiplomaMark,
+        FoundationCourse, FoundationCourseMark} = opts;
 
     console.log(StudentId, DateOfBirth, fullname, preferredOtherName, Degree, Status, FirstLanguage, CountryOrigin, Gender, CreatorId);
 
@@ -28,25 +24,24 @@ export const setStudentProfile = (
     }
 
     //NOTE: Setting profile on Firebase
-    setStudentFirebaseProfile({StudentId, DateOfBirth, fullname, preferredOtherName, Degree, Status, FirstLanguage, CountryOrigin, Gender, CreatorId})
-    .then((val) => {
-        console.log(val);
-    })
-    .catch((err) => {
-        console.log(`ERROR set student firebase profile: ${err}`);
-    });
-};
-
-export const setStudentFirebaseProfile = (opt) => {
     return new Promise((resolve, reject) => {
         FirebaseAPI.context.auth().onAuthStateChanged(firebaseUser => {
             let studentEmail = firebaseUser.email;
             console.log('INFO: Inserting user into Firebase');
-            console.log(opt);
-            FirebaseAPI.context.database().ref('/students/' + parseEmailForFirebase(studentEmail)).set(opt);
-            resolve();
+            console.log(opts);
+            FirebaseAPI.context.database().ref('/students/' + parseEmailForFirebase(studentEmail)).set(opts, (error) => {
+                if(error) {
+                    reject(error);
+                } else {
+                    resolve('Successfully set profile!');
+                }
+            });
         });
     });
+};
+
+export const setStudentFirebaseProfile = (opt) => {
+
 
 };
 
