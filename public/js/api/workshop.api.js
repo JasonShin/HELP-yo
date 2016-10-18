@@ -1,4 +1,4 @@
-import FirebaseAPI from './api/firebase.api';
+import FirebaseAPI from './firebase.api';
 import config from '../../config/config';
 const axios = require('axios');
 const headers = {
@@ -68,7 +68,7 @@ export const searchWorkshopsFirebase = (opts) => {
   var workshopSetIdRef = workshopRef.orderByChild("workshopSetID").equalTo(parseInt(workshopSetId))
       .limitToLast(10);
 
-  return new Promise( (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     workshopSetIdRef.on('value', (snapshot) => {
       var data = snapshot.val();
       if(data !== undefined) {
