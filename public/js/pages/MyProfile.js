@@ -53,9 +53,9 @@ class MyProfile extends React.Component {
         let Gender = this.genderField.value;
         let CreatorId = StudentId;
 
-        setStudentProfile(StudentId, DateOfBirth, fullname, preferredOtherName, Degree, Status, FirstLanguage, CountryOrigin, Gender, CreatorId)
+        setStudentProfile({StudentId, DateOfBirth, fullname, preferredOtherName, Degree, Status, FirstLanguage, CountryOrigin, Gender, CreatorId})
             .then((response) => {
-                console.log(response);
+                this.props.router.push('/workshopSets');
             }).catch((error) => {
                 console.log(error);
             });

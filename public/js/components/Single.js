@@ -65,14 +65,14 @@ export default class Single extends React.Component {
         if(this.state.authorized) {
 
             //Required to easily figure out workshop details from bookings data stored on Firebase
-            let workshopTopic = this.props.workshopStore.single.topic;
-            let workshopDescription = this.props.workshopStore.single.description;
-            let workshopStartDate = this.props.workshopStore.single.StartDate;
-            let workshopEndDate = this.props.workshopStore.single.EndDate;
-            let maxSeats = this.props.workshopStore.single.maximum;
-            let BookingCount = this.props.workshopStore.single.BookingCount;
-            let campus = this.props.workshopStore.single.campus;
-
+            let workshopTopic = this.props.workshopStore.single.topic || null;
+            let workshopDescription = this.props.workshopStore.single.description || null;
+            let workshopStartDate = this.props.workshopStore.single.StartDate || null;
+            let workshopEndDate = this.props.workshopStore.single.EndDate || null;
+            let maxSeats = this.props.workshopStore.single.maximum || null;
+            let BookingCount = this.props.workshopStore.single.BookingCount || null;
+            let campus = this.props.workshopStore.single.campus || null;
+            
             createWorkshopBookingFirebase({
                 workshopId: this.state.workshopId,
                 studentId: this.state.studentId,
