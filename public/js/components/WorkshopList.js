@@ -42,7 +42,7 @@ export default class WorkshopList extends React.Component {
     componentWillReceiveProps(nextProps) {
         var newStates = this.getCurrentParamsObject();
 
-        WorkshopsStore.fetchWorkshopsByStartEndDate(newStates.workshopSetId, newStates.StartDtBegin, newStates.StartDtEnd);
+        // WorkshopsStore.fetchWorkshopsByStartEndDate(newStates.workshopSetId, newStates.StartDtBegin, newStates.StartDtEnd);
 
         this.setState(newStates);
     }

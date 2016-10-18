@@ -24,7 +24,7 @@ class WorkshopsStore {
         searchWorkshopsFirebase({
             workshopSetId
         }).then((response) => {
-
+            console.log('WORKSHOPS LOADED',response);
             for(var curWorkshop in response) {
                 this.workshops.push(this.mapDataToModel(response[curWorkshop]));
             }
@@ -67,8 +67,9 @@ class WorkshopsStore {
                 return topicMatcher.test(workshop.topic);
             });
         } else if (this.dateFilter !== '') {
+            var dateMatcher = new RegExp(this.dateFilter, 'i');
             return this.workshops.filter((workshop) => {
-                return moment(this.dateFilter).isBetween(workshop.StartDate, workshop.EndDate, null, '[]');
+                return (dateMatcher.test(workshop.EndDate) || dateMatcher.test(workshop.StartDate));
             });
         } else if (this.tutorFilter !== '') {
             var tutorMatcher = new RegExp(this.tutorFilter, 'i');
