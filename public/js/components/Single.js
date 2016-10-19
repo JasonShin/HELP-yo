@@ -91,7 +91,6 @@ export default class Single extends React.Component {
             createWorkshopBookingFirebase(booking);
         } else {
             console.log('You are not authorized to perform Booking action');
-
         }
 
     }

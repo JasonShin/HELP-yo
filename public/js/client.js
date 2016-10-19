@@ -24,6 +24,7 @@ import WorkshopSetsPage from './pages/WorkshopSetsPage';
 import WorkshopsPage from './pages/WorkshopsPage';
 import WorkshopPage from './pages/WorkshopPage';
 import CreateWorkshopPage from './pages/CreateWorkshopPage';
+import FAQPage from './pages/FAQPage';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
  
@@ -54,6 +55,7 @@ ReactDOM.render(
             <Route path="bookings/future" component={Bookings} onEnter={FirebaseAPI.requireAuth} />
             <Route path="bookings/workshop" component={WorkshopPage} onEnter={FirebaseAPI.requireAuth} />
             <Route path="createWorkshop" component={CreateWorkshopPage} onEnter={FirebaseAPI.requireAuth} />
+            <Route path="faq" component={FAQPage} onEnter={FirebaseAPI.requireAuth} />
         </Route>
     </Router>,
     app

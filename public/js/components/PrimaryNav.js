@@ -300,7 +300,7 @@ class PrimaryNav extends React.Component {
                         <div className={workshopsLinkStyle}><Link onClick={this.handleWorkshopsToggle.bind(this)} to="/workshopSets">workshops</Link></div>
                         <div className={bookingsLinkStyle}><Link onClick={this.handleBookingsToggle.bind(this)} to="/bookings/past">my bookings</Link></div>
                         <div className={infoLinkStyle}><Link onClick={this.handleInfoToggle.bind(this)} to="/profile">my info</Link></div>
-                        <div className={faqLinkStyle}>faq's</div>
+                        <div className={faqLinkStyle}><Link onClick={this.handleInfoToggle.bind(this)} to="/faq">faq's</Link></div>
                         <div className="menu-navbar-div">{authButton}</div>
                     </div>
                 </div>
@@ -313,7 +313,7 @@ class PrimaryNav extends React.Component {
                 <div id='PrimaryNav'>
                     <div class="logo">
                         <div class="logo-container">
-                            <Link to="/">
+                            <Link to="/workshopSets">
                                 <span class="logo-image"><img src="https://firebasestorage.googleapis.com/v0/b/helps-uts-project.appspot.com/o/UTS-logo.png?alt=media&token=df24fd5f-1c18-46d6-bb89-6e83cf47609f" alt="logo" /></span>
                                 <span class="logo-text">UTS:HELPS</span>
                             </Link>
