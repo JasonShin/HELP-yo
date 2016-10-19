@@ -12,6 +12,8 @@ class WorkshopsStore {
     @observable workshops = [];
     @observable topicFilter = '';
     @observable dateFilter = '';
+    @observable StartDtBegin = '';
+    @observable StartDtEnd = '';
     @observable locationFilter = '';
     @observable tutorFilter = '';
     @observable single = null;
@@ -21,41 +23,29 @@ class WorkshopsStore {
 
         this.workshops.length = 0;
 
-        searchWorkshopsFirebase({
-            workshopSetId
-        }).then((response) => {
-            console.log('WORKSHOPS LOADED',response);
-            for(var workshopKey of Object.keys(response)) {
-                this.workshops.push(this.mapDataToModel(response[workshopKey]));
-            }
-
+        return new Promise((resolve, reject) => {
+            searchWorkshopsFirebase({
+                workshopSetId
+            }).then((response) => {
+                for(var workshopKey of Object.keys(response)) {
+                    this.workshops.push(this.mapDataToModel(response[workshopKey]));
+                }
+                resolve();
+            }).catch(() => {
+                reject();
+            });
         });
+
     }
 
     //TODO: Search by StartStartDate and StartEndDate
     //TODO: startingDtBegin=2013-04-10T10:00&startingDtEnd=2013-04-17T10:00
-    fetchWorkshopsByStartEndDate(workshopSetId, StartDtBegin, StartDtEnd) {
+    /*fetchWorkshopsByStartEndDate(workshopSetId, StartDtBegin, StartDtEnd) {
 
         console.log('INFO: Fetching by date: ' , workshopSetId, StartDtBegin, StartDtEnd);
         var newStartDtBegin = StartDtBegin+'T00:00:00';
         var newStartDtEnd = StartDtEnd+'T00:00:00';
-        /*
-        searchWorkshops({
-            pageSize: 150,
-            workshopSetId: workshopSetId,
-            startingDtBegin: newStartDtBegin,
-            startingDtEnd: newStartDtEnd
-        }).then((response) => {
 
-            console.log('Workshop data fetched');
-            console.log(response.data.Results);
-
-            this.workshops = response.data.Results.map((data) => {
-                return this.mapDataToModel(data);
-            });
-        }).catch((error) => {
-            console.log(error);
-        });*/
         if(StartDtBegin !== undefined && StartDtBegin !== '' && StartDtEnd !== undefined && StartDtEnd !== '') {
             const filteredByDate =  this.workshops.filter((workshop) => {
                 var workshopDate = moment(workshop.StartDate);
@@ -70,10 +60,14 @@ class WorkshopsStore {
             });
             this.workshops = filteredByDate;
         }
-        console.log('filtering by date: ', newStartDtBegin);
     }
 
-
+    fetchWorkshopsByTopic(topic) {
+        var topicMatcher = new RegExp(topic, 'i');
+        this.workshops = this.workshops.filter((workshop) => {
+            return topicMatcher.test(workshop.topic);
+        });
+    }*/
 
     @computed get filteredWorkshops() {
         if (this.topicFilter !== '') {
@@ -81,22 +75,22 @@ class WorkshopsStore {
             return this.workshops.filter((workshop) => {
                 return topicMatcher.test(workshop.topic);
             });
-        } else if (this.dateFilter !== '') {
-            var dateMatcherWithoutProcessed = new RegExp(this.dateFilter, 'i');
+        } else if(this.StartDtBegin !== undefined && this.StartDtBegin !== '' && this.StartDtEnd !== undefined && this.StartDtEnd !== '') {
+            console.log('Start ' , this.StartDtBegin, ' end: ' , this.StartDtEnd);
+            var newStartDtBegin = this.StartDtBegin+'T00:00:00';
+            var newStartDtEnd = this.StartDtEnd+'T00:00:00';
+
             const filteredByDate =  this.workshops.filter((workshop) => {
-                return (dateMatcherWithoutProcessed.test(workshop.EndDate) || dateMatcherWithoutProcessed.test(workshop.StartDate));
-            });
-            if (!filteredByDate.length || filteredByDate.length === 0) {
-                let processed = new Date(this.dateFilter);
-                processed.setDate(processed.getDate() + 1);
-                if (processed.toString() !== 'Invalid Date') {
-                    processed = processed.toISOString().slice(0, 10);
-                    var dateMatcher = new RegExp(processed, 'i');
-                    return this.workshops.filter((workshop) => {
-                        return (dateMatcher.test(workshop.EndDate) || dateMatcher.test(workshop.StartDate));
-                    });
+                var workshopDate = moment(workshop.StartDate);
+                var targetStartDate = moment(newStartDtBegin);
+                var targetEndDate = moment(newStartDtEnd);
+
+                if(workshopDate.isBefore(targetEndDate) && workshopDate.isAfter(targetStartDate)) {
+                    return true;
+                } else {
+                    return false;
                 }
-            }
+            });
             return filteredByDate;
         } else if (this.tutorFilter !== '') {
             var tutorMatcher = new RegExp(this.tutorFilter, 'i');
@@ -110,9 +104,6 @@ class WorkshopsStore {
             });
         }
         return this.workshops;
-
-        // console.log('INFO: Topic filter changed ', this.topicFilter, this.topicFilter == '' );
-
     }
 
     getPageNum(workshopId) {
