@@ -30,13 +30,13 @@ export const getMonthDate = (rawDate) => {
  */
 export const getFormattedStartDate = (rawStartDate) => {
     let momentDate = moment(rawStartDate);
-    let formattedDate = momentDate.format('dddd, DD/MM/YYYY');
+    let formattedDate = momentDate.format('dddd, DD/MM/YYYY h:mm a');
     return formattedDate.toUpperCase();
 };
 
 export const getFormattedEndDate = (rawEndDate) => {
     let momentDate = moment(rawEndDate);
-    let formattedDate = momentDate.format('DD/MM/YYYY');
+    let formattedDate = momentDate.format('DD/MM/YYYY h:mm a');
     return formattedDate;
 };
 

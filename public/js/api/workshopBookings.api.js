@@ -67,44 +67,26 @@ export const getWorkshopBookingFirebaseByWorkshopId = (opts) => {
  */
 export const setReminderForBooking = (opt) => {
     const {StartDate, to, subject, content, type} = opt;
-    var workshopStartDate = moment(StartDate);
-    let year = workshopStartDate.year();
-    let month = workshopStartDate.month() + 1;
-    let date = workshopStartDate.date();
-    let hour = workshopStartDate.hour();
-    let minute = workshopStartDate.minute();
-    let second = workshopStartDate.second();
-
-    var params = {
-        year, month, date, hour, minute, second,
+    const body = {
+        remindAt: StartDate
     };
 
     let urlPrefix;
     if (type === 'mail') {
         urlPrefix = config.mailBaseURL;
-        params.to = to;
-        params.subject = subject
-        params.content = content;
+        body.to = to;
+        body.subject = subject
+        body.content = content;
     } else if (type === 'sms') {
         urlPrefix = config.smsBaseURL;
-        params.number = to;
-        params.message = content;
+        body.number = to;
+        body.message = content;
     }
 
-    var postParams = {
-        params: params
-    };
-
     return new Promise((resolve, reject) => {
-
-        axios.get(`${urlPrefix}setReminder`, postParams).then((val) => {
-            if (val.data.IsSuccess === 'false') {
-                reject(val.data.DisplayMessage);
-            } else {
-                resolve(val);
-            }
+        axios.post(`${urlPrefix}setReminder`,  body).then((val) => {
+            console.log(val);
         });
     });
-
 };
 /* WorkshopBookings FIREBASE ENDS */

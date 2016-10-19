@@ -135,10 +135,13 @@ export default class Single extends React.Component {
 
     //TODO: Fix reminder feature => Throws 404 error
     //TODO: get these working
-    onClickReminder(e, reminderPayload) {
+    onClickReminder = (reminderPayload) => {
         let reminderMethod = this.reminderMethod.value;
         let reminderTime = this.reminderTime.value;
-        let phoneNumber = this.phoneNumber.value;
+        let phoneNumber;
+        if (this.phoneNumber) {
+            phoneNumber = this.phoneNumber.value;
+        }
 
         let workshopStart = new Date(reminderPayload.start);
         console.log(reminderMethod);
@@ -155,7 +158,7 @@ export default class Single extends React.Component {
                 break;    
             }
         }
-    }
+    };
 
     setEmailNotification(workshopTime, reminderTime, reminderPayload) {
         let absoluteReminderTime = workshopTime;
@@ -175,7 +178,7 @@ export default class Single extends React.Component {
         }
 
         setReminderForBooking({
-            StartDate: absoluteReminderTime.toISOString().slice(0, 19),
+            StartDate: absoluteReminderTime.getTime(),
             to: this.state.userEmail,
             subject: 'HELPS - Workshop Reminder',
             content: `You have registered for the ${reminderPayload.title} workshop at ${reminderPayload.room} at ${reminderPayload.duration}`,
@@ -202,7 +205,7 @@ export default class Single extends React.Component {
         }
         const message = `Reminder: You have a '${reminderPayload.title}' workshop at ${reminderPayload.room} on ${reminderPayload.duration}`;
         setReminderForBooking({
-            StartDate: absoluteReminderTime.toISOString().slice(0, 19),
+            StartDate: absoluteReminderTime.getTime(),
             to: phoneNumber,
             subject: 'HELPS - Workshop Reminder',
             content: message,
@@ -257,7 +260,7 @@ export default class Single extends React.Component {
             let attendanceFields = '';
 
             const reminderPayload = {
-                start: singleInstance.StartDate,
+                start: singleInstance.StartDate.split('T').join(' '),
                 title: singleInstance.topic,
                 room: singleInstance.campus,
                 duration: formattedDate,
@@ -311,7 +314,7 @@ export default class Single extends React.Component {
                             </select>
                         </div>
                         {phoneNumberInput}
-                        <button class="button-reminder" onClick={this.onClickReminder.bind(this, {}, reminderPayload)}>Set reminder</button>
+                        <button class="button-reminder" onClick={() => this.onClickReminder(reminderPayload)}>Set reminder</button>
                     </div>
                 );
 
@@ -419,7 +422,14 @@ export default class Single extends React.Component {
                                     <h3>spots available</h3>
                                     <div>{availables}</div>
                                 </div>
-
+                                <div>
+                                    <h3>Tutor</h3>
+                                    <div>{singleInstance.tutor}</div>
+                                </div>
+                                <div>
+                                    <h3>Type</h3>
+                                    <div>{singleInstance.type}</div>
+                                </div>
                             </div>
                         </div>
 
