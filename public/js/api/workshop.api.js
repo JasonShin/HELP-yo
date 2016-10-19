@@ -1,5 +1,6 @@
 import FirebaseAPI from './firebase.api';
 import config from '../../config/config';
+import { parseEmailForFirebase } from '../tools/Helpers';
 const axios = require('axios');
 const headers = {
   'AppKey': config.appKey,
@@ -50,7 +51,7 @@ export const searchWorkshopByIdFirebase = (opts) => {
   console.log('INFO: finding workshopID ' , workshopId);
   var workshopRef = FirebaseAPI.context.database().ref('/workshops/'+workshopId);
 
-  return new Promise( (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     workshopRef.on('value', (snapshot) => {
       var data = snapshot.val();
       if(data !== null && data !== undefined) {
@@ -59,9 +60,8 @@ export const searchWorkshopByIdFirebase = (opts) => {
         reject();
       }
     });
-  } )
+  });
 };
-
 
 export const updateWorkshop = (opts) => {
     const { workshopId } = opts;
@@ -84,6 +84,41 @@ export const searchWorkshopsFirebase = (opts) => {
         reject();
       }
     });
+  });
+};
+
+export const getWaitlistByWorkshop = (opts) => {
+  const { workshopId } = opts;
+  var waitlistRef = FirebaseAPI.context.database().ref('/waitlists/'+ workshopId);
+  return new Promise((resolve, reject) => {
+    waitlistRef.on('value', (snapshot) => {
+      var data = snapshot.val();
+      if(data !== null && data !== undefined) {
+        resolve(data);
+      } else {
+        reject();
+      }
+    });
+  });
+};
+
+export const addToWaitlist = (opts) => {
+  const { workshopId, email } = opts;
+  var waitlistRef = FirebaseAPI.context.database().ref('/waitlists/'+ workshopId);
+  let max = 0;
+  waitlistRef.on('value', (snapshot) => {
+    var data = snapshot.val();
+    if(data !== null && data !== undefined) {
+      for (const key of Object.keys(data)) {
+        const position = data[key];
+        if (position > max) {
+          max = position;
+        }
+      }
+    }
+  });
+  FirebaseAPI.context.database().ref('/waitlists/' + workshopId).set({
+    [parseEmailForFirebase(email)]: max + 1,
   });
 };
 
