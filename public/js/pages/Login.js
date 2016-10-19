@@ -3,7 +3,10 @@ import { browserHistory, Link, withRouter } from 'react-router'
 import { registerFirebase, loginFirebase } from '../api/student.api';
 import config from '../../config/config';
 import {materialLoading} from '../material-motion/material-motion';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Snackbar from 'material-ui/Snackbar';
 import Spinner from '../components/Spinner';
+
 const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 class Login extends React.Component {
@@ -12,9 +15,10 @@ class Login extends React.Component {
         document.title = `Login${config.titleEnding}`;
 
         this.state = {
-            enableSpinner: false
+            snackbarMessage: '',
+            enableSpinner: false,
+            enableSnackbar: false,
         };
-
     }
 
     handleSubmit(e) {
@@ -31,7 +35,7 @@ class Login extends React.Component {
             password: password
          }).
          then((body) => {
-            console.log(body);
+            // console.log(body);
             this.setState({
                 enableSpinner: false
             });
@@ -39,11 +43,27 @@ class Login extends React.Component {
          }).
          catch((err) => {
             console.log(err);
+            let message;
+            if (err.code === 'auth/user-not-found') {
+                message = 'You aren\'t registered with HELPS yet!';
+            } else if (err.code === 'auth/wrong-password') {
+                message = 'Wrong password';
+            }
             this.setState({
-                enableSpinner: false
+                snackbarMessage: message,
+                enableSpinner: false,
+                enableSnackbar: true,
             });
          });
     }
+
+
+    handleRequestClose = () => {
+        this.setState({
+            snackbarMessage: '',
+            enableSnackbar: false,
+        });
+    };
 
     render() {
 
@@ -93,6 +113,14 @@ class Login extends React.Component {
                             <button class="button-red" type="submit">login</button>
                         </form>
                     </div>
+                    <MuiThemeProvider>
+                        <Snackbar
+                          open={this.state.enableSnackbar}
+                          message={this.state.snackbarMessage}
+                          autoHideDuration={5000}
+                          onRequestClose={this.handleRequestClose}
+                        />
+                    </MuiThemeProvider>
                 </div>
             </ReactCSSTransitionGroup>
         );
