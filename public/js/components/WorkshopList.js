@@ -36,6 +36,9 @@ export default class WorkshopList extends React.Component {
 
     componentWillUnmount() {
         WorkshopsStore.topicFilter = '';
+        WorkshopsStore.dateFilter = '';
+        WorkshopsStore.locationFilter = '';
+        WorkshopsStore.tutorFilter = '';
     }
 
     //TODO: Use react router built in feature to replace this procedure or put this in helper to make it reusable

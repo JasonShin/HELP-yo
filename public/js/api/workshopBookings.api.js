@@ -4,14 +4,24 @@
 import config from '../../config/config';
 import {parseEmailForFirebase} from '../tools/Helpers';
 import FirebaseAPI from '../api/firebase.api';
+import { searchWorkshopByIdFirebase, updateWorkshop } from '../api/workshop.api';
 import moment from 'moment';
 const axios = require('axios');
 /* WorkshopBookings FIREBASE STARTS */
-export const createWorkshopBookingFirebase = (opts) => {
+export const createWorkshopBookingFirebase = async (opts) => {
 
     const { workshopId, studentId, userId, topic, description, StartDate } = opts;
 
+    const workshop = await searchWorkshopByIdFirebase({workshopId,});
+
+    const newBookingCount = workshop.BookingCount + 1;
+
+    if (opts.BookingCount) {
+        opts.BookingCount = newBookingCount;
+    }
+
     FirebaseAPI.context.database().ref('/workshopBookings/userId/' + parseEmailForFirebase(userId) + '/workshopId/' + workshopId).set(opts);
+    updateWorkshop({workshopId, BookingCount: newBookingCount});
 };
 
 export const updateWorkshopBookingAttendedFirebase = (opts) => {
@@ -21,11 +31,19 @@ export const updateWorkshopBookingAttendedFirebase = (opts) => {
     FirebaseAPI.context.database().ref('/workshopBookings/userId/' + parseEmailForFirebase(userId) + '/workshopId/' + workshopId).update(opts);
 };
 
-export const deleteWorkshopBookingFirebase = (opts) => {
+export const deleteWorkshopBookingFirebase = async (opts) => {
 
     const { workshopId, userId} = opts;
 
+    const workshop = await searchWorkshopByIdFirebase({workshopId,});
+
+    const newBookingCount = workshop.BookingCount - 1;
+    if (opts.BookingCount) {
+        opts.BookingCount = newBookingCount;
+    }
+
     FirebaseAPI.context.database().ref('/workshopBookings/userId/' + parseEmailForFirebase(userId) + '/workshopId/' + workshopId).remove();
+    updateWorkshop({workshopId, BookingCount: newBookingCount});
 };
 
 export const getWorkshopBookingFirebaseByUserId = (userId) => {

@@ -62,6 +62,13 @@ export const searchWorkshopByIdFirebase = (opts) => {
   } )
 };
 
+
+export const updateWorkshop = (opts) => {
+    const { workshopId } = opts;
+    FirebaseAPI.context.database().ref('/workshops/'+workshopId).update(opts);
+};
+
+
 export const searchWorkshopsFirebase = (opts) => {
   const { workshopId, workshopSetId, topic, startingDtBegin, startingDtEnd, endingDtBegin, endingDtEnd, campusId, active, page, pageSize } = opts;
   var workshopRef = FirebaseAPI.context.database().ref('/workshops/');

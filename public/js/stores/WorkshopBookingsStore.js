@@ -53,7 +53,6 @@ class WorkshopBookingsStore {
         getWorkshopBookingFirebaseByUserId(userId).on('value', (snapshot) => {
             //Emptying bookings array
             this.bookings = [];
-            
             if(snapshot.val() !== null) {
                 var data = snapshot.val().workshopId;
                 for(var key in data) {
@@ -68,7 +67,18 @@ class WorkshopBookingsStore {
                             currentBooking.description,
                             currentBooking.StartDate,
                             currentBooking.EndDate,
-                            currentBooking.campus
+                            currentBooking.campus,
+                            currentBooking.created,
+                            currentBooking.creatorID,
+                            currentBooking.modified,
+                            currentBooking.modifierID,
+                            currentBooking.archived,
+                            currentBooking.archiverID,
+                            currentBooking.canceled,
+                            currentBooking.attended,
+                            currentBooking.tutor,
+                            currentBooking.maximum,
+                            currentBooking.BookingCount
                         )
                     );
                 }

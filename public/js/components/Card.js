@@ -36,12 +36,12 @@ export default class Card extends React.Component {
 
         //Workshop
         if(maxSeats !== '') {
-            maxSeats = (<div>{maxSeats} sessions</div>);
+            maxSeats = (<div>{maxSeats} max</div>);
         }
 
         //Workshop
         if(availableSeats !== '') {
-            availableSeats = (<div>{availableSeats} available spots tick</div>)
+            availableSeats = (<div>{availableSeats} available spots</div>)
         }
 
         //Session
