@@ -10,11 +10,14 @@ class StudentStore {
     constructor() {
     }
 
-    fetchStudent(email) {
+    fetchStudent(email, cb) {
         getStudentFirebaseProfile(email).on('value', (snapshot) => {
             var rawData = snapshot.val();
             //TODO: Put this in model later
             this.student = rawData;
+            if (cb) {
+                cb(this.student);
+            }
         });
     }
 
