@@ -273,7 +273,7 @@ class PrimaryNav extends React.Component {
 
         //Workshops page filter
         if(pathname === this.pathWorkshops) {
-            secondaryNav = this.getWorkshopSearchFilters();
+           // secondaryNav = this.getWorkshopSearchFilters();
         }
 
         const workshopsLinkStyle = classNames({
@@ -321,6 +321,7 @@ class PrimaryNav extends React.Component {
                     </div>
                     {primaryNav}
                 </div>
+
                 <div class="menu-filter-container">
                     <div class="menu-container">
                         <div class="menu-main-container">
@@ -328,6 +329,7 @@ class PrimaryNav extends React.Component {
                         </div>
                     </div>
                 </div>
+
             </div>
         );
     }

@@ -60,9 +60,7 @@ export default class WorkshopList extends React.Component {
     }
 
     render() {
-
         const {workshopSetId, StartDtBegin, StartDtEnd} = this.state;
-
         console.log(workshopSetId, StartDtBegin, StartDtEnd);
 
         const workshopsList = this.props.store.filteredWorkshops.map( (workshop) => {
