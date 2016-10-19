@@ -12,8 +12,11 @@ import Spinner from '../components/Spinner';
 import {createWorkshopBookingFirebase, updateWorkshopBookingAttendedFirebase, deleteWorkshopBookingFirebase, setReminderForBooking } from '../api/workshopBookings.api';
 import {addToWaitlist} from '../api/workshop.api';
 import {getRandomWords} from '../tools/RandomWordHelper';
+import { sendReminder } from '../api/reminder.api';
+
 
 const moment = require('moment');
+require('moment-precise-range-plugin');
 
 @observer
 export default class Single extends React.Component {
@@ -89,7 +92,13 @@ export default class Single extends React.Component {
                 passcode: getRandomWords(),
                 attended: false
             };
+            sendReminder({
+                email: this.state.userEmail,
+                subject: 'UTS HELPS - Booking notification',
+                message: `Just a friendly reminder that you\'ve booked a workshop for ${booking.topic} at ${moment(booking.StartDate).format('dddd, DD/MM/YYYY h:mm a')}. If this wasn\'t you, please contact us`
+            });
             createWorkshopBookingFirebase(booking);
+
         } else {
             console.log('You are not authorized to perform Booking action');
         }
@@ -259,6 +268,9 @@ export default class Single extends React.Component {
             let phoneNumberInput = '';
             let attendanceFields = '';
 
+            const duration = moment.preciseDiff(moment(singleInstance.StartDate.split('T').join(' ')),
+                moment(singleInstance.EndDate.split('T').join(' ')));
+
             const reminderPayload = {
                 start: singleInstance.StartDate.split('T').join(' '),
                 title: singleInstance.topic,
@@ -271,6 +283,8 @@ export default class Single extends React.Component {
             //Todo optimize this to properly wait for response from Firebase
 
             const isWorkshopOver = (moment(Date.now()).isAfter(singleInstance.EndDate));
+            const isWorkshopOnNow = (moment(Date.now()).isBetween(singleInstance.StartDate, singleInstance.EndDate, null, '[]'));
+
             const isFull = (availables <= 0);
 
             if (waitlist) {
@@ -292,7 +306,7 @@ export default class Single extends React.Component {
                     <div class="reminder-methods">
 
                         <h2>
-                            Control your bookings!
+                            Reminders
                         </h2>
 
                         <div class="form-group-select">
@@ -318,7 +332,7 @@ export default class Single extends React.Component {
                     </div>
                 );
 
-                if(singleBooking.attended == false) {
+                if(singleBooking.attended == false && isWorkshopOnNow) {
                     attendanceFields = (
                         <div>
                             <h2>
@@ -365,6 +379,7 @@ export default class Single extends React.Component {
 
                                 <header>{singleInstance.topic}</header>
                                 <div class="single-ranged-date">{formattedDate}</div>
+                                <div class="single-ranged-date">{duration}</div>
                                 <div class="single-target-group">
                                     <h3>target group</h3>
                                     <div>{singleInstance.targetingGroup}</div>
@@ -429,6 +444,10 @@ export default class Single extends React.Component {
                                 <div>
                                     <h3>Type</h3>
                                     <div>{singleInstance.type}</div>
+                                </div>
+                                <div>
+                                    <h3>Attended</h3>
+                                    <div>{singleInstance.attended ? 'Yes' : 'No'}</div>
                                 </div>
                             </div>
                         </div>

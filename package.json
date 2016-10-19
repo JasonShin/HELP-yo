@@ -61,6 +61,7 @@
     "mocha": "^3.0.2",
     "mocha-jsdom": "^1.1.0",
     "moment": "^2.15.0",
+    "moment-precise-range-plugin": "^1.2.0",
     "node-fetch": "^1.6.0",
     "node-sass": "^3.8.0",
     "random-word-generator": "^0.9.9",
