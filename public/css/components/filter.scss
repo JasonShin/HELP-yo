@@ -1,43 +1,32 @@
 .menu-filter-container {
   border: 0px solid black;
+  width: 900px;
+  margin: 0px auto;
 
-  .menu-container {
-    .menu-main-container {
-      //Black navigation colour for filter menus
-      span {
-        cursor: pointer;
-        color: white;
-        text-transform:uppercase;
-      }
+  .filter-title {
+    text-align: center;
+  }
 
-      a {
-        color: black;
-        color: white;
-      }
-      
-      a:visited {
-        color: black;
-      }
-      .secondary-nav {
-        background-color: $secondary-nav-color;
-        padding: 8px;
-        z-index: 1;
-        display: flex;                  /* establish flex container */
-        justify-content: center; /* switched from default (flex-start, see below) */
-        align-items: center;
-        overflow-x: auto;
-        //UL
-        .filters-control {
-          list-style-type: none;
-          margin-right: 10px;
-          margin-left: 10px;
-          li {
-            text-transform: uppercase;
-          }
-        }
-      }
+  .filter-options {
+    overflow: hidden;
+    > div {
+      float: left;
+      width: 25%;
+      text-align: center;
+      cursor: pointer;
     }
   }
 
+  .filter-inputs-container {
+    padding-top: 10px;
+  }
+
+  .filter-calendars-container {
+    overflow: hidden;
+    >div {
+      float: left;
+      width: 50%;
+    }
+  }
 
 }

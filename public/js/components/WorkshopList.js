@@ -18,6 +18,7 @@ export default class WorkshopList extends React.Component {
     constructor() {
         super();
         this.state = {
+            topic: '',
             workshopSetId: 0,
             StartDtBegin: '',
             StartDtEnd: ''
@@ -45,9 +46,8 @@ export default class WorkshopList extends React.Component {
     componentWillReceiveProps(nextProps) {
         var newStates = this.getCurrentParamsObject();
 
-        // WorkshopsStore.fetchWorkshopsByStartEndDate(newStates.workshopSetId, newStates.StartDtBegin, newStates.StartDtEnd);
-
         this.setState(newStates);
+        WorkshopsStore.fetchWorkshopsByStartEndDate(newStates.workshopSetId, newStates.StartDtBegin, newStates.StartDtEnd);
     }
 
     getCurrentParamsObject() {

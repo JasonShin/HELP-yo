@@ -15,9 +15,7 @@ class Layout extends React.Component {
             <div>
                 <PrimaryNav />
                 <div id="Page">
-
                     {this.props.children}
-
                 </div>
             </div>
 

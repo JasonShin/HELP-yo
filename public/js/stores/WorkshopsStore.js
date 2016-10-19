@@ -39,7 +39,7 @@ class WorkshopsStore {
         console.log('INFO: Fetching by date: ' , workshopSetId, StartDtBegin, StartDtEnd);
         var newStartDtBegin = StartDtBegin+'T00:00:00';
         var newStartDtEnd = StartDtEnd+'T00:00:00';
-
+        /*
         searchWorkshops({
             pageSize: 150,
             workshopSetId: workshopSetId,
@@ -55,7 +55,22 @@ class WorkshopsStore {
             });
         }).catch((error) => {
             console.log(error);
-        });
+        });*/
+        if(StartDtBegin !== undefined && StartDtBegin !== '' && StartDtEnd !== undefined && StartDtEnd !== '') {
+            const filteredByDate =  this.workshops.filter((workshop) => {
+                var workshopDate = moment(workshop.StartDate);
+                var targetStartDate = moment(StartDtBegin);
+                var targetEndDate = moment(StartDtEnd);
+
+                if(workshopDate.isBefore(targetEndDate) && workshopDate.isAfter(targetStartDate)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+            this.workshops = filteredByDate;
+        }
+        console.log('filtering by date: ', newStartDtBegin);
     }
 
 
