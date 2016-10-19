@@ -69,11 +69,11 @@ export default class Single extends React.Component {
             let workshopDescription = this.props.workshopStore.single.description || null;
             let workshopStartDate = this.props.workshopStore.single.StartDate || null;
             let workshopEndDate = this.props.workshopStore.single.EndDate || null;
-            let maxSeats = this.props.workshopStore.single.maximum || null;
-            let BookingCount = this.props.workshopStore.single.BookingCount || null;
+            let maxSeats = this.props.workshopStore.single.maximum;
+            let BookingCount = this.props.workshopStore.single.BookingCount;
             let campus = this.props.workshopStore.single.campus || null;
-            
-            createWorkshopBookingFirebase({
+            let tutor = this.props.workshopStore.single.tutor || null;
+            const booking = {
                 workshopId: this.state.workshopId,
                 studentId: this.state.studentId,
                 userId: this.state.userEmail,
@@ -81,12 +81,14 @@ export default class Single extends React.Component {
                 description: workshopDescription,
                 StartDate: workshopStartDate,
                 EndDate: workshopEndDate,
-                maxSeats,
+                maximum: maxSeats,
                 BookingCount,
                 campus,
+                tutor,
                 passcode: getRandomWords(),
                 attended: false
-            });
+            };
+            createWorkshopBookingFirebase(booking);
         } else {
             console.log('You are not authorized to perform Booking action');
 

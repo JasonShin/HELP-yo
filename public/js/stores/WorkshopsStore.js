@@ -25,8 +25,8 @@ class WorkshopsStore {
             workshopSetId
         }).then((response) => {
             console.log('WORKSHOPS LOADED',response);
-            for(var curWorkshop in response) {
-                this.workshops.push(this.mapDataToModel(response[curWorkshop]));
+            for(var workshopKey of Object.keys(response)) {
+                this.workshops.push(this.mapDataToModel(response[workshopKey]));
             }
 
         });
