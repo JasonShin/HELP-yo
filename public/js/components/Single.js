@@ -72,7 +72,7 @@ export default class Single extends React.Component {
             let maxSeats = this.props.workshopStore.single.maximum || null;
             let BookingCount = this.props.workshopStore.single.BookingCount || null;
             let campus = this.props.workshopStore.single.campus || null;
-            
+
             createWorkshopBookingFirebase({
                 workshopId: this.state.workshopId,
                 studentId: this.state.studentId,
@@ -89,7 +89,6 @@ export default class Single extends React.Component {
             });
         } else {
             console.log('You are not authorized to perform Booking action');
-
         }
 
     }

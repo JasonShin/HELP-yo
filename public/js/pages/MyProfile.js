@@ -80,14 +80,14 @@ class MyProfile extends React.Component {
         var preferredOtherNameField = (<input type="text" class="form-control" required="true" ref={(c) =>{this.otherNameField = c}} />);
         var statusField = (
             <select  ref={ (c) => {this.statusField = c} }>
-                <option disabled selected value> -- select an option -- </option>
+                <option disabled selected> -- select an option -- </option>
                 <option value="local">Local</option>
                 <option value="international">International</option>
             </select>
         );
         var degreeField = (
             <select ref={ (c) => {this.degreeField = c} }>
-                <option disabled selected value> -- select an option -- </option>
+                <option disabled selected> -- select an option -- </option>
                 <option value="UG">undergraduate</option>
                 <option value="PG">Postgraduate</option>
             </select>
@@ -114,7 +114,7 @@ class MyProfile extends React.Component {
         if(status !== undefined) {
             statusField = (
                 <select  ref={ (c) => {this.statusField = c} } defaultValue={status}>
-                    <option disabled selected value> -- select an option -- </option>
+                    <option disabled selected> -- select an option -- </option>
                     <option value="local">Local</option>
                     <option value="international">International</option>
                 </select>
@@ -124,7 +124,7 @@ class MyProfile extends React.Component {
         if(degree !== undefined) {
             degreeField = (
                 <select ref={ (c) => {this.degreeField = c} } defaultValue={degree}>
-                    <option disabled selected value> -- select an option -- </option>
+                    <option disabled selected> -- select an option -- </option>
                     <option value="UG">undergraduate</option>
                     <option value="PG">Postgraduate</option>
                 </select>
