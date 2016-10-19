@@ -6,6 +6,7 @@ import {materialLoading} from '../material-motion/material-motion';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Snackbar from 'material-ui/Snackbar';
 import Spinner from '../components/Spinner';
+import FirebaseAPI from '../api/firebase.api';
 
 const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
@@ -19,6 +20,12 @@ class Login extends React.Component {
             enableSpinner: false,
             enableSnackbar: false,
         };
+
+        FirebaseAPI.context.auth().onAuthStateChanged(firebaseUser => {
+            if (firebaseUser) {
+                this.props.router.push('/workshopSets');
+            }
+        });
     }
 
     handleSubmit(e) {

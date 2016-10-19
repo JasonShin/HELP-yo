@@ -112,6 +112,5 @@ export default class WorkshopModel {
         this.topic = topic;
         this.type = type;
         this.tutor = tutor;
-
     }
 }

@@ -3,7 +3,7 @@
  */
 import { computed, observable, autorun } from 'mobx';
 import WorkshopModel from '../models/WorkshopModel';
-import { searchWorkshops, searchWorkshopsFirebase, searchWorkshopByIdFirebase } from '../api/workshop.api';
+import { searchWorkshops, searchWorkshopsFirebase, searchWorkshopByIdFirebase, getWaitlistByWorkshop } from '../api/workshop.api';
 
 //const data = require('./data');
 const moment = require('moment');
@@ -15,6 +15,7 @@ class WorkshopsStore {
     @observable locationFilter = '';
     @observable tutorFilter = '';
     @observable single = null;
+    @observable singleWaitlist = null;
 
     //NOTE: Inital fetching
     fetchWorkshops(studentId, workshopSetId) {
@@ -117,12 +118,16 @@ class WorkshopsStore {
 
     //Ability to fetch from local data if local data exist
     findWorkshopById(workshopId) {
-
         searchWorkshopByIdFirebase({workshopId}).
         then((workshop) => {
+            this.single = this.mapDataToModel(workshop);
             console.log('INFO: Found workshop by ID!');
             console.log(workshop);
-            this.single = this.mapDataToModel(workshop);
+        });
+
+        getWaitlistByWorkshop({workshopId}).then((waitlist) => {
+            // console.log('waitlist', waitlist);
+            this.singleWaitlist = waitlist;
         });
 
         /*

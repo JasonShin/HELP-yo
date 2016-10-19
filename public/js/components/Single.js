@@ -4,12 +4,13 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 import WorkshopModel from '../models/WorkshopModel';
-import {getFormattedRangeDate} from '../tools/Helpers';
+import {getFormattedRangeDate, parseEmailForFirebase } from '../tools/Helpers';
 import WorkshopBookingsStore from '../stores/WorkshopBookingsStore';
 import StudentStore from '../stores/StudentStore';
 import FirebaseAPI from '../api/firebase.api';
 import Spinner from '../components/Spinner';
-import {createWorkshopBookingFirebase, updateWorkshopBookingAttendedFirebase, deleteWorkshopBookingFirebase, setReminderForBooking} from '../api/workshopBookings.api';
+import {createWorkshopBookingFirebase, updateWorkshopBookingAttendedFirebase, deleteWorkshopBookingFirebase, setReminderForBooking } from '../api/workshopBookings.api';
+import {addToWaitlist} from '../api/workshop.api';
 import {getRandomWords} from '../tools/RandomWordHelper';
 
 const moment = require('moment');
@@ -219,9 +220,19 @@ export default class Single extends React.Component {
         }
     }
 
+    onWaitlistClick() {
+        const wrkShp = this.props.workshopStore.single;
+        addToWaitlist({
+            workshopId: wrkShp.WorkshopId,
+            email: this.state.userEmail,
+        });
+    }
+
     //TODO: Fix naming convention spinnerEnabled => workshopSpinnerEnabled   singleInstance => workshopSingleInstance
     render() {
         const singleInstance = this.props.workshopStore.single;
+        const waitlist = this.props.workshopStore.singleWaitlist;
+        let alreadySubscribedToWaitlist = false;
         const {spinnerEnabled, passcodeInvalid} = this.state;
         var singleBooking = WorkshopBookingsStore.single;
         var bookingSpinnerEnabled = true;
@@ -256,6 +267,14 @@ export default class Single extends React.Component {
             //Todo optimize this to properly wait for response from Firebase
 
             const isWorkshopOver = (moment(Date.now()).isAfter(singleInstance.EndDate));
+            const isFull = (availables <= 0);
+
+            if (waitlist) {
+                if (waitlist[parseEmailForFirebase(this.state.userEmail)]) {
+                    alreadySubscribedToWaitlist = true;
+                }
+            }
+
             if(singleBooking !== null && singleBooking !== '') {
                 bookingButton = (<button class="button-book-cancel" onClick={this.onBookCancelClick.bind(this)}>cancel booking</button>);
                 if (this.state.reminderType === 'sms') {
@@ -314,6 +333,10 @@ export default class Single extends React.Component {
                 }
             } else if (isWorkshopOver) {
                 bookingButton = (<button class="button-book-cancel">workshop is over</button>);
+            } else if (isFull && !alreadySubscribedToWaitlist) {
+                bookingButton = (<button class="button-book-cancel" onClick={this.onWaitlistClick.bind(this)}>subscribe to waitlist</button>);
+            } else if (isFull && alreadySubscribedToWaitlist) {
+                bookingButton = (<button class="button-book-cancel">subscribed to waitlist</button>);
             } else {
                 bookingButton = (<button class="button-book" onClick={this.onBookNowClick.bind(this)}>book now</button>);
             }
