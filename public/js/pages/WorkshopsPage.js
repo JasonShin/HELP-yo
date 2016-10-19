@@ -34,6 +34,16 @@ class Workshops extends React.Component {
         this.workshopModifyQueryParams('StartDtEnd', dateString);
     }
 
+    onLocationChange(e) {
+        e.preventDefault();
+        this.workshopModifyQueryParams('location', this.locationField.value);
+    }
+
+    onTutorChange(e) {
+        e.preventDefault();
+        this.workshopModifyQueryParams('tutor', this.tutorField.value);
+    }
+
     handleTopicSearch(e) {
         e.preventDefault();
 
@@ -77,7 +87,7 @@ class Workshops extends React.Component {
         this.setState({
             currentFilterInput: (
                 <div class="filter-inputs-container">
-                    <input type="text" placeholder="search by location" />
+                    <input type="text" placeholder="search by location" ref={c => this.locationField = c} onChange={this.onLocationChange.bind(this)} />
                 </div>
             )
         });
@@ -88,7 +98,7 @@ class Workshops extends React.Component {
         this.setState({
             currentFilterInput: (
                 <div class="filter-inputs-container">
-                    <input type="text" placeholder="search by tutor" />
+                    <input type="text" placeholder="search by tutor" ref={c => this.tutorField = c} onChange={this.onTutorChange.bind(this)} />
                 </div>
             )
         });

@@ -19,6 +19,9 @@
 
   .filter-inputs-container {
     padding-top: 10px;
+    > input {
+      width: 100%;
+    }
   }
 
   .filter-calendars-container {

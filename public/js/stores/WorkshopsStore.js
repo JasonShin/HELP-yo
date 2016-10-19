@@ -38,37 +38,6 @@ class WorkshopsStore {
 
     }
 
-    //TODO: Search by StartStartDate and StartEndDate
-    //TODO: startingDtBegin=2013-04-10T10:00&startingDtEnd=2013-04-17T10:00
-    /*fetchWorkshopsByStartEndDate(workshopSetId, StartDtBegin, StartDtEnd) {
-
-        console.log('INFO: Fetching by date: ' , workshopSetId, StartDtBegin, StartDtEnd);
-        var newStartDtBegin = StartDtBegin+'T00:00:00';
-        var newStartDtEnd = StartDtEnd+'T00:00:00';
-
-        if(StartDtBegin !== undefined && StartDtBegin !== '' && StartDtEnd !== undefined && StartDtEnd !== '') {
-            const filteredByDate =  this.workshops.filter((workshop) => {
-                var workshopDate = moment(workshop.StartDate);
-                var targetStartDate = moment(StartDtBegin);
-                var targetEndDate = moment(StartDtEnd);
-
-                if(workshopDate.isBefore(targetEndDate) && workshopDate.isAfter(targetStartDate)) {
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-            this.workshops = filteredByDate;
-        }
-    }
-
-    fetchWorkshopsByTopic(topic) {
-        var topicMatcher = new RegExp(topic, 'i');
-        this.workshops = this.workshops.filter((workshop) => {
-            return topicMatcher.test(workshop.topic);
-        });
-    }*/
-
     @computed get filteredWorkshops() {
         if (this.topicFilter !== '') {
             var topicMatcher = new RegExp(this.topicFilter, 'i');

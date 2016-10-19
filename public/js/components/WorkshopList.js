@@ -61,7 +61,14 @@ export default class WorkshopList extends React.Component {
         if(newStates.topic !== undefined && newStates.topic !== '') {
             WorkshopsStore.topicFilter = newStates.topic;
         }
+        if(newStates.location !== undefined && newStates.location !== '') {
+            WorkshopsStore.locationFilter = newStates.location;
+        }
+        if(newStates.tutor !== undefined && newStates.tutor !== '') {
+            WorkshopsStore.tutorFilter = newStates.tutor;
+        }
     }
+
 
     getCurrentParamsObject() {
         var rawParams = window.location.search.replace(/^\?/, '').split('&');
