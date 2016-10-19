@@ -122,6 +122,13 @@ class WorkshopsStore {
         return pageVal
     }
 
+    refreshWaitlist(workshopId) {
+        getWaitlistByWorkshop({workshopId}).then((waitlist) => {
+            // console.log('waitlist', waitlist);
+            this.singleWaitlist = waitlist;
+        });
+    }
+
     //Ability to fetch from local data if local data exist
     findWorkshopById(workshopId) {
         searchWorkshopByIdFirebase({workshopId}).

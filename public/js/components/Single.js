@@ -226,6 +226,7 @@ export default class Single extends React.Component {
             workshopId: wrkShp.WorkshopId,
             email: this.state.userEmail,
         });
+        this.props.workshopStore.refreshWaitlist(wrkShp.WorkshopId);
     }
 
     //TODO: Fix naming convention spinnerEnabled => workshopSpinnerEnabled   singleInstance => workshopSingleInstance
