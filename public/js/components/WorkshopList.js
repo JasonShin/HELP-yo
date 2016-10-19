@@ -18,6 +18,7 @@ export default class WorkshopList extends React.Component {
     constructor() {
         super();
         this.state = {
+            topic: '',
             workshopSetId: 0,
             StartDtBegin: '',
             StartDtEnd: ''
@@ -31,7 +32,11 @@ export default class WorkshopList extends React.Component {
         var newStates = this.getCurrentParamsObject();
         this.setState(newStates);
 
-        this.props.store.fetchWorkshops(null, workshopSetId);
+        this.props.store.fetchWorkshops(null, workshopSetId)
+            .then(() => {
+                this.applyFiltersToStore();
+            });
+
     }
 
     componentWillUnmount() {
@@ -39,15 +44,23 @@ export default class WorkshopList extends React.Component {
         WorkshopsStore.dateFilter = '';
         WorkshopsStore.locationFilter = '';
         WorkshopsStore.tutorFilter = '';
+
     }
 
     //TODO: Use react router built in feature to replace this procedure or put this in helper to make it reusable
     componentWillReceiveProps(nextProps) {
+        this.applyFiltersToStore();
+    }
+
+    applyFiltersToStore() {
         var newStates = this.getCurrentParamsObject();
-
-        // WorkshopsStore.fetchWorkshopsByStartEndDate(newStates.workshopSetId, newStates.StartDtBegin, newStates.StartDtEnd);
-
-        this.setState(newStates);
+        if(newStates.StartDtBegin !== undefined && newStates.StartDtBegin !== '' && newStates.StartDtEnd !== undefined && newStates.StartDtEnd !== '') {
+            WorkshopsStore.StartDtBegin = newStates.StartDtBegin;
+            WorkshopsStore.StartDtEnd = newStates.StartDtEnd;
+        }
+        if(newStates.topic !== undefined && newStates.topic !== '') {
+            WorkshopsStore.topicFilter = newStates.topic;
+        }
     }
 
     getCurrentParamsObject() {
@@ -63,10 +76,6 @@ export default class WorkshopList extends React.Component {
     }
 
     render() {
-
-        const {workshopSetId, StartDtBegin, StartDtEnd} = this.state;
-
-        console.log(workshopSetId, StartDtBegin, StartDtEnd);
 
         const workshopsList = this.props.store.filteredWorkshops.map( (workshop) => {
 
