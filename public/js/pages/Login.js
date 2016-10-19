@@ -25,36 +25,42 @@ class Login extends React.Component {
         e.preventDefault();
         var email = this.emailField.value;
         var password = this.passwordField.value;
-
-        this.setState({
-            enableSpinner: true
-        });
-
-        loginFirebase({
-            email: email,
-            password: password
-         }).
-         then((body) => {
-            // console.log(body);
+        if (!email || !password) {
             this.setState({
-                enableSpinner: false
-            });
-            this.props.router.push('/workshopSets');
-         }).
-         catch((err) => {
-            console.log(err);
-            let message;
-            if (err.code === 'auth/user-not-found') {
-                message = 'You aren\'t registered with HELPS yet!';
-            } else if (err.code === 'auth/wrong-password') {
-                message = 'Wrong password';
-            }
-            this.setState({
-                snackbarMessage: message,
-                enableSpinner: false,
+                snackbarMessage: 'Please enter an email and password',
                 enableSnackbar: true,
             });
-         });
+        } else {
+            this.setState({
+                enableSpinner: true
+            });
+
+            loginFirebase({
+                email: email,
+                password: password
+             }).
+             then((body) => {
+                // console.log(body);
+                this.setState({
+                    enableSpinner: false
+                });
+                this.props.router.push('/workshopSets');
+             }).
+             catch((err) => {
+                console.log(err);
+                let message;
+                if (err.code === 'auth/user-not-found') {
+                    message = 'You aren\'t registered with HELPS yet!';
+                } else if (err.code === 'auth/wrong-password') {
+                    message = 'Wrong password';
+                }
+                this.setState({
+                    snackbarMessage: message,
+                    enableSpinner: false,
+                    enableSnackbar: true,
+                });
+             });
+        }
     }
 
 
@@ -88,14 +94,14 @@ class Login extends React.Component {
 
                         <form onSubmit={this.handleSubmit.bind(this)}>
                             <div class="form-group">
-                                <input type="text" class="form-control" ref={(c) =>{this.emailField = c}} required />
+                                <input type="text" class="form-control" ref={(c) =>{this.emailField = c}} />
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>uts student email</label>
                             </div>
 
                             <div class="form-group">
-                                <input type="password" class="form-control" ref={(c) =>{this.passwordField = c}} required />
+                                <input type="password" class="form-control" ref={(c) =>{this.passwordField = c}} />
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>uts password</label>
