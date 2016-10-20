@@ -50,7 +50,9 @@ class Workshops extends React.Component {
         this.setState({
             currentFilterInput: (
                 <div class="filter-inputs-container">
-                    <input type="text" placeholder="search by topic" ref={c => this.topicField = c} onChange={this.onTopicInputChange.bind(this)} />
+                    <div class="form-group">
+                        <input type="text" placeholder="search by topic" ref={c => this.topicField = c} onChange={this.onTopicInputChange.bind(this)} />
+                    </div>
                 </div>
             )
         });
@@ -87,7 +89,9 @@ class Workshops extends React.Component {
         this.setState({
             currentFilterInput: (
                 <div class="filter-inputs-container">
-                    <input type="text" placeholder="search by location" ref={c => this.locationField = c} onChange={this.onLocationChange.bind(this)} />
+                    <div class="form-group">
+                        <input type="text" placeholder="search by location" ref={c => this.locationField = c} onChange={this.onLocationChange.bind(this)} />
+                    </div>
                 </div>
             )
         });
@@ -98,7 +102,9 @@ class Workshops extends React.Component {
         this.setState({
             currentFilterInput: (
                 <div class="filter-inputs-container">
-                    <input type="text" placeholder="search by tutor" ref={c => this.tutorField = c} onChange={this.onTutorChange.bind(this)} />
+                    <div class="form-group">
+                        <input type="text" placeholder="search by tutor" ref={c => this.tutorField = c} onChange={this.onTutorChange.bind(this)} />
+                    </div>
                 </div>
             )
         });
