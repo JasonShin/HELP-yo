@@ -17,14 +17,23 @@ export default class CreateWorkshopPage extends React.Component {
     }
 
     handleSubmit(e) {
+        const newStartDate = new Date();
+        newStartDate.setMinutes(newStartDate.getMinutes() + 5);
+        const newEndDate = new Date();
+        newEndDate.setMinutes(newEndDate.getMinutes() + 50);
+        newStartDate.setHours(newStartDate.getHours() + 11);
+        newEndDate.setHours(newEndDate.getHours() + 11);
+        console.log('DATES', newStartDate, newEndDate);
+
         e.preventDefault();
         var opts = {
+            BookingCount: 0,
             id: this.idField.value,
             topic: this.topicField.value,
             description: this.descField.value,
             campusID: this.campusField.value,
-            starting: this.starting,
-            ending: this.ending,
+            StartDate: newStartDate.toISOString().slice(0, 19),
+            EndDate: newEndDate.toISOString().slice(0, 19),
             maximum: this.maximumField.value,
             cutoff: this.cutoffField.value,
             creatorID: this.creatorIdField.value,
@@ -32,12 +41,15 @@ export default class CreateWorkshopPage extends React.Component {
             archived: this.archiverIdField.value,
             created: this.createdField.value,
             WorkShopSetID: this.workshopSetIdField.value,
-            type: this.typeField.value
+            type: this.typeField.value,
+            tutor: this.tutorField.value,
         };
         console.log(opts);
         createWorkshop(opts)
             .then((res) => {
                 console.log('success! ' + res);
+            }).catch((err) => {
+                console.log('ERROR', err);
             });
 
     }
@@ -179,6 +191,13 @@ export default class CreateWorkshopPage extends React.Component {
                                 <span class="bar"></span>
                                 <label>Type</label>
 
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" required="true" ref={ (c) => this.tutorField = c } />
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Tutor</label>
                             </div>
 
                             <button class="button-red" type="submit">create workshop</button>

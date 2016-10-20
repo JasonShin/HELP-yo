@@ -9,7 +9,7 @@ class WorkshopSetsStore {
     @observable workshopSets = [];
 
     constructor() {
-
+        console.log('workshop sets store loaded');
         listWorkshopSets().
         then((response) => {
             console.log('INFO: Correctly fetched workshop sets from firebase');

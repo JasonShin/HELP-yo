@@ -8,20 +8,15 @@ const headers = {
 };
 
 export const createWorkshop = (opts) => {
+  const { id: workshopId } = opts;
   return new Promise((resolve, reject) => {
-
-    var params = {
-      headers: {
-        'AppKey': config.appKey,
-        "content-type": "application/json"
-      },
-      data: JSON.stringify(opts)
-    };
-
-    axios.post(config.createWorkshopURL, {params}).
-        then((response) => {
-          resolve(response);
-        });
+    var workshopRef = FirebaseAPI.context.database().ref('/workshops/'+workshopId).set(opts, (error) => {
+        if(error) {
+            reject(error);
+        } else {
+            resolve('Successfully create workshop!');
+        }
+    });
 
   });
 };

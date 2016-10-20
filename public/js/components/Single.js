@@ -72,7 +72,7 @@ export default class Single extends React.Component {
             let workshopDescription = this.props.workshopStore.single.description || null;
             let workshopStartDate = this.props.workshopStore.single.StartDate || null;
             let workshopEndDate = this.props.workshopStore.single.EndDate || null;
-            let maxSeats = this.props.workshopStore.single.maximum;
+            let maxSeats = this.props.workshopStore.single.maximum || null;
             let BookingCount = this.props.workshopStore.single.BookingCount;
             let campus = this.props.workshopStore.single.campus || null;
             let tutor = this.props.workshopStore.single.tutor || null;
