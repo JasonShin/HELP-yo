@@ -101,14 +101,14 @@ class Login extends React.Component {
 
                         <form onSubmit={this.handleSubmit.bind(this)}>
                             <div class="form-group">
-                                <input type="text" class="form-control" ref={(c) =>{this.emailField = c}} />
+                                <input type="text" class="form-control" ref={(c) =>{this.emailField = c}} required="true" />
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>uts student email</label>
                             </div>
 
                             <div class="form-group">
-                                <input type="password" class="form-control" ref={(c) =>{this.passwordField = c}} />
+                                <input type="password" class="form-control" ref={(c) =>{this.passwordField = c}} required="true" />
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>uts password</label>

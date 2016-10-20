@@ -52,6 +52,7 @@ export default class WorkshopList extends React.Component {
         this.applyFiltersToStore();
     }
 
+    //TODO: FIx filter from here
     applyFiltersToStore() {
         var newStates = this.getCurrentParamsObject();
         if(newStates.StartDtBegin !== undefined && newStates.StartDtBegin !== '' && newStates.StartDtEnd !== undefined && newStates.StartDtEnd !== '') {
