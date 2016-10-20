@@ -2,6 +2,7 @@ import React from 'react';
 import { browserHistory, Link, withRouter } from 'react-router';
 import { registerFirebase, loginFirebase } from '../api/student.api';
 import { sendReminder } from '../api/reminder.api';
+import FirebaseAPI from '../api/firebase.api';
 
 import config from '../../config/config';
 import Spinner from '../components/Spinner';
@@ -126,8 +127,18 @@ class Register extends React.Component {
                     subject: 'UTS HELPS - Registration notification',
                     message: 'Just a friendly reminder that you\'ve registered for the UTS HELPS Service. If this wasn\'t you, please contact us'
                 });
-                this.props.router.push('/register/profile');
-                this.disableSpinnerForRegisterContainer();
+
+                console.log('INFO REACHED HERE!');
+                FirebaseAPI.context.auth().onAuthStateChanged(firebaseUser => {
+
+                    if (firebaseUser) {
+                        console.log('INFO FIREBASE USER AUTH');
+                        this.props.router.push('/profile');
+                        this.disableSpinnerForRegisterContainer();
+                    } else {
+                        console.log('Not logged in');
+                    }
+                });
             }).
             catch((error) => {
                 this.disableSpinnerForRegisterContainer();

@@ -55,17 +55,17 @@ export default class WorkshopList extends React.Component {
     //TODO: FIx filter from here
     applyFiltersToStore() {
         var newStates = this.getCurrentParamsObject();
-        if(newStates.StartDtBegin !== undefined && newStates.StartDtBegin !== '' && newStates.StartDtEnd !== undefined && newStates.StartDtEnd !== '') {
+        if(newStates.StartDtBegin !== undefined && newStates.StartDtEnd !== undefined) {
             WorkshopsStore.StartDtBegin = newStates.StartDtBegin;
             WorkshopsStore.StartDtEnd = newStates.StartDtEnd;
         }
-        if(newStates.topic !== undefined && newStates.topic !== '') {
+        if(newStates.topic !== undefined) {
             WorkshopsStore.topicFilter = newStates.topic;
         }
-        if(newStates.location !== undefined && newStates.location !== '') {
+        if(newStates.location !== undefined) {
             WorkshopsStore.locationFilter = newStates.location;
         }
-        if(newStates.tutor !== undefined && newStates.tutor !== '') {
+        if(newStates.tutor !== undefined) {
             WorkshopsStore.tutorFilter = newStates.tutor;
         }
     }
@@ -82,6 +82,7 @@ export default class WorkshopList extends React.Component {
         console.log(newStates);
         return newStates;
     }
+
 
     render() {
 

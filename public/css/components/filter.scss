@@ -7,6 +7,9 @@ $filter_width: 900px;
 
   .filter-title {
     text-align: center;
+    padding-bottom: 15px;
+    font-size: 20px;
+    font-weight: bold;
   }
 
   .filter-options {
@@ -48,14 +51,21 @@ $filter_width: 900px;
 
       > div {
         float: none;
-        display: inline-block;
         width: 100%;
         >div {
-          width: 100%;
+
+          display: inline-block;
+
         }
       }
     }
 
+    .filter-calendars-clear {
+      text-align: center;
+      padding-top: 10px;
+      > button {
+        width: 80%;
+      }
+    }
   }
-
 }

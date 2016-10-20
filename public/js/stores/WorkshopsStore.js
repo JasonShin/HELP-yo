@@ -40,6 +40,7 @@ class WorkshopsStore {
     }
 
     @computed get filteredWorkshops() {
+
         if (this.topicFilter !== '') {
             var topicMatcher = new RegExp(this.topicFilter, 'i');
             return this.workshops.filter((workshop) => {

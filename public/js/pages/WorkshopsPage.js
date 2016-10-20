@@ -20,6 +20,12 @@ class Workshops extends React.Component {
         }
     }
 
+    onDateClearClick(e) {
+        e.preventDefault();
+        this.workshopModifyQueryParams('StartDtBegin', '');
+        this.workshopModifyQueryParams('StartDtEnd', '');
+    }
+
     onTopicInputChange(e) {
         e.preventDefault();
         console.log(this.topicField.value);
@@ -62,22 +68,27 @@ class Workshops extends React.Component {
         e.preventDefault();
         this.setState({
             currentFilterInput: (
-                <div class="filter-inputs-container filter-calendars-container">
-                    <div>
-                        <h4>from date</h4>
-                        <Calendar
-                            dateFormat="YYYY-MM-DD"
-                            onChange={this.onFromDateChange.bind(this)}
-                            ref={(c) => {this.fromDateField = c}}
-                        />
+                <div>
+                    <div class="filter-inputs-container filter-calendars-container">
+                        <div>
+                            <h4>from date</h4>
+                            <Calendar
+                                dateFormat="YYYY-MM-DD"
+                                onChange={this.onFromDateChange.bind(this)}
+                                ref={(c) => {this.fromDateField = c}}
+                            />
+                        </div>
+                        <div>
+                            <h4>date to</h4>
+                            <Calendar
+                                dateFormat="YYYY-MM-DD"
+                                onChange={this.onToDateChange.bind(this)}
+                                ref={(c) => {this.toDateField = c}}
+                            />
+                        </div>
                     </div>
-                    <div>
-                        <h4>date to</h4>
-                        <Calendar
-                            dateFormat="YYYY-MM-DD"
-                            onChange={this.onToDateChange.bind(this)}
-                            ref={(c) => {this.toDateField = c}}
-                        />
+                    <div class="filter-calendars-clear">
+                        <button onClick={this.onDateClearClick.bind(this)}>Clear date filter</button>
                     </div>
                 </div>
             )
@@ -115,6 +126,9 @@ class Workshops extends React.Component {
 
         var paramKeyTest = new RegExp(param, 'g');
         var currentParams = window.location.search;
+
+        console.log('INFO: modifying params: ' , currentParams);
+
         if(paramKeyTest.test(currentParams)){
             //Param exist so replacing it with new value
             var targetParamPattern = new RegExp(param+'\\=[\\d\\w\\s\\/\?\\-\\*]*', 'g');
