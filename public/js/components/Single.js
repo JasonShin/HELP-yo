@@ -4,7 +4,7 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 import WorkshopModel from '../models/WorkshopModel';
-import {getFormattedRangeDate, parseEmailForFirebase } from '../tools/Helpers';
+import {getFormattedRangeDate, parseEmailForFirebase, getDuration } from '../tools/Helpers';
 import WorkshopBookingsStore from '../stores/WorkshopBookingsStore';
 import StudentStore from '../stores/StudentStore';
 import FirebaseAPI from '../api/firebase.api';
@@ -16,7 +16,6 @@ import { sendReminder } from '../api/reminder.api';
 
 
 const moment = require('moment');
-//require('moment-precise-range-plugin');
 
 @observer
 export default class Single extends React.Component {
@@ -267,8 +266,8 @@ export default class Single extends React.Component {
             let reminderButton = '';
             let phoneNumberInput = '';
             let attendanceFields = '';
-            const duration = '';
-            //const duration = moment.preciseDiff(moment(singleInstance.StartDate.split('T').join(' ')),moment(singleInstance.EndDate.split('T').join(' ')));
+
+            const duration = getDuration(singleInstance.StartDate, singleInstance.EndDate);
 
             const reminderPayload = {
                 start: singleInstance.StartDate.split('T').join(' '),

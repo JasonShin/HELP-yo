@@ -50,3 +50,51 @@ export const getFormattedRangeDate = (rawStartDate, rawEndDate, delimeter) => {
 export const parseEmailForFirebase = (userId) => {
     return userId.replace(/\./g, '_');
 };
+
+export const getDuration = (dateStr1, dateStr2) => {
+    const date1 = new Date(dateStr1);
+    const date2 = new Date(dateStr2);
+    const diff = Math.abs((date2.getTime() - date1.getTime()));
+
+    let x = diff / 1000;
+    let seconds = x % 60;
+    x = Math.floor(x / 60);
+    let minutes = x % 60;
+    x = Math.floor(x / 60);
+    let hours = x % 24;
+    x = Math.floor(x / 24);
+    let days = x;
+
+    let daysStr;
+    let hoursStr;
+    let minutesStr;
+    let secondsStr;
+
+    if (days > 0) {
+        daysStr = `${days} days`;
+        if (days === 1) {
+            daysStr = `${days} day`;
+        }
+    }
+    if (hours > 0) {
+        hoursStr = `${hours} hours`;
+        if (hours === 1) {
+            hoursStr = `${hours} hour`;
+        }
+    }
+    if (minutes > 0) {
+        minutesStr = `${minutes} minutes`;
+        if (minutes === 1) {
+            minutesStr = `${minutes} minute`;
+        }
+    }
+    if (seconds > 0) {
+        secondsStr = `${seconds} seconds`;
+        if (seconds === 1) {
+            secondsStr = `${seconds} second`;
+        }
+    }
+
+    const duration = `${daysStr || ''} ${hoursStr || ''} ${minutesStr || ''} ${secondsStr || ''}`;
+    return duration;
+};
