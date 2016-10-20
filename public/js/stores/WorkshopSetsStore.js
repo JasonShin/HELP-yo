@@ -23,4 +23,4 @@ class WorkshopSetsStore {
     }
 }
 
-export default new WorkshopSetsStore;
+export default new WorkshopSetsStore();

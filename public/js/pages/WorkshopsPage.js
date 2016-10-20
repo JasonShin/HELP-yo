@@ -29,25 +29,30 @@ class Workshops extends React.Component {
     onTopicInputChange(e) {
         e.preventDefault();
         console.log(this.topicField.value);
-        this.workshopModifyQueryParams('topic', this.topicField.value);
+        //this.workshopModifyQueryParams('topic', this.topicField.value);
+        WorkshopsStore.topicFilter = this.topicField.value;
     }
 
     onFromDateChange(dateString, { dateMoment, timestamp }) {
-        this.workshopModifyQueryParams('StartDtBegin', dateString);
+        WorkshopsStore.StartDtBegin = dateString;
+        //this.workshopModifyQueryParams('StartDtBegin', dateString);
     }
 
     onToDateChange(dateString, { dateMoment, timestamp }) {
-        this.workshopModifyQueryParams('StartDtEnd', dateString);
+        WorkshopsStore.StartDtEnd = dateString;
+        //this.workshopModifyQueryParams('StartDtEnd', dateString);
     }
 
     onLocationChange(e) {
         e.preventDefault();
-        this.workshopModifyQueryParams('location', this.locationField.value);
+        WorkshopsStore.locationFilter = this.locationField.value;
+        //this.workshopModifyQueryParams('location', this.locationField.value);
     }
 
     onTutorChange(e) {
         e.preventDefault();
-        this.workshopModifyQueryParams('tutor', this.tutorField.value);
+        WorkshopsStore.tutorFilter = this.tutorField.value;
+        //this.workshopModifyQueryParams('tutor', this.tutorField.value);
     }
 
     handleTopicSearch(e) {
