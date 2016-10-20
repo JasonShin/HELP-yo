@@ -1,6 +1,8 @@
+$filter_width: 900px;
+
 .menu-filter-container {
   border: 0px solid black;
-  width: 900px;
+  width: $filter_width;
   margin: 0px auto;
 
   .filter-title {
@@ -30,6 +32,30 @@
       float: left;
       width: 50%;
     }
+  }
+
+  @media all and (max-width: $filter_width) {
+    width: 90%;
+
+    .filter-inputs-container {
+      width: 90%;
+      margin: 0px auto;
+      padding-top: 20px;
+    }
+
+    .filter-calendars-container {
+      text-align: center;
+
+      > div {
+        float: none;
+        display: inline-block;
+        width: 100%;
+        >div {
+          width: 100%;
+        }
+      }
+    }
+
   }
 
 }

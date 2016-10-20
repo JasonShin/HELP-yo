@@ -16,7 +16,7 @@ import { sendReminder } from '../api/reminder.api';
 
 
 const moment = require('moment');
-require('moment-precise-range-plugin');
+//require('moment-precise-range-plugin');
 
 @observer
 export default class Single extends React.Component {
@@ -267,9 +267,8 @@ export default class Single extends React.Component {
             let reminderButton = '';
             let phoneNumberInput = '';
             let attendanceFields = '';
-
-            const duration = moment.preciseDiff(moment(singleInstance.StartDate.split('T').join(' ')),
-                moment(singleInstance.EndDate.split('T').join(' ')));
+            const duration = '';
+            //const duration = moment.preciseDiff(moment(singleInstance.StartDate.split('T').join(' ')),moment(singleInstance.EndDate.split('T').join(' ')));
 
             const reminderPayload = {
                 start: singleInstance.StartDate.split('T').join(' '),
