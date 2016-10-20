@@ -14,9 +14,9 @@ import animationConstants from '../constants/animationConstants';
 class MyProfile extends React.Component {
     constructor() {
         super();
-        this.state = {
-            enableSpinner: true,
-        }
+        // this.state = {
+        //     enableSpinner: true,
+        // }
     }
     //TODO: Move to const file
     //TODO: react-date-picker's default value creates permanent blue dot on the calendar, it is not user friendly.
@@ -29,12 +29,12 @@ class MyProfile extends React.Component {
         document.title = `Profiles${config.titleEnding}`;
     }
 
-    fetchStudentCallback = (profile) => {
-        this.setState({
-            enableSpinner: false,
-            profile,
-        });
-    };
+    // fetchStudentCallback = (profile) => {
+    //     this.setState({
+    //         enableSpinner: false,
+    //         profile,
+    //     });
+    // };
 
     componentDidMount(){
         FirebaseAPI.context.auth().onAuthStateChanged(firebaseUser => {
@@ -78,8 +78,8 @@ class MyProfile extends React.Component {
             width: '50%'
         };
 
-        if (this.state.profile) {
-            var currentStudent = this.state.profile;
+        // if (this.state.profile) {
+            var currentStudent = StudentStore.student;
             // console.log('student Object', currentStudent);
             var StudentId = currentStudent.StudentId;
             var fullname  = currentStudent.fullname;
@@ -254,24 +254,24 @@ class MyProfile extends React.Component {
                         </div>
                     </div>
                 </ReactCSSTransitionGroup>);
-        } else {
-           return (
-                <ReactCSSTransitionGroup 
-                  transitionName="page-transition"
-                  transitionAppear={true}
-                  transitionAppearTimeout={animationConstants.animationDelay}
-                  transitionEnterTimeout={animationConstants.animationDelay}>
-                    <div id="PageContent">
-                        <div class="progress">
-                          <div class="determinate" style={progressBarStyle}></div>
-                        </div>
+        // } else {
+        //    return (
+        //         <ReactCSSTransitionGroup 
+        //           transitionName="page-transition"
+        //           transitionAppear={true}
+        //           transitionAppearTimeout={animationConstants.animationDelay}
+        //           transitionEnterTimeout={animationConstants.animationDelay}>
+        //             <div id="PageContent">
+        //                 <div class="progress">
+        //                   <div class="determinate" style={progressBarStyle}></div>
+        //                 </div>
 
-                        <div class="container-small container-profile">
-                            <Spinner visible={true} />
-                        </div>
-                    </div>
-                </ReactCSSTransitionGroup>);
-        }
+        //                 <div class="container-small container-profile">
+        //                     <Spinner visible={true} />
+        //                 </div>
+        //             </div>
+        //         </ReactCSSTransitionGroup>);
+        // }
     }
 }
 

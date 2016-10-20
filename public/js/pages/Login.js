@@ -21,11 +21,11 @@ class Login extends React.Component {
             enableSnackbar: false,
         };
 
-        FirebaseAPI.context.auth().onAuthStateChanged(firebaseUser => {
-            if (firebaseUser) {
-                this.props.router.push('/workshopSets');
-            }
-        });
+        // FirebaseAPI.context.auth().onAuthStateChanged(firebaseUser => {
+        //     if (firebaseUser) {
+        //         this.props.router.push('/workshopSets');
+        //     }
+        // });
     }
 
     handleSubmit(e) {
