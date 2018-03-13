@@ -55,7 +55,7 @@
     "mobx": "^2.0.0",
     "mobx-react": "^3.0.0",
     "mobx-react-devtools": "^4.0.5",
-    "mocha": "^3.0.2",
+    "mocha": "^5.0.3",
     "moment": "^2.15.0",
     "node-sass": "^3.8.0",
     "random-word-generator": "^0.9.9",
