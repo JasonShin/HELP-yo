@@ -10,7 +10,9 @@
     "test": "echo true",
     "test:all": "mocha --recursive tests/.",
     "test:all:es6": "mocha --compilers js:babel-core/register --recursive tests/.",
-    "test:api:es6": "mocha --compilers js:babel-core/register --recursive tests/index.js"
+    "test:api:es6": "mocha --compilers js:babel-core/register --recursive tests/index.js",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -44,7 +46,7 @@
     "eslint-loader": "^1.5.0",
     "eslint-plugin-react": "^6.1.2",
     "extract-text-webpack-plugin": "^1.0.1",
-    "firebase": "^3.3.0",
+    "firebase": "^4.5.1",
     "font-awesome": "^4.6.3",
     "history": "^1.17.0",
     "jquery": "^3.1.0",
@@ -70,7 +72,8 @@
     "style-loader": "^0.13.1",
     "velocity-animate": "^1.2.3",
     "webpack": "^1.12.9",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "snyk": "^1.83.0"
   },
   "devDependencies": {
     "babel-core": "^6.13.2",
@@ -80,5 +83,6 @@
     "debug-webpack-plugin": "^0.1.0",
     "imports-loader": "^0.6.5",
     "json-loader": "^0.5.4"
-  }
+  },
+  "snyk": true
 }
