@@ -62,7 +62,7 @@
     "react": "^15.3.2",
     "react-addons-css-transition-group": "^15.3.1",
     "react-date-picker": "^5.3.28",
-    "react-dom": "^15.3.2",
+    "react-dom": "^16.0.1",
     "react-router": "^2.4.0",
     "react-tap-event-plugin": "^1.0.0",
     "sass-loader": "^4.0.0",
