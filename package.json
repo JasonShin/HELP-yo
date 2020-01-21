@@ -57,7 +57,7 @@
     "mobx-react-devtools": "^4.0.5",
     "mocha": "^3.0.2",
     "moment": "^2.15.0",
-    "node-sass": "^3.8.0",
+    "node-sass": "^4.13.1",
     "random-word-generator": "^0.9.9",
     "react": "^15.3.2",
     "react-addons-css-transition-group": "^15.3.1",
@@ -69,8 +69,8 @@
     "should": "^11.1.0",
     "style-loader": "^0.13.1",
     "velocity-animate": "^1.2.3",
-    "webpack": "^1.12.9",
-    "webpack-dev-server": "^1.14.1"
+    "webpack": "^2.2.0",
+    "webpack-dev-server": "^2.11.4"
   },
   "devDependencies": {
     "babel-core": "^6.13.2",
