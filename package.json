@@ -40,7 +40,7 @@
     "classnames": "^2.2.5",
     "css-loader": "^0.23.1",
     "es6-promise": "^3.2.1",
-    "eslint": "^3.4.0",
+    "eslint": "^6.6.0",
     "eslint-loader": "^1.5.0",
     "eslint-plugin-react": "^6.1.2",
     "extract-text-webpack-plugin": "^1.0.1",
