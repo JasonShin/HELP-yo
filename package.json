@@ -65,11 +65,11 @@
     "react-dom": "^15.3.2",
     "react-router": "^2.4.0",
     "react-tap-event-plugin": "^1.0.0",
-    "sass-loader": "^4.0.0",
+    "sass-loader": "^6.0.7",
     "should": "^11.1.0",
     "style-loader": "^0.13.1",
     "velocity-animate": "^1.2.3",
-    "webpack": "^1.12.9",
+    "webpack": "^4.0.0",
     "webpack-dev-server": "^1.14.1"
   },
   "devDependencies": {
