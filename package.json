@@ -43,7 +43,7 @@
     "eslint": "^3.4.0",
     "eslint-loader": "^1.5.0",
     "eslint-plugin-react": "^6.1.2",
-    "extract-text-webpack-plugin": "^1.0.1",
+    "extract-text-webpack-plugin": "^3.0.2",
     "firebase": "^3.3.0",
     "font-awesome": "^4.6.3",
     "history": "^1.17.0",
@@ -57,7 +57,7 @@
     "mobx-react-devtools": "^4.0.5",
     "mocha": "^3.0.2",
     "moment": "^2.15.0",
-    "node-sass": "^3.8.0",
+    "node-sass": "^9.0.0",
     "random-word-generator": "^0.9.9",
     "react": "^15.3.2",
     "react-addons-css-transition-group": "^15.3.1",
@@ -70,7 +70,7 @@
     "style-loader": "^0.13.1",
     "velocity-animate": "^1.2.3",
     "webpack": "^1.12.9",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^4.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.13.2",
